@@ -15,6 +15,7 @@ Before creating or editing any map folder, read the relevant guide in `excali-bu
 - Keep maps under `mind-maps/<domain>/<topic>/`, for example `mind-maps/de/dbt` and `mind-maps/de/snowflake`.
 - Keep source files, checked-in config files, `positions.json`, and `output.excalidraw` in this repo.
 - Commit both `positions.json` and `output.excalidraw` when layout changes should be preserved across machines.
+- Use lowercase kebab-case for new file names, for example `mind-map-manifesto.md`.
 - When format conventions conflict with local assumptions, the `excali-builder` docs win.
 
 ## Build Workflow

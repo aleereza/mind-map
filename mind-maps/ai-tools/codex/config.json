@@ -2,10 +2,10 @@
   "parser_type": "md",
   "layout": {
     "direction": "left-right",
-    "level_spacing": 220,
-    "sibling_spacing": 56,
-    "root_spacing": 140,
+    "level_spacing": 180,
+    "sibling_spacing": 48,
+    "root_spacing": 120,
     "start_x": 120,
-    "start_y": 120
+    "start_y": 100
   }
 }

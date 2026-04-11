@@ -1,25 +1,25 @@
 {
   "parent_child": {
     "connection_type": "line",
-    "color": "#DC2626",
+    "color": "#2563EB",
     "stroke_width": 2,
     "stroke_style": "solid",
     "arrow_start": null,
     "arrow_end": "arrow"
   },
-  "prereqs": {
+  "comment": {
     "connection_type": "line",
-    "color": "#DC2626",
+    "color": "#78716C",
     "stroke_width": 2,
-    "stroke_style": "solid",
+    "stroke_style": "dashed",
     "arrow_start": null,
-    "arrow_end": "arrow"
+    "arrow_end": null
   },
   "related": {
     "connection_type": "line",
     "color": "#6B7280",
-    "stroke_width": 2,
-    "stroke_style": "solid",
+    "stroke_width": 1,
+    "stroke_style": "dotted",
     "arrow_start": null,
     "arrow_end": null
   },

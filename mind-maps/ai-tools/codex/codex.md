@@ -1,470 +1,247 @@
-## OpenAI Codex Desktop Mental Model {#codex-desktop}
+# How To Use OpenAI Codex {#use-openai-codex}
 
-> [!meta]
 > type: category
 
-A review-first operating model for OpenAI Codex, centered on the desktop app and the same agent workflow used in Codex web. Think "delegate a task, inspect evidence and diffs, then curate with Git" rather than "approve every edit before it lands."
+A learning map for using the Codex app effectively, based mostly on OpenAI’s official Codex docs. The central question is how to work well with an agentic coding tool without expecting traditional IDE-style pre-approval for each edit.
 
-### Mental Model Shift {#mental-model-shift}
+## Comment: Review Happens After Edits {#review-happens-after-edits}
 
-> [!meta]
+> type: comment
+
+Codex edits first and asks for judgement later. Treat the app like a Git-centered review workflow, not an IDE suggestion flow that waits for approval before every change.
+
+## Mental Model {#mental-model}
+
 > type: category
 
-The biggest change from traditional IDEs is where control lives.
+Codex is best understood as a task agent you supervise, not as an autocomplete system you approve line by line.
 
-#### Traditional IDE Loop {#traditional-ide-loop}
+### IDE Approval Loop {#ide-approval-loop}
 
-> [!meta]
 > type: concept
 
-```edges
-contrasts: agent-review-loop
-```
+> edge.contrasts: codex-review-loop
 
-In an IDE or copilot flow, the editor is primary and you accept or reject suggestions before they become real changes.
+In a traditional IDE flow, you inspect suggestions before they become part of the working copy.
 
-#### Agent Review Loop {#agent-review-loop}
+### Codex Review Loop {#codex-review-loop}
 
-> [!meta]
 > type: concept
 
-```edges
-contrasts: traditional-ide-loop
-related: review-pane, terminal-evidence
-```
+> edge.contrasts: ide-approval-loop
+> edge.related: review-pane-mirrors-git
 
-In Codex, the unit of work is a task thread. You prompt, Codex works, then you inspect the result and decide whether to iterate, stage, revert, or commit.
+In Codex, you assign a task, let the agent work, then inspect the resulting diff and evidence before deciding what to keep.
 
-#### Control Moves After Execution {#control-after-execution}
+#### Review Pane and Git {#link-to-review-pane-mirrors-git}
 
-> [!meta]
-> type: principle
+> type: link
+> target: review-pane-mirrors-git
 
-```edges
-prereqs: agent-review-loop
-related: stage-means-next-commit, revert-means-discard
-```
+### You Are The Reviewer {#you-are-the-reviewer}
 
-The app is not built around per-keystroke approval. Your main approval point is post-hoc review of the diff and evidence.
+> type: concept
 
-#### Codex As A Configured Teammate {#configured-teammate}
+Your control point is task definition up front and review afterward. Think code review and curation, not keystroke approval.
 
-> [!meta]
-> type: principle
+## Working Loop {#working-loop}
 
-```edges
-prereqs: agent-review-loop
-related: agents-md, four-part-prompt
-```
-
-OpenAI's best-practices docs recommend treating Codex less like a one-off assistant and more like a teammate you configure with context, rules, and verification steps.
-
-### UI Surfaces {#ui-surfaces}
-
-> [!meta]
 > type: category
 
-Each main surface answers a different question: what did I ask, what changed, and what evidence supports it?
+This is the practical day-to-day loop for using Codex well.
 
-#### Chat Is The Control Plane {#chat-control-plane}
+### Scope The Task {#scope-the-task}
 
-> [!meta]
 > type: concept
 
-```edges
-related: four-part-prompt, plan-first
-```
+Start with a task that is clear enough to verify and small enough to review.
 
-The center chat is where you define the task, scope, and follow-up instructions. It is not the place where you approve each file edit.
+#### Prompt Shape {#prompt-shape}
 
-#### Thread Means One Ongoing Task {#thread-means-task}
-
-> [!meta]
 > type: concept
 
-```edges
-related: chat-control-plane, worktree-background
-```
+OpenAI recommends a prompt structure built around goal, context, constraints, and what done looks like.
 
-A thread contains your prompts plus Codex's tool calls and outputs. You can continue the same thread with follow-up prompts instead of starting over.
+#### Plan Before Coding {#plan-before-coding}
 
-#### Review Pane {#review-pane}
-
-> [!meta]
 > type: concept
 
-```edges
-prereqs: thread-means-task
-related: review-pane-repo-state, inline-comments
-```
+For ambiguous work, ask Codex to plan first or clarify missing requirements before it starts editing.
 
-The review pane is a Git diff surface. It only works inside a Git repo, and it is where you inspect diffs, open files in your editor, and shape what stays.
+### Let The Thread Run {#let-the-thread-run}
 
-#### Terminal Evidence {#terminal-evidence}
-
-> [!meta]
 > type: concept
 
-```edges
-related: review-pane, verify-with-evidence
-```
+A thread is the unit of work. Codex loops through reads, edits, and tool calls until the task is complete or you stop it.
 
-Codex can cite terminal logs and test outputs so you can trace what it ran and how it verified the task.
+#### Keep Parallel Threads Separate {#keep-parallel-threads-separate}
 
-#### Inline Comments {#inline-comments}
+> type: warning
 
-> [!meta]
+You can run multiple threads at once, but avoid having two threads modify the same files.
+
+### Review The Result {#review-the-result}
+
 > type: concept
 
-```edges
-prereqs: review-pane
-related: iterate-in-thread
-```
+Inspect both the diff and the evidence Codex provides, such as terminal logs, tests, and check results.
 
-Use inline comments on specific diff lines when the output is close but not quite right. This is often faster than rewriting the whole task.
+#### Use Inline Feedback {#use-inline-feedback}
 
-#### Iterate In The Same Thread {#iterate-in-thread}
+> type: concept
 
-> [!meta]
-> type: principle
+Inline comments are the fastest way to steer the next turn when a change is close but not yet right.
 
-```edges
-prereqs: thread-means-task
-related: inline-comments, plan-first
-```
+### Iterate Or Commit {#iterate-or-commit}
 
-If Codex got part of the job right, keep the same thread and give precise follow-up instructions. Reusing the thread preserves context, comments, and discovered evidence.
+> type: concept
 
-### Git Review Flow {#git-review-flow}
+Stay in the same thread when the task needs refinement. Commit only after the curated diff is acceptable.
 
-> [!meta]
+## Git Review Model {#git-review-model}
+
 > type: category
 
-Git is the safety system that turns Codex output into accepted work.
+The app’s review experience is a Git workflow, not a pre-edit approval workflow.
 
-#### Review Pane Mirrors Repo State {#review-pane-repo-state}
+### Review Pane Is Git {#review-pane-mirrors-git}
 
-> [!meta]
 > type: concept
 
-```edges
-prereqs: review-pane
-related: stage-means-next-commit
-```
+The review pane reflects the state of the repository, not only Codex edits. It can show Codex changes, your own uncommitted changes, and other repo changes.
 
-The review pane shows the Git state of the repo, not only Codex edits. It can show uncommitted changes, all branch changes, last-turn changes, and staged or unstaged views.
+### Stage Selects Commit {#stage-selects-the-next-commit}
 
-#### Stage Means Include In The Next Commit {#stage-means-next-commit}
+> type: concept
 
-> [!meta]
-> type: principle
+Stage means "include this in the next commit." Use it when you want to keep part or all of the diff.
 
-```edges
-prereqs: review-pane-repo-state
-related: should-you-stage-everything, partial-staging
-```
+#### Stage Is Not Pre-Edit Approval {#stage-is-not-pre-edit-approval}
 
-Staging is not "approve before Codex edits." It means "keep this change for the next commit."
+> type: warning
 
-#### Revert Means Discard The Working Copy Change {#revert-means-discard}
+Codex does not wait for you before editing files in the app. Staging happens after the edits exist.
 
-> [!meta]
-> type: principle
+### Revert Discards Changes {#revert-discards-changes}
 
-```edges
-prereqs: review-pane-repo-state
-related: stage-means-next-commit, should-you-stage-everything
-```
+> type: concept
 
-Revert is the reject button. Use it for files or hunks you do not want to keep.
+Revert is how you reject work you do not want to keep.
 
-#### Partial Staging Is Normal {#partial-staging}
+### Partial Staging Is Normal {#partial-staging-is-normal}
 
-> [!meta]
-> type: detail
+> type: concept
 
-```edges
-prereqs: stage-means-next-commit
-related: should-you-stage-everything
-```
+Git can hold staged and unstaged hunks in the same file. Seeing a file in both views is normal.
 
-The same file can appear in both staged and unstaged views. OpenAI's review docs call out that this is normal Git behavior, not a Codex bug.
+### Commit Is Acceptance {#commit-accepts-the-curated-diff}
 
-#### Should You Stage Every Change {#should-you-stage-everything}
+> type: concept
 
-> [!meta]
-> type: detail
+Commit is the real acceptance boundary. Review selects the changes; commit records the accepted set.
 
-```edges
-prereqs: stage-means-next-commit
-related: revert-means-discard
-```
+## Work Locations {#work-locations}
 
-No. Stage whatever you want in the next commit. If the whole diff is good, stage all once and commit. If the diff is mixed, stage only the good hunks or files and revert the rest.
-
-#### Commit Is The Acceptance Boundary {#commit-acceptance-boundary}
-
-> [!meta]
-> type: principle
-
-```edges
-prereqs: should-you-stage-everything
-related: clean-checkpoint
-```
-
-A commit is the durable checkpoint that says "this curated subset is accepted." Think of staging as selection and commit as acceptance.
-
-#### Start From A Clean Checkpoint {#clean-checkpoint}
-
-> [!meta]
-> type: principle
-
-```edges
-related: commit-acceptance-boundary, worktree-background
-```
-
-Before bigger Codex tasks, commit or stash your current work so the review diff stays clean and easy to reason about.
-
-### Local And Worktree {#local-and-worktree}
-
-> [!meta]
 > type: category
 
-The app uses Git checkouts to separate foreground work from background work.
+The app separates foreground work from background work so you can delegate safely.
 
-#### Local Is The Foreground {#local-foreground}
+### Local Is Foreground {#local-is-foreground}
 
-> [!meta]
 > type: concept
 
-```edges
-related: worktree-background, handoff
-```
+Use Local when you want your usual IDE, your existing dev server, or direct hands-on inspection.
 
-Local is your main checkout. Use it when you want your usual IDE, one running app instance, or tight manual inspection.
+### Worktree Is Background {#worktree-is-background}
 
-#### Worktree Is The Background {#worktree-background}
-
-> [!meta]
 > type: concept
 
-```edges
-contrasts: local-foreground
-related: app-for-delegation
-```
+Use Worktree when you want Codex to run in parallel without disturbing your Local checkout.
 
-A worktree is a second checkout for the same repo so Codex can run parallel tasks without disturbing your local checkout.
+### Handoff Moves Work Safely {#handoff-moves-work-safely}
 
-#### Handoff Moves The Thread Safely {#handoff}
+> type: concept
 
-> [!meta]
-> type: principle
+Handoff moves the thread and code between Local and Worktree and handles the required Git steps safely.
 
-```edges
-prereqs: local-foreground, worktree-background
-related: review-pane
-```
+### Local Environments {#local-environments-prepare-worktrees}
 
-Handoff moves the thread and code between Local and Worktree. OpenAI's docs describe Local as the foreground and Worktree as the background.
+> type: concept
 
-#### Setup Scripts Prepare Worktrees {#setup-scripts}
+Local environments define reusable setup steps and common actions for a project.
 
-> [!meta]
-> type: detail
+#### Setup Scripts {#setup-scripts}
 
-```edges
-prereqs: worktree-background
-related: agents-md
-```
+> type: concept
 
-Because worktrees run in different directories, setup scripts can install dependencies or build the project automatically when a new worktree starts.
+Setup scripts run automatically when Codex creates a new worktree, which helps install dependencies or build the project first.
 
-#### Actions And Integrated Terminal {#actions-and-terminal}
+#### Actions And Terminal {#actions-in-the-integrated-terminal}
 
-> [!meta]
-> type: detail
+> type: concept
 
-```edges
-related: setup-scripts, terminal-evidence
-```
+Actions give you one-click access to common commands such as starting the app or running tests in the app’s integrated terminal.
 
-Local environments can define reusable actions like test or run commands, and the app can run them in its integrated terminal.
+## Durable Setup {#durable-setup}
 
-### Task Design And Context {#task-design-and-context}
-
-> [!meta]
 > type: category
 
-Better prompts do not mean longer prompts. They mean clearer scope, constraints, and checks.
+Codex works better when your guidance and environment are reusable instead of repeated manually in every thread.
 
-#### Four-Part Prompt {#four-part-prompt}
+### AGENTS Guides Codex {#agents-guides-codex}
 
-> [!meta]
 > type: concept
 
-```edges
-related: chat-control-plane, plan-first
-```
+`AGENTS.md` is the best place to encode repo layout, commands, conventions, constraints, and done criteria.
 
-A strong default is Goal, Context, Constraints, and Done when. This gives Codex enough shape to work autonomously without guessing too much.
+### Keep AGENTS Practical {#keep-agents-practical}
 
-#### Keep Tasks Small Enough To Verify {#small-verifiable-tasks}
-
-> [!meta]
-> type: principle
-
-```edges
-prereqs: four-part-prompt
-related: review-pane, verify-with-evidence
-```
-
-Focused tasks are easier for Codex to test and easier for you to review. Split big work into milestones when possible.
-
-#### Plan First For Ambiguous Work {#plan-first}
-
-> [!meta]
-> type: principle
-
-```edges
-prereqs: four-part-prompt
-related: iterate-in-thread
-```
-
-For complex tasks, use Plan mode or ask Codex to interview you first. Planning reduces wasted edits and makes later review simpler.
-
-#### AGENTS.md Holds Durable Rules {#agents-md}
-
-> [!meta]
 > type: concept
 
-```edges
-related: configured-teammate, setup-scripts
-```
+Short, accurate instructions are more useful than long vague ones. Update `AGENTS.md` when repeated mistakes show real friction.
 
-Codex reads `AGENTS.md` before doing work, so repo norms, commands, do-not rules, and verification steps do not need to be repeated in every prompt.
+### Configure Permissions Carefully {#configure-permissions-carefully}
 
-#### Verify With Evidence {#verify-with-evidence}
+> type: concept
 
-> [!meta]
-> type: principle
+Start with tighter sandbox and approval defaults, then loosen them only for trusted repositories or proven workflows.
 
-```edges
-related: terminal-evidence, small-verifiable-tasks
-```
+### Ask For Verification {#ask-for-verification}
 
-Ask Codex to report the commands it ran, the tests it used, and the results. Evidence is the bridge between autonomy and trust.
+> type: concept
 
-### Pick The Right Surface {#pick-the-right-surface}
+Ask Codex to run the relevant checks, confirm the result, and review the diff before you accept the work.
 
-> [!meta]
+## Surface Choice {#surface-choice}
+
 > type: category
 
-The best Codex interface depends on whether you want delegation, approval gating, or fast local exploration.
+Choose the Codex surface that matches the risk, speed, and level of supervision you want.
 
-#### Codex App For Parallel Delegation {#app-for-delegation}
+### App For Agent Supervision {#app-for-agent-supervision}
 
-> [!meta]
 > type: concept
 
-```edges
-related: worktree-background, chat-control-plane
-```
+> edge.contrasts: cli-for-approval-gates
 
-The desktop app is a command center for multiple long-running tasks and background work. It is best when you want to supervise agents, not watch every edit live.
+The desktop app is a command center for multiple agents, background work, and long-running tasks.
 
-#### CLI For Approval Modes {#cli-approval-modes}
+### CLI For Approval Gates {#cli-for-approval-gates}
 
-> [!meta]
 > type: concept
 
-```edges
-contrasts: app-for-delegation
-related: commit-acceptance-boundary
-```
+> edge.contrasts: app-for-agent-supervision
 
-If you want stronger approval gates, the CLI is closer to that model. OpenAI's docs define Auto, Read-only, and Full Access modes, and Read-only will not edit or run commands until you approve a plan.
+Use the CLI when you want stronger approval control. In Read-only mode, Codex will not edit files or run commands until you approve a plan.
 
-#### IDE Extension For Fast Local Exploration {#ide-fast-local}
+### IDE For Close Reading {#ide-for-close-reading}
 
-> [!meta]
 > type: concept
 
-```edges
-contrasts: app-for-delegation
-related: review-pane
-```
+Use the IDE extension when you want nearby file context and faster local exploration near the code.
 
-OpenAI's workflows docs describe the IDE extension as the fastest surface for local exploration, open-file context, and targeted prompts near the code.
+### Pick By Risk And Speed {#pick-by-risk-and-speed}
 
-#### Use The Surface That Matches Risk {#surface-matches-risk}
+> type: concept
 
-> [!meta]
-> type: principle
-
-```edges
-prereqs: app-for-delegation, cli-approval-modes, ide-fast-local
-```
-
-Use the app when delegation speed matters, the CLI when approval control matters, and the IDE when close reading or surgical edits matter.
-
-### Common Mistakes {#common-mistakes}
-
-> [!meta]
-> type: category
-
-Most frustration comes from carrying the wrong expectations into an agent workflow.
-
-#### Waiting To Approve Every Edit {#waiting-to-approve}
-
-> [!meta]
-> type: detail
-
-```edges
-related: traditional-ide-loop, control-after-execution
-```
-
-If you expect Codex to pause on each file edit, the app will feel wrong. The intended loop is delegate first, review second.
-
-#### Treating Stage Like Pre-Edit Approval {#stage-is-not-pre-edit-approval}
-
-> [!meta]
-> type: detail
-
-```edges
-related: stage-means-next-commit, should-you-stage-everything
-```
-
-Stage is not the same as accepting an IDE suggestion. It only selects what goes into the next commit.
-
-#### Running Overlapping Threads On The Same Files {#overlapping-threads}
-
-> [!meta]
-> type: detail
-
-```edges
-related: thread-means-task, worktree-background
-```
-
-Codex can run multiple threads at once, but avoid having two threads edit the same files. Parallelism works best with separated scope.
-
-#### Using Vague Prompts {#vague-prompts}
-
-> [!meta]
-> type: detail
-
-```edges
-related: four-part-prompt, plan-first
-```
-
-"Improve this" or "clean up the codebase" creates noisy diffs. Name the files, the bug, the constraint, or the acceptance test.
-
-#### Skipping Review Because Tests Passed {#skipping-review}
-
-> [!meta]
-> type: detail
-
-```edges
-related: verify-with-evidence, review-pane-repo-state
-```
-
-Passing tests help, but they do not replace reading the diff. Your job is still to inspect behavior, scope, and unintended side changes.
+Use the app for delegation, the CLI for tighter approval gates, and the IDE when proximity to code matters most.
