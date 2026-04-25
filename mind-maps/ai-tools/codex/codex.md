@@ -50,6 +50,51 @@ Your control point is task definition up front and review afterward. Think code 
 
 This is the practical day-to-day loop for using Codex well.
 
+### Codex Workflow Procedure {#codex-workflow-procedure}
+
+> type: procedure
+
+This is the compact operational loop: define the task, let Codex work, review the evidence, then either refine or accept and feed that learning into the next task.
+
+#### Scope A Verifiable Task {#workflow-step-scope-a-verifiable-task}
+
+> type: step
+> edge.next: workflow-step-let-codex-work
+> edge.related: scope-the-task, plan-before-coding
+
+Define the goal, context, constraints, and what done looks like before Codex starts editing.
+
+#### Let Codex Work {#workflow-step-let-codex-work}
+
+> type: step
+> edge.next: workflow-step-review-diff-and-evidence
+> edge.related: let-the-thread-run, keep-parallel-threads-separate
+
+Let the thread read, edit, and run tools until it reaches a useful stopping point.
+
+#### Review Diff And Evidence {#workflow-step-review-diff-and-evidence}
+
+> type: step
+> edge.next: workflow-step-iterate-or-accept
+> edge.related: review-the-result, use-inline-feedback, ask-for-verification
+
+Inspect the diff, terminal output, and checks before deciding what to keep.
+
+#### Iterate Or Accept {#workflow-step-iterate-or-accept}
+
+> type: step
+> edge.next: workflow-step-feed-learning-into-the-next-task
+> edge.related: iterate-or-commit, commit-accepts-the-curated-diff
+
+Stay in the thread when the change needs refinement; commit when the curated result is acceptable.
+
+#### Feed Learning Into The Next Task {#workflow-step-feed-learning-into-the-next-task}
+
+> type: step
+> edge.related: workflow-step-scope-a-verifiable-task, keep-agents-practical, agents-guides-codex
+
+Capture the lessons in prompts, `AGENTS.md`, or workflow habits, then loop back into a better-scoped next task.
+
 ### Scope The Task {#scope-the-task}
 
 > type: concept
