@@ -30,5 +30,37 @@
     "stroke_style": "dashed",
     "arrow_start": null,
     "arrow_end": null
+  },
+  "attachment": {
+    "connection_type": "container",
+    "color": "#6B7280",
+    "stroke_width": 2,
+    "stroke_style": "dashed",
+    "arrow_start": null,
+    "arrow_end": null
+  },
+  "link": {
+    "connection_type": "line",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "dashed",
+    "arrow_start": null,
+    "arrow_end": null
+  },
+  "next": {
+    "connection_type": "line",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": "arrow"
+  },
+  "procedure_step": {
+    "connection_type": "container",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": "arrow"
   }
 }

@@ -33,6 +33,8 @@ In a traditional IDE flow, you inspect suggestions before they become part of th
 
 In Codex, you assign a task, let the agent work, then inspect the resulting diff and evidence before deciding what to keep.
 
+![Codex review loop sample](media/codex-review-loop-sample.svg)
+
 #### Review Pane and Git {#link-to-review-pane-mirrors-git}
 
 > type: link

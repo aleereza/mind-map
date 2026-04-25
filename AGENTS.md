@@ -4,7 +4,7 @@ This repo stores mind-map content only. Do not add builder code here.
 
 ## Canonical References
 
-Before creating or editing any map folder, read the relevant guide in `excali-builder`:
+Before creating or editing any map folder, read the relevant guide in `excali-builder` (likely a sibling directory at `../excali-builder` relative to this repo's root):
 
 - Markdown mind maps: `https://github.com/yeqline/excali-builder/blob/master/docs/mind-map-ai-agent-guide.md`
 - CSV diagrams: `https://github.com/yeqline/excali-builder/blob/master/docs/csv-parser-guide.md`

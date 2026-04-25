@@ -5,7 +5,8 @@
     "shape": "rectangle",
     "font_size": 18,
     "padding": 16,
-    "borderRadius": 12
+    "borderRadius": 12,
+    "font_family": "Arial"
   },
   "concept": {
     "color": "#1E3A8A",
@@ -13,7 +14,8 @@
     "shape": "rectangle",
     "font_size": 14,
     "padding": 12,
-    "borderRadius": 8
+    "borderRadius": 8,
+    "font_family": "Arial"
   },
   "comment": {
     "color": "#57534E",
@@ -21,7 +23,8 @@
     "shape": "rectangle",
     "font_size": 13,
     "padding": 10,
-    "borderRadius": 12
+    "borderRadius": 12,
+    "font_family": "Arial"
   },
   "warning": {
     "color": "#92400E",
@@ -29,6 +32,43 @@
     "shape": "rectangle",
     "font_size": 14,
     "padding": 12,
-    "borderRadius": 8
+    "borderRadius": 8,
+    "font_family": "Arial"
+  },
+  "image": {
+    "color": "#475569",
+    "backgroundColor": "#F8FAFC",
+    "shape": "rectangle",
+    "font_size": 13,
+    "font_family": "Arial",
+    "padding": 8,
+    "borderRadius": 12
+  },
+  "link": {
+    "color": "#1D4ED8",
+    "backgroundColor": "#DBEAFE",
+    "shape": "rectangle",
+    "font_size": 13,
+    "font_family": "Arial",
+    "padding": 10,
+    "borderRadius": 12
+  },
+  "procedure": {
+    "color": "#92400E",
+    "backgroundColor": "#FEF3C7",
+    "shape": "rectangle",
+    "font_size": 14,
+    "font_family": "Arial",
+    "padding": 12,
+    "borderRadius": 16
+  },
+  "step": {
+    "color": "#1F2937",
+    "backgroundColor": "#F9FAFB",
+    "shape": "rectangle",
+    "font_size": 13,
+    "font_family": "Arial",
+    "padding": 10,
+    "borderRadius": 12
   }
 }
