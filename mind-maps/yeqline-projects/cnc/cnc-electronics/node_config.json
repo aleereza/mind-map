@@ -17,24 +17,6 @@
     "borderRadius": 8,
     "font_family": "Arial"
   },
-  "detail": {
-    "color": "#065F46",
-    "backgroundColor": "#D1FAE5",
-    "shape": "rectangle",
-    "font_size": 12,
-    "padding": 10,
-    "borderRadius": 4,
-    "font_family": "Arial"
-  },
-  "principle": {
-    "color": "#7C2D12",
-    "backgroundColor": "#FEF3C7",
-    "shape": "rectangle",
-    "font_size": 14,
-    "padding": 12,
-    "borderRadius": 8,
-    "font_family": "Arial"
-  },
   "warning": {
     "color": "#92400E",
     "backgroundColor": "#FEF3C7",

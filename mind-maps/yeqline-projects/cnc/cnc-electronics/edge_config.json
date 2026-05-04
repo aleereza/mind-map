@@ -7,14 +7,6 @@
     "arrow_start": null,
     "arrow_end": "arrow"
   },
-  "prereqs": {
-    "connection_type": "line",
-    "color": "#DC2626",
-    "stroke_width": 2,
-    "stroke_style": "solid",
-    "arrow_start": null,
-    "arrow_end": "arrow"
-  },
   "related": {
     "connection_type": "line",
     "color": "#6B7280",

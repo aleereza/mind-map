@@ -4,9 +4,17 @@ This document defines how we want to design mind maps in this repo so they are e
 
 It complements the canonical builder docs in `excali-builder`.
 
-- Use `excali-builder` docs for syntax, file format, anchors, and build behavior.
-- Use this manifesto for information design, decomposition, and visual learning quality.
+- Use `excali-builder` docs only for syntax, file format, anchors, parser behavior, config files, and build behavior.
+- Use this manifesto for information design, decomposition, visual learning quality, and all other semantic guidance.
 - If these ever conflict on parser behavior, `excali-builder` wins.
+
+## Responsibility Boundary
+
+`excali-builder` should stay a neutral technical builder.
+It should explain how Markdown becomes nodes, links, layout, configs, and Excalidraw output.
+
+This repo owns the meaning of a good mind map.
+Guidance about teaching quality, cognitive load, branch depth, node semantics, edge usage policy, and map shape belongs here, not in `excali-builder`.
 
 ## Goal
 
@@ -88,22 +96,24 @@ Bad:
 
 - mixing a workflow step, a warning, a tool, and a best practice under one parent
 
-Parallel does not mean equal-sized.
-Siblings can have very different numbers of children, and some siblings can be leaves while others continue deeper.
+Parallel means siblings use the same kind of organizing lens.
+It does not mean they need matching child counts, matching depth, or deliberately different shapes.
 
-### 4. Let depth vary naturally
+### 4. Let depth follow meaning
 
-Natural maps are uneven.
-Some branches should stop early because the topic is simple; others should continue into H4, H5, or H6 when the subject has real internal structure.
+Do not choose a target depth for the map before the content is understood.
+For each node, ask whether child nodes would clarify a real internal structure.
+If not, stop there and use body text only when clarification is needed.
 
 Avoid:
 
-- giving every major branch the same depth
-- giving every second-level node a similar number of children
-- padding shallow branches with weak nodes
-- truncating rich branches to keep the picture symmetrical
+- expanding a branch only to match the depth of nearby branches
+- cutting a branch only to keep it aligned with nearby branches
+- adding weak children because a sibling has children
+- turning explanatory body text into nodes just to fill an outline level
+- forcing variation for its own sake
 
-The map should look like the subject's real shape, not an outline template.
+The map should follow the subject's real structure, not an outline template and not an anti-template.
 
 ### 5. Parent-child must mean true decomposition
 
@@ -129,8 +139,9 @@ Examples:
 
 Avoid switching lenses mid-branch.
 
-This principle should not force every branch into the same shape.
-A branch can stop after one useful layer, or continue several layers, depending on the topic.
+This principle should not force branches into the same shape.
+It also should not force them into different shapes.
+The only question is whether another child layer teaches a true decomposition.
 
 ### 7. Prefer short labels and low-text nodes
 
@@ -174,7 +185,7 @@ For now, keep the edge vocabulary small:
 
 - `parent_child`
 - `related`
-- `contrast`
+- `contrasts`
 
 ### `parent_child`
 
@@ -189,7 +200,7 @@ Use sparingly.
 
 Only add `related` when a non-obvious connection helps the learner understand two concepts better.
 
-### `contrast`
+### `contrasts`
 
 Use for common confusions, false alternatives, or important distinctions.
 

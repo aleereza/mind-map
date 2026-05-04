@@ -1,12 +1,12 @@
 # Mind Maps
 
-This repo stores mind-map source content only. The build logic and the detailed authoring rules live in the sibling `excali-builder` repo, so this guide stays intentionally thin.
+This repo stores mind-map source content only. The build logic and technical format rules live in the sibling `excali-builder` repo, so this guide stays intentionally thin.
 
 ## Canonical Docs
 
-Use these files in `excali-builder` as the source of truth:
+Use these files in `excali-builder` as the technical source of truth for parser syntax, config files, and build behavior:
 
-- Markdown mind-map authoring: [mind-map-ai-agent-guide.md](https://github.com/yeqline/excali-builder/blob/master/docs/mind-map-ai-agent-guide.md)
+- Markdown format authoring: [mind-map-ai-agent-guide.md](https://github.com/yeqline/excali-builder/blob/master/docs/mind-map-ai-agent-guide.md)
 - CSV authoring: [csv-parser-guide.md](https://github.com/yeqline/excali-builder/blob/master/docs/csv-parser-guide.md)
 - Builder usage: [excali-builder README](https://github.com/yeqline/excali-builder/blob/master/README.md)
 
@@ -33,6 +33,12 @@ mind-maps/
 
 Keep source files, config files, `positions.json`, and `output.excalidraw` in this repo if you want seamless cross-machine continuity. `positions.json` is the durable layout state used by the builder, and `output.excalidraw` is useful as the file you open directly in Excalidraw and as a backup source for sync.
 
+## Responsibility Boundary
+
+The sibling `excali-builder` repo should stay technical: parser rules, supported syntax, config behavior, and build workflow.
+
+This repo owns the semantic and editorial standards for mind maps: information design, learning quality, decomposition, node type policy, edge usage policy, and guidance about natural branch depth.
+
 ## Quick Start
 
 1. Create a map folder under `mind-maps/<domain>/<topic>/`.
@@ -54,10 +60,10 @@ uv run excali-builder /path/to/mind-map/mind-maps/<domain>/<topic>
 
 Do not copy the full builder guide into this repo.
 
-- Keep the detailed standards in `excali-builder`.
+- Keep parser and builder standards in `excali-builder`.
 - Keep this repo's docs limited to purpose, folder structure, and the exact canonical references.
 - Use GitHub links for canonical docs so the references work from any machine.
 - Commit `positions.json` and `output.excalidraw` if you want the easiest cross-machine workflow.
 - Organize maps under `mind-maps/<domain>/<topic>/`, for example `mind-maps/de/dbt` or `mind-maps/de/snowflake`.
-- If the standards change, update only the canonical guide in `excali-builder`.
+- If parser or builder standards change, update only the canonical guide in `excali-builder`.
 - If the doc path changes later, update the path in this README and `AGENTS.md`.

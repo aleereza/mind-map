@@ -4,13 +4,13 @@ This repo stores mind-map content only. Do not add builder code here.
 
 ## Canonical References
 
-Before creating or editing any map folder, read the relevant guide in `excali-builder` (likely a sibling directory at `../excali-builder` relative to this repo's root):
+Before creating or editing any map folder, read the relevant technical guide in `excali-builder` (likely a sibling directory at `../excali-builder` relative to this repo's root):
 
 - Markdown mind maps: `https://github.com/yeqline/excali-builder/blob/master/docs/mind-map-ai-agent-guide.md`
 - CSV diagrams: `https://github.com/yeqline/excali-builder/blob/master/docs/csv-parser-guide.md`
 - Builder usage: `https://github.com/yeqline/excali-builder/blob/master/README.md`
 
-Also read `mind-map-manifesto.md` before creating or substantially changing a mind map. Use it for information design, decomposition quality, and avoiding artificial-looking map structures.
+Also read `mind-map-manifesto.md` before creating or substantially changing a mind map. This repo, not `excali-builder`, owns semantic and editorial guidance: information design, decomposition quality, node type policy, edge usage policy, and avoiding outline-template behavior. Do not force branches to have the same depth, and do not force them to have different depths; let each branch stop where its real decomposition stops.
 
 ## Repo Conventions
 
