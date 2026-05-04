@@ -1,0 +1,47 @@
+{
+  "category": {
+    "color": "#0F172A",
+    "backgroundColor": "#DBEAFE",
+    "shape": "rectangle",
+    "font_size": 18,
+    "padding": 16,
+    "borderRadius": 12,
+    "font_family": "Arial"
+  },
+  "concept": {
+    "color": "#1E3A8A",
+    "backgroundColor": "#F8FAFC",
+    "shape": "rectangle",
+    "font_size": 14,
+    "padding": 12,
+    "borderRadius": 8,
+    "font_family": "Arial"
+  },
+  "detail": {
+    "color": "#065F46",
+    "backgroundColor": "#D1FAE5",
+    "shape": "rectangle",
+    "font_size": 12,
+    "padding": 10,
+    "borderRadius": 4,
+    "font_family": "Arial"
+  },
+  "principle": {
+    "color": "#7C2D12",
+    "backgroundColor": "#FEF3C7",
+    "shape": "rectangle",
+    "font_size": 14,
+    "padding": 12,
+    "borderRadius": 8,
+    "font_family": "Arial"
+  },
+  "warning": {
+    "color": "#92400E",
+    "backgroundColor": "#FEF3C7",
+    "shape": "rectangle",
+    "font_size": 14,
+    "padding": 12,
+    "borderRadius": 8,
+    "font_family": "Arial"
+  }
+}
