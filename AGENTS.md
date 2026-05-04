@@ -10,6 +10,8 @@ Before creating or editing any map folder, read the relevant guide in `excali-bu
 - CSV diagrams: `https://github.com/yeqline/excali-builder/blob/master/docs/csv-parser-guide.md`
 - Builder usage: `https://github.com/yeqline/excali-builder/blob/master/README.md`
 
+Also read `mind-map-manifesto.md` before creating or substantially changing a mind map. Use it for information design, decomposition quality, and avoiding artificial-looking map structures.
+
 ## Repo Conventions
 
 - Keep maps under `mind-maps/<domain>/<topic>/`, for example `mind-maps/de/dbt` and `mind-maps/de/snowflake`.

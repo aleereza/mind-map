@@ -88,7 +88,24 @@ Bad:
 
 - mixing a workflow step, a warning, a tool, and a best practice under one parent
 
-### 4. Parent-child must mean true decomposition
+Parallel does not mean equal-sized.
+Siblings can have very different numbers of children, and some siblings can be leaves while others continue deeper.
+
+### 4. Let depth vary naturally
+
+Natural maps are uneven.
+Some branches should stop early because the topic is simple; others should continue into H4, H5, or H6 when the subject has real internal structure.
+
+Avoid:
+
+- giving every major branch the same depth
+- giving every second-level node a similar number of children
+- padding shallow branches with weak nodes
+- truncating rich branches to keep the picture symmetrical
+
+The map should look like the subject's real shape, not an outline template.
+
+### 5. Parent-child must mean true decomposition
 
 A child should be a genuine sub-topic, component, stage, or part of the parent.
 
@@ -100,7 +117,7 @@ Use this test:
 
 If that sounds wrong, it should probably not be a child.
 
-### 5. Use one organizing principle per branch
+### 6. Use one organizing principle per branch
 
 Each branch should decompose its topic using a single lens.
 
@@ -112,26 +129,29 @@ Examples:
 
 Avoid switching lenses mid-branch.
 
-### 6. Prefer short labels and low-text nodes
+This principle should not force every branch into the same shape.
+A branch can stop after one useful layer, or continue several layers, depending on the topic.
+
+### 7. Prefer short labels and low-text nodes
 
 Node titles should usually be short phrases, not mini paragraphs.
 
 The label should help scanning first.
 The body text should clarify only when needed.
 
-### 7. Prefer a clean tree before adding links
+### 8. Prefer a clean tree before adding links
 
 The map should make sense with only `parent_child` edges.
 
 Only after the tree is solid should we add a small number of non-hierarchical links.
 
-### 8. Cross-links must earn their place
+### 9. Cross-links must earn their place
 
 Use cross-links only when the connection is not obvious from the hierarchy and materially helps understanding.
 
 If removing a cross-link does not hurt comprehension, remove it.
 
-### 9. Optimize for teaching, not exhaustiveness
+### 10. Optimize for teaching, not exhaustiveness
 
 Do not add nodes just because a fact is true.
 
@@ -142,7 +162,7 @@ Add nodes only if they help the learner:
 - remember
 - act
 
-### 10. Cut aggressively
+### 11. Cut aggressively
 
 If 30% of the nodes could disappear with no loss of understanding, the map is too dense.
 
