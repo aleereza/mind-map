@@ -73,6 +73,42 @@ uv run excali-builder serve /path/to/mind-map/mind-maps/<domain>/<topic>
 
 In this workflow, source files are authoritative for content and relationships, while `positions.json` is authoritative for durable layout. The local viewer is for spatial review and node layout, not for editing the canonical text content.
 
+## Edit Workflow
+
+Existing maps use the same source-and-viewer loop. The Markdown file remains the place where the agent changes meaning, structure, labels, body text, node types, and cross-links; the local viewer remains the place where the visual result is reviewed and spatial layout is adjusted.
+
+1. The existing map folder is opened with the live viewer:
+
+```bash
+cd /path/to/excali-builder
+uv run excali-builder serve /path/to/mind-map/mind-maps/<domain>/<topic>
+```
+
+2. The local viewer shows the current `output.excalidraw` and keeps it refreshed as Markdown or config files change.
+3. The user asks the AI agent for a specific content or structure edit, such as moving a branch, adding examples, splitting an overloaded node, renaming unclear labels, or tightening a branch.
+4. The agent edits the Markdown and, when needed, the checked-in config files.
+5. The server rebuilds automatically, and the viewer updates without a manual reload.
+6. New or moved concepts can be repositioned or resized in the viewer, with layout saved back to `positions.json`.
+7. The final state is captured by committing the changed Markdown, config files if any, `positions.json`, and `output.excalidraw`.
+
+Sample edit prompt:
+
+```text
+We are editing an existing Markdown mind map in this repo.
+
+Before editing, read:
+- `README.md`
+- `AGENTS.md`
+- `mind-map-manifesto.md`
+- the existing map Markdown file and config files in `<map-folder>`
+
+Make this change to the existing map:
+
+    <describe the branch move, added explanation, examples, cleanup, or restructuring>
+
+Keep Markdown as the source of truth. Preserve stable node IDs unless a rename is necessary for clarity. Keep the map teaching-oriented, avoid unnecessary cross-links, and let branch depth follow the real decomposition of the topic.
+```
+
 ## One-Shot Build
 
 The original build command still works for scripts or export-only work:
