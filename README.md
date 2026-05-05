@@ -1,10 +1,10 @@
 # Mind Maps
 
-This repo stores mind-map source content only. This guide stays focused on folder layout and the day-to-day creation workflow.
+This repo contains Markdown-based mind maps that are converted into Excalidraw diagrams with `excali-builder`. Each map keeps its learning content in source Markdown, its visual styling in checked-in config files, and its reusable layout in `positions.json`.
 
-## Recommended Repo Layout
+## Repo Layout
 
-Keep all content under `mind-maps/`. Organize by domain, then topic:
+Mind maps live under `mind-maps/`, grouped by domain and then topic:
 
 ```text
 mind-maps/
@@ -23,14 +23,14 @@ mind-maps/
       snowflake.md
 ```
 
-Keep source files, config files, `positions.json`, and `output.excalidraw` in this repo if you want seamless cross-machine continuity. `positions.json` is the durable layout state used by the builder, and `output.excalidraw` is useful as the file you open directly in Excalidraw and as a backup source for sync.
+Each map folder includes the Markdown source, checked-in config files, optional `positions.json`, and generated `output.excalidraw`. Keeping `positions.json` and `output.excalidraw` in the repo gives the easiest cross-machine continuity: `positions.json` stores durable layout state, and `output.excalidraw` is useful for direct Excalidraw use and as a backup source for sync.
 
-## Quick Start
+## Creation Workflow
 
-The main workflow is to pair an AI agent for source edits with the live `excali-builder serve` viewer for review and layout:
+The main workflow pairs an AI agent for Markdown source edits with the live `excali-builder serve` viewer for review and layout:
 
-1. Create a map folder under `mind-maps/<domain>/<topic>/`.
-2. Ask an AI agent to create the initial mind map source files for the subject.
+1. A new map starts as a folder under `mind-maps/<domain>/<topic>/`.
+2. An AI agent can create the initial Markdown source and config files for the subject.
 
 Sample prompt:
 
@@ -57,20 +57,19 @@ Use Markdown only. Create the required files:
 Optimize the map for teaching and cognitive clarity, not exhaustive coverage. Keep the first layer small, make sibling nodes parallel, let branch depth follow meaning, and use cross-links sparingly.
 ```
 
-3. Add or verify the required Markdown source and config files.
-4. Start the local auto-refreshing viewer:
+3. The map folder contains the required Markdown source and config files.
+4. The local auto-refreshing viewer runs from the builder:
 
 ```bash
 cd /path/to/excali-builder
 uv run excali-builder serve /path/to/mind-map/mind-maps/<domain>/<topic>
 ```
 
-5. Open the local viewer URL printed by `serve`.
-6. Review the generated Excalidraw map in the browser.
-7. Reposition or resize nodes directly in the viewer; layout saves automatically to `positions.json`.
-8. Ask the AI agent to edit the Markdown or config files while `serve` keeps running.
-9. The server rebuilds automatically and the viewer refreshes without a manual reload or separate build command.
-10. Commit source files, config files, `positions.json`, and `output.excalidraw` when the map is in a useful state.
+5. The local viewer URL printed by `serve` opens the generated Excalidraw map in the browser.
+6. Node repositioning and resizing happen directly in the viewer, and layout saves automatically to `positions.json`.
+7. While `serve` keeps running, AI-agent edits to Markdown or config files trigger automatic rebuilds.
+8. The viewer refreshes without a manual reload or separate build command.
+9. Source files, config files, `positions.json`, and `output.excalidraw` are committed when the map is in a useful state.
 
 In this workflow, source files are authoritative for content and relationships, while `positions.json` is authoritative for durable layout. The local viewer is for spatial review and node layout, not for editing the canonical text content.
 
@@ -83,14 +82,4 @@ cd /path/to/excali-builder
 uv run excali-builder /path/to/mind-map/mind-maps/<domain>/<topic>
 ```
 
-A one-shot build syncs layout from any existing `output.excalidraw`, regenerates the diagram, and exits. Prefer `serve` for day-to-day map creation and review.
-
-## Recommended Way To Manage Docs
-
-Do not copy the full builder guide into this repo.
-
-- Keep Markdown parser and builder standards out of this README.
-- Keep this repo's docs limited to purpose, folder structure, and practical workflow.
-- Commit `positions.json` and `output.excalidraw` if you want the easiest cross-machine workflow.
-- Organize maps under `mind-maps/<domain>/<topic>/`, for example `mind-maps/de/dbt` or `mind-maps/de/snowflake`.
-- If parser or builder standards change, update the canonical technical docs and `AGENTS.md`, not this README.
+A one-shot build syncs layout from any existing `output.excalidraw`, regenerates the diagram, and exits. The `serve` workflow is better suited to day-to-day map creation and review.
