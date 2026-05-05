@@ -1,13 +1,12 @@
 # Mind Map Repo Instructions
 
-This repo stores mind-map content only. Do not add builder code here.
+This repo stores Markdown mind-map content only. Do not add builder code here.
 
 ## Canonical References
 
 Before creating or editing any map folder, read the relevant technical guide in `excali-builder` (likely a sibling directory at `../excali-builder` relative to this repo's root):
 
 - Markdown mind maps: `https://github.com/yeqline/excali-builder/blob/master/docs/mind-map-ai-agent-guide.md`
-- CSV diagrams: `https://github.com/yeqline/excali-builder/blob/master/docs/csv-parser-guide.md`
 - Builder usage: `https://github.com/yeqline/excali-builder/blob/master/README.md`
 
 Also read `mind-map-manifesto.md` before creating or substantially changing a mind map. This repo, not `excali-builder`, owns semantic and editorial guidance: information design, decomposition quality, node type policy, edge usage policy, and avoiding outline-template behavior. Do not force branches to have the same depth, and do not force them to have different depths; let each branch stop where its real decomposition stops.
@@ -20,9 +19,20 @@ Also read `mind-map-manifesto.md` before creating or substantially changing a mi
 - Use lowercase kebab-case for new file names, for example `mind-map-manifesto.md`.
 - When format conventions conflict with local assumptions, the `excali-builder` docs win.
 
-## Build Workflow
+## Serve Workflow
 
-Run builds from the `excali-builder` repo against a map folder in this repo:
+Use the live local viewer for day-to-day map creation, review, and layout:
+
+```bash
+cd /path/to/excali-builder
+uv run excali-builder serve /path/to/mind-map/mind-maps/<domain>/<topic>
+```
+
+The `serve` workflow should be preferred when the user wants to see edits reflected in the diagram. It rebuilds when source or config files change, refreshes the local viewer automatically, and saves node repositioning/resizing from the viewer back into `positions.json`.
+
+## One-Shot Build
+
+Use a one-shot build for scripts, export-only work, or when no live viewer is needed:
 
 ```bash
 cd /path/to/excali-builder
