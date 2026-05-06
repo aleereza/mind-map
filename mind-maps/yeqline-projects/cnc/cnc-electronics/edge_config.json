@@ -22,5 +22,13 @@
     "stroke_style": "dashed",
     "arrow_start": null,
     "arrow_end": null
+  },
+  "comment": {
+    "connection_type": "line",
+    "color": "#78716C",
+    "stroke_width": 2,
+    "stroke_style": "dashed",
+    "arrow_start": null,
+    "arrow_end": null
   }
 }

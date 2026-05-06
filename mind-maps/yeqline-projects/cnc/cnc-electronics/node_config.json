@@ -25,5 +25,14 @@
     "padding": 12,
     "borderRadius": 8,
     "font_family": "Arial"
+  },
+  "comment": {
+    "color": "#57534E",
+    "backgroundColor": "#FAF7F2",
+    "shape": "rectangle",
+    "font_size": 13,
+    "font_family": "Arial",
+    "padding": 10,
+    "borderRadius": 12
   }
 }

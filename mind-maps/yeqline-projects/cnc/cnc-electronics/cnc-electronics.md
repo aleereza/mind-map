@@ -1,10 +1,10 @@
-## CNC Electronics {#cnc-electronics}
+## CNC (Computer Numerical Control) Electronics {#cnc-electronics}
 
 > type: category
 
-Root question: how do CNC electronics convert a toolpath into safe, accurate, diagnosable machine motion?
+Root question: how do CNC (Computer Numerical Control) electronics convert a toolpath into safe, accurate, diagnosable machine motion?
 
-### Whole System Model {#whole-system-model}
+### High Level System Model {#whole-system-model}
 
 > type: category
 
@@ -14,13 +14,13 @@ Understand the machine as four paths that meet at each axis: command, power, fee
 
 > type: concept
 
-Most CNC electronics problems become clearer when you ask which path is carrying the wrong information, energy, measurement, or permission.
+Most CNC (Computer Numerical Control) electronics problems become clearer when you ask which path is carrying the wrong information, energy, measurement, or permission.
 
 ##### Command Path {#command-path}
 
 > type: concept
 
-G-code, jogs, probing moves, and process commands become coordinated axis motion and output states.
+G-code (machine tool programming commands), jogs, probing moves, and process commands become coordinated axis motion and output states.
 
 ##### Power Path {#power-path}
 
@@ -38,7 +38,31 @@ Encoders, scales, probes, switches, sensors, and drive status report what actual
 
 > type: concept
 
-Safety hardware decides whether hazardous energy is allowed, even when normal control logic is wrong.
+Safety hardware watches for conditions where motion or process energy must stop, then permits, removes, or limits hazardous energy without depending on the normal controller.
+
+###### Hazard Inputs {#hazard-inputs}
+
+> type: concept
+
+Examples include emergency-stop buttons, guard-door switches, hard limits, drive safety feedback, spindle faults, air-pressure faults, and process interlocks.
+
+###### Safety Decision {#safety-decision}
+
+> type: concept
+
+A safety relay, safety PLC (Programmable Logic Controller), or rated drive function checks the input circuit, reset condition, and feedback contacts before allowing hazardous outputs.
+
+###### Energy Control {#energy-control}
+
+> type: concept
+
+Typical outputs remove or limit torque through STO (Safe Torque Off), drop motor or spindle contactors, disable process energy, close valves, or command a controlled safe stop.
+
+###### Restart Control {#restart-control}
+
+> type: warning
+
+After a safety trip, reset should prove the hazard is cleared and require a deliberate restart; releasing the E-stop (Emergency Stop) should not automatically resume motion.
 
 #### System Boundaries {#system-boundaries}
 
@@ -50,7 +74,15 @@ Good designs keep controller decisions, drive control, machine mechanics, and sa
 
 > type: concept
 
-The controller owns trajectory planning, machine state, I/O logic, homing, alarms, and command timing.
+The controller owns trajectory planning, machine state, I/O (Input/Output) logic, homing, alarms, and command timing.
+
+###### Controller Boundary Pitfall {#controller-boundary-pitfall}
+
+> type: comment
+
+A common bad design is making the CNC (Computer Numerical Control) controller responsible for things it can only request, not guarantee. In a DIY (Do-It-Yourself) machine, this happens when an E-stop (Emergency Stop), spindle permissive, or hard limit is treated as just another FluidNC input. The firmware may stop sending steps, but if the controller crashes, USB (Universal Serial Bus) drops, an output transistor fails, or a relay is wired normally-open in the wrong place, the drive enable or spindle run signal can remain in an unsafe state.
+
+Prevent this by keeping the controller's job focused on machine state and coordinated motion. Let it read limits, homes, drive alarms, probes, and process faults for diagnosis and orderly stops, but do not make it the only authority over hazardous energy. Use fail-safe input wiring, define clear alarm and reset states, bring fault signals back into the controller, and use external safety hardware where stopping must still work when the controller is wrong.
 
 ##### Drive Boundary {#drive-boundary}
 
@@ -58,53 +90,47 @@ The controller owns trajectory planning, machine state, I/O logic, homing, alarm
 
 The drive owns power electronics, current control, motor feedback handling, protection, and local faults.
 
+###### Drive Boundary Pitfall {#drive-boundary-pitfall}
+
+> type: comment
+
+Bad drive boundaries show up when the controller treats a drive as a silent pulse amplifier. A closed-loop stepper drive may detect following error, encoder loss, overcurrent, or overheating, but if its alarm output is not wired into the controller or safety chain, the rest of the machine can continue as if the axis still exists. On a dual-Y router, one Y drive faulting while the other side keeps driving can rack the gantry, twist the frame, or ruin a fixture before the operator understands the fault.
+
+Prevent this by wiring every drive's alarm, ready, and enable behavior deliberately. Confirm voltage levels, polarity, pullups, step timing, enable timing, and what the drive does after a fault. For coordinated axes, test one-axis fault cases during commissioning and make the intended stop behavior explicit. Also separate ordinary drive enable from safety-rated functions: a normal enable input may be useful for control, but STO (Safe Torque Off) or a rated safety device is the boundary for hazardous torque removal.
+
 ##### Machine Boundary {#machine-boundary}
 
 > type: concept
 
 The machine structure turns motor torque into tool motion through real stiffness, backlash, friction, and thermal growth.
 
+###### Machine Boundary Pitfall {#machine-boundary-pitfall}
+
+> type: comment
+
+A common boundary mistake is expecting electronics to fix mechanical truth. Increasing steps per unit, adding motor encoders, or tightening following-error limits does not remove a loose coupler, belt stretch, rack backlash, gantry skew, spindle growth, or frame deflection. A motor encoder can report perfect tracking while the cutter is still off because the error happened after the motor shaft.
+
+Prevent this by treating mechanical errors at the machine boundary first. Fix lost motion, alignment, stiffness, belt tension, screw support, bearing play, and gantry squaring before relying on software compensation. Use independent homes for dual drives when squaring matters, and reserve probing, axis scales, backlash compensation, and thermal compensation for errors that are repeatable and measured. If the machine changes under cutting load or heat, the controller needs real feedback or conservative process limits, not just more resolution.
+
 ##### Safety Boundary {#safety-boundary}
 
 > type: concept
 
-Safety hardware should be able to remove or limit hazardous motion without trusting the G-code sender or firmware.
+Safety hardware should be able to remove or limit hazardous motion without trusting the G-code (machine tool programming commands) sender or firmware.
 
-#### Example Signal Chain {#example-signal-chain}
+###### Safety Boundary Pitfall {#safety-boundary-pitfall}
 
-> type: concept
+> type: comment
 
-The running example uses a 6-axis FluidNC controller, four 3.0 Nm NEMA 23 closed-loop steppers, and encoder drives for X, Z, and dual Y.
+The worst boundary mistake is confusing an operational stop with a safety function. Feed hold, reset, sender disconnect, controller reboot, and a normal input pin can be useful controls, but they are not enough for emergency stop, guard doors, process energy, or hazardous stored energy. In real machines this shows up as guard switches hidden in ordinary PLC (Programmable Logic Controller) logic, a VFD (Variable Frequency Drive) fault ignored by the CNC (Computer Numerical Control), a brake released by a convenience output, or an E-stop (Emergency Stop) that stops axis commands while the spindle, plasma arc, coolant pump, or pneumatic actuator can still energize.
 
-##### FluidNC To Drives {#fluidnc-to-drives}
-
-> type: concept
-
-FluidNC sends step, direction, and enable signals to four external closed-loop stepper drives.
-
-##### Drives To Motors {#drives-to-motors}
-
-> type: concept
-
-Each drive converts low-power commands into controlled phase current for one motor.
-
-##### Encoders To Drives {#encoders-to-drives}
-
-> type: concept
-
-Each motor encoder returns position information to its own drive, which handles the closed loop locally.
-
-##### Alarms To Controller {#alarms-to-controller}
-
-> type: concept
-
-Each drive alarm should return to the controller or safety chain so one failed axis stops coordinated motion.
+Prevent this with a safety path that can act independently of normal control. Use normally-closed safety circuits, safety relays or safety PLCs (Programmable Logic Controllers) where risk requires them, drive STO (Safe Torque Off) or appropriate contactors, feedback contacts for contactor monitoring, and a deliberate reset that cannot automatically restart motion. Test the actual result: press E-stop (Emergency Stop), open guards, fault a drive, remove air pressure, and verify which energy sources are removed, which axes coast or brake, what the controller reports, and what the operator must do before restart.
 
 ### Controller Layer {#controller-layer}
 
 > type: category
 
-The CNC controller is the machine-level decision maker. It decides what motion should happen, not how motor current is switched.
+The CNC (Computer Numerical Control) controller is the machine-level decision maker. It decides what motion should happen, not how motor current is switched.
 
 #### Controller Job {#controller-job}
 
@@ -116,7 +142,7 @@ A controller interprets commands, plans motion, schedules outputs, reads inputs,
 
 > type: concept
 
-Tracks G-code modes, units, offsets, feed modes, spindle commands, coolant, and program flow.
+Tracks G-code (machine tool programming commands) modes, units, offsets, feed modes, spindle commands, coolant, and program flow.
 
 ##### Trajectory Planning {#trajectory-planning}
 
@@ -130,7 +156,7 @@ Turns geometry into time-based motion while respecting velocity, acceleration, c
 
 For step/dir systems, pulse timing is the controller's real-time promise to the drives.
 
-##### Machine I/O State {#machine-io-state}
+##### Machine I/O (Input/Output) State {#machine-io-state}
 
 > type: concept
 
@@ -146,31 +172,31 @@ Separates running, hold, homing, alarm, reset, and safety-interlocked behavior s
 
 > type: concept
 
-CNC controllers differ by where real-time motion, I/O, safety integration, and the operator interface live.
+CNC (Computer Numerical Control) controllers differ by where real-time motion, I/O (Input/Output), safety integration, and the operator interface live.
 
 ##### Embedded Firmware {#embedded-firmware}
 
 > type: concept
 
-FluidNC and GRBL-style controllers are compact step/dir controllers for small to mid-size machines.
+FluidNC and GRBL (open-source controller firmware) style controllers are compact step/dir controllers for small to mid-size machines.
 
-##### PC Motion System {#pc-motion-system}
-
-> type: concept
-
-PC systems use a computer for interface and planning, with real-time kernels or external timing hardware when needed.
-
-##### Industrial CNC {#industrial-cnc}
+##### PC (Personal Computer) Motion System {#pc-motion-system}
 
 > type: concept
 
-Industrial CNCs integrate high-performance motion, drives, I/O, probing, diagnostics, safety, and production workflows.
+PC (Personal Computer) systems use a computer for interface and planning, with real-time kernels or external timing hardware when needed.
 
-##### PLC Motion {#plc-motion}
+##### Industrial CNC (Computer Numerical Control) {#industrial-cnc}
 
 > type: concept
 
-PLC motion systems combine automation logic, motion function blocks, fieldbus drives, distributed I/O, and safety PLCs.
+Industrial CNCs (Computer Numerical Control systems) integrate high-performance motion, drives, I/O (Input/Output), probing, diagnostics, safety, and production workflows.
+
+##### PLC (Programmable Logic Controller) Motion {#plc-motion}
+
+> type: concept
+
+PLC (Programmable Logic Controller) motion systems combine automation logic, motion function blocks, fieldbus drives, distributed I/O (Input/Output), and safety PLCs (Programmable Logic Controllers).
 
 ##### Robot Controller {#robot-controller}
 
@@ -212,7 +238,7 @@ Two powered Y sides should home independently for squaring, then move as one mec
 
 > type: warning
 
-FluidNC is not a safety PLC or a high-end fieldbus CNC. Dangerous energy needs external rated hardware.
+FluidNC is not a safety PLC (Programmable Logic Controller) or a high-end fieldbus CNC (Computer Numerical Control system). Dangerous energy needs external rated hardware.
 
 ### Drive-Motor Layer {#drive-motor-layer}
 
@@ -230,7 +256,7 @@ A motor drive is a controlled power amplifier between low-energy controller comm
 
 > type: concept
 
-Drives may accept step/dir pulses, analog velocity, PWM, serial commands, or cyclic fieldbus setpoints.
+Drives may accept step/dir pulses, analog velocity, PWM (Pulse-Width Modulation), serial commands, or cyclic fieldbus setpoints.
 
 ##### Current Control {#current-control}
 
@@ -254,7 +280,7 @@ Drives detect overcurrent, voltage faults, overheating, encoder faults, stalls, 
 
 > type: concept
 
-Main CNC drive families follow the motor and process physics they control.
+Main CNC (Computer Numerical Control) drive families follow the motor and process physics they control.
 
 ##### Open-Loop Stepper Driver {#open-loop-stepper-driver}
 
@@ -275,7 +301,7 @@ Uses an encoder to detect position error, improve behavior, and raise alarms on 
 
 Controls a servo motor through feedback loops for current, velocity, and position.
 
-##### Spindle VFD {#spindle-vfd}
+##### Spindle VFD (Variable Frequency Drive) {#spindle-vfd}
 
 > type: concept
 
@@ -285,7 +311,7 @@ Controls spindle speed and torque by modulating frequency, voltage, and sometime
 
 > type: concept
 
-Linear motors, torque motors, plasma, laser, waterjet, EDM, and additive systems add specialized drive requirements.
+Linear motors, torque motors, plasma, laser, waterjet, EDM (Electrical Discharge Machining), and additive systems add specialized drive requirements.
 
 #### Stepper Driver Duties {#stepper-driver-duties}
 
@@ -360,11 +386,11 @@ Motor sizing is about torque across speed, thermal limits, inertia, and the mech
 
 Stepper and servo torque depends on controlled winding current and magnetic alignment.
 
-##### Inductance And Back EMF {#inductance-and-back-emf}
+##### Inductance And Back EMF (Electromotive Force) {#inductance-and-back-emf}
 
 > type: concept
 
-Inductance slows current rise, and back EMF at speed reduces voltage headroom for current control.
+Inductance slows current rise, and back EMF (Electromotive Force) at speed reduces voltage headroom for current control.
 
 ##### Thermal Budget {#thermal-budget}
 
@@ -376,7 +402,7 @@ Current setting, duty cycle, cooling, enclosure temperature, and drive losses de
 
 > type: concept
 
-The example machine uses four closed-loop encoder drives, one per NEMA 23 motor.
+The example machine uses four closed-loop encoder drives, one per NEMA (National Electrical Manufacturers Association) 23 motor.
 
 ##### Per-Axis Tuning {#per-axis-tuning}
 
@@ -550,7 +576,7 @@ Physical separation and shield termination matter before filters and software de
 
 > type: concept
 
-Motor phase and VFD cables carry fast switching current and should be separated from encoder, probe, and sensor wiring.
+Motor phase and VFD (Variable Frequency Drive) cables carry fast switching current and should be separated from encoder, probe, and sensor wiring.
 
 ##### Feedback Cable Routing {#feedback-cable-routing}
 
@@ -574,7 +600,7 @@ Noise immunity comes from reducing emissions, reducing coupling, and making rece
 
 > type: concept
 
-Differential encoder, RS-485, and fieldbus signals reject common-mode noise better than single-ended cabinet wiring.
+Differential encoder, RS-485 (differential serial communication standard), and fieldbus signals reject common-mode noise better than single-ended cabinet wiring.
 
 ##### Isolation And Filtering {#isolation-and-filtering}
 
@@ -598,13 +624,13 @@ Confirm step, direction, enable, and alarm voltage, polarity, timing, and input 
 
 > type: concept
 
-Bring every drive alarm back, label terminals, document I/O, and make fault states visible.
+Bring every drive alarm back, label terminals, document I/O (Input/Output), and make fault states visible.
 
 ### Safety And Industrial Practice {#safety-and-industrial-practice}
 
 > type: category
 
-Industrial best practice scales CNC electronics with rated safety, deterministic timing, rich diagnostics, servo performance, and metrology feedback.
+Industrial best practice scales CNC (Computer Numerical Control) electronics with rated safety, deterministic timing, rich diagnostics, servo performance, and metrology feedback.
 
 #### Limits Homing Alarms {#limits-homing-alarms}
 
@@ -636,7 +662,7 @@ Drive, process, limit, and safety faults should produce clear machine states and
 
 Emergency stop is a safety function design problem, not just a spare controller input.
 
-##### Feed Hold Is Not E-Stop {#feed-hold-is-not-e-stop}
+##### Feed Hold Is Not E-Stop (Emergency Stop) {#feed-hold-is-not-e-stop}
 
 > type: warning
 
@@ -654,13 +680,13 @@ Stop category 0 removes torque immediately; stop category 1 decelerates first; r
 
 Modern drives and safety controllers can limit hazardous motion with defined safety functions.
 
-##### STO And SS1 {#sto-and-ss1}
+##### STO (Safe Torque Off) And SS1 (Safe Stop 1) {#sto-and-ss1}
 
 > type: concept
 
 Safe Torque Off prevents torque-producing output, while Safe Stop 1 stops first and then removes torque.
 
-##### SLS And SOS {#sls-and-sos}
+##### SLS (Safely Limited Speed) And SOS (Safe Operating Stop) {#sls-and-sos}
 
 > type: concept
 
@@ -676,7 +702,7 @@ Rated safety requires risk assessment, wiring discipline, stop-time proof, reset
 
 > type: concept
 
-High-end CNC machines use servos when dynamic stiffness, speed range, duty cycle, and fault observability matter.
+High-end CNC (Computer Numerical Control) machines use servos when dynamic stiffness, speed range, duty cycle, and fault observability matter.
 
 ##### Cascaded Loops {#cascaded-loops}
 
@@ -700,13 +726,13 @@ Fieldbus motion replaces loose pulse wiring with cyclic command, feedback, state
 
 > type: concept
 
-EtherCAT, Profinet IRT, Sercos, and MECHATROLINK are used for synchronized industrial motion.
+EtherCAT (Ethernet for Control Automation Technology), Profinet IRT (Isochronous Real Time), Sercos (Serial Real-time Communication System), and MECHATROLINK (industrial motion network) are used for synchronized industrial motion.
 
-##### CiA 402 Drive Profile {#cia-402-drive-profile}
+##### CiA (Controller Area Network In Automation) 402 Drive Profile {#cia-402-drive-profile}
 
 > type: concept
 
-CiA 402 standardizes drive state, control word, status word, operation modes, and cyclic process data.
+CiA (Controller Area Network in Automation) 402 standardizes drive state, control word, status word, operation modes, and cyclic process data.
 
 ##### Deterministic Timing {#deterministic-timing}
 
@@ -730,7 +756,7 @@ Industrial drives can record current, speed, position, following error, bus volt
 
 > type: concept
 
-Keep motor parameters, tuning, I/O maps, firmware versions, homing settings, and safety validation records.
+Keep motor parameters, tuning, I/O (Input/Output) maps, firmware versions, homing settings, and safety validation records.
 
 ##### Metrology Feedback {#metrology-feedback}
 
@@ -742,7 +768,7 @@ Linear scales, probing, tool setters, and thermal compensation close the loop ar
 
 > type: concept
 
-Different CNC industries reuse the same electronics ideas but emphasize different hazards and feedback.
+Different CNC (Computer Numerical Control) industries reuse the same electronics ideas but emphasize different hazards and feedback.
 
 ##### Milling Turning Grinding {#milling-turning-grinding}
 
@@ -754,7 +780,7 @@ Milling, turning, and grinding emphasize spindle synchronization, stiffness, coo
 
 > type: concept
 
-Plasma, laser, and waterjet machines emphasize process enable safety, height control, EMI, pressure, and fire or arc hazards.
+Plasma, laser, and waterjet machines emphasize process enable safety, height control, EMI (Electromagnetic Interference), pressure, and fire or arc hazards.
 
 ##### Additive Robotics {#additive-robotics}
 

@@ -91,7 +91,7 @@ uv run excali-builder serve /path/to/mind-map/mind-maps/<domain>/<topic>
 6. New or moved concepts can be repositioned or resized in the viewer, with layout saved back to `positions.json`.
 7. The final state is captured by committing the changed Markdown, config files if any, `positions.json`, and `output.excalidraw`.
 
-Sample edit prompt:
+Sample edit prompt (replace `<map-folder>` with the folder name):
 
 ```text
 We are editing an existing Markdown mind map in this repo.
@@ -102,11 +102,9 @@ Before editing, read:
 - `mind-map-manifesto.md`
 - the existing map Markdown file and config files in `<map-folder>`
 
-Make this change to the existing map:
-
-    <describe the branch move, added explanation, examples, cleanup, or restructuring>
-
 Keep Markdown as the source of truth. Preserve stable node IDs unless a rename is necessary for clarity. Keep the map teaching-oriented, avoid unnecessary cross-links, and let branch depth follow the real decomposition of the topic.
+
+let me know when ready for making changes.
 ```
 
 ## One-Shot Build
