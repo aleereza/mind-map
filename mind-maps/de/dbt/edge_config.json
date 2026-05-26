@@ -1,0 +1,58 @@
+{
+  "parent_child": {
+    "connection_type": "line",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": "arrow"
+  },
+  "comment": {
+    "connection_type": "line",
+    "color": "#78716C",
+    "stroke_width": 2,
+    "stroke_style": "dashed",
+    "arrow_start": null,
+    "arrow_end": null
+  },
+  "related": {
+    "connection_type": "line",
+    "color": "#6B7280",
+    "stroke_width": 1,
+    "stroke_style": "dotted",
+    "arrow_start": null,
+    "arrow_end": null
+  },
+  "contrasts": {
+    "connection_type": "line",
+    "color": "#F59E0B",
+    "stroke_width": 2,
+    "stroke_style": "dashed",
+    "arrow_start": null,
+    "arrow_end": null
+  },
+  "next": {
+    "connection_type": "line",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": "arrow"
+  },
+  "procedure_step": {
+    "connection_type": "group",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": null
+  },
+  "comment": {
+    "connection_type": "line",
+    "color": "#78716C",
+    "stroke_width": 2,
+    "stroke_style": "dashed",
+    "arrow_start": null,
+    "arrow_end": null
+  }
+}

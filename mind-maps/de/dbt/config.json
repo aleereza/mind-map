@@ -1,0 +1,11 @@
+{
+  "parser_type": "md",
+  "layout": {
+    "direction": "left-right",
+    "level_spacing": 190,
+    "sibling_spacing": 52,
+    "root_spacing": 140,
+    "start_x": 120,
+    "start_y": 100
+  }
+}
