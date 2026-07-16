@@ -1,0 +1,6464 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1807782992,
+      "isDeleted": false,
+      "id": "node-e899a1e65ad4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -152.0,
+      "y": 359.0,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 161.6,
+      "height": 54.5,
+      "seed": 160951,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e899a1e65ad4"
+        },
+        {
+          "id": "t4pztab0",
+          "type": "arrow"
+        },
+        {
+          "id": "x8o0vhli",
+          "type": "arrow"
+        },
+        {
+          "id": "fcsbha4c",
+          "type": "arrow"
+        },
+        {
+          "id": "xfpv24m2",
+          "type": "arrow"
+        },
+        {
+          "id": "8bngcgt5",
+          "type": "arrow"
+        },
+        {
+          "id": "8bkf1iwn",
+          "type": "arrow"
+        },
+        {
+          "id": "6gj23wlq",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "apache-kafka"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9084053614,
+      "isDeleted": false,
+      "id": "text-e899a1e65ad4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -136.0,
+      "y": 364.0,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 129.6,
+      "height": 22.5,
+      "seed": 863950,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Apache Kafka",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-e899a1e65ad4",
+      "originalText": "Apache Kafka",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "apache-kafka"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8319408810,
+      "isDeleted": false,
+      "id": "node-f5ad4938e6a9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 189.6,
+      "y": 75.5,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 100.0,
+      "height": 54.5,
+      "seed": 108803,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f5ad4938e6a9"
+        },
+        {
+          "id": "t4pztab0",
+          "type": "arrow"
+        },
+        {
+          "id": "o0ye8zql",
+          "type": "arrow"
+        },
+        {
+          "id": "9e4r9134",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "basics"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9330075082,
+      "isDeleted": false,
+      "id": "text-f5ad4938e6a9",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 205.6,
+      "y": 80.5,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 68.0,
+      "height": 22.5,
+      "seed": 10790,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Basics",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-f5ad4938e6a9",
+      "originalText": "Basics",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "basics"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3370182106,
+      "isDeleted": false,
+      "id": "node-f1d87975789d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 270.96901287728826,
+      "y": -348.9252396209601,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 952899,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f1d87975789d"
+        },
+        {
+          "id": "o0ye8zql",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "what-is-kafka"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6553140044,
+      "isDeleted": false,
+      "id": "text-f1d87975789d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 282.96901287728826,
+      "y": -343.9252396209601,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 157.5,
+      "seed": 707655,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What Is Kafka?\nApache Kafka is a distributed event-streaming\nplatform for publishing, storing, and\nprocessing streams of records. Producers\nappend events to durable, partitioned topics,\nwhile consumers read those events\nindependently, making Kafka useful for\nreal-time data pipelines, event-driven\nservices, and streaming analytics.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-f1d87975789d",
+      "originalText": "What Is Kafka?\nApache Kafka is a distributed event-streaming platform for publishing, storing, and processing streams of records. Producers append events to durable, partitioned topics, while consumers read those events independently, making Kafka useful for real-time data pipelines, event-driven services, and streaming analytics.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "what-is-kafka"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9974284957,
+      "isDeleted": false,
+      "id": "node-18df2e7580b8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 430.4851520037006,
+      "y": -127.78779684768335,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 505.5329238178809,
+      "height": 284.6245314721468,
+      "seed": 805399,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-18df2e7580b8"
+        },
+        {
+          "id": "9e4r9134",
+          "type": "arrow"
+        },
+        {
+          "id": "n7shmr5d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "how-kafka-works"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9323779231,
+      "isDeleted": false,
+      "id": "text-18df2e7580b8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 443.851613912641,
+      "y": -127.78779684768335,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 478.79999999999995,
+      "height": 332.5,
+      "seed": 318792,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "How It Works\nKafka provides a durable, shared event log between\nsystems, so producers and consumers do not need to be\nonline at the same moment and multiple consumers can\nindependently use or replay the same data. In an IoT\nsetup, multiple sensors send measurements over local\ndevice protocols to an edge device. A gateway application\nrunning on that edge device collects, filters,\nnormalizes, batches, or aggregates the readings, then\nuses a Kafka client to publish records to a topic such as\n`sensor-readings`. Kafka brokers append each record to a\npartition, retain it, and replicate it as configured. An\nalerting service, time-series database sink, or data-lake\nloader consumes the topic when ready. Kafka does not\nautomatically choose a destination: that work belongs to\na consumer application or Kafka Connect sink. The brokers\nrun centrally as a self-managed or managed cluster, while\nthe edge device and destination only need client or\nconnector software.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-18df2e7580b8",
+      "originalText": "How It Works\nKafka provides a durable, shared event log between systems, so producers and consumers do not need to be online at the same moment and multiple consumers can independently use or replay the same data. In an IoT setup, multiple sensors send measurements over local device protocols to an edge device. A gateway application running on that edge device collects, filters, normalizes, batches, or aggregates the readings, then uses a Kafka client to publish records to a topic such as `sensor-readings`. Kafka brokers append each record to a partition, retain it, and replicate it as configured. An alerting service, time-series database sink, or data-lake loader consumes the topic when ready. Kafka does not automatically choose a destination: that work belongs to a consumer application or Kafka Connect sink. The brokers run centrally as a self-managed or managed cluster, while the edge device and destination only need client or connector software.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "how-kafka-works"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8606436893,
+      "isDeleted": false,
+      "id": "node-26bc38faea1c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1025.0082887301774,
+      "y": -155.62496064427387,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 172.39999999999998,
+      "height": 54.5,
+      "seed": 950490,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-26bc38faea1c"
+        },
+        {
+          "id": "n7shmr5d",
+          "type": "arrow"
+        },
+        {
+          "id": "i6xo2pj5",
+          "type": "arrow"
+        },
+        {
+          "id": "hlxrgwvk",
+          "type": "arrow"
+        },
+        {
+          "id": "1d200gkj",
+          "type": "arrow"
+        },
+        {
+          "id": "ih5xys57",
+          "type": "arrow"
+        },
+        {
+          "id": "txs7wjoj",
+          "type": "arrow"
+        },
+        {
+          "id": "e8bukut7",
+          "type": "arrow"
+        },
+        {
+          "id": "mgkyd7br",
+          "type": "arrow"
+        },
+        {
+          "id": "9rs1fvoo",
+          "type": "arrow"
+        },
+        {
+          "id": "to27vd08",
+          "type": "arrow"
+        },
+        {
+          "id": "sqvk6dsd",
+          "type": "arrow"
+        },
+        {
+          "id": "ynyyhtvj",
+          "type": "arrow"
+        },
+        {
+          "id": "bli7wt54",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "core-concepts"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6041606835,
+      "isDeleted": false,
+      "id": "text-26bc38faea1c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1041.0082887301774,
+      "y": -150.62496064427387,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 140.39999999999998,
+      "height": 45.0,
+      "seed": 144878,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Core\nConcepts",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-26bc38faea1c",
+      "originalText": "Core Concepts",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "core-concepts"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3395041657,
+      "isDeleted": false,
+      "id": "node-2fc03be5f18a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1377.4082887301774,
+      "y": -1535.6057379773356,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 410.40000000000003,
+      "height": 146.5,
+      "seed": 548155,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2fc03be5f18a"
+        },
+        {
+          "id": "i6xo2pj5",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "sensor"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9306039418,
+      "isDeleted": false,
+      "id": "text-2fc03be5f18a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1389.4082887301774,
+      "y": -1530.6057379773356,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 122.5,
+      "seed": 412247,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Sensor\nA measurement component that observes one\nphysical property, such as temperature,\npressure, or vibration. A sensor may be too\nsimple to communicate with Kafka, and multiple\nsensors can send independent data streams to\nthe same edge device.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-2fc03be5f18a",
+      "originalText": "Sensor\nA measurement component that observes one physical property, such as temperature, pressure, or vibration. A sensor may be too simple to communicate with Kafka, and multiple sensors can send independent data streams to the same edge device.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "sensor"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5421694019,
+      "isDeleted": false,
+      "id": "node-e672bde8f27c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1365.3119899101682,
+      "y": -577.2090500173416,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 494.3992459584889,
+      "height": 90.77117449525302,
+      "seed": 896267,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e672bde8f27c"
+        },
+        {
+          "id": "hlxrgwvk",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "edge-device"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9770278972,
+      "isDeleted": false,
+      "id": "text-e672bde8f27c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1389.9116128894127,
+      "y": -577.2090500173416,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 445.2,
+      "height": 122.5,
+      "seed": 992499,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Edge Device\nA local computing device near the sensors, such as an\nindustrial PC, PLC, embedded controller, or gateway\nappliance. It receives streams from multiple sensors\nand provides compute, temporary buffering, local\nprocessing, and network connectivity for sending\nselected data upstream.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-e672bde8f27c",
+      "originalText": "Edge Device\nA local computing device near the sensors, such as an industrial PC, PLC, embedded controller, or gateway appliance. It receives streams from multiple sensors and provides compute, temporary buffering, local processing, and network connectivity for sending selected data upstream.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "edge-device"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7560285265,
+      "isDeleted": false,
+      "id": "node-2e2efabf5b40",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1372.628045970667,
+      "y": -467.1667010268353,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 572.5725760077261,
+      "height": 79.00695025325751,
+      "seed": 684289,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2e2efabf5b40"
+        },
+        {
+          "id": "1d200gkj",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "gateway-application"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8625084217,
+      "isDeleted": false,
+      "id": "text-2e2efabf5b40",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1385.91433397453,
+      "y": -467.1667010268353,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 546.0,
+      "height": 87.5,
+      "seed": 219087,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Gateway Application\nSoftware running on the edge device that collects sensor streams,\ntranslates local device protocols, and can validate, normalize,\nfilter, batch, or aggregate readings before publishing them. It\nis often the producer in an IoT setup.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-2e2efabf5b40",
+      "originalText": "Gateway Application\nSoftware running on the edge device that collects sensor streams, translates local device protocols, and can validate, normalize, filter, batch, or aggregate readings before publishing them. It is often the producer in an IoT setup.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "gateway-application"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4965269672,
+      "isDeleted": false,
+      "id": "node-101456bdd9c4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1476.260029075157,
+      "y": -359.48370344877014,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 471.10487329566274,
+      "height": 94.62746022720569,
+      "seed": 192723,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-101456bdd9c4"
+        },
+        {
+          "id": "ih5xys57",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "producer"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1856798293,
+      "isDeleted": false,
+      "id": "text-101456bdd9c4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1497.4791374759182,
+      "y": -354.48370344877014,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 428.6666564941406,
+      "height": 70.0,
+      "seed": 538405,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Producer\nAn application role that publishes records to Kafka topics. In the IoT\nexample, the gateway is usually the producer and uses a Kafka client\nlibrary to send sensor readings.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-101456bdd9c4",
+      "originalText": "Producer\nAn application role that publishes records to Kafka topics. In the IoT example, the gateway is usually the producer and uses a Kafka client library to send sensor readings.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "producer"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4665032938,
+      "isDeleted": false,
+      "id": "node-e6bd0d4f2475",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1124.7008401614412,
+      "y": -754.5183056990959,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 527.3214982307336,
+      "height": 88.76169166725604,
+      "seed": 869563,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e6bd0d4f2475"
+        },
+        {
+          "id": "txs7wjoj",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "kafka-client"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5316381490,
+      "isDeleted": false,
+      "id": "text-e6bd0d4f2475",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1153.161589276808,
+      "y": -754.5183056990959,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 470.4,
+      "height": 105.0,
+      "seed": 406826,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Kafka Client\nA language library or compatible interface used by an\napplication to authenticate with brokers and produce or\nconsume records. It handles Kafka's network protocol and\nserializes outgoing keys and values or deserializes\nincoming ones.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-e6bd0d4f2475",
+      "originalText": "Kafka Client\nA language library or compatible interface used by an application to authenticate with brokers and produce or consume records. It handles Kafka's network protocol and serializes outgoing keys and values or deserializes incoming ones.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "kafka-client"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4627681109,
+      "isDeleted": false,
+      "id": "node-cf085ab1b0b8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1308.994172611442,
+      "y": -871.056621732259,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 468.92844848399136,
+      "height": 89.55183181850327,
+      "seed": 462086,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-cf085ab1b0b8"
+        },
+        {
+          "id": "e8bukut7",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "kafka-broker"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8089219121,
+      "isDeleted": false,
+      "id": "text-cf085ab1b0b8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1325.0583968534377,
+      "y": -871.056621732259,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 436.8,
+      "height": 122.5,
+      "seed": 830068,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Kafka Broker\nA Kafka server process that receives client requests\nand stores topic partitions in append-only\nlog-segment files on its storage. Kafka does not\nrequire an external database; brokers replicate\npartition data with other brokers for fault\ntolerance.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-cf085ab1b0b8",
+      "originalText": "Kafka Broker\nA Kafka server process that receives client requests and stores topic partitions in append-only log-segment files on its storage. Kafka does not require an external database; brokers replicate partition data with other brokers for fault tolerance.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "kafka-broker"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4683769345,
+      "isDeleted": false,
+      "id": "node-b415e16fbe4c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1547.9319348597537,
+      "y": -684.3364123879579,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 507.8120154027366,
+      "height": 92.41971969750546,
+      "seed": 610187,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b415e16fbe4c"
+        },
+        {
+          "id": "mgkyd7br",
+          "type": "arrow"
+        },
+        {
+          "id": "xfudeusr",
+          "type": "arrow"
+        },
+        {
+          "id": "3h9r96ve",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "topic"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1574667295,
+      "isDeleted": false,
+      "id": "text-b415e16fbe4c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1587.6379425611221,
+      "y": -679.3364123879579,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 428.4,
+      "height": 70.0,
+      "seed": 738414,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Topic\nA named, durable stream of related records, such as\n`sensor-readings`. Producers write to the topic and\nconsumers read from it independently.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-b415e16fbe4c",
+      "originalText": "Topic\nA named, durable stream of related records, such as `sensor-readings`. Producers write to the topic and consumers read from it independently.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "topic"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5927741278,
+      "isDeleted": false,
+      "id": "node-88faac11dac2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2225.6204263988134,
+      "y": -913.8657275395003,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 410.40000000000003,
+      "height": 199.0,
+      "seed": 360949,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-88faac11dac2"
+        },
+        {
+          "id": "xfudeusr",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "partition"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3794933963,
+      "isDeleted": false,
+      "id": "text-88faac11dac2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2237.6204263988134,
+      "y": -908.8657275395003,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 175.0,
+      "seed": 441999,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Partition\nA partition is one ordered, append-only shard\nof a topic. Every record is written to one\npartition and receives a sequential offset\nthere; multiple partitions distribute storage\nand work across brokers, but ordering is\nguaranteed only within a partition. When a key\nis present, the producer normally hashes its\nserialized bytes so the same key goes to the\nsame partition.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-88faac11dac2",
+      "originalText": "Partition\nA partition is one ordered, append-only shard of a topic. Every record is written to one partition and receives a sequential offset there; multiple partitions distribute storage and work across brokers, but ordering is guaranteed only within a partition. When a key is present, the producer normally hashes its serialized bytes so the same key goes to the same partition.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "partition"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8188933237,
+      "isDeleted": false,
+      "id": "node-31e69adfb28b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2245.8674741261666,
+      "y": -669.8039656076621,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 410.40000000000003,
+      "height": 164.0,
+      "seed": 851747,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-31e69adfb28b"
+        },
+        {
+          "id": "3h9r96ve",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "retention"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5784623935,
+      "isDeleted": false,
+      "id": "text-31e69adfb28b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2257.8674741261666,
+      "y": -664.8039656076621,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 140.0,
+      "seed": 918148,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Retention\nRetention controls how long or how much of a\ntopic's log Kafka keeps, independently of\nwhether consumers have read it. Time- or\nsize-based retention removes old log segments,\nwhile compaction can retain the latest record\nfor each key. Retention defines the replay\nwindow; it is not a backup.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-31e69adfb28b",
+      "originalText": "Retention\nRetention controls how long or how much of a topic's log Kafka keeps, independently of whether consumers have read it. Time- or size-based retention removes old log segments, while compaction can retain the latest record for each key. Retention defines the replay window; it is not a backup.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "retention"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3031423189,
+      "isDeleted": false,
+      "id": "node-da68bf3a5522",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1426.4496484956342,
+      "y": 16.64728326008975,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 524.8828128772342,
+      "height": 83.45511843475418,
+      "seed": 653125,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-da68bf3a5522"
+        },
+        {
+          "id": "9rs1fvoo",
+          "type": "arrow"
+        },
+        {
+          "id": "4mgmu1l1",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "cluster"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1192112385,
+      "isDeleted": false,
+      "id": "text-da68bf3a5522",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1436.0660579860091,
+      "y": 21.64728326008975,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 505.6499938964844,
+      "height": 52.5,
+      "seed": 678371,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Cluster\nA group of Kafka brokers working together as one service. A cluster spreads topic\npartitions and their replicas across brokers for capacity and fault tolerance.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-da68bf3a5522",
+      "originalText": "Cluster\nA group of Kafka brokers working together as one service. A cluster spreads topic partitions and their replicas across brokers for capacity and fault tolerance.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "cluster"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7153863593,
+      "isDeleted": false,
+      "id": "node-7ddb9625261f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2111.477061675331,
+      "y": -354.0656789919241,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 114403,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7ddb9625261f"
+        },
+        {
+          "id": "4mgmu1l1",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "replication"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5144660265,
+      "isDeleted": false,
+      "id": "text-7ddb9625261f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2123.477061675331,
+      "y": -349.0656789919241,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 157.5,
+      "seed": 231068,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Replication\nReplication keeps copies of each partition on\ndifferent brokers. With replication factor\n`3`, one leader serves the partition while two\nfollowers copy it and an in-sync follower can\ntake over after failure. Replication improves\navailability and durability, but it multiplies\nstorage and does not replace backup or extend\nretention.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-7ddb9625261f",
+      "originalText": "Replication\nReplication keeps copies of each partition on different brokers. With replication factor `3`, one leader serves the partition while two followers copy it and an in-sync follower can take over after failure. Replication improves availability and durability, but it multiplies storage and does not replace backup or extend retention.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "replication"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4805372486,
+      "isDeleted": false,
+      "id": "node-5006ed0248a0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1283.5941392342331,
+      "y": 451.1540351860577,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 625.8345314383097,
+      "height": 168.0,
+      "seed": 469715,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5006ed0248a0"
+        },
+        {
+          "id": "to27vd08",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "event"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8688877833,
+      "isDeleted": false,
+      "id": "text-5006ed0248a0",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1289.5363988498723,
+      "y": 456.1540351860577,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 613.9500122070312,
+      "height": 157.5,
+      "seed": 548589,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Event\nAn event is the meaningful fact that happened, such as sensor `42` measuring `21.4\u00b0C`; a record is\nKafka's stored representation of that event, and message is an informal term often used for either.\nA record carries a possibly null key, a value payload, a timestamp, and optional application-defined\nheaders; its topic is selected when produced, and Kafka assigns its partition and offset. The\nproducer serializes the key and value into bytes using JSON, Avro, Protocol Buffers, text, or\nanother agreed encoding, and the consumer deserializes those bytes. The key is application data\nsuch as `sensor-42`, not inherently a hash, though the producer commonly hashes its serialized\nbytes to choose a partition.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-5006ed0248a0",
+      "originalText": "Event\nAn event is the meaningful fact that happened, such as sensor `42` measuring `21.4\u00b0C`; a record is Kafka's stored representation of that event, and message is an informal term often used for either. A record carries a possibly null key, a value payload, a timestamp, and optional application-defined headers; its topic is selected when produced, and Kafka assigns its partition and offset. The producer serializes the key and value into bytes using JSON, Avro, Protocol Buffers, text, or another agreed encoding, and the consumer deserializes those bytes. The key is application data such as `sensor-42`, not inherently a hash, though the producer commonly hashes its serialized bytes to choose a partition.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "event"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8819208839,
+      "isDeleted": false,
+      "id": "node-cb7a82c31787",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1433.087669980399,
+      "y": -235.6040398109963,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 489.7009369321335,
+      "height": 93.56766647713175,
+      "seed": 125094,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-cb7a82c31787"
+        },
+        {
+          "id": "sqvk6dsd",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "consumer"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2120993796,
+      "isDeleted": false,
+      "id": "text-cb7a82c31787",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1445.8548101993954,
+      "y": -230.6040398109963,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 464.1666564941406,
+      "height": 70.0,
+      "seed": 185732,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Consumer\nAn application role that reads records from topic partitions and processes\nthem. Reading does not delete records; a consumer tracks offsets so it can\ncontinue from its last position or intentionally replay earlier data.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-cb7a82c31787",
+      "originalText": "Consumer\nAn application role that reads records from topic partitions and processes them. Reading does not delete records; a consumer tracks offsets so it can continue from its last position or intentionally replay earlier data.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "consumer"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4904537515,
+      "isDeleted": false,
+      "id": "node-6f2b83563239",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1405.266778167222,
+      "y": -105.81943732171413,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 525.1536103517315,
+      "height": 88.76169166725595,
+      "seed": 985974,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6f2b83563239"
+        },
+        {
+          "id": "ynyyhtvj",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "sink"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4352052026,
+      "isDeleted": false,
+      "id": "text-6f2b83563239",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1420.0435833430877,
+      "y": -104.55774565445819,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 495.59999999999997,
+      "height": 87.5,
+      "seed": 680684,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Sink\nA consumer application or Kafka Connect sink connector that\nreads a Kafka topic and writes records to an external\ndestination, such as a time-series database, data lake, or\nalerting system.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-6f2b83563239",
+      "originalText": "Sink\nA consumer application or Kafka Connect sink connector that reads a Kafka topic and writes records to an external destination, such as a time-series database, data lake, or alerting system.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "sink"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9727663288,
+      "isDeleted": false,
+      "id": "node-b875d88818ba",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1364.185510108205,
+      "y": 141.21236202731842,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 552.4228331314948,
+      "height": 150.0,
+      "seed": 618198,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b875d88818ba"
+        },
+        {
+          "id": "bli7wt54",
+          "type": "arrow"
+        },
+        {
+          "id": "3lo2je51",
+          "type": "arrow"
+        },
+        {
+          "id": "23s1xd73",
+          "type": "arrow"
+        },
+        {
+          "id": "6654n394",
+          "type": "arrow"
+        },
+        {
+          "id": "ot1dwfdp",
+          "type": "arrow"
+        },
+        {
+          "id": "yahilo4i",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "managed-kafka-service"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3388273501,
+      "isDeleted": false,
+      "id": "text-b875d88818ba",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1371.480270179812,
+      "y": 146.21236202731842,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 537.8333129882812,
+      "height": 140.0,
+      "seed": 141374,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Managed Kafka Service\nA hosted offering that exposes Kafka-compatible cluster endpoints while the provider\noperates the underlying service. Providers commonly handle compute, storage,\nnetworking, broker and controller provisioning, security, monitoring, failed-node\nreplacement, patches, upgrades, scaling, partition rebalancing, and high availability.\nYou still design topics, keys, partitions, retention, schemas, producers, consumers, and\nbusiness processing; depending on the offering, the data plane may be open-source\nApache Kafka or a compatible managed engine.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-b875d88818ba",
+      "originalText": "Managed Kafka Service\nA hosted offering that exposes Kafka-compatible cluster endpoints while the provider operates the underlying service. Providers commonly handle compute, storage, networking, broker and controller provisioning, security, monitoring, failed-node replacement, patches, upgrades, scaling, partition rebalancing, and high availability. You still design topics, keys, partitions, retention, schemas, producers, consumers, and business processing; depending on the offering, the data plane may be open-source Apache Kafka or a compatible managed engine.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "managed-kafka-service"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3881966862,
+      "isDeleted": false,
+      "id": "node-5a1105c87910",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2552.8987055034345,
+      "y": -264.7726303764721,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 410.40000000000003,
+      "height": 146.5,
+      "seed": 310984,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5a1105c87910"
+        },
+        {
+          "id": "3lo2je51",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-kafka"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7078494501,
+      "isDeleted": false,
+      "id": "text-5a1105c87910",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2564.8987055034345,
+      "y": -259.7726303764721,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 122.5,
+      "seed": 743306,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Aiven for Apache Kafka\nA fully managed Apache Kafka service that runs\nin Aiven's cloud or a bring-your-own-cloud\nenvironment. Aiven operates the cluster and\noffers managed scaling, Kafka Connect,\nmonitoring, and local, tiered, or\nobject-storage-backed topic options.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-5a1105c87910",
+      "originalText": "Aiven for Apache Kafka\nA fully managed Apache Kafka service that runs in Aiven's cloud or a bring-your-own-cloud environment. Aiven operates the cluster and offers managed scaling, Kafka Connect, monitoring, and local, tiered, or object-storage-backed topic options.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-kafka"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2380437845,
+      "isDeleted": false,
+      "id": "node-b743f415fbdc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2541.0879276624783,
+      "y": -83.3343923083105,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 418.8,
+      "height": 164.0,
+      "seed": 751366,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b743f415fbdc"
+        },
+        {
+          "id": "23s1xd73",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "davra"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2960205176,
+      "isDeleted": false,
+      "id": "text-b743f415fbdc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2553.0879276624783,
+      "y": -78.3343923083105,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 140.0,
+      "seed": 224833,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Davra\nA full industrial IoT platform that bundles\nand manages Kafka alongside device\nintegration, databases, analytics, digital\ntwins, and application services. Kafka acts as\nDavra's internal enterprise message bus and\nIoT data stream, so Davra is broader than a\nstandalone managed Kafka service.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-b743f415fbdc",
+      "originalText": "Davra\nA full industrial IoT platform that bundles and manages Kafka alongside device integration, databases, analytics, digital twins, and application services. Kafka acts as Davra's internal enterprise message bus and IoT data stream, so Davra is broader than a standalone managed Kafka service.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "davra"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5204899726,
+      "isDeleted": false,
+      "id": "node-e2fb58db4a7a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2558.801747049773,
+      "y": 124.52142172167066,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 410.40000000000003,
+      "height": 146.5,
+      "seed": 143745,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e2fb58db4a7a"
+        },
+        {
+          "id": "6654n394",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "confluent-cloud"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4509967868,
+      "isDeleted": false,
+      "id": "text-e2fb58db4a7a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2570.801747049773,
+      "y": 129.52142172167066,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 122.5,
+      "seed": 930565,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Confluent Cloud\nA fully managed data-streaming platform with a\ncloud-native Apache Kafka engine. Confluent\noperates cluster provisioning, scaling,\nreliability, and security and also provides\nconnectors, schema governance, stream\nprocessing, and monitoring tools.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-e2fb58db4a7a",
+      "originalText": "Confluent Cloud\nA fully managed data-streaming platform with a cloud-native Apache Kafka engine. Confluent operates cluster provisioning, scaling, reliability, and security and also provides connectors, schema governance, stream processing, and monitoring tools.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "confluent-cloud"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2073677843,
+      "isDeleted": false,
+      "id": "node-f87ed09238f5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2331.3086219634197,
+      "y": 300.48520396784147,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 402.0,
+      "height": 129.0,
+      "seed": 684250,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f87ed09238f5"
+        },
+        {
+          "id": "ot1dwfdp",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "amazon-msk"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2010064107,
+      "isDeleted": false,
+      "id": "text-f87ed09238f5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2343.3086219634197,
+      "y": 305.48520396784147,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 378.0,
+      "height": 105.0,
+      "seed": 100385,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Amazon MSK\nAWS's managed Apache Kafka service. AWS\nprovisions and operates the compute,\nstorage, networking, brokers, maintenance,\nhigh availability, and failover while\napplications use standard Kafka clients.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-f87ed09238f5",
+      "originalText": "Amazon MSK\nAWS's managed Apache Kafka service. AWS provisions and operates the compute, storage, networking, brokers, maintenance, high availability, and failover while applications use standard Kafka clients.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "amazon-msk"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4162193423,
+      "isDeleted": false,
+      "id": "node-a0e57ff6b8ae",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2173.205894347389,
+      "y": 441.937880714028,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 443.38691193973955,
+      "height": 104.41308806026032,
+      "seed": 646262,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a0e57ff6b8ae"
+        },
+        {
+          "id": "yahilo4i",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "google-managed-kafka"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4686431843,
+      "isDeleted": false,
+      "id": "text-a0e57ff6b8ae",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2183.2743503172587,
+      "y": 446.937880714028,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 423.25,
+      "height": 87.5,
+      "seed": 102717,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Google Cloud Managed Kafka\nGoogle Cloud's managed service for open-source Apache Kafka. It\nautomates broker provisioning, sizing, storage, partition rebalancing,\ninfrastructure maintenance, security integration, monitoring, and\nlogging.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-a0e57ff6b8ae",
+      "originalText": "Google Cloud Managed Kafka\nGoogle Cloud's managed service for open-source Apache Kafka. It automates broker provisioning, sizing, storage, partition rebalancing, infrastructure maintenance, security integration, monitoring, and logging.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "google-managed-kafka"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5860089986,
+      "isDeleted": false,
+      "id": "node-13cc9c666b01",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -147.51967867910747,
+      "y": 1102.7596144067206,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 498.58413031709847,
+      "height": 174.06748798372678,
+      "seed": 377265,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-13cc9c666b01"
+        },
+        {
+          "id": "x8o0vhli",
+          "type": "arrow"
+        },
+        {
+          "id": "cc9mu0ph",
+          "type": "arrow"
+        },
+        {
+          "id": "wxwigys6",
+          "type": "arrow"
+        },
+        {
+          "id": "4zg84e42",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "runtime-model"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1392631363,
+      "isDeleted": false,
+      "id": "text-13cc9c666b01",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -135.42761046880042,
+      "y": 1107.7596144067206,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 474.3999938964844,
+      "height": 157.5,
+      "seed": 253111,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Runtime Model\nKafka is not one infinite loop searching external systems for\nmessages. It is a collection of long-running broker server\nprocesses and client applications communicating over\npersistent TCP connections: producers push records to\nbrokers, consumers pull records from brokers, and brokers\nstore the records between them.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-13cc9c666b01",
+      "originalText": "Runtime Model\nKafka is not one infinite loop searching external systems for messages. It is a collection of long-running broker server processes and client applications communicating over persistent TCP connections: producers push records to brokers, consumers pull records from brokers, and brokers store the records between them.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "runtime-model"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1222276030,
+      "isDeleted": false,
+      "id": "node-4bf28342709d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 486.109920234214,
+      "y": 922.68057660529,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 438.9818247867791,
+      "height": 110.17271538379782,
+      "seed": 731557,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4bf28342709d"
+        },
+        {
+          "id": "cc9mu0ph",
+          "type": "arrow"
+        },
+        {
+          "id": "5udjtfs3",
+          "type": "arrow"
+        },
+        {
+          "id": "upioocqq",
+          "type": "arrow"
+        },
+        {
+          "id": "4juzrmja",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "producer-application"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8662032670,
+      "isDeleted": false,
+      "id": "text-4bf28342709d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 493.6091639264316,
+      "y": 927.68057660529,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 423.98333740234375,
+      "height": 87.5,
+      "seed": 18781,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Producer Application\nIn the IoT example, the gateway application typically runs a loop that\nwaits for sensor readings. When data arrives, it builds a record and\nasks its Kafka client to serialize, batch, and push the record to a\nbroker; Kafka itself does not inspect the sensors.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-4bf28342709d",
+      "originalText": "Producer Application\nIn the IoT example, the gateway application typically runs a loop that waits for sensor readings. When data arrives, it builds a record and asks its Kafka client to serialize, batch, and push the record to a broker; Kafka itself does not inspect the sensors.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "producer-application"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6926736308,
+      "isDeleted": false,
+      "id": "node-8a87c25e1377",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 951.4762114182352,
+      "y": 664.0258987236717,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 491.76737846131016,
+      "height": 140.53585770593122,
+      "seed": 649296,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-8a87c25e1377"
+        },
+        {
+          "id": "5udjtfs3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "producer-bootstrap-metadata"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3253850441,
+      "isDeleted": false,
+      "id": "text-8a87c25e1377",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 958.1599037006481,
+      "y": 669.0258987236717,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 478.3999938964844,
+      "height": 105.0,
+      "seed": 239302,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Bootstrap & Metadata\nThe client starts with one or more bootstrap addresses such as `kafka-\n1.example.com:9092`. It resolves a hostname to an IP address, opens a TCP\nconnection, and requests cluster metadata to learn which brokers exist and\nwhich broker leads each topic partition; the bootstrap broker is an entry point,\nnot a permanent proxy.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-8a87c25e1377",
+      "originalText": "Bootstrap & Metadata\nThe client starts with one or more bootstrap addresses such as `kafka-1.example.com:9092`. It resolves a hostname to an IP address, opens a TCP connection, and requests cluster metadata to learn which brokers exist and which broker leads each topic partition; the bootstrap broker is an entry point, not a permanent proxy.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "producer-bootstrap-metadata"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5132571445,
+      "isDeleted": false,
+      "id": "node-03eab94f3bea",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1006.5217776258901,
+      "y": 822.7995558358789,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 484.0866017811721,
+      "height": 126.876246046,
+      "seed": 608713,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-03eab94f3bea"
+        },
+        {
+          "id": "upioocqq",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "producer-persistent-connections"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7842430316,
+      "isDeleted": false,
+      "id": "text-03eab94f3bea",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1016.7067411141323,
+      "y": 827.7995558358789,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 463.7166748046875,
+      "height": 105.0,
+      "seed": 901421,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Persistent Connections\nThe client maintains and reuses TCP connections to the brokers it needs\ninstead of opening a new connection for every record. Connections may\ncross a private network, VPN, or the internet and commonly use TLS\nencryption plus authentication; the client handles reconnecting and retrying\nwhen connections fail.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-03eab94f3bea",
+      "originalText": "Persistent Connections\nThe client maintains and reuses TCP connections to the brokers it needs instead of opening a new connection for every record. Connections may cross a private network, VPN, or the internet and commonly use TLS encryption plus authentication; the client handles reconnecting and retrying when connections fail.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "producer-persistent-connections"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2394574685,
+      "isDeleted": false,
+      "id": "node-42907b912ce3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 992.4403537123042,
+      "y": 973.0341190749136,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 480.2462134411031,
+      "height": 126.4544337923451,
+      "seed": 890674,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-42907b912ce3"
+        },
+        {
+          "id": "4juzrmja",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "producer-produce-request"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1782121598,
+      "isDeleted": false,
+      "id": "text-42907b912ce3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 997.58845432934,
+      "y": 978.0341190749136,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 469.95001220703125,
+      "height": 105.0,
+      "seed": 78683,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Produce Request\nCalling `producer.send(record)` makes the client serialize and batch records\ninto Kafka's binary produce-request format, then send the bytes through a\nTCP connection to the partition's leader broker. TCP divides the request\ninto IP packets for network transport, and the broker returns an\nacknowledgement according to the producer's configuration.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-42907b912ce3",
+      "originalText": "Produce Request\nCalling `producer.send(record)` makes the client serialize and batch records into Kafka's binary produce-request format, then send the bytes through a TCP connection to the partition's leader broker. TCP divides the request into IP packets for network transport, and the broker returns an acknowledgement according to the producer's configuration.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "producer-produce-request"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3497725503,
+      "isDeleted": false,
+      "id": "node-afdc7357dc93",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 468.43702221202966,
+      "y": 1133.1344298871063,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 410.40000000000003,
+      "height": 199.0,
+      "seed": 840873,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-afdc7357dc93"
+        },
+        {
+          "id": "wxwigys6",
+          "type": "arrow"
+        },
+        {
+          "id": "cwqikc1q",
+          "type": "arrow"
+        },
+        {
+          "id": "szivwukh",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "broker-process"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9551802498,
+      "isDeleted": false,
+      "id": "text-afdc7357dc93",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 480.43702221202966,
+      "y": 1138.1344298871063,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 175.0,
+      "seed": 599999,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Broker Process\nA broker is a long-running Kafka server\nprocess, commonly run as an operating-system\nservice, container, or Kubernetes workload. At\nstartup it loads its partition logs, joins the\ncluster, opens configured TCP\nlisteners\u2014commonly on port `9092`\u2014and waits\nefficiently for client and broker requests. A\nmanaged Kafka provider runs these broker\nprocesses for you.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-afdc7357dc93",
+      "originalText": "Broker Process\nA broker is a long-running Kafka server process, commonly run as an operating-system service, container, or Kubernetes workload. At startup it loads its partition logs, joins the cluster, opens configured TCP listeners\u2014commonly on port `9092`\u2014and waits efficiently for client and broker requests. A managed Kafka provider runs these broker processes for you.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "broker-process"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1217958172,
+      "isDeleted": false,
+      "id": "node-084f028d3dbc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1161.247377947202,
+      "y": 1130.562714475244,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 457.04556620765504,
+      "height": 131.99676383275892,
+      "seed": 736984,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-084f028d3dbc"
+        },
+        {
+          "id": "cwqikc1q",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "broker-request-handling"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6348660284,
+      "isDeleted": false,
+      "id": "text-084f028d3dbc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1179.3451579992718,
+      "y": 1135.562714475244,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 420.8500061035156,
+      "height": 105.0,
+      "seed": 837982,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Request Handling\nNetwork I/O and request-handler loops wait on sockets rather than\nrepeatedly scanning for data. A produce request is validated and\nappended to a partition log; a fetch request asks for records after an\noffset and may be held briefly until data arrives, avoiding a wasteful\nbusy loop.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-084f028d3dbc",
+      "originalText": "Request Handling\nNetwork I/O and request-handler loops wait on sockets rather than repeatedly scanning for data. A produce request is validated and appended to a partition log; a fetch request asks for records after an offset and may be held briefly until data arrives, avoiding a wasteful busy loop.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "broker-request-handling"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4795368057,
+      "isDeleted": false,
+      "id": "node-dabdc27acbd2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1167.6480251806502,
+      "y": 1280.7972777142786,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 441.8423300404138,
+      "height": 124.31598715262089,
+      "seed": 643606,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-dabdc27acbd2"
+        },
+        {
+          "id": "szivwukh",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "broker-background-work"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1750809318,
+      "isDeleted": false,
+      "id": "text-dabdc27acbd2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1172.6775276032008,
+      "y": 1285.7972777142786,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 431.7833251953125,
+      "height": 105.0,
+      "seed": 401576,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Background Work\nKafka continuously performs internal maintenance alongside client\nrequests. Followers fetch partition updates from leaders, retention\nremoves expired log segments, compaction and log maintenance\nmanage storage, and cluster coordination tracks metadata and broker\nleadership.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-dabdc27acbd2",
+      "originalText": "Background Work\nKafka continuously performs internal maintenance alongside client requests. Followers fetch partition updates from leaders, retention removes expired log segments, compaction and log maintenance manage storage, and cluster coordination tracks metadata and broker leadership.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "broker-background-work"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5393062195,
+      "isDeleted": false,
+      "id": "node-f6c5bebdaf0e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 357.06576035003036,
+      "y": 1418.2305464864169,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "#EFF6FF",
+      "width": 410.40000000000003,
+      "height": 181.5,
+      "seed": 663250,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f6c5bebdaf0e"
+        },
+        {
+          "id": "4zg84e42",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "consumer-application"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7667644246,
+      "isDeleted": false,
+      "id": "text-f6c5bebdaf0e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 369.06576035003036,
+      "y": 1423.2305464864169,
+      "strokeColor": "#1E40AF",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 157.5,
+      "seed": 965901,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Consumer Application\nA consumer application typically runs a poll\nloop that asks Kafka for records after its\ncurrent partition offsets. Kafka may hold an\nempty fetch request open briefly, then returns\nnew records or a timeout; the consumer\ndeserializes and processes the results. Kafka\ndoes not push records to the destination, and\nreading them does not delete them.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 17.5,
+      "containerId": "node-f6c5bebdaf0e",
+      "originalText": "Consumer Application\nA consumer application typically runs a poll loop that asks Kafka for records after its current partition offsets. Kafka may hold an empty fetch request open briefly, then returns new records or a timeout; the consumer deserializes and processes the results. Kafka does not push records to the destination, and reading them does not delete them.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "consumer-application"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8496875049,
+      "isDeleted": false,
+      "id": "node-5d38a35bc102",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2478.9893026706386,
+      "y": 1169.6575116590238,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 133.37984697457287,
+      "height": 56.26317074391813,
+      "seed": 121588,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 16
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5d38a35bc102"
+        },
+        {
+          "id": "fcsbha4c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "data-flow"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3576186629,
+      "isDeleted": false,
+      "id": "text-5d38a35bc102",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2504.0458910443995,
+      "y": 1174.6575116590238,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 83.26667022705078,
+      "height": 23.22791452730565,
+      "seed": 372921,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Data Flow",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-5d38a35bc102",
+      "originalText": "Data Flow",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "data-flow"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3368694358,
+      "isDeleted": false,
+      "id": "node-2ebe954ae492",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2673.636462846381,
+      "y": 579.4525139428781,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 423.26422027534744,
+      "height": 87.7498993253769,
+      "seed": 144290,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2ebe954ae492"
+        },
+        {
+          "id": "1q7rzl58",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "sensor-measures"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7418895792,
+      "isDeleted": false,
+      "id": "text-2ebe954ae492",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2682.9352447369847,
+      "y": 584.4525139428781,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 404.6666564941406,
+      "height": 67.10286418999411,
+      "seed": 595863,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Sensor Measures\nOne or more sensors measure properties in the physical world, such\nas sensor `42` recording a temperature of `21.4\u00b0C`, and emit their\nown streams of readings.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-2ebe954ae492",
+      "originalText": "Sensor Measures\nOne or more sensors measure properties in the physical world, such as sensor `42` recording a temperature of `21.4\u00b0C`, and emit their own streams of readings.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "sensor-measures"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2864828858,
+      "isDeleted": false,
+      "id": "node-1b6dc605d594",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2726.6192402492516,
+      "y": 693.2170301729545,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 420.4232027758342,
+      "height": 98.96491617055779,
+      "seed": 80272,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-1b6dc605d594"
+        },
+        {
+          "id": "1q7rzl58",
+          "type": "arrow"
+        },
+        {
+          "id": "8pxx9rt4",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "edge-device-collects"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5427714409,
+      "isDeleted": false,
+      "id": "text-1b6dc605d594",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2736.3141790395125,
+      "y": 698.2170301729545,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 401.0333251953125,
+      "height": 81.25,
+      "seed": 903094,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Edge Device Collects\nThe edge device is a local computing device\u2014such as an industrial\nPC, PLC, embedded controller, or gateway appliance\u2014that receives\nstreams from multiple sensors. It may filter, normalize, batch,\naggregate, or temporarily buffer readings before they move upstream.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-1b6dc605d594",
+      "originalText": "Edge Device Collects\nThe edge device is a local computing device\u2014such as an industrial PC, PLC, embedded controller, or gateway appliance\u2014that receives streams from multiple sensors. It may filter, normalize, batch, aggregate, or temporarily buffer readings before they move upstream.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "edge-device-collects"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8226745800,
+      "isDeleted": false,
+      "id": "node-0923e4b8aa39",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2733.1258971232887,
+      "y": 826.5458296822595,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 429.4629975773743,
+      "height": 101.7452657717166,
+      "seed": 583752,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-0923e4b8aa39"
+        },
+        {
+          "id": "8pxx9rt4",
+          "type": "arrow"
+        },
+        {
+          "id": "awnttvh8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "gateway-builds-event"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8135569327,
+      "isDeleted": false,
+      "id": "text-0923e4b8aa39",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2752.6573989637336,
+      "y": 831.5458296822595,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 390.3999938964844,
+      "height": 81.25,
+      "seed": 549509,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Gateway Builds Event\nThe gateway application is software running on the edge device. It\nconverts selected sensor data into application events containing\ninformation such as the sensor ID, measured value, unit, and\nmeasurement time, and decides what should be published to Kafka.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-0923e4b8aa39",
+      "originalText": "Gateway Builds Event\nThe gateway application is software running on the edge device. It converts selected sensor data into application events containing information such as the sensor ID, measured value, unit, and measurement time, and decides what should be published to Kafka.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "gateway-builds-event"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1123759370,
+      "isDeleted": false,
+      "id": "node-dc0966bae944",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2750.786822924246,
+      "y": 963.9998136307099,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 431.31656397814675,
+      "height": 87.7498993253769,
+      "seed": 600204,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-dc0966bae944"
+        },
+        {
+          "id": "awnttvh8",
+          "type": "arrow"
+        },
+        {
+          "id": "6vdv5cyo",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "client-creates-record"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1321429599,
+      "isDeleted": false,
+      "id": "text-dc0966bae944",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2766.445104913319,
+      "y": 963.9998136307099,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 400.0,
+      "height": 97.5,
+      "seed": 266867,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Client Creates Record\nThe Kafka client is a library used by the gateway\napplication to communicate with Kafka. Acting as a\nproducer, the gateway uses it to create a record\nwith the destination topic, key, value, timestamp,\nand any optional headers.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-dc0966bae944",
+      "originalText": "Client Creates Record\nThe Kafka client is a library used by the gateway application to communicate with Kafka. Acting as a producer, the gateway uses it to create a record with the destination topic, key, value, timestamp, and any optional headers.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "client-creates-record"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6353717565,
+      "isDeleted": false,
+      "id": "node-e086f24322eb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2757.872933570231,
+      "y": 1097.828198743497,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 431.31656397814675,
+      "height": 104.52561537287544,
+      "seed": 956290,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e086f24322eb"
+        },
+        {
+          "id": "6vdv5cyo",
+          "type": "arrow"
+        },
+        {
+          "id": "g26ymwho",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "client-serializes-sends"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3925090354,
+      "isDeleted": false,
+      "id": "text-e086f24322eb",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2770.7312155593045,
+      "y": 1097.828198743497,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 405.59999999999997,
+      "height": 146.25,
+      "seed": 238618,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Client Serializes & Sends\nThe client serializes the key and value into bytes,\nchooses a partition\u2014normally using the key\u2014and finds\nits leader through cluster metadata. It reuses a\npersistent TCP connection, or opens one when needed,\nand sends a binary Kafka produce request; DNS, IP\nrouting, optional TLS and authentication, packet\ntransport, retries, and acknowledgements are handled\nunderneath.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-e086f24322eb",
+      "originalText": "Client Serializes & Sends\nThe client serializes the key and value into bytes, chooses a partition\u2014normally using the key\u2014and finds its leader through cluster metadata. It reuses a persistent TCP connection, or opens one when needed, and sends a binary Kafka produce request; DNS, IP routing, optional TLS and authentication, packet transport, retries, and acknowledgements are handled underneath.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "client-serializes-sends"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9924323973,
+      "isDeleted": false,
+      "id": "node-3ed28995959b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2757.872933570231,
+      "y": 1243.6478843871378,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 407.15953286974883,
+      "height": 87.7498993253769,
+      "seed": 580757,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3ed28995959b"
+        },
+        {
+          "id": "g26ymwho",
+          "type": "arrow"
+        },
+        {
+          "id": "cjxuqd26",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "broker-appends-record"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3493873417,
+      "isDeleted": false,
+      "id": "text-3ed28995959b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2770.9527000051057,
+      "y": 1248.6478843871378,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 381.0,
+      "height": 50.32714814249558,
+      "seed": 726593,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Broker Appends Record\nThe leader broker appends the record to the partition log on disk\nand assigns its sequential offset within that partition.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-3ed28995959b",
+      "originalText": "Broker Appends Record\nThe leader broker appends the record to the partition log on disk and assigns its sequential offset within that partition.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "broker-appends-record"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4887151950,
+      "isDeleted": false,
+      "id": "node-55f2bf9ac2ec",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2757.872933570231,
+      "y": 1372.6918539832805,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 423.26422027534744,
+      "height": 87.7498993253769,
+      "seed": 280246,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-55f2bf9ac2ec"
+        },
+        {
+          "id": "cjxuqd26",
+          "type": "arrow"
+        },
+        {
+          "id": "a8nfkina",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "kafka-replicates-retains"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3905118356,
+      "isDeleted": false,
+      "id": "text-55f2bf9ac2ec",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2769.563378058491,
+      "y": 1377.6918539832805,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 399.8833312988281,
+      "height": 67.10286418999411,
+      "seed": 956991,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Kafka Replicates & Retains\nFollower brokers copy the partition data according to its replication\nfactor, and Kafka keeps the record according to the topic's retention\npolicy.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-55f2bf9ac2ec",
+      "originalText": "Kafka Replicates & Retains\nFollower brokers copy the partition data according to its replication factor, and Kafka keeps the record according to the topic's retention policy.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "kafka-replicates-retains"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7314561279,
+      "isDeleted": false,
+      "id": "node-9f2fd7ba2e46",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2757.872933570231,
+      "y": 1501.7358235794231,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 431.31656397814675,
+      "height": 104.52561537287544,
+      "seed": 139758,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9f2fd7ba2e46"
+        },
+        {
+          "id": "a8nfkina",
+          "type": "arrow"
+        },
+        {
+          "id": "6kwq5lp9",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "consumer-reads-record"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4953603317,
+      "isDeleted": false,
+      "id": "text-9f2fd7ba2e46",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2770.9562186110625,
+      "y": 1506.7358235794231,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 405.1499938964844,
+      "height": 67.10286418999411,
+      "seed": 668281,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Consumer Reads Record\nA consumer fetches records from its current partition offset and uses\nits Kafka client to deserialize the key and value back into application\ndata.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-9f2fd7ba2e46",
+      "originalText": "Consumer Reads Record\nA consumer fetches records from its current partition offset and uses its Kafka client to deserialize the key and value back into application data.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "consumer-reads-record"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6991678382,
+      "isDeleted": false,
+      "id": "node-c0a4a805ee26",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2757.872933570231,
+      "y": 1647.5555092230638,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 399.1071891669495,
+      "height": 121.30133142037396,
+      "seed": 190305,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c0a4a805ee26"
+        },
+        {
+          "id": "6kwq5lp9",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "application-uses-event"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6143381283,
+      "isDeleted": false,
+      "id": "text-c0a4a805ee26",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2763.251525101948,
+      "y": 1652.5555092230638,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 388.3500061035156,
+      "height": 83.87858023749263,
+      "seed": 592536,
+      "groupIds": [
+        "1cnb5uv1"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Application Uses Event\nThe consumer can trigger an alert, perform a calculation, or use a\nsink to write the data to another system. Reading advances the\nconsumer's position but does not delete the Kafka record;\nretention still controls when Kafka removes it.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 16.25,
+      "containerId": "node-c0a4a805ee26",
+      "originalText": "Application Uses Event\nThe consumer can trigger an alert, perform a calculation, or use a sink to write the data to another system. Reading advances the consumer's position but does not delete the Kafka record; retention still controls when Kafka removes it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "application-uses-event"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9931181446,
+      "isDeleted": false,
+      "id": "node-f380cbcd9a79",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -980.4860034463112,
+      "y": 784.2680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 161.6,
+      "height": 54.5,
+      "seed": 308834,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f380cbcd9a79"
+        },
+        {
+          "id": "xfpv24m2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "architecture"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5114222633,
+      "isDeleted": false,
+      "id": "text-f380cbcd9a79",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -964.4860034463112,
+      "y": 789.2680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 129.6,
+      "height": 22.5,
+      "seed": 171882,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Architecture",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-f380cbcd9a79",
+      "originalText": "Architecture",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "architecture"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5765240778,
+      "isDeleted": false,
+      "id": "node-20ec5ee8b8a1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -980.4860034463112,
+      "y": 878.7680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 291.2,
+      "height": 54.5,
+      "seed": 3244,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-20ec5ee8b8a1"
+        },
+        {
+          "id": "8bngcgt5",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reliability-and-operations"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7533248128,
+      "isDeleted": false,
+      "id": "text-20ec5ee8b8a1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -964.4860034463112,
+      "y": 883.7680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 259.2,
+      "height": 22.5,
+      "seed": 695287,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reliability & Operations",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-20ec5ee8b8a1",
+      "originalText": "Reliability & Operations",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reliability-and-operations"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2131642921,
+      "isDeleted": false,
+      "id": "node-d2e7fb580f09",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -980.4860034463112,
+      "y": 973.2680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 129.2,
+      "height": 54.5,
+      "seed": 166315,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d2e7fb580f09"
+        },
+        {
+          "id": "8bkf1iwn",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "use-cases"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3173315490,
+      "isDeleted": false,
+      "id": "text-d2e7fb580f09",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -964.4860034463112,
+      "y": 978.2680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 97.19999999999999,
+      "height": 45.0,
+      "seed": 342772,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Use\nCases",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-d2e7fb580f09",
+      "originalText": "Use Cases",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "use-cases"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5473478644,
+      "isDeleted": false,
+      "id": "node-ec1cf295fdbe",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -980.4860034463112,
+      "y": 1067.7680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "#e2e8f0",
+      "width": 269.59999999999997,
+      "height": 54.5,
+      "seed": 39205,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ec1cf295fdbe"
+        },
+        {
+          "id": "6gj23wlq",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "ecosystem-and-interfaces"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6225474128,
+      "isDeleted": false,
+      "id": "text-ec1cf295fdbe",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -964.4860034463112,
+      "y": 1072.7680845086838,
+      "strokeColor": "#1a1a2e",
+      "backgroundColor": "transparent",
+      "width": 237.59999999999997,
+      "height": 45.0,
+      "seed": 214646,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Ecosystem &\nInterfaces",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "baseline": 22.5,
+      "containerId": "node-ec1cf295fdbe",
+      "originalText": "Ecosystem & Interfaces",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "ecosystem-and-interfaces"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9156533226,
+      "isDeleted": false,
+      "id": "t4pztab0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -41.32592592592593,
+      "y": 359.0,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 946118,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          251.05185185185184,
+          -229.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e899a1e65ad4",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f5ad4938e6a9",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8154463379,
+      "isDeleted": false,
+      "id": "o0ye8zql",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 257.7781568055378,
+      "y": 75.5,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 950592,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          162.05259074688615,
+          -242.9252396209601
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-f5ad4938e6a9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f1d87975789d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2778503961,
+      "isDeleted": false,
+      "id": "9e4r9134",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 289.6,
+      "y": 92.80689054824646,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 172217,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          140.8851520037005,
+          -28.01672972999461
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-f5ad4938e6a9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-18df2e7580b8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1551109399,
+      "isDeleted": false,
+      "id": "n7shmr5d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 936.0180758215815,
+      "y": -69.87702625636406,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 567482,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          93.58163387565992,
+          -31.247934387909808
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-18df2e7580b8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9139157770,
+      "isDeleted": false,
+      "id": "i6xo2pj5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1120.837850278794,
+      "y": -155.62496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 65526,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          435.88547025189155,
+          -1233.4807773330617
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2fc03be5f18a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9451964003,
+      "isDeleted": false,
+      "id": "hlxrgwvk",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1145.0676673407636,
+      "y": -155.62496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 844617,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          411.05026547227567,
+          -330.8129148778147
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e672bde8f27c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5962338050,
+      "isDeleted": false,
+      "id": "1d200gkj",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1161.0765644547391,
+      "y": -155.62496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 540892,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          425.54528549435645,
+          -232.53479012930393
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2e2efabf5b40",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8350231646,
+      "isDeleted": false,
+      "id": "ih5xys57",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1197.4082887301774,
+      "y": -154.7536151739187,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 630663,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          359.79266975277596,
+          -110.10262804764577
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-101456bdd9c4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2851000665,
+      "isDeleted": false,
+      "id": "txs7wjoj",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1124.1902658256522,
+      "y": -155.62496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 472099,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          243.0281629340932,
+          -510.1316533875661
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e6bd0d4f2475",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3805411841,
+      "isDeleted": false,
+      "id": "e8bukut7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1128.085661538367,
+      "y": -155.62496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 416771,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          387.64063162227853,
+          -625.8798292694819
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-cf085ab1b0b8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1576781570,
+      "isDeleted": false,
+      "id": "mgkyd7br",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1148.1275615017125,
+      "y": -155.62496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 558695,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          591.1036133349869,
+          -436.2917320461786
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b415e16fbe4c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1473528086,
+      "isDeleted": false,
+      "id": "xfudeusr",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1966.7569648239726,
+      "y": -684.336412387958,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 857596,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          258.8634615748408,
+          -72.53283529822932
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b415e16fbe4c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-88faac11dac2",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8520286173,
+      "isDeleted": false,
+      "id": "3h9r96ve",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2055.74395026249,
+      "y": -618.4459826886746,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 94931,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.12352386367638,
+          14.73671035003224
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b415e16fbe4c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-31e69adfb28b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6133620904,
+      "isDeleted": false,
+      "id": "9rs1fvoo",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1195.5021145651585,
+      "y": -101.12496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 652692,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          364.3109363621775,
+          117.77224390436362
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-da68bf3a5522",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9800287764,
+      "isDeleted": false,
+      "id": "4mgmu1l1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1770.868084908233,
+      "y": 16.64728326008975,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 974691,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          371.723555580978,
+          -189.21296225201382
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-da68bf3a5522",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7ddb9625261f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5610809571,
+      "isDeleted": false,
+      "id": "to27vd08",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1131.1388569497824,
+      "y": -101.12496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 934655,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          403.9352000972999,
+          552.2789958303315
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5006ed0248a0",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6422046070,
+      "isDeleted": false,
+      "id": "sqvk6dsd",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1197.4082887301774,
+      "y": -137.56872413073125,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 654421,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          235.67938125022147,
+          -25.136664615419477
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-cb7a82c31787",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7033873998,
+      "isDeleted": false,
+      "id": "ynyyhtvj",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1197.4082887301774,
+      "y": -118.00925965997708,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 416334,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          207.85848943704445,
+          24.99534743099788
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6f2b83563239",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6687439416,
+      "isDeleted": false,
+      "id": "bli7wt54",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1153.0565792365323,
+      "y": -101.12496064427387,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 686860,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          372.16156622726885,
+          242.3373226715923
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-26bc38faea1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b875d88818ba",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7764563453,
+      "isDeleted": false,
+      "id": "3lo2je51",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1845.990351260858,
+      "y": 141.21236202731842,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 603119,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          711.3121095626989,
+          -259.4849924037905
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b875d88818ba",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5a1105c87910",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8298461907,
+      "isDeleted": false,
+      "id": "23s1xd73",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1916.6083432397,
+      "y": 162.08265812843436,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 147302,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          624.4795844227783,
+          -122.38051350660578
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b875d88818ba",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b743f415fbdc",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7847467753,
+      "isDeleted": false,
+      "id": "6654n394",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1916.6083432397,
+      "y": 211.67909717097535,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 920495,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          642.193403810073,
+          -10.539871322713964
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b875d88818ba",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e2fb58db4a7a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3496203102,
+      "isDeleted": false,
+      "id": "ot1dwfdp",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1916.6083432397,
+      "y": 262.2850367505346,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 222656,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          414.70027872371975,
+          69.17292299797856
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b875d88818ba",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f87ed09238f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9407983404,
+      "isDeleted": false,
+      "id": "yahilo4i",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1843.999494942228,
+      "y": 291.2123620273184,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 493868,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          409.1747027757601,
+          150.72551868670956
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b875d88818ba",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a0e57ff6b8ae",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5034376533,
+      "isDeleted": false,
+      "id": "x8o0vhli",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -65.3341092769922,
+      "y": 413.5,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 241575,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          148.37143405109424,
+          689.2596144067206
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e899a1e65ad4",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-13cc9c666b01",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7292346809,
+      "isDeleted": false,
+      "id": "cc9mu0ph",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 349.63512632328155,
+      "y": 1102.7596144067206,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 602716,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          199.08568575955127,
+          -69.90632241763296
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-13cc9c666b01",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4bf28342709d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2951855813,
+      "isDeleted": false,
+      "id": "5udjtfs3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 816.8624675741988,
+      "y": 922.68057660529,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 884420,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          238.57255410158507,
+          -118.118820175687
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4bf28342709d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-8a87c25e1377",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7269982155,
+      "isDeleted": false,
+      "id": "upioocqq",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 925.091745020993,
+      "y": 940.7666346661263,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 399223,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          81.43003260489718,
+          -13.726926424855264
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4bf28342709d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-03eab94f3bea",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5330318067,
+      "isDeleted": false,
+      "id": "4juzrmja",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 925.091745020993,
+      "y": 1002.1310711749449,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 875403,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          67.34860869131114,
+          7.475893661331156
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4bf28342709d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-42907b912ce3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9669680794,
+      "isDeleted": false,
+      "id": "wxwigys6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 351.064451637991,
+      "y": 1208.4690003558756,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 414392,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          117.37257057403866,
+          8.792931705441788
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-13cc9c666b01",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-afdc7357dc93",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8149606302,
+      "isDeleted": false,
+      "id": "cwqikc1q",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 878.8370222120298,
+      "y": 1222.2980166814925,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 274334,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          282.4103557351723,
+          -14.225682896798844
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-afdc7357dc93",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-084f028d3dbc",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2794256245,
+      "isDeleted": false,
+      "id": "szivwukh",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 878.8370222120298,
+      "y": 1264.29874388724,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 899861,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          288.8110029686204,
+          44.56628793709547
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-afdc7357dc93",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-dabdc27acbd2",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8036771059,
+      "isDeleted": false,
+      "id": "4zg84e42",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 227.33651908608516,
+      "y": 1276.8271023904476,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 294654,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          204.00364262351246,
+          141.40344409596923
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-13cc9c666b01",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f6c5bebdaf0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6795981768,
+      "isDeleted": false,
+      "id": "fcsbha4c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 9.599999999999994,
+      "y": 411.30746477890614,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 913185,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          2469.3893026706387,
+          765.7999440232323
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e899a1e65ad4",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5d38a35bc102",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8841096364,
+      "isDeleted": false,
+      "id": "1q7rzl58",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2904.2201820250502,
+      "y": 667.202413268255,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 723069,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          11.23690973367411,
+          26.01461690469955
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2ebe954ae492",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-1b6dc605d594",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2852378882,
+      "isDeleted": false,
+      "id": "8pxx9rt4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2940.8809096585683,
+      "y": 792.1819463435124,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 985527,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          2.812634424132739,
+          34.36388333874709
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-1b6dc605d594",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-0923e4b8aa39",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2660958282,
+      "isDeleted": false,
+      "id": "awnttvh8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2955.105843790364,
+      "y": 928.291095453976,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 973097,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          5.087858988718381,
+          35.708718176733896
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-0923e4b8aa39",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-dc0966bae944",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3109909549,
+      "isDeleted": false,
+      "id": "6vdv5cyo",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2968.631231765217,
+      "y": 1051.7497129560868,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 355767,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          2.2959209263854063,
+          46.07848578741027
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-dc0966bae944",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e086f24322eb",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6834130762,
+      "isDeleted": false,
+      "id": "g26ymwho",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2968.937977249961,
+      "y": 1202.3538141163726,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 398740,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -3.62922533083929,
+          41.29407027076513
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e086f24322eb",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3ed28995959b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7953042906,
+      "isDeleted": false,
+      "id": "cjxuqd26",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2964.190496864057,
+      "y": 1331.3977837125149,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 551201,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          2.576749984896196,
+          41.29407027076559
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3ed28995959b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-55f2bf9ac2ec",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7118592662,
+      "isDeleted": false,
+      "id": "a8nfkina",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2970.7903943459105,
+      "y": 1460.4417533086576,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 260812,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          1.2097417769459753,
+          41.29407027076559
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-55f2bf9ac2ec",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9f2fd7ba2e46",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1697702844,
+      "isDeleted": false,
+      "id": "6kwq5lp9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2968.073141585022,
+      "y": 1606.2614389522987,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 259466,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -4.3125522759760315,
+          41.29407027076513
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-9f2fd7ba2e46",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c0a4a805ee26",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6468507973,
+      "isDeleted": false,
+      "id": "xfpv24m2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -124.28708651389752,
+      "y": 413.5,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 23860,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -722.3118304185163,
+          370.76808450868384
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e899a1e65ad4",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f380cbcd9a79",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1506246590,
+      "isDeleted": false,
+      "id": "8bngcgt5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -111.2379404087176,
+      "y": 413.5,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 417271,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -683.610122628876,
+          465.26808450868384
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e899a1e65ad4",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-20ec5ee8b8a1",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6842242617,
+      "isDeleted": false,
+      "id": "8bkf1iwn",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -108.67173941540923,
+      "y": 413.5,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 452150,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -769.7425246154927,
+          559.7680845086838
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e899a1e65ad4",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d2e7fb580f09",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6483272463,
+      "isDeleted": false,
+      "id": "6gj23wlq",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -100.9766562225241,
+      "y": 413.5,
+      "strokeColor": "#DC2626",
+      "backgroundColor": "transparent",
+      "seed": 456522,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -714.932691001263,
+          654.2680845086838
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e899a1e65ad4",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ec1cf295fdbe",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

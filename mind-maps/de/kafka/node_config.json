@@ -1,0 +1,38 @@
+{
+  "category": {
+    "color": "#1a1a2e",
+    "backgroundColor": "#e2e8f0",
+    "shape": "rectangle",
+    "font_size": 18,
+    "padding": 16,
+    "borderRadius": 12,
+    "font_family": "Arial"
+  },
+  "concept": {
+    "color": "#1E40AF",
+    "backgroundColor": "#EFF6FF",
+    "shape": "rectangle",
+    "font_size": 14,
+    "padding": 12,
+    "borderRadius": 8,
+    "font_family": "Arial"
+  },
+  "procedure": {
+    "color": "#92400E",
+    "backgroundColor": "#FEF3C7",
+    "shape": "rectangle",
+    "font_size": 14,
+    "font_family": "Arial",
+    "padding": 12,
+    "borderRadius": 16
+  },
+  "step": {
+    "color": "#1F2937",
+    "backgroundColor": "#F9FAFB",
+    "shape": "rectangle",
+    "font_size": 13,
+    "font_family": "Arial",
+    "padding": 10,
+    "borderRadius": 12
+  }
+}

@@ -11,6 +11,20 @@ Before creating or editing any map folder, read the relevant technical guide in 
 
 Also read `mind-map-manifesto.md` before creating or substantially changing a mind map. This repo, not `excali-builder`, owns semantic and editorial guidance: information design, decomposition quality, node type policy, edge usage policy, and avoiding outline-template behavior. Do not force branches to have the same depth, and do not force them to have different depths; let each branch stop where its real decomposition stops.
 
+## Markdown Node Refresher
+
+When the user asks what nodes or tools are available for a Markdown mind map, consult the Markdown-parser guide and README above. Scope the answer to the Markdown parser. Give a brief, practical answer that lists the intended use of each option:
+
+- `category`: root and major learning pillars.
+- `concept`: normal ideas and explanations.
+- `warning`: pitfalls or common misconceptions.
+- `link`: a clickable resource or jump to another node.
+- `comment`: a side note or annotation.
+- image attachment: a local image or photo that supports understanding.
+- `procedure` and `step`: an ordered process, only when the subject is genuinely sequential.
+
+Do not explain implementation details unless the user asks.
+
 ## Repo Conventions
 
 - Keep maps under `mind-maps/<domain>/<topic>/`, for example `mind-maps/de/dbt` and `mind-maps/de/snowflake`.
