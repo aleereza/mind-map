@@ -44,6 +44,8 @@ uv run excali-builder serve /path/to/mind-map/mind-maps/<domain>/<topic>
 
 The `serve` workflow should be preferred when the user wants to see edits reflected in the diagram. It rebuilds when source or config files change, refreshes the local viewer automatically, and saves node repositioning/resizing from the viewer back into `positions.json`.
 
+Agents must not start or stop the `serve` process. Before relying on the live viewer, check whether the appropriate `excali-builder serve` process is already running. If it is not running, tell the user and provide the command above for them to run in their own local terminal.
+
 ## One-Shot Build
 
 Use a one-shot build for scripts, export-only work, or when no live viewer is needed:
