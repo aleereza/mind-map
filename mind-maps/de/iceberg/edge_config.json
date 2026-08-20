@@ -1,0 +1,57 @@
+{
+  "parent_child": {
+    "connection_type": "line",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": "arrow",
+    "show_label": true,
+    "label_color": null,
+    "label_font_size": 14
+  },
+  "related": {
+    "connection_type": "line",
+    "color": "#6B7280",
+    "stroke_width": 1,
+    "stroke_style": "dotted",
+    "arrow_start": null,
+    "arrow_end": null,
+    "show_label": true,
+    "label_color": null,
+    "label_font_size": 14
+  },
+  "contrasts": {
+    "connection_type": "line",
+    "color": "#F59E0B",
+    "stroke_width": 2,
+    "stroke_style": "dashed",
+    "arrow_start": null,
+    "arrow_end": null,
+    "show_label": true,
+    "label_color": null,
+    "label_font_size": 14
+  },
+  "next": {
+    "connection_type": "line",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": "arrow",
+    "show_label": true,
+    "label_color": null,
+    "label_font_size": 14
+  },
+  "procedure_step": {
+    "connection_type": "group",
+    "color": "#2563EB",
+    "stroke_width": 2,
+    "stroke_style": "solid",
+    "arrow_start": null,
+    "arrow_end": null,
+    "show_label": false,
+    "label_color": null,
+    "label_font_size": 14
+  }
+}
