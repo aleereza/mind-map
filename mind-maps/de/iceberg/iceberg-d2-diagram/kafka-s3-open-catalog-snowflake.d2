@@ -1,0 +1,173 @@
+# One Iceberg table: a Kafka sink writes Parquet files to S3 and commits through Snowflake Open Catalog, and Snowflake reads the table.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+direction: right
+
+classes: {
+  box: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#1E293B"
+      font-size: 20
+    }
+  }
+  store: {
+    style: {
+      fill: "#E0F2FE"
+      stroke: "#0369A1"
+      stroke-width: 2
+      font-color: "#1E293B"
+      font-size: 22
+    }
+  }
+  zone: {
+    style: {
+      fill: "#F1F5F9"
+      stroke: "#CBD5E1"
+      border-radius: 12
+      font-color: "#334155"
+      font-size: 22
+    }
+  }
+  zone_alt: {
+    style: {
+      fill: "#EEF2FF"
+      stroke: "#C7D2FE"
+      border-radius: 12
+      font-color: "#334155"
+      font-size: 22
+    }
+  }
+  ref: {
+    style: {
+      stroke: "#64748B"
+      stroke-width: 2
+      stroke-dash: 4
+      font-color: "#334155"
+      font-size: 20
+    }
+  }
+  write: {
+    style: {
+      stroke: "#0369A1"
+      stroke-width: 3
+      font-color: "#0369A1"
+      font-size: 20
+    }
+  }
+  read: {
+    style: {
+      stroke: "#B45309"
+      stroke-width: 3
+      font-color: "#B45309"
+      font-size: 20
+    }
+  }
+}
+
+topic: "Kafka topic\nreadings" {
+  class: box
+  shape: queue
+  top: 0
+  left: 10
+  width: 220
+  height: 80
+}
+sink: "Iceberg sink connector\nin Kafka Connect\ntasks write files,\none task commits" {
+  class: box
+  top: 160
+  left: 0
+  width: 240
+  height: 130
+}
+topic -> sink: "1 records" {class: write}
+
+catalog: "Snowflake Open Catalog\nan Iceberg REST catalog" {
+  class: zone_alt
+  label.near: top-left
+  top: 0
+  left: 380
+
+  entry: "Table entry in the catalog" {
+    shape: sql_table
+    style.font-size: 20
+    style.fill: "#334155"
+    top: 12
+    left: 0
+    "database (namespace)": sensors
+    table: readings
+    metadata-location: "…/00042-….metadata.json"
+  }
+}
+
+s3: "Amazon S3" {
+  class: store
+  label.near: top-right
+  top: 360
+  left: 447
+
+  mfile: "Metadata file (JSON)\nschema, partition spec" {
+    class: box
+    label.near: top-left
+    top: 0
+    left: 0
+
+    snap: "Snapshots\ncurrent and older" {
+      class: box
+      top: 10
+      left: 0
+      width: 200
+      height: 70
+    }
+  }
+  mlist: "Manifest list (Avro)\none per snapshot" {
+    class: box
+    top: 250
+    left: 40
+    width: 240
+    height: 70
+  }
+  mans: "Manifests (Avro)\npaths, row counts,\ncolumn min and max" {
+    class: box
+    top: 370
+    left: 40
+    width: 240
+    height: 96
+  }
+  pq: "Parquet data files\nthe rows" {
+    class: box
+    top: 516
+    left: 40
+    width: 240
+    height: 70
+  }
+
+  mfile.snap -> mlist: {class: ref}
+  mlist -> mans: {class: ref}
+  mans -> pq: {class: ref}
+}
+
+snow: "Snowflake\nIceberg table\nsensors.readings" {
+  class: box
+  top: 465
+  left: 1130
+  width: 200
+  height: 110
+}
+
+catalog.entry -> s3.mfile: "5 new file,\npointer moves" {class: write}
+sink -> catalog: "4 commit" {class: write}
+sink -> s3.mlist: "3 manifest list,\nmanifests" {class: write}
+sink -> s3.pq: "2 Parquet files" {class: write}
+catalog -> snow: "A pointer" {class: read}
+s3.mfile -> snow: "B metadata files" {class: read}
+s3.pq -> snow: "C Parquet files" {class: read}

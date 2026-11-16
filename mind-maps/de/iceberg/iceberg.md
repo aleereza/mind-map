@@ -2,9 +2,19 @@
 
 > type: category
 
-How does Iceberg work, and how do you use it? Start from Snowflake. One product there owns three jobs: it stores the bytes, it tracks the table metadata, and it runs the compute. Iceberg breaks those three jobs apart and standardizes the middle one. Your rows sit in ordinary Parquet files in object storage that you own. S3 is the common choice, but GCS, ADLS, HDFS, and MinIO work the same way; Iceberg is not S3-native and uses no proprietary storage. Next to those data files, Iceberg keeps a small set of metadata files. They record which Parquet files form the table right now, the schema, the partition rules, and per-file statistics such as row counts and column minimum and maximum values. That metadata is the table format. Iceberg is a written specification, so it runs no queries and stores no bytes itself.
+How does Iceberg work, and how do you use it? Start from Snowflake. One product there owns three jobs: it stores the bytes, it tracks the table metadata, and it runs the compute. Iceberg breaks those three jobs apart and [standardizes the middle one](https://iceberg.apache.org/spec/). Your rows sit in ordinary Parquet files in object storage that you own. S3 is the common choice, but GCS, ADLS, HDFS, and MinIO work the same way; Iceberg is not S3-native and uses no proprietary storage. Next to those data files, Iceberg keeps a small set of metadata files. They record which Parquet files form the table right now, the schema, the partition rules, and per-file statistics such as row counts and column minimum and maximum values. That metadata is the table format. The specification lists every field in [Table Metadata Fields](https://iceberg.apache.org/spec/#table-metadata-fields), [Snapshots](https://iceberg.apache.org/spec/#snapshots), [Manifest Lists](https://iceberg.apache.org/spec/#manifest-lists), and [Manifest Schema](https://iceberg.apache.org/spec/#manifest-schema). Iceberg is a written specification, so it runs no queries and stores no bytes itself.
 
 Two external parts complete the picture. A catalog holds one pointer per table: the location of the table's current metadata file. Each commit writes new files, then swaps that pointer in one atomic step. This swap is what makes a write ACID, and it is what gives you snapshots and time travel. Common catalogs are the Iceberg REST catalog, AWS Glue, Apache Polaris, Project Nessie, Unity Catalog, and Snowflake Open Catalog. An engine is the compute. It asks the catalog for the pointer, reads the metadata, skips the files that cannot match the query, and runs the SQL. Spark, Trino, Flink, DuckDB, BigQuery, Athena, and Snowflake can all act as the engine. The payoff is that several engines share one copy of the data, with no exports and no copies. Your work stays SQL and modeling, so a dbt model can materialize as an Iceberg table. You keep the Snowflake behavior you expect, such as atomic commits, time travel, and schema evolution, on files you own and any engine can read.
+
+## One Table End to End {#one-table-end-to-end}
+
+> type: concept
+
+The diagram shows one setup. A Kafka sink writes Parquet files to S3 and commits through Snowflake Open Catalog, and Snowflake reads the table.
+
+![Diagram of one Iceberg table: a Kafka sink writes Parquet files, manifests, and a commit; Snowflake Open Catalog holds the pointer to the metadata file; Snowflake reads the pointer, the metadata files, and the Parquet files](iceberg-d2-diagram/kafka-s3-open-catalog-snowflake.d2.svg)
+
+Blue arrows show one write, in the order 1 to 5. Orange arrows show one read, in the order A to C. Dashed arrows show which item points to the next one. By default, S3 holds the metadata files in the metadata/ folder and the Parquet files in the data/ folder ([table properties](https://iceberg.apache.org/docs/latest/configuration/#write-properties)). In the catalog entry, 00042 is the version of the metadata file, and each commit writes the next version ([Polaris code](https://github.com/apache/polaris/blob/a52f812/runtime/service/src/main/java/org/apache/polaris/service/catalog/iceberg/LocalIcebergCatalog.java#L2248-L2287)).
 
 ## Basics {#iceberg-basics}
 
