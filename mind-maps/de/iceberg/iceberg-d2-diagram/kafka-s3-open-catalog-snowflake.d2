@@ -72,6 +72,14 @@ classes: {
       font-size: 20
     }
   }
+  refresh: {
+    style: {
+      stroke: "#0F766E"
+      stroke-width: 3
+      font-color: "#0F766E"
+      font-size: 20
+    }
+  }
 }
 
 topic: "Kafka topic\nreadings" {
@@ -156,18 +164,18 @@ s3: "Amazon S3" {
   mans -> pq: {class: ref}
 }
 
-snow: "Snowflake\nIceberg table\nsensors.readings" {
+snow: "Snowflake\nIceberg table\nsensors.readings\nsnapshot from the\nlast refresh" {
   class: box
-  top: 465
+  top: 445
   left: 1130
   width: 200
-  height: 110
+  height: 150
 }
 
 catalog.entry -> s3.mfile: "5 new file,\npointer moves" {class: write}
 sink -> catalog: "4 commit" {class: write}
 sink -> s3.mlist: "3 manifest list,\nmanifests" {class: write}
 sink -> s3.pq: "2 Parquet files" {class: write}
-catalog -> snow: "A pointer" {class: read}
-s3.mfile -> snow: "B metadata files" {class: read}
-s3.pq -> snow: "C Parquet files" {class: read}
+catalog -> snow: "A refresh:\nthe pointer" {class: refresh}
+s3.mfile -> snow: "B refresh:\nnew metadata" {class: refresh}
+s3.pq -> snow: "C each query:\nParquet files" {class: read}

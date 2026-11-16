@@ -272,7 +272,7 @@ S3 is a separate sign-in. With vended credentials, the catalog hands Snowflake s
 
 #### Outputs {#snowflake-outputs}
 
-The output is a set of Iceberg tables that a Snowflake role can query once it has SELECT. dbt reads them as sources. Snowflake stores none of the rows: each query reads the files of the table's current snapshot from S3.
+The output is a set of Iceberg tables that a Snowflake role can query once it has SELECT. dbt reads them as sources. Snowflake stores none of the rows. A query reads from S3 only the files that can match it. A repeat query can skip S3 in two cases. Either Snowflake has a saved result, or the servers that ran the query still hold the files on local disk. The [Iceberg in Snowflake map](../../snowflake/iceberg/snowflake-iceberg.md) explains both and shows a query step by step.
 
 Catalog names are case-sensitive and usually lowercase. Snowflake turns unquoted names into uppercase, so queries and dbt sources must quote the schema and table names, for example "sensors"."readings".
 

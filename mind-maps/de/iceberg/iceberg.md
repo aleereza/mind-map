@@ -12,9 +12,9 @@ Two external parts complete the picture. A catalog holds one pointer per table: 
 
 The diagram shows one setup. A Kafka sink writes Parquet files to S3 and commits through Snowflake Open Catalog, and Snowflake reads the table.
 
-![Diagram of one Iceberg table: a Kafka sink writes Parquet files, manifests, and a commit; Snowflake Open Catalog holds the pointer to the metadata file; Snowflake reads the pointer, the metadata files, and the Parquet files](iceberg-d2-diagram/kafka-s3-open-catalog-snowflake.d2.svg)
+![Diagram of one Iceberg table: a Kafka sink writes Parquet files, manifests, and a commit; Snowflake Open Catalog holds the pointer to the metadata file; Snowflake refreshes its table from the pointer and the new metadata file, and each query reads the Parquet files](iceberg-d2-diagram/kafka-s3-open-catalog-snowflake.d2.svg)
 
-Blue arrows show one write, in the order 1 to 5. Orange arrows show one read, in the order A to C. Dashed arrows show which item points to the next one. By default, S3 holds the metadata files in the metadata/ folder and the Parquet files in the data/ folder ([table properties](https://iceberg.apache.org/docs/latest/configuration/#write-properties)). In the catalog entry, 00042 is the version of the metadata file, and each commit writes the next version ([Polaris code](https://github.com/apache/polaris/blob/a52f812/runtime/service/src/main/java/org/apache/polaris/service/catalog/iceberg/LocalIcebergCatalog.java#L2248-L2287)).
+Blue arrows show one write, in the order 1 to 5. Teal arrows show a refresh: Snowflake polls the catalog for the pointer (A) and reads the new metadata file (B). The orange arrow shows a query: Snowflake reads the Parquet files (C). A refresh runs in the background, and a query uses the snapshot from the last refresh. Dashed arrows show which item points to the next one. By default, S3 holds the metadata files in the metadata/ folder and the Parquet files in the data/ folder ([table properties](https://iceberg.apache.org/docs/latest/configuration/#write-properties)). In the catalog entry, 00042 is the version of the metadata file, and each commit writes the next version ([Polaris code](https://github.com/apache/polaris/blob/a52f812/runtime/service/src/main/java/org/apache/polaris/service/catalog/iceberg/LocalIcebergCatalog.java#L2248-L2287)). The [Iceberg in Snowflake map](../snowflake/iceberg/snowflake-iceberg.md) shows a query step by step.
 
 ## Basics {#iceberg-basics}
 
@@ -159,7 +159,7 @@ The catalog moves the table pointer from the old metadata file to the new one in
 > type: step
 > edge.next: read-pick-snapshot
 
-The engine reads the table pointer and loads the current metadata file. It never lists storage directories to discover the table content.
+The engine reads the table pointer and loads the current metadata file. It never lists storage directories to discover the table content. Some engines do this step ahead of the query. Snowflake reads the pointer and the new metadata file when it refreshes an externally managed table. A query then uses the snapshot from the last refresh. The [Iceberg in Snowflake map](../snowflake/iceberg/snowflake-iceberg.md) shows the order.
 
 #### Engine Picks a Snapshot {#read-pick-snapshot}
 

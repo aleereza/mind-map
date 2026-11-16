@@ -84,6 +84,18 @@ The linked database has [limits](https://docs.snowflake.com/en/user-guide/tables
 
 ### Auto-refresh {#auto-refresh}
 
+### Query caches {#query-caches}
+
+> edge.related: auto-refresh
+
+Snowflake can answer a query without reading the table's files from S3. It has two ways to do this: a saved result and the warehouse cache.
+
+A saved result is the stored answer to an earlier query. Snowflake keeps it for 24 hours. It returns the saved result when the same SQL text runs again, the table data has not changed, and the role has the privileges. Each reuse restarts the 24 hours, up to 31 days after the first run. The [saved results guide](https://docs.snowflake.com/en/user-guide/querying-persisted-results) lists every condition.
+
+A [virtual warehouse](https://docs.snowflake.com/en/user-guide/warehouses) is the cluster of servers that runs a query. The catalog setting called warehouse, under Internal and external catalogs, means something else: a catalog name. The warehouse cache is table data that a running warehouse keeps on its local disk. A later query that needs the same data reads it from there, not from storage. Suspending the warehouse drops the cache, so a short auto-suspend time empties it between queries. The [warehouse cache guide](https://docs.snowflake.com/en/user-guide/performance-query-warehouse-cache) describes it.
+
+Both caches work for an externally managed Iceberg table. The node A query test, under Snowflake account, shows both at work.
+
 ### Snowflake Horizon Catalog {#horizon-catalog}
 
 ### Catalog sync {#catalog-sync}
@@ -104,6 +116,52 @@ Holds the Iceberg tables that users query, and the objects that connect them to 
 #### Outputs {#account-outputs}
 
 #### Under the hood {#account-under-the-hood}
+
+#### A query, in order {#account-query-order}
+
+> edge.related: auto-refresh, query-caches
+
+A query on an externally managed Iceberg table runs in the order below. Before any query, a refresh has set the table's snapshot. Auto-refresh does this in the background.
+
+![Diagram of a query on an externally managed Iceberg table: a background refresh sets the snapshot; the query is planned on that snapshot; Snowflake returns a saved result if one exists; otherwise the warehouse reads the remaining files from its cache and from S3, returns the rows, and saves the result](snowflake-iceberg-d2-diagram/query-order.d2.svg)
+
+1. The SQL arrives. Snowflake checks that the role has SELECT on the table.
+2. Snowflake plans the query on the snapshot from the last refresh. It drops the data files that cannot match.
+3. Snowflake looks for a saved result of the same SQL. If it finds one, it returns that result and reads no S3.
+4. If not, the warehouse reads the remaining data files. It takes what it holds from the warehouse cache and reads the rest from S3, through the external volume or the catalog's vended credentials.
+5. Snowflake returns the rows and saves the result.
+
+Amber marks the step that reads S3. Teal marks the answer that skips S3.
+
+#### A query test {#account-query-test}
+
+A test shows both caches at work on an externally managed Iceberg table. It ran one SQL text five times and read the statistics of each run. The SQL counts rows, sums one column, and counts distinct values of another, for one fixed hour of data. The scan kept 13 of the table's 18,390 data files in runs 1 to 4, and 13 of 18,391 in run 5.
+
+| Run | Saved results | Data from the cache | Execution time | Elapsed time |
+| --- | --- | --- | --- | --- |
+| 1 | off | 0 | 425 ms | 2,267 ms |
+| 2 | off | 1 | 36 ms | 1,907 ms |
+| 3 | on | 1 | 31 ms | 1,855 ms |
+| 4 | on | none: the saved result of run 3 | 1 ms | 129 ms |
+| 5, six minutes later | on | 0 | 293 ms | 1,054 ms |
+
+Run 1 read all its data from S3. Runs 2 and 3 read the same data from the warehouse cache. Run 4 returned the saved result of run 3 and scanned no bytes.
+
+The cache column is `percentage_scanned_from_cache`. It is a fraction: 0 means all data came from S3, and 1 means all came from the cache. A query for two hours of data, run right after a query for the first hour, showed about 0.16.
+
+Run 5 used the same SQL after one refresh had moved the table to a new snapshot. It did not reuse the saved result, and it took nothing from the cache. The test warehouse suspends after 60 idle seconds.
+
+To repeat the test on your own table, use a query of this shape. Run the same SELECT twice with saved results off, then turn them on and run it twice more. Read the statistics right after each run:
+
+```sql
+ALTER SESSION SET USE_CACHED_RESULT = FALSE;
+SELECT SUM("value") FROM lake."sensors"."readings"
+  WHERE "produced_at" >= '2026-11-16 06:00:00' AND "produced_at" < '2026-11-16 07:00:00';
+SELECT operator_type, operator_statistics
+  FROM TABLE(GET_QUERY_OPERATOR_STATS(LAST_QUERY_ID()));
+```
+
+In the statistics, `io.percentage_scanned_from_cache`, `pruning.partitions_scanned`, and `pruning.partitions_total` describe the scan. For an Iceberg table, a partition is one data file: `partitions_total` matched the number of rows that ICEBERG_TABLE_FILES returned. A run that returned a saved result shows the operator QUERY RESULT REUSE instead of TableScan.
 
 ### Snowflake Open Catalog account {#open-catalog-account}
 
