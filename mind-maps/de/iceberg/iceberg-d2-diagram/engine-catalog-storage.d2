@@ -1,0 +1,85 @@
+# The Iceberg library inside the engine asks the catalog for the table pointer, and reads and writes the files in object storage.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+direction: down
+
+classes: {
+  box: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#1E293B"
+    }
+  }
+  store: {
+    style: {
+      fill: "#E0F2FE"
+      stroke: "#0369A1"
+      stroke-width: 2
+      font-color: "#1E293B"
+    }
+  }
+  actor: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      font-color: "#1E293B"
+    }
+  }
+  external: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      stroke-dash: 4
+      border-radius: 8
+      font-color: "#1E293B"
+    }
+  }
+  zone: {
+    style: {
+      fill: "#F1F5F9"
+      stroke: "#CBD5E1"
+      border-radius: 12
+      font-color: "#334155"
+    }
+  }
+  zone_alt: {
+    style: {
+      fill: "#EEF2FF"
+      stroke: "#C7D2FE"
+      border-radius: 12
+      font-color: "#334155"
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#64748B"
+      stroke-width: 2
+      font-color: "#334155"
+    }
+  }
+}
+
+engine: "Engine\nSpark, Trino, Flink, Snowflake" {
+  class: zone_alt
+  style.font-size: 20
+  library: "Iceberg client library\nA JAR or a Python package" {class: box}
+}
+catalog: "Catalog\nRun it or use a managed one" {class: external}
+storage: "Object storage\nFiles only, nothing to run" {
+  class: store
+  shape: cylinder
+}
+
+engine.library -> catalog: "asks for the pointer" {class: flow}
+engine.library -> storage: "reads and writes files" {class: flow}
