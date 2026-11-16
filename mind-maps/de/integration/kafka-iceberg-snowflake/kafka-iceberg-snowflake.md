@@ -86,7 +86,11 @@ For example, the sink unwraps the record from the [CDC source connector](#cdc-ou
 
 A REST catalog is an Iceberg catalog that clients reach through the open Iceberg REST API over HTTPS. Like every catalog, it maps each table name to the table's current metadata file. The [Iceberg map](../../iceberg/iceberg.md) explains that role. Because the API is a standard, any engine with an Iceberg client can use it. Here, the sink writes through it, and Snowflake reads through it.
 
-The catalog also controls access. Each client signs in as a principal, a catalog user, with OAuth (open authorization) client credentials, a standard sign-in method for programs. Roles then decide what each principal may do: the sink's principal can change table contents, and Snowflake's principal can only read. If two writers commit to one table at the same time, the catalog accepts one commit and rejects the other, which then retries.
+The catalog also controls access, with identities of its own. A principal is the catalog's identity for a program, such as the sink or Snowflake. The catalog creates and manages it. When you create a service principal, the catalog gives it a client ID and a secret. The program signs in with them through OAuth (open authorization) client credentials, a standard sign-in method for programs.
+
+Permissions reach a principal through a chain. Privileges go to a catalog role, a catalog role goes to a principal role, and a principal role goes to principals. The sink's chain ends in privileges to create tables and write data, often granted together as CATALOG_MANAGE_CONTENT. Snowflake's chain ends in TABLE_READ_DATA only. The [Apache Polaris access control guide](https://polaris.apache.org/in-dev/unreleased/managing-security/access-control/) describes the chain.
+
+If two writers commit to one table at the same time, the catalog accepts one commit and rejects the other, which then retries.
 
 Snowflake Open Catalog is a managed version of Apache Polaris, an open-source REST catalog.
 
@@ -258,9 +262,13 @@ Finds the tables through the catalog and reads their files in place.
 
 #### Inputs {#snowflake-inputs}
 
-The read side takes two inputs: each table's current metadata from the catalog, and the files in S3 that the metadata lists.
+The read side takes two inputs: each table's current metadata from the catalog, and the files in S3 that the metadata lists. Both ways to bind Snowflake to the catalog take these same inputs: a catalog-linked database, and one Iceberg table per source table. They differ only in how Snowflake gets into S3, as Under the hood shows.
 
-Snowflake reaches the catalog through a catalog integration. This Snowflake object holds the catalog's address and name, and the OAuth client that Snowflake signs in with. The client belongs to its own principal, with a read-only catalog role. That principal is separate from the sink's principal, which can write.
+Snowflake reaches the catalog through a catalog integration. This Snowflake object stores the catalog's web address, the catalog's name, and the client ID and secret that Snowflake signs in with. Snowflake signs in to the catalog. It sends the ID and secret to the catalog, gets back a short-lived token, and shows that token on every catalog request. The integration also names the principal role that the token should carry.
+
+The ID and secret belong to a principal: the catalog's own identity for a program, as the [REST catalog](#rest-catalog) concept explains. Snowflake has its own principal, which can only read. The sink has a different principal, which can write.
+
+S3 is a separate sign-in. With vended credentials, the catalog hands Snowflake short-lived S3 credentials with each table. With an external volume, Snowflake assumes the AWS IAM role that the volume names.
 
 #### Outputs {#snowflake-outputs}
 
@@ -285,7 +293,7 @@ For a table of its own, AUTO_REFRESH is off by default, as the [CREATE ICEBERG T
 
 For example, suppose the sink creates a new table at 10:00 and commits every 5 minutes. With a catalog-linked database, the table appears in Snowflake by about 10:00:30. Each later commit follows within a minute or so. With one table per source table, the table appears only after someone registers it in Snowflake. If AUTO_REFRESH is off, it then keeps the snapshot it found, while the sink commits 288 times a day.
 
-The per-table way is older and more manual, but Snowflake does not call it deprecated. The catalog-linked database removes the per-table setup and the two-step order. It has [limits](https://docs.snowflake.com/en/user-guide/tables-iceberg-catalog-linked-database#considerations-for-using-a-catalog-linked-database-for-iceberg-tables): it works only with an Iceberg REST catalog, and it supports no replication, cloning, or UNDROP. Renaming a table in the catalog drops and recreates it in Snowflake. As of November 2026, one Snowflake reference page still labels the feature as preview.
+The per-table way is older and more manual, and Snowflake still supports it. The catalog-linked database removes the per-table setup and the two-step order. It has [limits](https://docs.snowflake.com/en/user-guide/tables-iceberg-catalog-linked-database#considerations-for-using-a-catalog-linked-database-for-iceberg-tables): it works only with an Iceberg REST catalog, and it supports no replication, cloning, or UNDROP. Renaming a table in the catalog drops and recreates it in Snowflake. As of November 2026, one Snowflake reference page still labels the feature as preview.
 
 Choose a catalog-linked database when you want every table in a namespace, kept current with no table-by-table work. Choose the per-table way when you want only some of the tables, or your own names in an existing database. It also fits when you need a feature that the linked database lacks.
 
