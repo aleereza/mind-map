@@ -344,7 +344,7 @@ Apache Spark and Apache Flink are the usual writers, and Flink covers streaming 
 
 > type: category
 
-Iceberg is a specification and a library, not an app or a server. This branch shows what you add to an engine, what you run, and what a vendor can run for you.
+Iceberg is a specification that engines implement. This branch shows what you add to an engine, what you run, and what a vendor can run for you.
 
 ### Three Parts You Deploy {#three-parts-you-deploy}
 
@@ -354,7 +354,7 @@ Because [Iceberg is only a specification](#iceberg-is-a-spec), a working setup h
 
 ![Diagram of the three Iceberg parts: the Iceberg client library inside the engine asks the catalog for the pointer and reads and writes files in object storage](iceberg-d2-diagram/engine-catalog-storage.d2.svg)
 
-Iceberg adds no server of its own. The library ships as a JAR (Java archive) file or a Python package, and storage is a bucket. The catalog can be a database table, a service that a vendor runs, or a REST catalog server that you run. So a Linux server appears only if you run an engine or a REST catalog server yourself.
+The library ships as a JAR (Java archive) file or a Python package. Some engines, such as Snowflake, have it built in. Storage is a bucket. The catalog can be a database table, a service that a vendor runs, or a REST catalog server that you run. A server appears where you run a part yourself: an engine such as Spark, or a REST catalog server.
 
 ### Iceberg Library {#iceberg-library}
 
@@ -362,17 +362,35 @@ Iceberg adds no server of its own. The library ships as a JAR (Java archive) fil
 
 The library is Iceberg's code inside the engine process. [Engine Role](#engine-role) explains what it does. Each engine loads it in its own way:
 
+- Snowflake: the engine includes Iceberg support ([Metadata and retention](https://docs.snowflake.com/en/user-guide/tables-iceberg-metadata)).
 - Spark: add the `iceberg-spark-runtime` JAR with `--packages`, or put it in Spark's `jars` folder. Match the JAR to your Spark version ([Spark getting started](https://iceberg.apache.org/docs/latest/spark-getting-started/)).
 - Flink: put the `iceberg-flink-runtime` JAR in Flink's `lib` folder ([Flink guide](https://iceberg.apache.org/docs/latest/flink/)).
 - Trino: create one catalog properties file in `etc/catalog` that sets `connector.name=iceberg` ([Trino connector guide](https://trino.io/docs/current/connector/iceberg.html)).
-- PyIceberg, the Python library that needs no Spark: run `pip install "pyiceberg[s3fs,hive]"` ([PyIceberg guide](https://py.iceberg.apache.org/)).
-- Snowflake: nothing to add, because Snowflake is a hosted service.
+- PyIceberg, the Python implementation of Iceberg: run `pip install "pyiceberg[s3fs,hive]"` ([PyIceberg guide](https://py.iceberg.apache.org/)).
 
 #### Catalog Settings {#catalog-settings}
 
 > type: concept
 
-You tell an engine about Iceberg in its catalog settings. For example, three Spark settings define a catalog named `rest_prod` ([Spark configuration guide](https://iceberg.apache.org/docs/latest/spark-configuration/#catalogs)):
+You tell an engine about Iceberg in its catalog settings. The settings name the catalog type and its address, and often the sign-in details.
+
+##### Catalog Settings in Snowflake {#catalog-settings-snowflake}
+
+> type: concept
+
+In Snowflake, a catalog integration holds the settings for an external catalog. For example, a catalog integration for Snowflake Open Catalog has three key settings ([CREATE CATALOG INTEGRATION reference](https://docs.snowflake.com/en/sql-reference/sql/create-catalog-integration-open-catalog)):
+
+- `CATALOG_SOURCE = POLARIS` selects the catalog type.
+- `REST_CONFIG = (CATALOG_URI = '<account URL>' CATALOG_NAME = '<catalog name>')` gives the catalog address and name.
+- `REST_AUTHENTICATION = (TYPE = OAUTH OAUTH_CLIENT_ID = '<id>' OAUTH_CLIENT_SECRET = '<secret>' ...)` gives the sign-in details.
+
+For other Iceberg REST catalogs, `CATALOG_SOURCE = ICEBERG_REST` selects the type ([CREATE CATALOG INTEGRATION (Iceberg REST) reference](https://docs.snowflake.com/en/sql-reference/sql/create-catalog-integration-rest)).
+
+##### Catalog Settings in Spark {#catalog-settings-spark}
+
+> type: concept
+
+Three Spark settings define a catalog named `rest_prod` ([Spark configuration guide](https://iceberg.apache.org/docs/latest/spark-configuration/#catalogs)):
 
 - `spark.sql.catalog.rest_prod = org.apache.iceberg.spark.SparkCatalog` loads the Iceberg class.
 - `spark.sql.catalog.rest_prod.type = rest` selects the catalog type.
@@ -384,7 +402,7 @@ In SQL, `rest_prod.db.table` then names a table in that catalog.
 
 > type: concept
 
-A catalog is not always a server. It can be a table in a database, a service that a vendor runs, or a REST catalog server that you run. A vendor-run catalog, such as AWS Glue, needs no process from you. [Common Catalogs](#common-catalogs) lists the names.
+A catalog can be a table in a database, a service that a vendor runs, or a REST catalog server that you run. With a vendor-run catalog, such as AWS Glue or Snowflake, the vendor runs the process. [Common Catalogs](#common-catalogs) lists the names.
 
 #### JDBC Catalog {#jdbc-catalog}
 
@@ -398,7 +416,7 @@ A commit is one SQL statement. Shortened, it reads `UPDATE iceberg_tables SET me
 
 > type: concept
 
-A REST catalog server is a process that offers the Iceberg REST API over HTTP. REST is a common style of web API. Because the API is a standard, any engine with an Iceberg client can call the same server. [Apache Polaris](https://github.com/apache/polaris) and [Lakekeeper](https://github.com/lakekeeper/lakekeeper) are open-source examples. Polaris starts with one `docker run` command ([Polaris README](https://github.com/apache/polaris/blob/a52f812/README.md#L135-L138)).
+A REST catalog server is a process that offers the Iceberg REST API over HTTP. REST is a common style of web API. Because the API is a standard, any engine with an Iceberg client can call the same server. [Snowflake Open Catalog](https://docs.snowflake.com/en/user-guide/opencatalog/overview) is a managed service for Apache Polaris. You can also run [Apache Polaris](https://github.com/apache/polaris) or [Lakekeeper](https://github.com/lakekeeper/lakekeeper) yourself, and Polaris starts with one `docker run` command ([Polaris README](https://github.com/apache/polaris/blob/a52f812/README.md#L135-L138)).
 
 ##### Commit Through a REST Catalog {#rest-commit}
 
@@ -410,13 +428,13 @@ At commit, the engine sends its changes and the conditions they need. For exampl
 
 > type: warning
 
-The Iceberg repository includes a REST server and the Docker image `apache/iceberg-rest-fixture`. Its [README](https://github.com/apache/iceberg/blob/4616acf/docker/iceberg-rest-fixture/README.md#L20-L48) calls the server a test fixture. As of November 2026, it keeps its catalog in a SQLite file under `/tmp` unless you set another backend. The [Spark quickstart](https://iceberg.apache.org/spark-quickstart/) uses it for a local trial. For real use, run a catalog product such as Polaris.
+The Iceberg repository includes a REST server and the Docker image `apache/iceberg-rest-fixture`. Its [README](https://github.com/apache/iceberg/blob/4616acf/docker/iceberg-rest-fixture/README.md#L20-L48) calls the server a test fixture. As of November 2026, it keeps its catalog in a SQLite file under `/tmp` unless you set another backend. The [Spark quickstart](https://iceberg.apache.org/spark-quickstart/) uses it for a local trial. For real use, choose a catalog product such as Snowflake Open Catalog or Polaris.
 
 ### Iceberg in Snowflake {#iceberg-in-snowflake}
 
 > type: concept
 
-Snowflake is a hosted service, so there is nothing to install. You create each Iceberg table with `CREATE ICEBERG TABLE`, and the command names the catalog. There are two cases ([Iceberg tables overview](https://docs.snowflake.com/en/user-guide/tables-iceberg)).
+Snowflake runs the engine, and the engine includes Iceberg support. You create each Iceberg table with `CREATE ICEBERG TABLE`, and the command names the catalog. There are two cases ([Iceberg tables overview](https://docs.snowflake.com/en/user-guide/tables-iceberg)).
 
 #### Snowflake as the Catalog {#snowflake-as-catalog}
 
@@ -424,10 +442,10 @@ Snowflake is a hosted service, so there is nothing to install. You create each I
 
 > edge.contrasts: snowflake-external-catalog
 
-With `CATALOG = 'SNOWFLAKE'`, Snowflake is the catalog. The files need storage: Snowflake-managed storage, or an external volume, which is a Snowflake object that points to your bucket. You need no catalog integration. Snowflake handles table maintenance, such as compaction ([CREATE ICEBERG TABLE](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-snowflake)).
+With `CATALOG = 'SNOWFLAKE'`, Snowflake is the catalog. The files need storage: Snowflake-managed storage, or an external volume, which is a Snowflake object that points to your bucket. Snowflake generates the Iceberg metadata files for version 2 or 3 of the specification and writes them to the external volume. It does this on a periodic basis with the function `SYSTEM$GET_ICEBERG_TABLE_INFORMATION`, and you can run that function on demand ([Metadata and retention](https://docs.snowflake.com/en/user-guide/tables-iceberg-metadata)). Snowflake handles all lifecycle maintenance for these tables, such as compaction ([CREATE ICEBERG TABLE](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-snowflake)).
 
 #### External Catalog in Snowflake {#snowflake-external-catalog}
 
 > type: concept
 
-With an external catalog, such as AWS Glue or an Iceberg REST catalog, you create a catalog integration. It is a Snowflake object that stores the connection to that catalog. You also need an external volume. Snowflake does not manage the lifecycle of these tables, so another engine or service must run their maintenance ([external catalog variant](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-rest)).
+With an external catalog, such as AWS Glue or an Iceberg REST catalog, you create a [catalog integration](#catalog-settings-snowflake). Storage access comes from an external volume, or from credentials that the catalog vends. For a REST catalog, a table then names the integration and its table in the catalog: `CREATE ICEBERG TABLE my_table EXTERNAL_VOLUME = '<volume>' CATALOG = '<integration>' CATALOG_TABLE_NAME = '<table>'` ([CREATE ICEBERG TABLE reference](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-rest)). The owner of the external catalog is responsible for table maintenance, such as compaction ([Iceberg tables overview](https://docs.snowflake.com/en/user-guide/tables-iceberg)).
