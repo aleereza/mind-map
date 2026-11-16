@@ -2,11 +2,11 @@
 
 > type: category
 
-Iceberg is a table format. Table format is a data-lake term. A data lake keeps data as plain files that many tools can read. The term builds on a more familiar one, file format. A file format is an agreed way to arrange data inside one file, so that any program can read it. Parquet is one. A table format is the same idea one level up: an agreed way to arrange many files and metadata as one table that any engine can read ([Table Format vs File Format](#table-format-vs-file-format)). Iceberg defines its table format in a written [specification](https://iceberg.apache.org/spec/). Iceberg is a written specification, so it runs no queries and stores no bytes itself ([Iceberg Is Only a Specification](#iceberg-is-a-spec)).
+Iceberg is a table format. Table format is a data-lake term. A data lake keeps data as plain files that many tools can read. The term builds on a more familiar one, file format. A file format is an agreed way to arrange data inside one file, so that any program can read it. Parquet is one. A table format is the same idea one level up: an agreed way to arrange many files and metadata as one table that any engine can read ([Table Format vs File Format](#table-format-vs-file-format-table-format-vs-file-format)). Iceberg defines its table format in a written [specification](https://iceberg.apache.org/spec/). Iceberg is a written specification, so it runs no queries and stores no bytes itself ([Iceberg Is Only a Specification](#iceberg-is-only-a-specification-iceberg-is-a-spec)).
 
 An Iceberg table is made of two kinds of files: data files and metadata files. Each table has its own set of both, in its own folder in storage. The next paragraphs describe one table.
 
-Data files hold the rows. Your rows sit in ordinary Parquet files in object storage that you own ([Data Files](#data-files)). Object storage is a storage service that keeps files, called objects, in buckets. S3 is the common choice. Google Cloud Storage (GCS), Azure Data Lake Storage (ADLS), the Hadoop Distributed File System (HDFS), and MinIO work the same way. Iceberg is not S3-native and uses no proprietary storage.
+Data files hold the rows. Your rows sit in ordinary Parquet files in object storage that you own ([Data Files](#data-files-data-files)). Object storage is a storage service that keeps files, called objects, in buckets. S3 is the common choice. Google Cloud Storage (GCS), Azure Data Lake Storage (ADLS), the Hadoop Distributed File System (HDFS), and MinIO work the same way. Iceberg is not S3-native and uses no proprietary storage.
 
 Next to those data files sit the same table's metadata files. They come in three kinds:
 
@@ -14,15 +14,15 @@ Next to those data files sit the same table's metadata files. They come in three
 - Manifest lists, usually in Avro.
 - Manifests, usually in Avro.
 
-The engine or the catalog that commits a change writes them. Each commit adds new ones, so the number of metadata files grows with every commit. Together they record which Parquet files form the table right now, the schema, the partition rules, and per-file statistics such as row counts and column minimum and maximum values. That metadata is the [table format](#table-format-vs-file-format). Two of these words have an Iceberg meaning. The schema is the list of columns and their types, while a Snowflake schema is a group of tables ([Schema](#table-schema)). A partition is a group of rows that share a value derived from a column, such as the day of an event time ([Partition Spec](#partition-spec)).
+The engine or the catalog that commits a change writes them. Each commit adds new ones, so the number of metadata files grows with every commit. Together they record which Parquet files form the table right now, the schema, the partition rules, and per-file statistics such as row counts and column minimum and maximum values. That metadata is the [table format](#table-format-vs-file-format-table-format-vs-file-format). Two of these words have an Iceberg meaning. The schema is the list of columns and their types, while a Snowflake schema is a group of tables ([Schema](#schema-table-schema)). A partition is a group of rows that share a value derived from a column, such as the day of an event time ([Partition Spec](#partition-spec-partition-spec)).
 
-The metadata files form a small tree ([Table Anatomy](#table-anatomy)). At the top, a [metadata file](#metadata-file) holds the table state, including a list of snapshots. Snapshot is an Iceberg term: the complete set of data files at one point in time ([Snapshot](#snapshot)). Each snapshot names one [manifest list](#manifest-list), and the manifest list names the manifests. Manifest is an Iceberg term for a file that lists data files with their statistics ([Manifest File](#manifest-file)). The specification lists every field in [Table Metadata Fields](https://iceberg.apache.org/spec/#table-metadata-fields), [Snapshots](https://iceberg.apache.org/spec/#snapshots), [Manifest Lists](https://iceberg.apache.org/spec/#manifest-lists), and [Manifest Schema](https://iceberg.apache.org/spec/#manifest-schema).
+The metadata files form a small tree ([Table Anatomy](#table-anatomy-table-anatomy)). At the top, a [metadata file](#metadata-file-metadata-file) holds the table state, including a list of snapshots. Snapshot is an Iceberg term: the complete set of data files at one point in time ([Snapshot](#snapshot-snapshot)). Each snapshot names one [manifest list](#manifest-list-manifest-list), and the manifest list names the manifests. Manifest is an Iceberg term for a file that lists data files with their statistics ([Manifest File](#manifest-file-manifest-file)). The specification lists every field in [Table Metadata Fields](https://iceberg.apache.org/spec/#table-metadata-fields), [Snapshots](https://iceberg.apache.org/spec/#snapshots), [Manifest Lists](https://iceberg.apache.org/spec/#manifest-lists), and [Manifest Schema](https://iceberg.apache.org/spec/#manifest-schema).
 
-Two external parts complete the picture: a catalog and an engine. Catalog is an Iceberg term here. An Iceberg catalog holds one pointer per table: the location of the table's current metadata file ([Catalog Role](#catalog-role)). In a data warehouse, a catalog is a rich metadata service, so the word can mislead ([Metadata Is Not in the Catalog](#metadata-not-in-catalog)). Common catalogs are the Iceberg REST catalog, AWS Glue, Apache Polaris, Project Nessie, Unity Catalog, and Snowflake Open Catalog ([Common Catalogs](#common-catalogs)). An engine is the compute: the program that reads and writes the files and runs the SQL ([Engine Role](#engine-role)). Spark, Trino, Flink, DuckDB, BigQuery, Athena, and Snowflake can all act as the engine ([Common Engines](#common-engines)).
+Two external parts complete the picture: a catalog and an engine. Catalog is an Iceberg term here. An Iceberg catalog holds one pointer per table: the location of the table's current metadata file ([Catalog Role](#catalog-role-catalog-role)). In a data warehouse, a catalog is a rich metadata service, so the word can mislead ([Metadata Is Not in the Catalog](#metadata-is-not-in-the-catalog-metadata-not-in-catalog)). Common catalogs are the Iceberg REST catalog, AWS Glue, Apache Polaris, Project Nessie, Unity Catalog, and Snowflake Open Catalog ([Common Catalogs](#common-catalogs-common-catalogs)). An engine is the compute: the program that reads and writes the files and runs the SQL ([Engine Role](#engine-role-engine-role)). Spark, Trino, Flink, DuckDB, BigQuery, Athena, and Snowflake can all act as the engine ([Common Engines](#common-engines-common-engines)).
 
-A commit is the Iceberg step that makes a write part of the table. Each commit writes new files, then swaps that pointer in one atomic step ([Write Path](#write-path)). This swap is what makes a write ACID: atomic, consistent, isolated, and durable. For example, a reader sees all of a change or none of it. The swap is also what gives you snapshots and time travel. Time travel means a query reads the table as it was at an older snapshot ([Time Travel](#time-travel)). To read, the engine asks the catalog for the pointer, reads the metadata, skips the files that cannot match the query, and runs the SQL ([Read Path](#read-path)).
+A commit is the Iceberg step that makes a write part of the table. Each commit writes new files, then swaps that pointer in one atomic step ([Write Path](#write-path-write-path)). This swap is what makes a write ACID: atomic, consistent, isolated, and durable. For example, a reader sees all of a change or none of it. The swap is also what gives you snapshots and time travel. Time travel means a query reads the table as it was at an older snapshot ([Time Travel](#time-travel-time-travel)). To read, the engine asks the catalog for the pointer, reads the metadata, skips the files that cannot match the query, and runs the SQL ([Read Path](#read-path-read-path)).
 
-Now compare a data warehouse like Snowflake. There, one product owns three jobs: it stores the bytes, it tracks the table metadata, and it runs the compute. Iceberg breaks those three jobs apart and [standardizes the middle one](https://iceberg.apache.org/spec/). Object storage stores the bytes, the metadata files and the catalog track the table, and any engine runs the compute. The payoff is that several engines share one copy of the data, with no exports and no copies. Your work stays SQL and modeling, so a dbt model can materialize as an Iceberg table: dbt writes the model's result as an Iceberg table. You keep the Snowflake behavior you expect, such as atomic commits, time travel, and [schema evolution](#schema-evolution), on files you own and any engine can read.
+Now compare a data warehouse like Snowflake. There, one product owns three jobs: it stores the bytes, it tracks the table metadata, and it runs the compute. Iceberg breaks those three jobs apart and [standardizes the middle one](https://iceberg.apache.org/spec/). Object storage stores the bytes, the metadata files and the catalog track the table, and any engine runs the compute. The payoff is that several engines share one copy of the data, with no exports and no copies. Your work stays SQL and modeling, so a dbt model can materialize as an Iceberg table: dbt writes the model's result as an Iceberg table. You keep the Snowflake behavior you expect, such as atomic commits, time travel, and [schema evolution](#schema-evolution-schema-evolution), on files you own and any engine can read.
 
 ## One Table End to End {#one-table-end-to-end}
 
@@ -165,7 +165,7 @@ The engine records the new files, with their partition values and column statist
 > type: step
 > edge.next: write-commit-swap
 
-The engine writes a new metadata file. It adds the new snapshot, points the current snapshot at it, and keeps the older snapshots in the list. A REST catalog works another way: the engine sends the changes, and the catalog server writes this file into your storage ([Commit Through a REST Catalog](#rest-commit)).
+The engine writes a new metadata file. It adds the new snapshot, points the current snapshot at it, and keeps the older snapshots in the list. A REST catalog works another way: the engine sends the changes, and the catalog server writes this file into your storage ([Commit Through a REST Catalog](#commit-through-a-rest-catalog-rest-commit)).
 
 #### Catalog Swaps the Pointer {#write-commit-swap}
 
@@ -383,7 +383,7 @@ Iceberg is a specification that engines implement. This branch shows what you ad
 
 > type: concept
 
-Because [Iceberg is only a specification](#iceberg-is-a-spec), a working setup has three parts. The library is code inside an engine. The catalog stores one pointer per table. Object storage holds the data files and the metadata files.
+Because [Iceberg is only a specification](#iceberg-is-only-a-specification-iceberg-is-a-spec), a working setup has three parts. The library is code inside an engine. The catalog stores one pointer per table. Object storage holds the data files and the metadata files.
 
 ![Diagram of the three Iceberg parts: the Iceberg client library inside the engine asks the catalog for the pointer and reads and writes files in object storage](iceberg-d2-diagram/engine-catalog-storage.d2.svg)
 
@@ -393,7 +393,7 @@ The library ships as a JAR (Java archive) file or a Python package. Some engines
 
 > type: concept
 
-The library is Iceberg's code inside the engine process. [Engine Role](#engine-role) explains what it does. Each engine loads it in its own way:
+The library is Iceberg's code inside the engine process. [Engine Role](#engine-role-engine-role) explains what it does. Each engine loads it in its own way:
 
 - Snowflake: the engine includes Iceberg support ([Metadata and retention](https://docs.snowflake.com/en/user-guide/tables-iceberg-metadata)).
 - Spark: add the `iceberg-spark-runtime` JAR with `--packages`, or put it in Spark's `jars` folder. Match the JAR to your Spark version ([Spark getting started](https://iceberg.apache.org/docs/latest/spark-getting-started/)).
@@ -435,7 +435,7 @@ In SQL, `rest_prod.db.table` then names a table in that catalog.
 
 > type: concept
 
-A catalog can be a table in a database, a service that a vendor runs, or a REST catalog server that you run. With a vendor-run catalog, such as AWS Glue or Snowflake, the vendor runs the process. [Common Catalogs](#common-catalogs) lists the names.
+A catalog can be a table in a database, a service that a vendor runs, or a REST catalog server that you run. With a vendor-run catalog, such as AWS Glue or Snowflake, the vendor runs the process. [Common Catalogs](#common-catalogs-common-catalogs) lists the names.
 
 #### JDBC Catalog {#jdbc-catalog}
 
@@ -443,7 +443,7 @@ A catalog can be a table in a database, a service that a vendor runs, or a REST 
 
 The simplest catalog is one table in a relational database. In the Iceberg code, the JDBC (Java Database Connectivity) catalog calls it `iceberg_tables`. Each Iceberg table has one row, and the column `metadata_location` holds the path of its current metadata file.
 
-A commit is one SQL statement. Shortened, it reads `UPDATE iceberg_tables SET metadata_location = <new path> WHERE table_name = <table> AND metadata_location = <old path>`. The writer remembers the old path from when it started. If another writer committed first, no row matches, and the commit fails. This is the [pointer swap](#write-commit-swap) in real code ([SQL text](https://github.com/apache/iceberg/blob/4616acf/core/src/main/java/org/apache/iceberg/jdbc/JdbcUtil.java#L61-L92), [failure check](https://github.com/apache/iceberg/blob/4616acf/core/src/main/java/org/apache/iceberg/jdbc/JdbcTableOperations.java#L160-L165)).
+A commit is one SQL statement. Shortened, it reads `UPDATE iceberg_tables SET metadata_location = <new path> WHERE table_name = <table> AND metadata_location = <old path>`. The writer remembers the old path from when it started. If another writer committed first, no row matches, and the commit fails. This is the [pointer swap](#catalog-swaps-the-pointer-write-commit-swap) in real code ([SQL text](https://github.com/apache/iceberg/blob/4616acf/core/src/main/java/org/apache/iceberg/jdbc/JdbcUtil.java#L61-L92), [failure check](https://github.com/apache/iceberg/blob/4616acf/core/src/main/java/org/apache/iceberg/jdbc/JdbcTableOperations.java#L160-L165)).
 
 #### REST Catalog Server {#rest-catalog-server}
 
