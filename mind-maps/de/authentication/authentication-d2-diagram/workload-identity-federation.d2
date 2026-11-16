@@ -1,0 +1,84 @@
+# A pod trades the signed token that Kubernetes gives it for a Snowflake session, with no stored secret.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+direction: down
+
+classes: {
+  box: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#1E293B"
+    }
+  }
+  store: {
+    style: {
+      fill: "#E0F2FE"
+      stroke: "#0369A1"
+      stroke-width: 2
+      font-color: "#1E293B"
+    }
+  }
+  actor: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      font-color: "#1E293B"
+    }
+  }
+  external: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      stroke-dash: 4
+      border-radius: 8
+      font-color: "#1E293B"
+    }
+  }
+  zone: {
+    style: {
+      fill: "#F1F5F9"
+      stroke: "#CBD5E1"
+      border-radius: 12
+      font-color: "#334155"
+    }
+  }
+  zone_alt: {
+    style: {
+      fill: "#EEF2FF"
+      stroke: "#C7D2FE"
+      border-radius: 12
+      font-color: "#334155"
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#64748B"
+      stroke-width: 2
+      font-color: "#334155"
+    }
+  }
+}
+
+token_flow: "Workload identity federation" {
+  shape: sequence_diagram
+  pod: "Pod\n(workload)" {class: box}
+  sf: "Snowflake" {class: box}
+  k8s: "Kubernetes\n(token issuer)" {class: box}
+
+  k8s -> pod: "1. signed token in a file" {class: flow}
+  pod -> sf: "2. connect with the token\nauthenticator=WORKLOAD_IDENTITY" {class: flow}
+  sf <-> k8s: "3. fetch discovery document\nand jwks_uri keys" {class: flow}
+  sf -> sf: "4. check signature,\nexpiry, iss and sub" {class: flow}
+  sf -> pod: "5. session as the service user" {class: flow}
+}
