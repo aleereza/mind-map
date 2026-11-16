@@ -344,7 +344,7 @@ Apache Spark and Apache Flink are the usual writers, and Flink covers streaming 
 
 > type: category
 
-Iceberg is a specification that engines implement. This branch shows what you add to an engine, what you run, and what a vendor can run for you.
+Iceberg is a specification that engines implement. This branch shows what you add to an engine, what you run, and what a vendor can run for you. The [Iceberg in Snowflake map](../snowflake/iceberg/snowflake-iceberg.md) covers what is specific to Snowflake.
 
 ### Three Parts You Deploy {#three-parts-you-deploy}
 
@@ -429,23 +429,3 @@ At commit, the engine sends its changes and the conditions they need. For exampl
 > type: warning
 
 The Iceberg repository includes a REST server and the Docker image `apache/iceberg-rest-fixture`. Its [README](https://github.com/apache/iceberg/blob/4616acf/docker/iceberg-rest-fixture/README.md#L20-L48) calls the server a test fixture. As of November 2026, it keeps its catalog in a SQLite file under `/tmp` unless you set another backend. The [Spark quickstart](https://iceberg.apache.org/spark-quickstart/) uses it for a local trial. For real use, choose a catalog product such as Snowflake Open Catalog or Polaris.
-
-### Iceberg in Snowflake {#iceberg-in-snowflake}
-
-> type: concept
-
-Snowflake runs the engine, and the engine includes Iceberg support. You create each Iceberg table with `CREATE ICEBERG TABLE`, and the command names the catalog. There are two cases ([Iceberg tables overview](https://docs.snowflake.com/en/user-guide/tables-iceberg)).
-
-#### Snowflake as the Catalog {#snowflake-as-catalog}
-
-> type: concept
-
-> edge.contrasts: snowflake-external-catalog
-
-With `CATALOG = 'SNOWFLAKE'`, Snowflake is the catalog. The files need storage: Snowflake-managed storage, or an external volume, which is a Snowflake object that points to your bucket. Snowflake generates the Iceberg metadata files for version 2 or 3 of the specification and writes them to the external volume. It does this on a periodic basis with the function `SYSTEM$GET_ICEBERG_TABLE_INFORMATION`, and you can run that function on demand ([Metadata and retention](https://docs.snowflake.com/en/user-guide/tables-iceberg-metadata)). Snowflake handles all lifecycle maintenance for these tables, such as compaction ([CREATE ICEBERG TABLE](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-snowflake)).
-
-#### External Catalog in Snowflake {#snowflake-external-catalog}
-
-> type: concept
-
-With an external catalog, such as AWS Glue or an Iceberg REST catalog, you create a [catalog integration](#catalog-settings-snowflake). Storage access comes from an external volume, or from credentials that the catalog vends. For a REST catalog, a table then names the integration and its table in the catalog: `CREATE ICEBERG TABLE my_table EXTERNAL_VOLUME = '<volume>' CATALOG = '<integration>' CATALOG_TABLE_NAME = '<table>'` ([CREATE ICEBERG TABLE reference](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-rest)). The owner of the external catalog is responsible for table maintenance, such as compaction ([Iceberg tables overview](https://docs.snowflake.com/en/user-guide/tables-iceberg)).
