@@ -1,0 +1,93 @@
+# Stage 1: the camera and the readers all send their requests to one broker with a fixed address.
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    pad: 24
+  }
+}
+
+style.fill: "#FAF8F4"
+
+classes: {
+  producer: {
+    style: {
+      fill: "#E4EDE5"
+      stroke: "#86A68E"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2F4A38"
+    }
+  }
+  kafka: {
+    style: {
+      fill: "#E4E8F1"
+      stroke: "#8593B4"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2E3A57"
+    }
+  }
+  consumer: {
+    style: {
+      fill: "#F3E8DF"
+      stroke: "#C29C84"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5B3B29"
+    }
+  }
+  highlight: {
+    style: {
+      fill: "#F4E4B8"
+      stroke: "#C7A24A"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5A4614"
+    }
+  }
+  quiet: {
+    style: {
+      fill: "#F1F0EC"
+      stroke: "#BDB8AE"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#55524B"
+    }
+  }
+  zone: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#D5D1C8"
+      stroke-width: 2
+      border-radius: 12
+      font-color: "#3D3B36"
+    }
+  }
+  note: {
+    shape: text
+    style: {
+      font-color: "#5F5B53"
+      font-size: 15
+      bold: false
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#7D8698"
+      stroke-width: 2
+      font-color: "#4F5664"
+    }
+  }
+}
+
+direction: right
+
+camera: "Camera (P)\nProducer" {class: producer}
+broker: "Broker (B)\nFixed address" {class: kafka}
+player: "Player\nConsumer" {class: consumer}
+recorder: "Recorder\nConsumer" {class: consumer}
+
+camera -> broker: "store chunk 57" {class: flow}
+broker <- player: "chunks after 56?" {class: flow}
+broker <- recorder: "chunks after 40?" {class: flow}

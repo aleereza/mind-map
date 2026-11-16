@@ -1,0 +1,509 @@
+# The whole video example in one picture: cameras produce, the Kafka cluster stores, consumer groups read.
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    pad: 28
+  }
+}
+
+style.fill: "#FAF8F4"
+
+classes: {
+  title: {
+    shape: text
+    style: {
+      font-size: 36
+      bold: true
+      font-color: "#2B2F36"
+    }
+  }
+  subtitle: {
+    shape: text
+    style: {
+      font-size: 21
+      bold: false
+      font-color: "#5F5B53"
+    }
+  }
+  band: {
+    style: {
+      fill: transparent
+      stroke-width: 0
+    }
+  }
+  gap: {
+    style: {
+      opacity: 0
+    }
+  }
+  lane_p: {
+    style: {
+      fill: "#EEF3EE"
+      stroke: "#A9C1AF"
+      stroke-width: 2
+      border-radius: 14
+      font-size: 26
+      bold: true
+      font-color: "#2F4A38"
+    }
+  }
+  lane_k: {
+    style: {
+      fill: "#EDF0F6"
+      stroke: "#A5B0CB"
+      stroke-width: 2
+      border-radius: 14
+      font-size: 26
+      bold: true
+      font-color: "#2E3A57"
+    }
+  }
+  lane_c: {
+    style: {
+      fill: "#F7EFE8"
+      stroke: "#D1B29D"
+      stroke-width: 2
+      border-radius: 14
+      font-size: 26
+      bold: true
+      font-color: "#5B3B29"
+    }
+  }
+  lane_h: {
+    style: {
+      fill: "#FAF3E1"
+      stroke: "#D6BE7E"
+      stroke-width: 2
+      border-radius: 14
+      font-size: 24
+      bold: true
+      font-color: "#5A4614"
+    }
+  }
+  lane_t: {
+    style: {
+      fill: "#F1EEF5"
+      stroke: "#B5A9C9"
+      stroke-width: 2
+      border-radius: 14
+      font-size: 24
+      bold: true
+      font-color: "#463A5C"
+    }
+  }
+  card_p: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#A9C1AF"
+      stroke-width: 2
+      border-radius: 10
+      font-size: 21
+      bold: true
+      font-color: "#2F4A38"
+    }
+  }
+  card_k: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#A5B0CB"
+      stroke-width: 2
+      border-radius: 10
+      font-size: 21
+      bold: true
+      font-color: "#2E3A57"
+    }
+  }
+  card_c: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#D1B29D"
+      stroke-width: 2
+      border-radius: 10
+      font-size: 21
+      bold: true
+      font-color: "#5B3B29"
+    }
+  }
+  chip_p: {
+    style: {
+      fill: "#E4EDE5"
+      stroke-width: 0
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#2F4A38"
+    }
+  }
+  chip_k: {
+    style: {
+      fill: "#E4E8F1"
+      stroke-width: 0
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#2E3A57"
+    }
+  }
+  chip_c: {
+    style: {
+      fill: "#F3E8DF"
+      stroke-width: 0
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#5B3B29"
+    }
+  }
+  chip_h: {
+    style: {
+      fill: "#F4E4B8"
+      stroke-width: 0
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#5A4614"
+    }
+  }
+  chip_t: {
+    style: {
+      fill: "#E6E0EE"
+      stroke-width: 0
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#463A5C"
+    }
+  }
+  chip_q: {
+    style: {
+      fill: "#ECEAE4"
+      stroke-width: 0
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#55524B"
+    }
+  }
+  leader: {
+    style: {
+      fill: "#7F8DB0"
+      stroke-width: 0
+      border-radius: 8
+      font-size: 19
+      bold: true
+      font-color: "#FFFFFF"
+    }
+  }
+  follower: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#8593B4"
+      stroke-width: 2
+      stroke-dash: 3
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#2E3A57"
+    }
+  }
+  next_slot: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#8593B4"
+      stroke-width: 2
+      stroke-dash: 4
+      border-radius: 8
+      font-size: 19
+      bold: false
+      font-color: "#6B7796"
+    }
+  }
+  note: {
+    shape: text
+    style: {
+      font-size: 19
+      bold: false
+      font-color: "#5F5B53"
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#7D8698"
+      stroke-width: 3
+      font-size: 20
+      font-color: "#4F5664"
+    }
+  }
+}
+
+grid-rows: 4
+vertical-gap: 22
+
+header: "" {
+  class: band
+  grid-rows: 2
+  grid-gap: 4
+  title: "Video streaming with Kafka: every word from the story in one picture" {class: title}
+  subtitle: "200 cameras push video chunks. Readers pull them at their own speed. Arrows point from the side that sends the request." {class: subtitle}
+}
+
+main: "" {
+  class: band
+  grid-rows: 1
+  grid-columns: 5
+  grid-gap: 0
+  producers: "Producers push" {
+    class: lane_p
+    grid-columns: 1
+    grid-gap: 10
+    cam7: "Camera cam-7" {
+      class: card_p
+      grid-columns: 1
+      grid-gap: 8
+      record: "Record" {
+        class: card_p
+        grid-rows: 2
+        grid-columns: 2
+        grid-gap: 6
+        key: "key: cam-7" {class: chip_h; width: 112; height: 40}
+        value: "value: chunk bytes" {class: chip_p; width: 194; height: 40}
+        ts: "timestamp" {class: chip_p; width: 112; height: 40}
+        headers: "headers: codec=h264" {class: chip_p; width: 194; height: 40}
+      }
+      client: "Kafka client" {
+        class: card_p
+        grid-columns: 1
+        grid-gap: 6
+        ser: "serializer: key, value → bytes" {class: chip_p; width: 312; height: 40}
+        hash: "hash(key) → partition 1" {class: chip_h; width: 312; height: 40}
+        batch: "batch + compression" {class: chip_p; width: 312; height: 40}
+        idem: "idempotent producer:\nproducer ID + sequence numbers" {class: chip_p; width: 312; height: 60}
+        acks: "acks=all: OK when all ISR have it" {class: chip_p; width: 312; height: 40}
+      }
+    }
+    more: "cam-1 … cam-200\n199 more producers" {class: card_p; width: 330; height: 64; style.multiple: true}
+    source: "Source connector" {
+      class: card_p
+      grid-columns: 1
+      grid-gap: 6
+      db: "Kafka Connect reads database\nchanges into a topic" {class: chip_p; width: 328; height: 60}
+    }
+  }
+  s1: "" {class: gap; width: 56; height: 10}
+  cluster: "Kafka cluster" {
+    class: lane_k
+    grid-columns: 1
+    grid-gap: 10
+    entry: "" {
+      class: band
+      grid-rows: 1
+      grid-columns: 3
+      grid-gap: 0
+      boot: "bootstrap server: first door\nmetadata: which broker leads\neach partition" {class: chip_k; width: 297; height: 80}
+      s1: "" {class: gap; width: 10; height: 10}
+      ctrl: "controllers (KRaft): keep\nmetadata, choose leaders\nolder Kafka: ZooKeeper" {class: chip_k; width: 297; height: 80}
+    }
+    brokers: "" {
+      class: band
+      grid-rows: 1
+      grid-columns: 5
+      grid-gap: 0
+      b1: "Broker 1" {
+        class: card_k
+        grid-columns: 1
+        grid-gap: 6
+        p0: "p0 leader" {class: leader; width: 182; height: 40}
+        p1: "p1 follower" {class: follower; width: 182; height: 40}
+        p2: "p2 follower" {class: follower; width: 182; height: 40}
+      }
+      s1: "" {class: gap; width: 11; height: 10}
+      b2: "Broker 2" {
+        class: card_k
+        grid-columns: 1
+        grid-gap: 6
+        p0: "p0 follower" {class: follower; width: 182; height: 40}
+        p1: "p1 leader" {class: leader; width: 182; height: 40}
+        p2: "p2 follower" {class: follower; width: 182; height: 40}
+      }
+      s2: "" {class: gap; width: 11; height: 10}
+      b3: "Broker 3" {
+        class: card_k
+        grid-columns: 1
+        grid-gap: 6
+        p0: "p0 follower" {class: follower; width: 182; height: 40}
+        p1: "p1 follower" {class: follower; width: 182; height: 40}
+        p2: "p2 leader" {class: leader; width: 182; height: 40}
+      }
+    }
+    facts: "" {
+      class: band
+      grid-rows: 3
+      grid-columns: 3
+      grid-gap: 0
+      rf: "replication factor 3:\n1 leader + 2 follower replicas" {class: chip_k; width: 297; height: 60}
+      s1: "" {class: gap; width: 10; height: 10}
+      isr: "followers fetch from the leader\nup-to-date replicas = ISR" {class: chip_k; width: 297; height: 60}
+      r1: "" {class: gap; width: 297; height: 10}
+      r2: "" {class: gap; width: 10; height: 10}
+      r3: "" {class: gap; width: 297; height: 10}
+      min: "min.insync.replicas=2:\na write needs 2 copies" {class: chip_k; width: 297; height: 60}
+      s2: "" {class: gap; width: 10; height: 10}
+      gc: "group coordinator (a broker):\nheartbeats and rebalances" {class: chip_h; width: 297; height: 60}
+    }
+    topics: "Topics: one named log for each kind of data" {
+      class: card_k
+      grid-rows: 3
+      grid-columns: 2
+      grid-gap: 6
+      vc: "video-chunks\n20 partitions: p0 … p19" {class: chip_k; width: 293; height: 60}
+      ma: "motion-alerts\nwritten in transactions" {class: chip_k; width: 293; height: 60}
+      sr: "sensor-readings\nanother kind of data" {class: chip_k; width: 293; height: 60}
+      cs: "camera-status\ncompacted topic" {class: chip_k; width: 293; height: 60}
+      co: "__consumer_offsets\ncommitted offsets" {class: chip_k; width: 293; height: 60}
+      cl: "changelog topic\nKafka Streams state" {class: chip_k; width: 293; height: 60}
+    }
+  }
+  s2: "" {class: gap; width: 56; height: 10}
+  consumers: "Consumers pull" {
+    class: lane_c
+    grid-columns: 1
+    grid-gap: 10
+    motion: "Consumer group motion-detector" {
+      class: card_c
+      grid-columns: 1
+      grid-gap: 6
+      gid: "group.id = motion-detector" {class: chip_c; width: 318; height: 40}
+      members: "10 members, 2 partitions each" {
+        class: band
+        style.font-size: 19
+        style.bold: false
+        style.font-color: "#5B3B29"
+        grid-rows: 1
+        grid-columns: 10
+        grid-gap: 3
+        m1: "1" {class: chip_c; width: 28; height: 40}
+        m2: "2" {class: chip_c; width: 28; height: 40}
+        m3: "3" {class: chip_c; width: 28; height: 40}
+        m4: "4" {class: chip_c; width: 28; height: 40}
+        m5: "5" {class: chip_c; width: 28; height: 40}
+        m6: "6" {class: chip_c; width: 28; height: 40}
+        m7: "7" {class: chip_c; width: 28; height: 40}
+        m8: "8" {class: chip_c; width: 28; height: 40}
+        m9: "9" {class: chip_c; width: 28; height: 40}
+        m10: "10" {class: chip_c; width: 28; height: 40}
+      }
+      streams: "Kafka Streams app:\nvideo-chunks → motion-alerts" {class: chip_c; width: 318; height: 60}
+    }
+    recorder: "Consumer group recorder" {
+      class: card_c
+      grid-columns: 1
+      grid-gap: 6
+      one: "1 member reads all 20 partitions" {class: chip_c; width: 318; height: 40}
+    }
+    players: "Consumer group players" {
+      class: card_c
+      grid-columns: 1
+      grid-gap: 6
+      cam7: "player for cam-7 → partition 1" {class: chip_c; width: 318; height: 40}
+    }
+    sink: "Sink connector" {
+      class: card_c
+      grid-columns: 1
+      grid-gap: 6
+      s3: "Kafka Connect writes a topic\nto S3 or Snowflake" {class: chip_c; width: 318; height: 60}
+    }
+    client: "Kafka client: fetch with long polling\n(waits up to 500 ms), deserializer" {class: chip_c; width: 330; height: 60}
+    rule: "Inside a group, members share the\npartitions, like a queue. Each group\ngets the full stream, like pub/sub." {class: chip_q; width: 330; height: 80}
+  }
+}
+
+main.producers -> main.cluster: "push" {class: flow}
+main.consumers -> main.cluster: "pull" {class: flow}
+
+log: "Inside partition 1 of video-chunks: an append-only log on broker 2's disk" {
+  class: lane_k
+  grid-columns: 1
+  grid-gap: 10
+  segments: "" {
+    class: band
+    grid-rows: 1
+    grid-columns: 3
+    grid-gap: 0
+    old: "Older segment" {
+      class: card_k
+      grid-rows: 1
+      grid-columns: 4
+      grid-gap: 4
+      o0: "0" {class: chip_q; width: 70; height: 40}
+      o1: "1" {class: chip_q; width: 70; height: 40}
+      gap: "…" {class: chip_q; width: 70; height: 40}
+      o999: "999" {class: chip_q; width: 70; height: 40}
+    }
+    s1: "" {class: gap; width: 12; height: 10}
+    active: "Active segment: records, numbered by offset" {
+      class: card_k
+      grid-rows: 1
+      grid-columns: 8
+      grid-gap: 4
+      o1000: "1,000" {class: chip_k; width: 134; height: 40}
+      o1001: "1,001" {class: chip_k; width: 134; height: 40}
+      gap1: "…" {class: chip_q; width: 134; height: 40}
+      o1207: "1,207" {class: chip_h; width: 134; height: 40}
+      gap2: "…" {class: chip_q; width: 134; height: 40}
+      o1498: "1,498" {class: chip_k; width: 134; height: 40}
+      o1499: "1,499" {class: chip_k; width: 134; height: 40}
+      o1500: "1,500: next" {class: next_slot; width: 140; height: 40}
+    }
+  }
+  marks: "" {
+    class: band
+    grid-rows: 1
+    grid-columns: 7
+    grid-gap: 0
+    retention: "retention 7 days: then delete the\nsegment, or tiered storage in S3" {class: chip_q; width: 349; height: 60}
+    s1: "" {class: gap; width: 10; height: 10}
+    recorder: "motion-detector: committed\noffset 1,207 (a commit saves it)" {class: chip_h; width: 349; height: 60}
+    s2: "" {class: gap; width: 10; height: 10}
+    lag: "consumer lag = 1,500 − 1,207\n= 293 chunks, about 10 minutes" {class: chip_h; width: 349; height: 60}
+    s3: "" {class: gap; width: 10; height: 10}
+    player: "player: position 1,500\ncaught up, long polling" {class: chip_c; width: 349; height: 60}
+  }
+  notes: "" {
+    class: band
+    grid-rows: 1
+    grid-columns: 3
+    grid-gap: 0
+    reset: "Reading never deletes a record. auto.offset.reset (earliest or\nlatest) decides where to start if a bookmark points at deleted data." {class: chip_q; width: 708; height: 60}
+    s1: "" {class: gap; width: 10; height: 10}
+    compact: "log compaction (camera-status): keep the latest record for each\nkey, and delete older records that have the same key." {class: chip_q; width: 708; height: 60}
+  }
+}
+
+footer: "" {
+  class: band
+  grid-rows: 1
+  grid-columns: 3
+  grid-gap: 0
+  delivery: "Delivery guarantees" {
+    class: lane_h
+    grid-rows: 3
+    grid-columns: 2
+    grid-gap: 6
+    acks: "acks = 0, 1 or all\n(default: all)" {class: chip_h; width: 347; height: 60}
+    idem: "idempotent producer:\nretries add no duplicates" {class: chip_h; width: 348; height: 60}
+    amo: "at-most-once:\ncommit, then process" {class: chip_h; width: 347; height: 60}
+    alo: "at-least-once:\nprocess, then commit" {class: chip_h; width: 348; height: 60}
+    tx: "transaction: write the output and\ncommit the input as one step" {class: chip_h; width: 347; height: 60}
+    rc: "isolation.level=read_committed\n→ exactly-once inside Kafka" {class: chip_h; width: 348; height: 60}
+  }
+  s1: "" {class: gap; width: 20; height: 10}
+  tools: "Tools around the core" {
+    class: lane_t
+    grid-columns: 1
+    grid-gap: 6
+    registry: "Schema Registry: stores each record format (Avro, Protobuf,\nJSON Schema) and refuses breaking changes. Aiven: Karapace." {class: chip_t; width: 701; height: 60}
+    connect: "Kafka Connect: ready-made connectors. A source connector\nwrites to a topic, and a sink connector reads from one." {class: chip_t; width: 701; height: 60}
+    streams: "Kafka Streams: read, compute, write, and keep state in a\nchangelog topic. ksqlDB and Flink do similar work." {class: chip_t; width: 701; height: 60}
+  }
+}

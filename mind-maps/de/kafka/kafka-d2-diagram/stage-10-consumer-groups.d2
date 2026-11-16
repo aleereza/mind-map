@@ -1,0 +1,145 @@
+# Stage 10: two consumer groups read the same 20 partitions; inside a group, the members share them.
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    pad: 24
+  }
+}
+
+style.fill: "#FAF8F4"
+
+classes: {
+  producer: {
+    style: {
+      fill: "#E4EDE5"
+      stroke: "#86A68E"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2F4A38"
+    }
+  }
+  kafka: {
+    style: {
+      fill: "#E4E8F1"
+      stroke: "#8593B4"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2E3A57"
+    }
+  }
+  consumer: {
+    style: {
+      fill: "#F3E8DF"
+      stroke: "#C29C84"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5B3B29"
+    }
+  }
+  highlight: {
+    style: {
+      fill: "#F4E4B8"
+      stroke: "#C7A24A"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5A4614"
+    }
+  }
+  quiet: {
+    style: {
+      fill: "#F1F0EC"
+      stroke: "#BDB8AE"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#55524B"
+    }
+  }
+  zone: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#D5D1C8"
+      stroke-width: 2
+      border-radius: 12
+      font-color: "#3D3B36"
+    }
+  }
+  note: {
+    shape: text
+    style: {
+      font-color: "#5F5B53"
+      font-size: 15
+      bold: false
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#7D8698"
+      stroke-width: 2
+      font-color: "#4F5664"
+    }
+  }
+}
+
+grid-rows: 4
+grid-gap: 18
+
+topic: "Topic video-chunks: 20 partitions" {
+  class: zone
+  style.font-size: 18
+  grid-columns: 20
+  grid-gap: 6
+  p0: "0" {class: kafka; width: 38; height: 44}
+  p1: "1" {class: kafka; width: 38; height: 44}
+  p2: "2" {class: kafka; width: 38; height: 44}
+  p3: "3" {class: kafka; width: 38; height: 44}
+  p4: "4" {class: kafka; width: 38; height: 44}
+  p5: "5" {class: kafka; width: 38; height: 44}
+  p6: "6" {class: kafka; width: 38; height: 44}
+  p7: "7" {class: kafka; width: 38; height: 44}
+  p8: "8" {class: kafka; width: 38; height: 44}
+  p9: "9" {class: kafka; width: 38; height: 44}
+  p10: "10" {class: kafka; width: 38; height: 44}
+  p11: "11" {class: kafka; width: 38; height: 44}
+  p12: "12" {class: kafka; width: 38; height: 44}
+  p13: "13" {class: kafka; width: 38; height: 44}
+  p14: "14" {class: kafka; width: 38; height: 44}
+  p15: "15" {class: kafka; width: 38; height: 44}
+  p16: "16" {class: kafka; width: 38; height: 44}
+  p17: "17" {class: kafka; width: 38; height: 44}
+  p18: "18" {class: kafka; width: 38; height: 44}
+  p19: "19" {class: kafka; width: 38; height: 44}
+}
+
+motion: "Group motion-detector: 10 members, 2 partitions each" {
+  class: zone
+  style.font-size: 18
+  grid-columns: 10
+  grid-gap: 6
+  m1: "Member 1" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m2: "Member 2" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m3: "Member 3" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m4: "Member 4" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m5: "Member 5" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m6: "Member 6" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m7: "Member 7" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m8: "Member 8" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m9: "Member 9" {class: consumer; width: 82; height: 52; style.font-size: 14}
+  m10: "Member 10" {class: consumer; width: 82; height: 52; style.font-size: 14}
+}
+
+recorder: "Group recorder: 1 member" {
+  class: zone
+  style.font-size: 18
+  grid-columns: 1
+  grid-gap: 6
+  all: "One member reads all 20 partitions" {class: consumer; width: 874; height: 52}
+}
+
+players: "Group players" {
+  class: zone
+  style.font-size: 18
+  grid-columns: 1
+  grid-gap: 6
+  more: "…" {class: consumer; width: 874; height: 52}
+}

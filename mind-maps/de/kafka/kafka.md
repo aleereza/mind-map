@@ -22,24 +22,6 @@ Kafka provides a durable, shared event log between systems, so producers and con
 
 > type: category
 
-##### Sensor {#sensor}
-
-> type: concept
-
-A measurement component that observes one physical property, such as temperature, pressure, or vibration. A sensor may be too simple to communicate with Kafka, and multiple sensors can send independent data streams to the same edge device.
-
-##### Edge Device {#edge-device}
-
-> type: concept
-
-A local computing device near the sensors, such as an industrial PC, PLC, embedded controller, or gateway appliance. It receives streams from multiple sensors and provides compute, temporary buffering, local processing, and network connectivity for sending selected data upstream.
-
-##### Gateway Application {#gateway-application}
-
-> type: concept
-
-Software running on the edge device that collects sensor streams, translates local device protocols, and can validate, normalize, filter, batch, or aggregate readings before publishing them. It is often the producer in an IoT setup.
-
 ##### Producer {#producer}
 
 > type: concept
@@ -141,6 +123,263 @@ AWS's managed Apache Kafka service. AWS provisions and operates the compute, sto
 > type: concept
 
 Google Cloud's managed service for open-source Apache Kafka. It automates broker provisioning, sizing, storage, partition rebalancing, infrastructure maintenance, security integration, monitoring, and logging.
+
+## Let's Invent Kafka from First Principles {#invent-kafka}
+
+> type: procedure
+
+You already found the first Kafka idea yourself: C remembers where it is. Below, each stage starts with a problem. Then we invent a fix and give it its Kafka name.
+
+**The example.** P is a camera at a site gate. Every 2 seconds it makes one video chunk of about 500 KB: chunk 0, 1, 2, and so on. That is 43,200 chunks a day, about 21.6 GB. C is a video player in an office.
+
+(A note before we start: real video sites send video through CDNs (content delivery networks), not through Kafka. Kafka's default maximum record size is about 1 MB. But the mechanics are the same for any stream of records, so the example still works.)
+
+### Stage 0: P and C talk directly over TCP {#stage-0-direct-tcp}
+
+> type: step
+> edge.next: stage-1-machine-in-the-middle
+
+![Sequence diagram: the player opens a TCP connection to the camera, asks for chunk 7, gets it, remembers next = 8, and asks for chunk 8](kafka-d2-diagram/stage-0-direct-tcp.d2.svg)
+
+One small correction to your picture. In TCP, one side waits for connections and the other side connects. If C asks in a loop, C connects to P, so **C needs P's address**. If P pushed the chunks, P would need C's address. Either way, one side must know where the other one is.
+
+TCP also numbers its bytes, with sequence numbers. But those numbers exist only inside one connection. Your chunk number survives a reconnect. That is the start of Kafka's **offset**.
+
+What goes wrong:
+1. **Both must be online.** C's laptop sleeps for 10 minutes, and P makes 300 chunks during that time. Either P stores them, or they are lost.
+2. **More readers.** The security team adds a recorder, a motion detector and 3 more players. P now serves 5 connections, each at a different position.
+3. **Speed.** Suppose P pushes and the motion detector is slow. TCP's buffers fill up, and P's send call waits. A slow reader stops the camera.
+4. **Failure.** If P's disk fails, the history is lost with it.
+
+Now P is a camera, a storage server and a delivery service. That is too many jobs for one machine.
+
+### Stage 1: Put a machine in the middle {#stage-1-machine-in-the-middle}
+
+> type: step
+> edge.next: stage-2-mailbox
+
+**Invention.** Add one machine B that is always on and has a fixed address. P sends each chunk to B. C asks B for chunks. P and C never talk to each other.
+
+![The camera sends chunk 57 to broker B, and the player and the recorder each ask B for the chunks after their own position](kafka-d2-diagram/stage-1-broker-in-the-middle.d2.svg)
+
+Both arrows point to B, and B never calls P or C. B also does not push chunks to readers. Each reader asks, so each reader controls its own speed. Kafka calls this **pull**.
+
+**Kafka words:** B is a **broker**, and its known address is a **bootstrap server**. P is a **producer**, and C is a **consumer**. The library inside P and C that talks to B is the **Kafka client**.
+
+Next question: how should B keep the chunks?
+
+### Stage 2: The mailbox, the pre-Kafka answer {#stage-2-mailbox}
+
+> type: step
+> edge.next: stage-3-numbered-log
+
+**First idea.** Classic message queues, such as RabbitMQ and ActiveMQ, worked like a mailbox. B gives a chunk to a reader, and the reader confirms it (an "ack"). Then B deletes the chunk.
+
+What goes wrong:
+- **Two readers.** The player takes chunk 57, so the recorder never gets it. The queue answer is one queue per reader. B puts each chunk into 5 queues and tracks each one.
+- **Late reader.** A highlights tool starts at noon and wants the morning's video. Those chunks are already deleted.
+- **Bugs.** The motion detector had a bug yesterday. You fix it and want to run it again on yesterday's video. That data is gone.
+- **Slow reader.** The recorder's queue grows to a million chunks. B tracks the state of each one and can slow down for everyone.
+
+### Stage 3: Keep everything, in order, and number it {#stage-3-numbered-log}
+
+> type: step
+> edge.next: stage-4-cheap-loop
+
+This is the key invention.
+
+**Invention.** B adds each chunk to the end of a file. B never changes a chunk. B also never deletes a chunk because someone read it. Each chunk gets a fixed number, which is its position in the file. Each reader keeps its own bookmark, and B does not track who read what.
+
+![A log of numbered chunks: the camera appends at offset 58, and the recorder, the player and the motion detector point at their next offsets 40, 57 and 58](kafka-d2-diagram/stage-3-log-and-bookmarks.d2.svg)
+
+**Kafka words:** the file is a **log**. One entry is a **record**, and its number is its **offset**. A reader's bookmark is its **position**.
+
+What this solves:
+- One copy serves any number of readers.
+- A late reader can start at offset 0.
+- To replay, a reader moves its bookmark back.
+- A slow reader only falls behind, and no other reader notices.
+
+### Stage 4: Make the loop cheap {#stage-4-cheap-loop}
+
+> type: step
+> edge.next: stage-5-disk-fills-up
+
+**Problem 1.** The motion detector is caught up. It asks "anything after 57?" and gets "no", thousands of times per second.
+
+**Invention.** B holds the request open until a new record arrives, or for up to 500 ms by default. Then it answers. This feels like push, but the reader still asks. **Kafka word:** **long polling**.
+
+**Problem 2.** For small records, such as sensor readings, sending one request per record wastes time.
+
+**Invention.** The producer puts many records into one request and often compresses them. The consumer gets many records in one answer. **Kafka words:** **batch**, **compression**.
+
+### Stage 5: The disk fills up {#stage-5-disk-fills-up}
+
+> type: step
+> edge.next: stage-6-kinds-of-data
+
+**Problem.** One camera writes 21.6 GB per day, and the log grows forever.
+
+**Invention.** Cut the log into files of, for example, 1 GB each, and keep 7 days of data. When the oldest file is more than 7 days old, delete the whole file. Deleting one file is cheap, and B never deletes single records.
+
+**Kafka words:** each file is a **segment**. The rule for what to keep is **retention**, set by time or by size. The default is 7 days.
+
+**Result.** Suppose a reader is away for longer than retention. Its bookmark then points at deleted data. The `auto.offset.reset` setting decides what it does next. It can start at the oldest record that is still kept (`earliest`) or at the end (`latest`).
+
+Newer Kafka versions can also move old segments to object storage, such as S3. This is **tiered storage**, and it makes long retention cheaper. Your doc mentions it in the Aiven node.
+
+### Stage 6: Different kinds of data {#stage-6-kinds-of-data}
+
+> type: step
+> edge.next: stage-7-too-much-for-one-machine
+
+**Problem.** B now also stores sensor readings and motion alerts in the same log. To find a few alerts, the alert screen must read through gigabytes of video.
+
+**Invention.** Keep one separate, named log for each kind of data: `video-chunks`, `motion-alerts` and `sensor-readings`. A reader asks for a log by name.
+
+**Kafka word:** **topic**. As we discussed, a topic is a place, not a tag.
+
+### Stage 7: Too much for one machine {#stage-7-too-much-for-one-machine}
+
+> type: step
+> edge.next: stage-8-latest-value-matters
+
+**Problem.** Now 200 cameras write to `video-chunks`. That is about 4.3 TB per day. One disk on one broker cannot write or store that much, and one reader cannot process it.
+
+**Invention 1.** Split the topic into many independent logs, and put them on several brokers. Each small log has its own offsets, starting at 0. So the full address of a record is its topic, partition and offset. For example: `video-chunks`, partition 1, offset 1,207.
+
+**Kafka words:** each small log is a **partition**. The group of brokers is a **cluster**.
+
+**New problem: order.** The player for `cam-7` needs cam-7's chunks in order. If those chunks are spread over all partitions, nobody knows their order.
+
+**Invention 2.** Give each record a **key**, the camera ID `cam-7`. The producer hashes the key to choose the partition. So all of cam-7's chunks go to the same partition, in order.
+
+![Topic video-chunks split into three partitions on three brokers, with every cam-7 record in partition 1](kafka-d2-diagram/stage-7-partitions-and-keys.d2.svg)
+
+**Rule:** Kafka keeps order only inside one partition. The same key always goes to the same partition, so its records stay in order.
+
+**Small problem.** How does a camera know that broker 2 has partition 1? It asks any broker for a map. The map shows which brokers exist and which broker handles each partition. **Kafka word:** **metadata**. The bootstrap server is only the first door.
+
+Now a record has a clear shape. It has a **key** (`cam-7`), a **value** (the chunk bytes), a **timestamp** and optional **headers** (for example `codec=h264`). Kafka stores only bytes. The producer turns the key and value into bytes with a **serializer**, and the consumer turns them back with a **deserializer**.
+
+### Stage 8: Only the latest value matters {#stage-8-latest-value-matters}
+
+> type: step
+> edge.next: stage-9-broker-fails
+
+**Problem.** A `camera-status` topic gets "cam-7 online", "cam-7 offline", "cam-7 online", for years. A new dashboard needs only the current status of each camera. Also, time-based retention would delete the status of a camera that has not changed for 8 days.
+
+**Invention.** For this topic, keep at least the latest record for each key, and delete older records that have the same key. The topic now works like a table, with one row per camera.
+
+**Kafka words:** **log compaction**, and the topic is a **compacted topic**.
+
+### Stage 9: A broker fails {#stage-9-broker-fails}
+
+> type: step
+> edge.next: stage-10-reader-too-slow
+
+**Problem.** Broker 2's disk fails. Partition 1 is lost, together with cam-7's history, and cam-7 cannot write.
+
+**Invention.** Keep each partition on 3 brokers. One copy is the **leader**. It takes all writes and, by default, all reads. The other copies are **followers**. A follower copies the leader by asking it for new records, the same way a consumer does. Followers that are fully up to date are **in-sync replicas (ISR)**. If the leader fails, an in-sync follower becomes the new leader.
+
+![Partition 1 has its leader on broker 2: the camera produces to the leader, and the followers on brokers 1 and 3 fetch from it](kafka-d2-diagram/stage-9-replication.d2.svg)
+
+**The producer's question:** "When is my chunk safe?" The producer chooses a setting called **acks**:
+- `acks=0`: do not wait. This is fast, but you can lose data.
+- `acks=1`: wait until the leader has the chunk.
+- `acks=all`: wait until all in-sync replicas have it. This is the default.
+
+With `min.insync.replicas=2`, at least 2 copies exist before the producer gets "OK".
+
+Who chooses the new leader? A few **controller** nodes keep the cluster's metadata and choose leaders. Kafka 4 uses its built-in **KRaft** protocol for this. Older versions used ZooKeeper.
+
+**Kafka words:** **replication factor** (3 here), **leader**, **follower**, **ISR**, **acks**, **controller**.
+
+### Stage 10: One reader is too slow {#stage-10-reader-too-slow}
+
+> type: step
+> edge.next: stage-11-bookmark-storage
+
+**Problem.** The motion detector must check all 200 cameras live. One process can handle 20 cameras, so you run 10 copies. But if each copy reads everything, each chunk gets checked 10 times.
+
+**Invention.** The 10 copies share one name, `motion-detector`. Kafka gives each partition to exactly one copy in that group. With 20 partitions and 10 copies, each copy gets 2 partitions.
+
+![The 10 members of group motion-detector share the 20 partitions, two each, while the one member of group recorder reads all 20](kafka-d2-diagram/stage-10-consumer-groups.d2.svg)
+
+**Kafka words:** this is a **consumer group**, and its name is the `group.id`. One broker is the **group coordinator**, and members send it **heartbeats**. When a member fails or a new one joins, the coordinator moves partitions between members. This is a **rebalance**.
+
+Two rules follow from this:
+- Inside one group, the members **share** the work, like a queue.
+- Different groups each get **the full stream**, like publish/subscribe. The players, the recorder and the motion detector are three separate groups.
+
+Also, with 20 partitions, a group can use at most 20 members, and a 21st member gets nothing. The number of partitions sets the maximum parallel work.
+
+### Stage 11: Where does the bookmark live? {#stage-11-bookmark-storage}
+
+> type: step
+> edge.next: stage-12-crashes-and-retries
+
+**Problem.** Copy 4 crashes, and its partitions move to copy 5. Where should copy 5 start? Copy 4 kept the bookmark in its memory, and that memory is gone.
+
+**Invention.** Consumers save their bookmarks in Kafka, in an internal topic called `__consumer_offsets`. Copy 5 reads the last saved bookmark and continues from there.
+
+Note that the bookmarks are themselves a compacted log, with one key for each group, topic and partition. Kafka stores its own state with its own idea.
+
+**Kafka words:** **commit** (save the bookmark) and **committed offset**.
+
+**Consumer lag** comes directly from this. Lag is the last offset in the partition minus the group's committed offset. For example, the log ends at 1,500 and the group committed 1,207. The lag is 293 chunks, which is about 10 minutes of video. In production, lag is the first number to watch.
+
+### Stage 12: Crashes and retries {#stage-12-crashes-and-retries}
+
+> type: step
+> edge.next: stage-13-tools-around-the-core
+
+**Problem A, on the consumer side.** Copy 4 processed chunks 1,207 to 1,300, then crashed before it committed. Copy 5 starts again at 1,207, so those chunks get processed twice.
+- If you commit after processing, duplicates can occur. This is **at-least-once**.
+- If you commit before processing, you can lose data. This is **at-most-once**.
+
+**Problem B, on the producer side.** The camera sends chunk 57, and the leader stores it. But the "OK" is lost on the network, so the camera sends the chunk again. Now chunk 57 is in the log twice.
+- **Invention:** each producer gets an ID and numbers its batches. The broker drops any batch that it already has. This is the **idempotent producer**, and it is on by default.
+
+**Problem C, read-process-write.** The motion detector reads chunks and writes alerts to `motion-alerts`. After a crash, it can write the same alert twice.
+- **Invention:** write the alerts and commit the input bookmark as one all-or-nothing step. This is a **transaction**. Readers with `isolation.level=read_committed` see only finished transactions. Together, these give you **exactly-once** processing inside Kafka.
+
+### Stage 13: The tools around the core {#stage-13-tools-around-the-core}
+
+> type: step
+
+You do not need these for the core idea, but you will see them:
+- **Schema Registry.** Kafka stores only bytes. If the camera team changes the record format, the recorder breaks. A Schema Registry stores each version of the format (Avro, Protobuf or JSON Schema). It refuses a new version that would break readers. It is a separate service, not part of Apache Kafka, and Aiven's version is Karapace.
+- **Kafka Connect.** Many teams write the same "topic to S3" or "database to topic" program. Kafka Connect runs ready-made connectors instead. A **source connector** is a producer, for example one that reads database changes. A **sink connector** is a consumer, for example one that writes to S3 or Snowflake.
+- **Kafka Streams.** The motion detector follows a common pattern: read a topic, compute, write a topic, and keep some state. Kafka Streams is a library for this pattern. It backs up its state to a compacted **changelog topic**, so a new instance can rebuild the state by replaying that topic. ksqlDB and Apache Flink do similar work.
+
+### The whole story in one picture {#whole-story-picture}
+
+> type: concept
+
+![Infographic of the whole video example: cameras produce to a three-broker Kafka cluster, consumer groups read from it, with one partition's log, the delivery guarantees and the tools around Kafka](kafka-d2-diagram/whole-story-overview.d2.svg)
+
+### The whole story in one table {#whole-story-table}
+
+> type: concept
+
+| Problem | Invention | Kafka word |
+|---|---|---|
+| P and C must be online together and know each other | A machine in the middle with a known address | broker, bootstrap server |
+| If B pushes, a slow reader gets too much data | Readers ask at their own speed | pull |
+| Reading deletes the data | Append-only file, numbered entries, a bookmark for each reader | log, record, offset |
+| Caught-up readers ask in a busy loop | Hold the request until data arrives | long polling |
+| The disk fills up | Cut the log into files and delete old files | segment, retention |
+| Different kinds of data are mixed | One named log for each kind | topic |
+| Too much data for one machine | Many logs per topic, on many brokers | partition, cluster |
+| No order across partitions | Same key, same partition | key |
+| Only the latest value matters | Keep the latest record for each key | compaction |
+| A broker fails | Copies on other brokers | replica, leader, follower, ISR, acks, controller |
+| One reader is too slow | Share partitions between copies of the reader | consumer group, rebalance |
+| Bookmarks are lost when a process crashes | Save bookmarks in Kafka | commit, `__consumer_offsets`, lag |
+| Retries and crashes cause duplicates | Producer IDs, sequence numbers, all-or-nothing writes | idempotent producer, transactions |
+
+Last step: change "video chunk" to "sensor reading" and "camera" to "gateway". Then you have the setup that your `kafka.md` describes.
 
 ## Runtime Model {#runtime-model}
 

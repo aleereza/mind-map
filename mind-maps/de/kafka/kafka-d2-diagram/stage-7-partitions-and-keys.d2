@@ -1,0 +1,116 @@
+# Stage 7: the video-chunks topic split into three partitions on three brokers; key cam-7 always lands in partition 1.
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    pad: 24
+  }
+}
+
+style.fill: "#FAF8F4"
+
+classes: {
+  producer: {
+    style: {
+      fill: "#E4EDE5"
+      stroke: "#86A68E"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2F4A38"
+    }
+  }
+  kafka: {
+    style: {
+      fill: "#E4E8F1"
+      stroke: "#8593B4"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2E3A57"
+    }
+  }
+  consumer: {
+    style: {
+      fill: "#F3E8DF"
+      stroke: "#C29C84"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5B3B29"
+    }
+  }
+  highlight: {
+    style: {
+      fill: "#F4E4B8"
+      stroke: "#C7A24A"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5A4614"
+    }
+  }
+  quiet: {
+    style: {
+      fill: "#F1F0EC"
+      stroke: "#BDB8AE"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#55524B"
+    }
+  }
+  zone: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#D5D1C8"
+      stroke-width: 2
+      border-radius: 12
+      font-color: "#3D3B36"
+    }
+  }
+  note: {
+    shape: text
+    style: {
+      font-color: "#5F5B53"
+      font-size: 15
+      bold: false
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#7D8698"
+      stroke-width: 2
+      font-color: "#4F5664"
+    }
+  }
+}
+
+direction: down
+
+topic: "Topic video-chunks" {
+  class: zone
+  style.font-size: 20
+  grid-rows: 3
+  grid-columns: 6
+  grid-gap: 8
+  p0: "Partition 0\nOn broker 1" {class: kafka; width: 150; height: 64}
+  p0r0: "cam-2" {class: zone; width: 96; height: 64}
+  p0r1: "cam-9" {class: zone; width: 96; height: 64}
+  p0r2: "cam-2" {class: zone; width: 96; height: 64}
+  p0r3: "cam-9" {class: zone; width: 96; height: 64}
+  p0more: "…" {class: quiet; width: 56; height: 64}
+  p1: "Partition 1\nOn broker 2" {class: kafka; width: 150; height: 64}
+  p1r0: "cam-7" {class: highlight; width: 96; height: 64}
+  p1r1: "cam-4" {class: zone; width: 96; height: 64}
+  p1r2: "cam-7" {class: highlight; width: 96; height: 64}
+  p1r3: "cam-7" {class: highlight; width: 96; height: 64}
+  p1more: "…" {class: quiet; width: 56; height: 64}
+  p2: "Partition 2\nOn broker 3" {class: kafka; width: 150; height: 64}
+  p2r0: "cam-1" {class: zone; width: 96; height: 64}
+  p2r1: "cam-5" {class: zone; width: 96; height: 64}
+  p2r2: "cam-1" {class: zone; width: 96; height: 64}
+  p2r3: "cam-5" {class: zone; width: 96; height: 64}
+  p2more: "…" {class: quiet; width: 56; height: 64}
+}
+
+legend: "Key cam-7: always partition 1, always in order" {
+  class: highlight
+  near: bottom-center
+  style.bold: false
+}

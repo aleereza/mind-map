@@ -1,0 +1,133 @@
+# Stage 3: one append-only log of numbered chunks, with one bookmark for each reader.
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    pad: 24
+  }
+}
+
+style.fill: "#FAF8F4"
+
+classes: {
+  producer: {
+    style: {
+      fill: "#E4EDE5"
+      stroke: "#86A68E"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2F4A38"
+    }
+  }
+  kafka: {
+    style: {
+      fill: "#E4E8F1"
+      stroke: "#8593B4"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#2E3A57"
+    }
+  }
+  consumer: {
+    style: {
+      fill: "#F3E8DF"
+      stroke: "#C29C84"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5B3B29"
+    }
+  }
+  highlight: {
+    style: {
+      fill: "#F4E4B8"
+      stroke: "#C7A24A"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#5A4614"
+    }
+  }
+  quiet: {
+    style: {
+      fill: "#F1F0EC"
+      stroke: "#BDB8AE"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#55524B"
+    }
+  }
+  zone: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#D5D1C8"
+      stroke-width: 2
+      border-radius: 12
+      font-color: "#3D3B36"
+    }
+  }
+  note: {
+    shape: text
+    style: {
+      font-color: "#5F5B53"
+      font-size: 15
+      bold: false
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#7D8698"
+      stroke-width: 2
+      font-color: "#4F5664"
+    }
+  }
+}
+
+grid-rows: 2
+grid-columns: 12
+horizontal-gap: 8
+vertical-gap: 44
+
+o0: "0" {class: kafka; width: 76; height: 56}
+o1: "1" {class: kafka; width: 76; height: 56}
+o2: "2" {class: kafka; width: 76; height: 56}
+gap3: "…" {class: quiet; width: 76; height: 56}
+o40: "40" {class: kafka; width: 76; height: 56}
+o41: "41" {class: kafka; width: 76; height: 56}
+gap6: "…" {class: quiet; width: 76; height: 56}
+o56: "56" {class: kafka; width: 76; height: 56}
+o57: "57" {class: kafka; width: 76; height: 56}
+o58: "58" {
+  width: 76
+  height: 56
+  style: {
+    fill: "#FFFFFF"
+    stroke: "#8593B4"
+    stroke-width: 2
+    stroke-dash: 4
+    border-radius: 8
+    font-color: "#8593B4"
+  }
+}
+spacer: "" {width: 24; height: 20; style: {opacity: 0}}
+camera: "Camera (P)\nAppends here" {class: producer; style.font-size: 15}
+b1: "" {width: 76; height: 20; style: {opacity: 0}}
+b2: "" {width: 76; height: 20; style: {opacity: 0}}
+b3: "" {width: 76; height: 20; style: {opacity: 0}}
+b4: "" {width: 76; height: 20; style: {opacity: 0}}
+recorder: "Recorder\nnext 40" {class: consumer; width: 76; style.font-size: 14}
+b5: "" {width: 76; height: 20; style: {opacity: 0}}
+b6: "" {width: 76; height: 20; style: {opacity: 0}}
+b7: "" {width: 76; height: 20; style: {opacity: 0}}
+player: "Player\nnext 57" {class: consumer; width: 76; style.font-size: 14}
+motion: "Motion\ndetector\nnext 58,\ncaught up" {class: consumer; width: 76; style.font-size: 14}
+b8: "" {width: 24; height: 20; style: {opacity: 0}}
+b9: "" {width: 20; height: 20; style: {opacity: 0}}
+
+camera -> o58: {class: flow}
+recorder -> o40: {class: flow}
+player -> o57: {class: flow}
+motion -> o58: {class: flow}
+
+legend: "Each reader keeps its own bookmark: the next offset that it will read." {
+  class: note
+  near: bottom-center
+}
