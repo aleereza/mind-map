@@ -1,0 +1,104 @@
+# The example Parquet file from byte 0 to byte 1,595: PAR1, two row groups with an id, city, and fare chunk each, the footer, then the footer length and PAR1.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+direction: down
+
+classes: {
+  box: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#1E293B"
+    }
+  }
+  store: {
+    style: {
+      fill: "#E0F2FE"
+      stroke: "#0369A1"
+      stroke-width: 2
+      font-color: "#1E293B"
+    }
+  }
+  actor: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      font-color: "#1E293B"
+    }
+  }
+  external: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#475569"
+      stroke-width: 2
+      stroke-dash: 4
+      border-radius: 8
+      font-color: "#1E293B"
+    }
+  }
+  zone: {
+    style: {
+      fill: "#F1F5F9"
+      stroke: "#CBD5E1"
+      border-radius: 12
+      font-color: "#334155"
+    }
+  }
+  zone_alt: {
+    style: {
+      fill: "#EEF2FF"
+      stroke: "#C7D2FE"
+      border-radius: 12
+      font-color: "#334155"
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#64748B"
+      stroke-width: 2
+      font-color: "#334155"
+    }
+  }
+}
+
+file: "Example file: 1,595 bytes" {
+  class: zone
+  style.font-size: 20
+  grid-columns: 1
+  grid-gap: 16
+
+  start: "PAR1\nbytes 0 to 4" {class: external}
+
+  rg0: "Row group 0: rows 1 to 3, bytes 4 to 305" {
+    class: zone_alt
+    style.font-size: 18
+    grid-columns: 3
+    grid-gap: 16
+    id: "id\n1, 2, 3\nbytes 4 to 114" {class: box}
+    city: "city\nPerth, Perth, Sydney\nbytes 114 to 196" {class: box}
+    fare: "fare\n12.5, 8.0, 20.0\nbytes 196 to 305" {class: box}
+  }
+
+  rg1: "Row group 1: rows 4 to 6, bytes 305 to 606" {
+    class: zone_alt
+    style.font-size: 18
+    grid-columns: 3
+    grid-gap: 16
+    id: "id\n4, 5, 6\nbytes 305 to 415" {class: box}
+    city: "city\nSydney, Perth, Perth\nbytes 415 to 497" {class: box}
+    fare: "fare\n15.5, 9.0, 11.0\nbytes 497 to 606" {class: box}
+  }
+
+  footer: "Footer: bytes 606 to 1,587\nschema, chunk byte ranges, min and max values" {class: store}
+
+  end: "Footer length, then PAR1\nbytes 1,587 to 1,595" {class: external}
+}

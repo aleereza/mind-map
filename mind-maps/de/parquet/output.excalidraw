@@ -1,0 +1,4411 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3285938862,
+      "isDeleted": false,
+      "id": "node-acd079a9820e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120.0,
+      "y": 2134.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 732692,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-acd079a9820e"
+        },
+        {
+          "id": "edge-d3e9ff277eda",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-52dac00894ab",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1f395b172cd3",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-3ea7f15785a3",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-642c23f729a0",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "apache-parquet"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6702448060,
+      "isDeleted": false,
+      "id": "text-acd079a9820e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 2134.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 787.5,
+      "seed": 194551,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Apache Parquet\nWhat is a Parquet file, and why\ndoes it store each column\ntogether? [Apache Parquet](https:/\n/parquet.apache.org/) is a file\nformat for the rows and columns of\none table. It stores the values of\neach column next to each other,\nnot row by row. The file also\nholds the column names and types.\n[Apache\nIceberg](../iceberg/iceberg.md)\nuses it as its usual data file\nformat. Snowflake supports Iceberg\ntables that use Parquet files\n([Snowflake documentation](https:/\n/docs.snowflake.com/en/user-guide/\ntables-iceberg)).\n\nKeeping a column together gives\nthree gains. A reader loads only\nthe columns that a query needs.\nThe writer stores each column in a\ncompact form. A reader skips whole\nblocks of rows, by using the\nminimum and maximum values in the\nfooter. How Much Columnar Saves\nmeasures the gains. The price is\nthat one row is spread over every\ncolumn. An engine, which is a\nprogram that runs queries such as\nSnowflake, also writes each\nParquet file once and replaces it\nto change data. Files Are Written\nOnce explains why.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-acd079a9820e",
+      "originalText": "Apache Parquet\nWhat is a Parquet file, and why does it store each column together? [Apache Parquet](https://parquet.apache.org/) is a file format for the rows and columns of one table. It stores the values of each column next to each other, not row by row. The file also holds the column names and types. [Apache Iceberg](../iceberg/iceberg.md) uses it as its usual data file format. Snowflake supports Iceberg tables that use Parquet files ([Snowflake documentation](https://docs.snowflake.com/en/user-guide/tables-iceberg)).\n\nKeeping a column together gives three gains. A reader loads only the columns that a query needs. The writer stores each column in a compact form. A reader skips whole blocks of rows, by using the minimum and maximum values in the footer. How Much Columnar Saves measures the gains. The price is that one row is spread over every column. An engine, which is a program that runs queries such as Snowflake, also writes each Parquet file once and replaces it to change data. Files Are Written Once explains why.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "apache-parquet"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3759834639,
+      "isDeleted": false,
+      "id": "node-31e5c2ec3c3a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 710.0,
+      "y": 545.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 100.0,
+      "height": 54.5,
+      "seed": 843016,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-31e5c2ec3c3a"
+        },
+        {
+          "id": "edge-d3e9ff277eda",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0ea08bf657a9",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f15c209f04fd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-39ec8819e716",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-46d33d71161e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d2a785703e72",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "parquet-basics"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3577530866,
+      "isDeleted": false,
+      "id": "text-31e5c2ec3c3a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 726.0,
+      "y": 561.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 68.0,
+      "height": 22.5,
+      "seed": 638340,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Basics",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-31e5c2ec3c3a",
+      "originalText": "Basics",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "parquet-basics"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6815306244,
+      "isDeleted": false,
+      "id": "node-fb8d4ceb6ff8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 990.0,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 820280,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-fb8d4ceb6ff8"
+        },
+        {
+          "id": "edge-0ea08bf657a9",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "what-is-parquet"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3595528368,
+      "isDeleted": false,
+      "id": "text-fb8d4ceb6ff8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.0,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 455.0,
+      "seed": 873684,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What Is Parquet?\nA Parquet file stores the data of one table:\nnamed, typed columns and many rows. This map\nfollows one example table with the columns\n`id`, `city`, and `fare`, and six rows: `1,\nPerth, 12.5`; `2, Perth, 8.0`; `3, Sydney,\n20.0`; `4, Sydney, 15.5`; `5, Perth, 9.0`; and\n`6, Perth, 11.0`. A short script writes the\ntable to the file `trips.parquet`, which takes\n1,595 bytes. The file is stored beside this\nmap, and About the Numbers shows the script.\nThe file also stores the type of each column:\n`id` is an integer (`int64`), `city` is text\n(`string`), and `fare` is a decimal number\n(`double`). The file stores each value as the\nbytes of its number or text. With plain\nencoding, which writes each value as it is,\nthe number 12.5 is the 8 bytes `00 00 00 00 00\n00 29 40`. The writer of `trips.parquet` also\ncompresses the bytes with SNAPPY, a\ncompression method, so the file holds their\ncompressed form (Compress the Bytes explains\nit). A CSV file stores the same number as the\nfour characters `12.5`, which are the bytes\n`31 32 2e 35`. A tool that reads Parquet\ndecodes the bytes into rows and columns.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-fb8d4ceb6ff8",
+      "originalText": "What Is Parquet?\nA Parquet file stores the data of one table: named, typed columns and many rows. This map follows one example table with the columns `id`, `city`, and `fare`, and six rows: `1, Perth, 12.5`; `2, Perth, 8.0`; `3, Sydney, 20.0`; `4, Sydney, 15.5`; `5, Perth, 9.0`; and `6, Perth, 11.0`. A short script writes the table to the file `trips.parquet`, which takes 1,595 bytes. The file is stored beside this map, and About the Numbers shows the script. The file also stores the type of each column: `id` is an integer (`int64`), `city` is text (`string`), and `fare` is a decimal number (`double`). The file stores each value as the bytes of its number or text. With plain encoding, which writes each value as it is, the number 12.5 is the 8 bytes `00 00 00 00 00 00 29 40`. The writer of `trips.parquet` also compresses the bytes with SNAPPY, a compression method, so the file holds their compressed form (Compress the Bytes explains it). A CSV file stores the same number as the four characters `12.5`, which are the bytes `31 32 2e 35`. A tool that reads Parquet decodes the bytes into rows and columns.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "what-is-parquet"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1641189818,
+      "isDeleted": false,
+      "id": "node-2f9b59148846",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 990.0,
+      "y": 222.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 789863,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2f9b59148846"
+        },
+        {
+          "id": "edge-0f24e28faddf",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f15c209f04fd",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "why-parquet-exists"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6940514025,
+      "isDeleted": false,
+      "id": "text-2f9b59148846",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.0,
+      "y": 222.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 315.0,
+      "seed": 772027,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Why Parquet Exists\nThe [specification](https://github.com/apache/\nparquet-format/blob/ec90dd4/README.md#L34-L43)\nstates four goals:\n\n- A compressed, efficient columnar\nrepresentation of data.\n- Very efficient compression and encoding,\nchosen for each column.\n- Support for complex nested data structures.\n- One format that every data processing\nframework can use.\n\nThe first two goals are about cost: fewer\nbytes to store and fewer bytes to read. [How\nMuch Columnar Saves](#how-much-columnar-saves)\nmeasures them. The other two goals are about\nwhat a file can hold and who can read it.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2f9b59148846",
+      "originalText": "Why Parquet Exists\nThe [specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L34-L43) states four goals:\n\n- A compressed, efficient columnar representation of data.\n- Very efficient compression and encoding, chosen for each column.\n- Support for complex nested data structures.\n- One format that every data processing framework can use.\n\nThe first two goals are about cost: fewer bytes to store and fewer bytes to read. [How Much Columnar Saves](#how-much-columnar-saves) measures them. The other two goals are about what a file can hold and who can read it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "why-parquet-exists"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4595864774,
+      "isDeleted": false,
+      "id": "node-e12dc140eaea",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 990.0,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 208177,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e12dc140eaea"
+        },
+        {
+          "id": "edge-39ec8819e716",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-60caba4c12ef",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "row-layout"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9295207550,
+      "isDeleted": false,
+      "id": "text-e12dc140eaea",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.0,
+      "y": 392.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 157.5,
+      "seed": 872782,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Row Layout\nA row layout stores one record after another.\nA CSV (comma-separated values) file is the\nusual example. The example table becomes six\ntext lines: `1,Perth,12.5`, then\n`2,Perth,8.0`, then `3,Sydney,20.0`, and so\non. The three values of one record sit next to\neach other. To read only `fare`, a reader must\nscan every line and cut out the third value.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e12dc140eaea",
+      "originalText": "Row Layout\nA row layout stores one record after another. A CSV (comma-separated values) file is the usual example. The example table becomes six text lines: `1,Perth,12.5`, then `2,Perth,8.0`, then `3,Sydney,20.0`, and so on. The three values of one record sit next to each other. To read only `fare`, a reader must scan every line and cut out the third value.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "row-layout"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3446031743,
+      "isDeleted": false,
+      "id": "node-47455e3cb314",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 990.0,
+      "y": 601.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 846549,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-47455e3cb314"
+        },
+        {
+          "id": "edge-60caba4c12ef",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6054930a34d6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-46d33d71161e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "column-layout"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8625102555,
+      "isDeleted": false,
+      "id": "text-47455e3cb314",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.0,
+      "y": 601.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 943519,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Column Layout\nA column layout stores all values of one\ncolumn together. A Python dictionary shows the\nidea. Each key is a column, and each value is\nthe list of that column's values. [pyarrow](ht\ntps://arrow.apache.org/docs/python/generated/p\nyarrow.Table.html#pyarrow.Table.to_pydict) is\nthe Python library for Apache Arrow. Its\n`to_pydict()` method returns the example table\nas `{'id': [1, 2, 3, 4, 5, 6], 'city':\n['Perth', 'Perth', 'Sydney', 'Sydney',\n'Perth', 'Perth'], 'fare': [12.5, 8.0, 20.0,\n15.5, 9.0, 11.0]}`. A Parquet file adds one\ndetail. It cuts each list into pieces, one for\neach row group.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-47455e3cb314",
+      "originalText": "Column Layout\nA column layout stores all values of one column together. A Python dictionary shows the idea. Each key is a column, and each value is the list of that column's values. [pyarrow](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_pydict) is the Python library for Apache Arrow. Its `to_pydict()` method returns the example table as `{'id': [1, 2, 3, 4, 5, 6], 'city': ['Perth', 'Perth', 'Sydney', 'Sydney', 'Perth', 'Perth'], 'fare': [12.5, 8.0, 20.0, 15.5, 9.0, 11.0]}`. A Parquet file adds one detail. It cuts each list into pieces, one for each row group.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "column-layout"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9629527123,
+      "isDeleted": false,
+      "id": "node-f643f8e37a19",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 990.0,
+      "y": 833.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 200250,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f643f8e37a19"
+        },
+        {
+          "id": "edge-d2a785703e72",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "many-files-form-one-table"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7574963011,
+      "isDeleted": false,
+      "id": "text-f643f8e37a19",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.0,
+      "y": 833.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 517901,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Many Files Form One Table\nA large table is usually many Parquet files.\nEach file has its own footer, which describes\nonly that file. A table format such as Apache\nIceberg records which files form the table. A\nSnowflake Iceberg table is an example. Its\nrows sit in many Parquet files in cloud\nstorage, and the Iceberg metadata names the\nfiles. The [Iceberg\nmap](../iceberg/iceberg.md) explains the table\nformat, and the [Iceberg in Snowflake map](../\nsnowflake/iceberg/snowflake-iceberg.md) covers\nSnowflake's side.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-f643f8e37a19",
+      "originalText": "Many Files Form One Table\nA large table is usually many Parquet files. Each file has its own footer, which describes only that file. A table format such as Apache Iceberg records which files form the table. A Snowflake Iceberg table is an example. Its rows sit in many Parquet files in cloud storage, and the Iceberg metadata names the files. The [Iceberg map](../iceberg/iceberg.md) explains the table format, and the [Iceberg in Snowflake map](../snowflake/iceberg/snowflake-iceberg.md) covers Snowflake's side.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "many-files-form-one-table"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3799428674,
+      "isDeleted": false,
+      "id": "node-e4518a3b165f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 710.0,
+      "y": 1486.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 291688,
+      "groupIds": [
+        "uqh2zh2i"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e4518a3b165f"
+        },
+        {
+          "id": "edge-52dac00894ab",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-aeda64f1bf04",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b60a37b3db47",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-57ad6b54c1fa",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "file-anatomy"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6247420761,
+      "isDeleted": false,
+      "id": "text-e4518a3b165f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 726.0,
+      "y": 1486.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 315.0,
+      "seed": 756040,
+      "groupIds": [
+        "uqh2zh2i"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "File Anatomy\nA Parquet file is a stack of\nparts. At the top level, the file\nholds row groups and a footer. A\nrow group holds one column chunk\nfor each column. A column chunk\nholds pages. The picture shows the\nexample file down to the column\nchunks, with the real byte range\nof each part. The [format specific\nation](https://github.com/apache/p\narquet-format/blob/ec90dd4/README.\nmd#L64-L85) defines the same\nhierarchy.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-e4518a3b165f",
+      "originalText": "File Anatomy\nA Parquet file is a stack of parts. At the top level, the file holds row groups and a footer. A row group holds one column chunk for each column. A column chunk holds pages. The picture shows the example file down to the column chunks, with the real byte range of each part. The [format specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L64-L85) defines the same hierarchy.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "file-anatomy"
+      }
+    },
+    {
+      "type": "image",
+      "version": 1,
+      "versionNonce": 3299784614,
+      "isDeleted": false,
+      "id": "node-6a614eaf1a41",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1300.0,
+      "y": 1065.5,
+      "strokeColor": "transparent",
+      "backgroundColor": "transparent",
+      "width": 297.3371104815864,
+      "height": 320.0,
+      "seed": 615417,
+      "groupIds": [
+        "uqh2zh2i"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "status": "saved",
+      "fileId": "file-c13bababb445",
+      "scale": [
+        1,
+        1
+      ],
+      "crop": null,
+      "customData": {
+        "node_id": "file-anatomy-image-parquet-d2-diagram-file-layout-d-1"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8500600663,
+      "isDeleted": false,
+      "id": "node-17667ed2b7ea",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1300.0,
+      "y": 1425.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 581186,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-17667ed2b7ea"
+        },
+        {
+          "id": "edge-aeda64f1bf04",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "magic-bytes"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4094346258,
+      "isDeleted": false,
+      "id": "text-17667ed2b7ea",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1312.0,
+      "y": 1425.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 580577,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Magic Bytes\nEvery Parquet file starts and ends with the\nfour bytes `PAR1`. A reader checks them to\nknow that the file is Parquet. The next bytes\nstart the header of the first page. In the\nexample file, the first 11 bytes are\n`b'PAR1\\x15\\x04\\x150\\x15.L'` in Python\nnotation. The bytes `0x15` and `0x04` are\ncontrol codes, which an editor does not show\nas letters. The [specification](https://github\n.com/apache/parquet-format/blob/ec90dd4/README\n.md#L92-L121) shows the layout.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-17667ed2b7ea",
+      "originalText": "Magic Bytes\nEvery Parquet file starts and ends with the four bytes `PAR1`. A reader checks them to know that the file is Parquet. The next bytes start the header of the first page. In the example file, the first 11 bytes are `b'PAR1\\x15\\x04\\x150\\x15.L'` in Python notation. The bytes `0x15` and `0x04` are control codes, which an editor does not show as letters. The [specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L92-L121) shows the layout.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "magic-bytes"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4118619252,
+      "isDeleted": false,
+      "id": "node-9361947c8f1d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1300.0,
+      "y": 1647.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 466481,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9361947c8f1d"
+        },
+        {
+          "id": "edge-6054930a34d6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b60a37b3db47",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-94ce88d5660e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "row-group"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2307961004,
+      "isDeleted": false,
+      "id": "text-9361947c8f1d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1312.0,
+      "y": 1647.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 224926,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Row Group\nA row group is a slice of consecutive rows.\nThe example file has two: rows 1 to 3, and\nrows 4 to 6. Read back with pyarrow, each\ncolumn shows as two pieces, one for each row\ngroup: `id: [[1,2,3],[4,5,6]]`. A row group\nholds one column chunk for each column. The [s\npecification](https://github.com/apache/parque\nt-format/blob/ec90dd4/README.md#L251-L257)\nrecommends large row groups, from 512 MB to 1\nGB. Large row groups allow large sequential\nreads, but the writer needs more memory. The\nexample uses three rows per group only to keep\nthe picture small.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9361947c8f1d",
+      "originalText": "Row Group\nA row group is a slice of consecutive rows. The example file has two: rows 1 to 3, and rows 4 to 6. Read back with pyarrow, each column shows as two pieces, one for each row group: `id: [[1,2,3],[4,5,6]]`. A row group holds one column chunk for each column. The [specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L251-L257) recommends large row groups, from 512 MB to 1 GB. Large row groups allow large sequential reads, but the writer needs more memory. The example uses three rows per group only to keep the picture small.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "row-group"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9121260216,
+      "isDeleted": false,
+      "id": "node-dbe717ef8462",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1898.8,
+      "y": 1666.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 383905,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-dbe717ef8462"
+        },
+        {
+          "id": "edge-94ce88d5660e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6ae10dfb7d2d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "column-chunk"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1439258420,
+      "isDeleted": false,
+      "id": "text-dbe717ef8462",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1910.8,
+      "y": 1669.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 253826,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Column Chunk\nA column chunk holds the values of one column\ninside one row group, in one contiguous byte\nrange. In the example file, the `id` chunk of\nrow group 0 covers bytes 4 to 114. The `city`\nchunk follows it at bytes 114 to 196. The [spe\ncification](https://github.com/apache/parquet-\nformat/blob/ec90dd4/README.md#L87-L90) names\nthe column chunk as the unit for input and\noutput.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-dbe717ef8462",
+      "originalText": "Column Chunk\nA column chunk holds the values of one column inside one row group, in one contiguous byte range. In the example file, the `id` chunk of row group 0 covers bytes 4 to 114. The `city` chunk follows it at bytes 114 to 196. The [specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L87-L90) names the column chunk as the unit for input and output.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "column-chunk"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2672420093,
+      "isDeleted": false,
+      "id": "node-767013ce0ee0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2497.6,
+      "y": 1647.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 141088,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-767013ce0ee0"
+        },
+        {
+          "id": "edge-6ae10dfb7d2d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "page"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4088984066,
+      "isDeleted": false,
+      "id": "text-767013ce0ee0",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2509.6,
+      "y": 1647.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 553884,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Page\nA column chunk is a run of pages. A page is\nthe smallest unit that the writer encodes and\ncompresses ([glossary](https://github.com/apac\nhe/parquet-format/blob/ec90dd4/README.md#L79-L\n81)). A reader can skip pages that it does not\nneed. When a chunk uses dictionary encoding,\nits first page is the dictionary page. The\ndata pages follow ([specification](https://git\nhub.com/apache/parquet-format/blob/ec90dd4/REA\nDME.md#L207-L218)). In the example file, the\n`id` chunk of row group 0 has a dictionary\npage at byte 4 and a data page at byte 41.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-767013ce0ee0",
+      "originalText": "Page\nA column chunk is a run of pages. A page is the smallest unit that the writer encodes and compresses ([glossary](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L79-L81)). A reader can skip pages that it does not need. When a chunk uses dictionary encoding, its first page is the dictionary page. The data pages follow ([specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L207-L218)). In the example file, the `id` chunk of row group 0 has a dictionary page at byte 4 and a data page at byte 41.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "page"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9834523169,
+      "isDeleted": false,
+      "id": "node-d7eb6b340a11",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1300.0,
+      "y": 1907.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 406571,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d7eb6b340a11"
+        },
+        {
+          "id": "edge-57ad6b54c1fa",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5dfe4ea39023",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-39a7b30f4b76",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-913ebbc03686",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "footer"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4880880429,
+      "isDeleted": false,
+      "id": "text-d7eb6b340a11",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1312.0,
+      "y": 1907.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 420.0,
+      "seed": 221241,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Footer\nThe footer is the last part of the file. After\nit come its length (4 bytes) and the closing\n`PAR1` (4 bytes). In the example file, the\nfooter covers bytes 606 to 1,587. The footer\nholds three things:\n\n- The schema, which lists the column names and\ntypes ([file metadata](https://github.com/apac\nhe/parquet-format/blob/ec90dd4/src/main/thrift\n/parquet.thrift#L1422-L1445)).\n- The byte range, codec, and encodings of\nevery column chunk ([column metadata](https://\ngithub.com/apache/parquet-format/blob/ec90dd4/\nsrc/main/thrift/parquet.thrift#L922-L959)).\n- The minimum and maximum value of every\ncolumn chunk.\n\nA reader starts here. It reads the end of the\nfile, finds the footer length, and then reads\nthe footer. The writer puts the footer last,\nso that it can write the file in one pass ([sp\necification](https://github.com/apache/parquet\n-format/blob/ec90dd4/README.md#L109-L121)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d7eb6b340a11",
+      "originalText": "Footer\nThe footer is the last part of the file. After it come its length (4 bytes) and the closing `PAR1` (4 bytes). In the example file, the footer covers bytes 606 to 1,587. The footer holds three things:\n\n- The schema, which lists the column names and types ([file metadata](https://github.com/apache/parquet-format/blob/ec90dd4/src/main/thrift/parquet.thrift#L1422-L1445)).\n- The byte range, codec, and encodings of every column chunk ([column metadata](https://github.com/apache/parquet-format/blob/ec90dd4/src/main/thrift/parquet.thrift#L922-L959)).\n- The minimum and maximum value of every column chunk.\n\nA reader starts here. It reads the end of the file, finds the footer length, and then reads the footer. The writer puts the footer last, so that it can write the file in one pass ([specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L109-L121)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "footer"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1572588829,
+      "isDeleted": false,
+      "id": "node-a5ee6e6159f5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 710.0,
+      "y": 2697.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 122.0,
+      "seed": 134989,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a5ee6e6159f5"
+        },
+        {
+          "id": "edge-1f395b172cd3",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-258aea9d7b9b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ea8bb8fa5833",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-fcab63f033cc",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-757a7f320c6f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-57b6b0d1fed3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "why-columnar-pays"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7419360899,
+      "isDeleted": false,
+      "id": "text-a5ee6e6159f5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 726.0,
+      "y": 2697.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 225.0,
+      "seed": 65754,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Why Columnar Pays\nA query costs the bytes it reads\nand the values it decodes. A row\nlayout keeps the fields of one row\ntogether, so a query that needs\none column still reads every\nfield. A column layout keeps the\nvalues of one column together, so\na reader fetches only the columns\nthat it needs.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-a5ee6e6159f5",
+      "originalText": "Why Columnar Pays\nA query costs the bytes it reads and the values it decodes. A row layout keeps the fields of one row together, so a query that needs one column still reads every field. A column layout keeps the values of one column together, so a reader fetches only the columns that it needs.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "why-columnar-pays"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7631875528,
+      "isDeleted": false,
+      "id": "node-3293bd507246",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1289.2,
+      "y": 2056.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 410.40000000000003,
+      "height": 181.5,
+      "seed": 658918,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3293bd507246"
+        },
+        {
+          "id": "edge-0f24e28faddf",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-258aea9d7b9b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-912901763b66",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-cb1400b12750",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-7b2a73665899",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "how-much-columnar-saves"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8138790776,
+      "isDeleted": false,
+      "id": "text-3293bd507246",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1301.2,
+      "y": 2068.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 157.5,
+      "seed": 252031,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "How Much Columnar Saves\nThe measurements use one table of 300,000 rows\nwith the columns `id`, `city`, `fare`, and\n`note`. The table is stored three ways. CSV is\na row layout in a text file. SQLite is a row\nlayout in a database file, with `id` as the\nprimary key. Parquet is the column layout. The\nthree nodes below hold the numbers. About the\nNumbers describes the files and the method.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-3293bd507246",
+      "originalText": "How Much Columnar Saves\nThe measurements use one table of 300,000 rows with the columns `id`, `city`, `fare`, and `note`. The table is stored three ways. CSV is a row layout in a text file. SQLite is a row layout in a database file, with `id` as the primary key. Parquet is the column layout. The three nodes below hold the numbers. About the Numbers describes the files and the method.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "how-much-columnar-saves"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2173651091,
+      "isDeleted": false,
+      "id": "node-d43ee08881f9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 1907.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 810336,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d43ee08881f9"
+        },
+        {
+          "id": "edge-912901763b66",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "three-queries"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2809965615,
+      "isDeleted": false,
+      "id": "text-d43ee08881f9",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1891.6000000000001,
+      "y": 1907.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 82358,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Three Queries on One Table\nThe times are the median of 5 runs on one\nthread, with the files in the operating system\ncache. They show CPU work and no disk delay.\nThe byte counts are exact.\n\n- Sum of `fare` where `city` is `Perth`. This\nneeds 2 of the 4 columns. Parquet reads\n705,192 bytes and takes 4.5 ms. SQLite takes\n12 ms. CSV reads 19,625,110 bytes and takes 23\nms.\n- Sum of `fare` where `id` is at least 200000.\nThis needs 2 columns from 1 of the 3 row\ngroups. Parquet reads 866,416 bytes and takes\n0.6 ms. SQLite takes 2.7 ms. CSV reads\n19,625,110 bytes and takes 21 ms.\n- Read every column of every row. Parquet\nreads 15,416,992 bytes and takes 9.8 ms. CSV\nreads 19,625,110 bytes and takes 25 ms.\n\nIn the first query, Parquet reads 28 times\nfewer bytes than CSV. Two steps make the gap.\nThe CSV text of `city` and `fare` alone takes\n4,736,208 bytes, which is 4.1 times fewer than\nthe whole file. Parquet stores those two\ncolumns in 639,656 bytes, and the footer read\nadds 65,536 bytes. Column Pruning, Encoding\nand Compression, and Row Group Skipping\nexplain the steps. In the third query, Parquet\nis still 2.6 times faster.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d43ee08881f9",
+      "originalText": "Three Queries on One Table\nThe times are the median of 5 runs on one thread, with the files in the operating system cache. They show CPU work and no disk delay. The byte counts are exact.\n\n- Sum of `fare` where `city` is `Perth`. This needs 2 of the 4 columns. Parquet reads 705,192 bytes and takes 4.5 ms. SQLite takes 12 ms. CSV reads 19,625,110 bytes and takes 23 ms.\n- Sum of `fare` where `id` is at least 200000. This needs 2 columns from 1 of the 3 row groups. Parquet reads 866,416 bytes and takes 0.6 ms. SQLite takes 2.7 ms. CSV reads 19,625,110 bytes and takes 21 ms.\n- Read every column of every row. Parquet reads 15,416,992 bytes and takes 9.8 ms. CSV reads 19,625,110 bytes and takes 25 ms.\n\nIn the first query, Parquet reads 28 times fewer bytes than CSV. Two steps make the gap. The CSV text of `city` and `fare` alone takes 4,736,208 bytes, which is 4.1 times fewer than the whole file. Parquet stores those two columns in 639,656 bytes, and the footer read adds 65,536 bytes. Column Pruning, Encoding and Compression, and Row Group Skipping explain the steps. In the third query, Parquet is still 2.6 times faster.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "three-queries"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8736945468,
+      "isDeleted": false,
+      "id": "node-d11c13b0cd12",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 2167.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 799372,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d11c13b0cd12"
+        },
+        {
+          "id": "edge-cb1400b12750",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "savings-grow-with-width"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5521900683,
+      "isDeleted": false,
+      "id": "text-d11c13b0cd12",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1891.6000000000001,
+      "y": 2167.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 402.5,
+      "seed": 852757,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Savings Grow With Table Width\nThe gain depends on how many columns a query\nskips. Each table here has 100,000 rows of\nrandom decimal numbers, and each query sums\nthe first column. Parquet reads the same\n334,234 bytes for every table, because the\nother columns are skipped.\n\n- 4 columns: the CSV file has 2,312,335 bytes,\nwhich is 6.9 times more than Parquet reads.\nParquet takes 0.2 ms and CSV takes 4.2 ms.\n- 20 columns: the CSV file has 11,561,921\nbytes, which is 35 times more. Parquet takes\n0.3 ms and CSV takes 17 ms.\n- 100 columns: the CSV file has 57,805,429\nbytes, which is 173 times more. Parquet takes\n0.4 ms and CSV takes 85 ms.\n\nA wide table with a narrow query gains the\nmost. Snowflake tables also store columns\nseparately, so a Snowflake query scans only\nthe columns that it references (see Column\nPruning).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d11c13b0cd12",
+      "originalText": "Savings Grow With Table Width\nThe gain depends on how many columns a query skips. Each table here has 100,000 rows of random decimal numbers, and each query sums the first column. Parquet reads the same 334,234 bytes for every table, because the other columns are skipped.\n\n- 4 columns: the CSV file has 2,312,335 bytes, which is 6.9 times more than Parquet reads. Parquet takes 0.2 ms and CSV takes 4.2 ms.\n- 20 columns: the CSV file has 11,561,921 bytes, which is 35 times more. Parquet takes 0.3 ms and CSV takes 17 ms.\n- 100 columns: the CSV file has 57,805,429 bytes, which is 173 times more. Parquet takes 0.4 ms and CSV takes 85 ms.\n\nA wide table with a narrow query gains the most. Snowflake tables also store columns separately, so a Snowflake query scans only the columns that it references (see Column Pruning).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "savings-grow-with-width"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2045721836,
+      "isDeleted": false,
+      "id": "node-360d77bbb974",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 2297.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 519743,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-360d77bbb974"
+        },
+        {
+          "id": "edge-f86536919768",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-7b2a73665899",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "savings-depend-on-values"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2515729727,
+      "isDeleted": false,
+      "id": "text-360d77bbb974",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1891.6000000000001,
+      "y": 2297.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 735.0,
+      "seed": 542958,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Savings Depend on Column Values\nParquet is efficient with compression for\nthree reasons. The writer encodes each column\nby its type before the codec runs. The writer\npicks the encoding and the codec for each\ncolumn, and the footer records both. A reader\ndecompresses only the pages of the columns\nthat a query needs.\n\nThe sizes below are rough. They come from the\ntest table with ZSTD as the codec. Each one\ncompares a Parquet column with the CSV text of\nthe same column, compressed with ZSTD too:\n\n- Four different city names: about 4 times\nsmaller. Dictionary encoding does this.\n- Ids that rise by one: thousands of times\nsmaller. Delta encoding stores only the step\nbetween neighbours, which is always 1.\n- Decimal fares: about 1.3 times smaller.\n- Random letters: about the same size. Only\nthe codec can shrink them, by about a third\nwith ZSTD and a few percent with SNAPPY.\n\nWith ZSTD, the whole table is about half its\nCSV size, in Parquet and in CSV alike. Parquet\nis only a few percent smaller than the\ncompressed CSV, because two thirds of the\ntable is random letters. A query on one column\ndecompresses about 20 times fewer bytes than a\ncompressed CSV file needs, and it runs about\n30 times faster.\n\nSnowflake compresses each column of a\nmicro-partition on its own and picks the\nalgorithm itself ([micro-partitions](https://d\nocs.snowflake.com/en/user-guide/tables-cluster\ning-micropartitions)). Iceberg writes Parquet\nfiles with ZSTD unless the table property\n`write.parquet.compression-codec` says\notherwise ([configuration](https://iceberg.apa\nche.org/docs/latest/configuration/)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-360d77bbb974",
+      "originalText": "Savings Depend on Column Values\nParquet is efficient with compression for three reasons. The writer encodes each column by its type before the codec runs. The writer picks the encoding and the codec for each column, and the footer records both. A reader decompresses only the pages of the columns that a query needs.\n\nThe sizes below are rough. They come from the test table with ZSTD as the codec. Each one compares a Parquet column with the CSV text of the same column, compressed with ZSTD too:\n\n- Four different city names: about 4 times smaller. Dictionary encoding does this.\n- Ids that rise by one: thousands of times smaller. Delta encoding stores only the step between neighbours, which is always 1.\n- Decimal fares: about 1.3 times smaller.\n- Random letters: about the same size. Only the codec can shrink them, by about a third with ZSTD and a few percent with SNAPPY.\n\nWith ZSTD, the whole table is about half its CSV size, in Parquet and in CSV alike. Parquet is only a few percent smaller than the compressed CSV, because two thirds of the table is random letters. A query on one column decompresses about 20 times fewer bytes than a compressed CSV file needs, and it runs about 30 times faster.\n\nSnowflake compresses each column of a micro-partition on its own and picks the algorithm itself ([micro-partitions](https://docs.snowflake.com/en/user-guide/tables-clustering-micropartitions)). Iceberg writes Parquet files with ZSTD unless the table property `write.parquet.compression-codec` says otherwise ([configuration](https://iceberg.apache.org/docs/latest/configuration/)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "savings-depend-on-values"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6163176381,
+      "isDeleted": false,
+      "id": "node-d45498bb6340",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1289.2,
+      "y": 2167.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 209161,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d45498bb6340"
+        },
+        {
+          "id": "edge-5dfe4ea39023",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ea8bb8fa5833",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "column-pruning"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2289953454,
+      "isDeleted": false,
+      "id": "text-d45498bb6340",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1301.2,
+      "y": 2167.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 402.5,
+      "seed": 477820,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Column Pruning\nA reader fetches only the column chunks that a\nquery needs. It finds their byte ranges in the\nfooter and skips the rest. The test file\n`trips_big.parquet` has 300,000 rows and\n15,353,361 bytes (About the Numbers describes\nit). A read of `fare` alone pulls 629,235\nbytes, which is 4.1% of the file. A wrapper\nthat logged every read showed what pyarrow\n18.1.0 did in November 2026. It first read the\nlast 64 KB of the file, which holds the\nfooter. It then made three reads of about 188\nKB each, one for each row group, at the byte\nranges that the footer lists. It skipped the\nother 14,724,126 bytes. A read of all four\ncolumns pulled 15,416,992 bytes: every byte of\nthe file except the first 4, plus 63,635 bytes\nthat the footer read repeats. Snowflake stores\nthe columns of each micro-partition, its unit\nof table storage, independently. A query scans\nonly the columns that it references ([micro-pa\nrtitions](https://docs.snowflake.com/en/user-g\nuide/tables-clustering-micropartitions)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d45498bb6340",
+      "originalText": "Column Pruning\nA reader fetches only the column chunks that a query needs. It finds their byte ranges in the footer and skips the rest. The test file `trips_big.parquet` has 300,000 rows and 15,353,361 bytes (About the Numbers describes it). A read of `fare` alone pulls 629,235 bytes, which is 4.1% of the file. A wrapper that logged every read showed what pyarrow 18.1.0 did in November 2026. It first read the last 64 KB of the file, which holds the footer. It then made three reads of about 188 KB each, one for each row group, at the byte ranges that the footer lists. It skipped the other 14,724,126 bytes. A read of all four columns pulled 15,416,992 bytes: every byte of the file except the first 4, plus 63,635 bytes that the footer read repeats. Snowflake stores the columns of each micro-partition, its unit of table storage, independently. A query scans only the columns that it references ([micro-partitions](https://docs.snowflake.com/en/user-guide/tables-clustering-micropartitions)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "column-pruning"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6343468370,
+      "isDeleted": false,
+      "id": "node-42f263f6eb8d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1289.2,
+      "y": 2583.125,
+      "strokeColor": "#7C2D12",
+      "backgroundColor": "#FFEDD5",
+      "width": 410.40000000000003,
+      "height": 146.5,
+      "seed": 599105,
+      "groupIds": [
+        "rhdjcntn"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 16
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-42f263f6eb8d"
+        },
+        {
+          "id": "edge-f86536919768",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-fcab63f033cc",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "encoding-and-compression"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7199315755,
+      "isDeleted": false,
+      "id": "text-42f263f6eb8d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1301.2,
+      "y": 2583.125,
+      "strokeColor": "#7C2D12",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 192.5,
+      "seed": 419241,
+      "groupIds": [
+        "rhdjcntn"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Encoding and Compression\nThe writer prepares each page in two steps. It\nfirst encodes the values into a compact form,\nby using the type and the pattern of the\ncolumn. It then compresses the encoded bytes\nwith a codec, which is a compression method\nthat works on any bytes. A codec replaces a\nrepeated run of bytes with a short reference\nto its first copy, and it can give common\nbytes shorter bit codes. The first step works\nwell because a chunk holds one kind of value.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-42f263f6eb8d",
+      "originalText": "Encoding and Compression\nThe writer prepares each page in two steps. It first encodes the values into a compact form, by using the type and the pattern of the column. It then compresses the encoded bytes with a codec, which is a compression method that works on any bytes. A codec replaces a repeated run of bytes with a short reference to its first copy, and it can give common bytes shorter bit codes. The first step works well because a chunk holds one kind of value.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "encoding-and-compression"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7288394255,
+      "isDeleted": false,
+      "id": "node-959f0806c0d1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 2427.0,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 417.8,
+      "height": 198.75,
+      "seed": 30017,
+      "groupIds": [
+        "rhdjcntn"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-959f0806c0d1"
+        },
+        {
+          "id": "edge-5f92badd5176",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "encode-values"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1589855926,
+      "isDeleted": false,
+      "id": "text-959f0806c0d1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1889.6000000000001,
+      "y": 2437.0,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 397.8,
+      "height": 178.75,
+      "seed": 805006,
+      "groupIds": [
+        "rhdjcntn"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Encode the Values\nDictionary encoding stores each different value\nonce, in the dictionary page. The data pages then\nhold small codes that point into the dictionary ([s\npecification](https://github.com/apache/parquet-for\nmat/blob/ec90dd4/README.md#L213-L218)). The `city`\ncolumn of the test file has 300,000 values but only\nfour different names. Written as plain values, the\ncolumn takes 3,299,981 bytes. With dictionary\nencoding, it takes 75,933 bytes, which is 43 times\nsmaller. That is about 2 bits for each row.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-959f0806c0d1",
+      "originalText": "Encode the Values\nDictionary encoding stores each different value once, in the dictionary page. The data pages then hold small codes that point into the dictionary ([specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L213-L218)). The `city` column of the test file has 300,000 values but only four different names. Written as plain values, the column takes 3,299,981 bytes. With dictionary encoding, it takes 75,933 bytes, which is 43 times smaller. That is about 2 bits for each row.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "encode-values"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5764255677,
+      "isDeleted": false,
+      "id": "node-b07779aeda7b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 2665.75,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "#F9FAFB",
+      "width": 417.8,
+      "height": 220.0,
+      "seed": 577943,
+      "groupIds": [
+        "rhdjcntn"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b07779aeda7b"
+        },
+        {
+          "id": "edge-5f92badd5176",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "compress-bytes"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6153598580,
+      "isDeleted": false,
+      "id": "text-b07779aeda7b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1889.6000000000001,
+      "y": 2665.75,
+      "strokeColor": "#1F2937",
+      "backgroundColor": "transparent",
+      "width": 397.8,
+      "height": 357.5,
+      "seed": 577856,
+      "groupIds": [
+        "rhdjcntn"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Compress the Bytes\nThe writer then compresses each page with a codec (\n[specification](https://github.com/apache/parquet-f\normat/blob/ec90dd4/Compression.md#L26-L29)), and\nthe footer records the codec of each chunk. Every\nchunk in the example file uses SNAPPY, which is the\ndefault codec in pyarrow ([`write_table`](https://a\nrrow.apache.org/docs/python/generated/pyarrow.parqu\net.write_table.html)). SNAPPY helps when bytes\nrepeat ([format](https://github.com/google/snappy/b\nlob/main/format_description.txt#L31-L42)). GZIP\n([RFC\n1951](https://www.rfc-editor.org/rfc/rfc1951)) and\nZSTD ([RFC\n8878](https://www.rfc-editor.org/rfc/rfc8878)) also\ngive common bytes shorter bit codes. On the plain\n`city` column, SNAPPY cuts 3,299,981 bytes to\n593,977. After dictionary encoding, little is left\nto remove: 75,933 bytes become 75,957. The random\ntext of the `note` column barely shrinks with\nSNAPPY. Its 13,340,241 encoded bytes become\n12,872,675 compressed bytes, which is 3.5% less.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-b07779aeda7b",
+      "originalText": "Compress the Bytes\nThe writer then compresses each page with a codec ([specification](https://github.com/apache/parquet-format/blob/ec90dd4/Compression.md#L26-L29)), and the footer records the codec of each chunk. Every chunk in the example file uses SNAPPY, which is the default codec in pyarrow ([`write_table`](https://arrow.apache.org/docs/python/generated/pyarrow.parquet.write_table.html)). SNAPPY helps when bytes repeat ([format](https://github.com/google/snappy/blob/main/format_description.txt#L31-L42)). GZIP ([RFC 1951](https://www.rfc-editor.org/rfc/rfc1951)) and ZSTD ([RFC 8878](https://www.rfc-editor.org/rfc/rfc8878)) also give common bytes shorter bit codes. On the plain `city` column, SNAPPY cuts 3,299,981 bytes to 593,977. After dictionary encoding, little is left to remove: 75,933 bytes become 75,957. The random text of the `note` column barely shrinks with SNAPPY. Its 13,340,241 encoded bytes become 12,872,675 compressed bytes, which is 3.5% less.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "compress-bytes"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4481128311,
+      "isDeleted": false,
+      "id": "node-be3163a8d496",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1289.2,
+      "y": 2925.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 359125,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-be3163a8d496"
+        },
+        {
+          "id": "edge-757a7f320c6f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "row-group-skipping"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7124292512,
+      "isDeleted": false,
+      "id": "text-be3163a8d496",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1301.2,
+      "y": 2925.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 735.0,
+      "seed": 116198,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Row Group Skipping\nThe footer stores the minimum and maximum\nvalue of each column chunk ([`Statistics`](htt\nps://github.com/apache/parquet-format/blob/ec9\n0dd4/src/main/thrift/parquet.thrift#L267-L311)\n). A reader that filters on a column compares\nthe filter with these values. It skips every\nrow group that cannot match. In the example\nfile, `id` runs from 1 to 3 in row group 0 and\nfrom 4 to 6 in row group 1. The filter `id >\n3` keeps only row group 1.\n\nSkipping works only when similar values sit in\nthe same row group. In the example, `fare`\nruns from 8.0 to 20.0 in row group 0 and from\n9.0 to 15.5 in row group 1. The filter `fare >\n12` therefore keeps both. In the test file,\n`id` is sorted, and `id >= 200000` keeps one\nof three row groups. Its `fare` values are\nrandom, so every row group runs from 5.0 to\n60.0. The filter `fare > 55` keeps all three.\nThese results come from the pyarrow dataset\nAPI in November 2026.\n\nSnowflake tables use the same idea. Snowflake\nkeeps the range of values of each column for\neach micro-partition. A query skips the\nmicro-partitions that cannot match ([micro-par\ntitions](https://docs.snowflake.com/en/user-gu\nide/tables-clustering-micropartitions)).\nApache Iceberg adds a level above the footer.\nEach manifest records the minimum and maximum\nvalue of each column for every data file. A\nreader therefore skips whole files first. The\n[Iceberg map](../iceberg/iceberg.md) describes\nmanifests. Inside each file that remains,\nIceberg's Parquet reader compares the footer\nminimum and maximum values with the filter. It\nskips row groups that cannot match ([`ReadConf\n`](https://github.com/apache/iceberg/blob/4616\nacf/parquet/src/main/java/org/apache/iceberg/p\narquet/ReadConf.java#L94-L114)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-be3163a8d496",
+      "originalText": "Row Group Skipping\nThe footer stores the minimum and maximum value of each column chunk ([`Statistics`](https://github.com/apache/parquet-format/blob/ec90dd4/src/main/thrift/parquet.thrift#L267-L311)). A reader that filters on a column compares the filter with these values. It skips every row group that cannot match. In the example file, `id` runs from 1 to 3 in row group 0 and from 4 to 6 in row group 1. The filter `id > 3` keeps only row group 1.\n\nSkipping works only when similar values sit in the same row group. In the example, `fare` runs from 8.0 to 20.0 in row group 0 and from 9.0 to 15.5 in row group 1. The filter `fare > 12` therefore keeps both. In the test file, `id` is sorted, and `id >= 200000` keeps one of three row groups. Its `fare` values are random, so every row group runs from 5.0 to 60.0. The filter `fare > 55` keeps all three. These results come from the pyarrow dataset API in November 2026.\n\nSnowflake tables use the same idea. Snowflake keeps the range of values of each column for each micro-partition. A query skips the micro-partitions that cannot match ([micro-partitions](https://docs.snowflake.com/en/user-guide/tables-clustering-micropartitions)). Apache Iceberg adds a level above the footer. Each manifest records the minimum and maximum value of each column for every data file. A reader therefore skips whole files first. The [Iceberg map](../iceberg/iceberg.md) describes manifests. Inside each file that remains, Iceberg's Parquet reader compares the footer minimum and maximum values with the filter. It skips row groups that cannot match ([`ReadConf`](https://github.com/apache/iceberg/blob/4616acf/parquet/src/main/java/org/apache/iceberg/parquet/ReadConf.java#L94-L114)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "row-group-skipping"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6949420276,
+      "isDeleted": false,
+      "id": "node-773d311b5dc5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1289.2,
+      "y": 3185.75,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 410.40000000000003,
+      "height": 164.0,
+      "seed": 730893,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-773d311b5dc5"
+        },
+        {
+          "id": "edge-57b6b0d1fed3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "whole-rows-cost-more"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7619784325,
+      "isDeleted": false,
+      "id": "text-773d311b5dc5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1301.2,
+      "y": 3185.75,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 227.5,
+      "seed": 711156,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Whole Rows Cost More\nThe column layout has a price. A row is spread\nover every column. To rebuild one whole row, a\nreader must read from every column of the row\ngroup that holds it. In the test table,\nfetching the row with `id` 250000 took SQLite\n0.06 ms. Parquet needed 3.2 ms and 5,182,765\nbytes, which is one row group and the footer.\nCSV took 33 ms and scanned 16,335,389 bytes to\nreach the row. SQLite is fast here because its\nprimary key leads to the page that holds the\nwhole row. Parquet suits queries that read\nmany rows of a few columns.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-773d311b5dc5",
+      "originalText": "Whole Rows Cost More\nThe column layout has a price. A row is spread over every column. To rebuild one whole row, a reader must read from every column of the row group that holds it. In the test table, fetching the row with `id` 250000 took SQLite 0.06 ms. Parquet needed 3.2 ms and 5,182,765 bytes, which is one row group and the footer. CSV took 33 ms and scanned 16,335,389 bytes to reach the row. SQLite is fast here because its primary key leads to the page that holds the whole row. Parquet suits queries that read many rows of a few columns.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "whole-rows-cost-more"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5805662165,
+      "isDeleted": false,
+      "id": "node-1e048dd34df2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 710.0,
+      "y": 3722.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 172.39999999999998,
+      "height": 54.5,
+      "seed": 135991,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-1e048dd34df2"
+        },
+        {
+          "id": "edge-3ea7f15785a3",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-7d2cd1710c50",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-185008eb9883",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-fcaecac21b12",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "using-parquet"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3482815700,
+      "isDeleted": false,
+      "id": "text-1e048dd34df2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 726.0,
+      "y": 3726.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 140.39999999999998,
+      "height": 45.0,
+      "seed": 914108,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Using\nParquet",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-1e048dd34df2",
+      "originalText": "Using Parquet",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "using-parquet"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9267136864,
+      "isDeleted": false,
+      "id": "node-7d0da0082d57",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1062.4,
+      "y": 3389.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 831632,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7d0da0082d57"
+        },
+        {
+          "id": "edge-7d2cd1710c50",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "open-a-parquet-file"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2697302301,
+      "isDeleted": false,
+      "id": "text-7d0da0082d57",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1074.4,
+      "y": 3389.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 507.5,
+      "seed": 186592,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Open a Parquet File\nA text editor shows a Parquet file as\nunreadable characters. Tools that read Parquet\ndecode the bytes and show rows and columns:\n\n- Snowflake: a stage is a named place for data\nfiles, inside Snowflake or in cloud storage.\nAfter you put the file in a stage, Snowflake\nreads each Parquet row into one column, `$1`.\nThe query `SELECT $1:id, $1:city::varchar,\n$1:fare FROM @my_stage/trips.parquet;` returns\nthe example columns ([Parquet tutorial](https:\n//docs.snowflake.com/en/user-guide/tutorials/s\ncript-data-load-transform-parquet)). The\nfunction `INFER_SCHEMA` lists the column names\nand types that the file stores ([`INFER_SCHEMA\n`](https://docs.snowflake.com/en/sql-reference\n/functions/infer_schema)).\n- pyarrow:\n`pyarrow.parquet.read_table('trips.parquet')`\nreturns a table ([`read_table`](https://arrow.\napache.org/docs/python/generated/pyarrow.parqu\net.read_table.html)). Its `to_pydict()` method\nreturns the dictionary of columns.\n- pandas, the Python data-analysis library:\n`pandas.read_parquet('trips.parquet')` uses\npyarrow, or fastparquet if pyarrow is missing \n([`read_parquet`](https://pandas.pydata.org/do\ncs/reference/api/pandas.read_parquet.html)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7d0da0082d57",
+      "originalText": "Open a Parquet File\nA text editor shows a Parquet file as unreadable characters. Tools that read Parquet decode the bytes and show rows and columns:\n\n- Snowflake: a stage is a named place for data files, inside Snowflake or in cloud storage. After you put the file in a stage, Snowflake reads each Parquet row into one column, `$1`. The query `SELECT $1:id, $1:city::varchar, $1:fare FROM @my_stage/trips.parquet;` returns the example columns ([Parquet tutorial](https://docs.snowflake.com/en/user-guide/tutorials/script-data-load-transform-parquet)). The function `INFER_SCHEMA` lists the column names and types that the file stores ([`INFER_SCHEMA`](https://docs.snowflake.com/en/sql-reference/functions/infer_schema)).\n- pyarrow: `pyarrow.parquet.read_table('trips.parquet')` returns a table ([`read_table`](https://arrow.apache.org/docs/python/generated/pyarrow.parquet.read_table.html)). Its `to_pydict()` method returns the dictionary of columns.\n- pandas, the Python data-analysis library: `pandas.read_parquet('trips.parquet')` uses pyarrow, or fastparquet if pyarrow is missing ([`read_parquet`](https://pandas.pydata.org/docs/reference/api/pandas.read_parquet.html)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "open-a-parquet-file"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7103761973,
+      "isDeleted": false,
+      "id": "node-6a28a06f2c9f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1062.4,
+      "y": 3649.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 410.40000000000003,
+      "height": 199.0,
+      "seed": 604442,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6a28a06f2c9f"
+        },
+        {
+          "id": "edge-39a7b30f4b76",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-185008eb9883",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "files-are-written-once"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8040947729,
+      "isDeleted": false,
+      "id": "text-6a28a06f2c9f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1074.4,
+      "y": 3649.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 910.0,
+      "seed": 657001,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Files Are Written Once\nA writer creates a Parquet file in one pass,\nand engines then leave it unchanged. To change\ndata, an engine writes a new file. This is a\nhabit of engines, and the layout makes it\npractical. The format has no lock, and an\noverwrite is possible.\n\nThe footer comes last, so a writer needs one\npass over the data ([specification](https://gi\nthub.com/apache/parquet-format/blob/ec90dd4/RE\nADME.md#L109-L121)). The footer records the\nbyte range and the minimum and maximum value\nof every chunk. These numbers describe the\nexact bytes before the footer.\n\nExperiments with pyarrow 18.1.0 in November\n2026, on copies of the example file, show what\nan overwrite does:\n\n- Replace one value with another value of the\nsame size, in a copy written with plain\nencoding and no compression. The file opens\nand returns the new value, 99.0 in place of\n20.0. The footer still says that the maximum\nof `fare` is 20.0. The filter `fare > 50`\nreturns 0 rows when it uses the footer, and 1\nrow after a full read. Two readers give two\nanswers.\n- Flip one byte inside a compressed chunk of\n109 bytes. Of the 109 possible flips, 60 break\nthe read, 15 return different values without\nan error, and 34 change nothing that a reader\nsees.\n- Insert one byte before a chunk. Every later\nbyte range in the footer is off by one, and\nthe read fails.\n- Flip one byte in the footer. Of the 981\npossible flips, 721 break the read.\n- Add page checksums. A writer can store a\nCRC32 checksum for each page ([specification](\nhttps://github.com/apache/parquet-format/blob/\nec90dd4/README.md#L224-L228)). With\n`write_page_checksum=True` when writing and\n`page_checksum_verification=True` when\nreading, pyarrow reports the same-size edit as\nan error: CRC checksum verification failed.\n\nA table format such as Apache Iceberg tracks\nwhich files are current. The [Iceberg\nmap](../iceberg/iceberg.md) describes its data\nfiles as immutable.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-6a28a06f2c9f",
+      "originalText": "Files Are Written Once\nA writer creates a Parquet file in one pass, and engines then leave it unchanged. To change data, an engine writes a new file. This is a habit of engines, and the layout makes it practical. The format has no lock, and an overwrite is possible.\n\nThe footer comes last, so a writer needs one pass over the data ([specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L109-L121)). The footer records the byte range and the minimum and maximum value of every chunk. These numbers describe the exact bytes before the footer.\n\nExperiments with pyarrow 18.1.0 in November 2026, on copies of the example file, show what an overwrite does:\n\n- Replace one value with another value of the same size, in a copy written with plain encoding and no compression. The file opens and returns the new value, 99.0 in place of 20.0. The footer still says that the maximum of `fare` is 20.0. The filter `fare > 50` returns 0 rows when it uses the footer, and 1 row after a full read. Two readers give two answers.\n- Flip one byte inside a compressed chunk of 109 bytes. Of the 109 possible flips, 60 break the read, 15 return different values without an error, and 34 change nothing that a reader sees.\n- Insert one byte before a chunk. Every later byte range in the footer is off by one, and the read fails.\n- Flip one byte in the footer. Of the 981 possible flips, 721 break the read.\n- Add page checksums. A writer can store a CRC32 checksum for each page ([specification](https://github.com/apache/parquet-format/blob/ec90dd4/README.md#L224-L228)). With `write_page_checksum=True` when writing and `page_checksum_verification=True` when reading, pyarrow reports the same-size edit as an error: CRC checksum verification failed.\n\nA table format such as Apache Iceberg tracks which files are current. The [Iceberg map](../iceberg/iceberg.md) describes its data files as immutable.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "files-are-written-once"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3810290821,
+      "isDeleted": false,
+      "id": "node-3bac4ac70436",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1062.4,
+      "y": 3888.75,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 979361,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3bac4ac70436"
+        },
+        {
+          "id": "edge-913ebbc03686",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-fcaecac21b12",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "tiny-files-waste-space"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2018206677,
+      "isDeleted": false,
+      "id": "text-3bac4ac70436",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1074.4,
+      "y": 3888.75,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 499432,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Tiny Files Waste Space\nEvery Parquet file carries its own footer. The\nexample file spends 981 of its 1,595 bytes on\nthe footer, which is more than the 602 bytes\nof column data. The test file spends 1,893 of\nits 15,353,361 bytes, which is 0.01%. A reader\nalso makes one extra read for each file, to\nget the footer. Many tiny files therefore\nwaste storage and time.\n\nSnowflake and Iceberg give sizes to aim for.\nSnowflake recommends data files of roughly 100\nto 250 MB compressed for loading ([loading gui\nde](https://docs.snowflake.com/en/user-guide/d\nata-load-considerations-prepare)). For a\nSnowflake-managed Iceberg table, the setting\n`TARGET_FILE_SIZE` sets a target Parquet file\nsize. The choices are `AUTO`, 16 MB, 32 MB, 64\nMB, and 128 MB ([`CREATE ICEBERG TABLE`](https\n://docs.snowflake.com/en/sql-reference/sql/cre\nate-iceberg-table-snowflake)). A streaming\nwriter can leave small files when it commits\noften. The Iceberg sink connector in the\n[Kafka \u2192 Iceberg \u2192 Snowflake map](../integrati\non/kafka-iceberg-snowflake/kafka-iceberg-snowf\nlake.md) commits on a timer. Each of its tasks\nwrites its own Parquet files. Compaction in\nIceberg rewrites many small files into fewer\nlarge ones. The [Iceberg\nmap](../iceberg/iceberg.md) describes it.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-3bac4ac70436",
+      "originalText": "Tiny Files Waste Space\nEvery Parquet file carries its own footer. The example file spends 981 of its 1,595 bytes on the footer, which is more than the 602 bytes of column data. The test file spends 1,893 of its 15,353,361 bytes, which is 0.01%. A reader also makes one extra read for each file, to get the footer. Many tiny files therefore waste storage and time.\n\nSnowflake and Iceberg give sizes to aim for. Snowflake recommends data files of roughly 100 to 250 MB compressed for loading ([loading guide](https://docs.snowflake.com/en/user-guide/data-load-considerations-prepare)). For a Snowflake-managed Iceberg table, the setting `TARGET_FILE_SIZE` sets a target Parquet file size. The choices are `AUTO`, 16 MB, 32 MB, 64 MB, and 128 MB ([`CREATE ICEBERG TABLE`](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-snowflake)). A streaming writer can leave small files when it commits often. The Iceberg sink connector in the [Kafka \u2192 Iceberg \u2192 Snowflake map](../integration/kafka-iceberg-snowflake/kafka-iceberg-snowflake.md) commits on a timer. Each of its tasks writes its own Parquet files. Compaction in Iceberg rewrites many small files into fewer large ones. The [Iceberg map](../iceberg/iceberg.md) describes it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "tiny-files-waste-space"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8623922557,
+      "isDeleted": false,
+      "id": "node-3920b1c5238c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 710.0,
+      "y": 4148.75,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 417.8,
+      "height": 220.0,
+      "seed": 476326,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3920b1c5238c"
+        },
+        {
+          "id": "edge-642c23f729a0",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "about-the-numbers"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5956598253,
+      "isDeleted": false,
+      "id": "text-3920b1c5238c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 4148.75,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 397.8,
+      "height": 1397.5,
+      "seed": 801237,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Numbers\nThe numbers in this map come from files that\nscripts generated in November 2026. The example\nfile `trips.parquet` is stored beside this map, in\nthe folder `mind-maps/de/parquet/` of the mind-map\nrepository. The script below writes it again and\nalso creates the test file `trips_big.parquet`. Run\nthe script in an empty folder, because it writes\nboth files to the current folder. It uses [pyarrow]\n(https://arrow.apache.org/docs/python/generated/pya\nrrow.parquet.write_table.html) 18.1.0:\n\n```python\nimport random\n\nimport pyarrow as pa\nimport pyarrow.parquet as pq\n\nexample = pa.table(\n{\n\"id\": pa.array([1, 2, 3, 4, 5, 6], pa.int64()),\n\"city\": [\"Perth\", \"Perth\", \"Sydney\", \"Sydney\",\n\"Perth\", \"Perth\"],\n\"fare\": [12.5, 8.0, 20.0, 15.5, 9.0, 11.0],\n}\n)\npq.write_table(example, \"trips.parquet\",\nrow_group_size=3)\n\nrng = random.Random(42)\nn = 300_000\ncities = [\"Perth\", \"Sydney\", \"Melbourne\",\n\"Brisbane\"]\nletters = \"abcdefghijklmnopqrstuvwxyz0123456789\"\ntest = pa.table(\n{\n\"id\": pa.array(range(n), pa.int64()),\n\"city\": [rng.choice(cities) for _ in range(n)],\n\"fare\": [round(rng.uniform(5, 60), 2) for _ in\nrange(n)],\n\"note\": [\"\".join(rng.choices(letters, k=40)) for _\nin range(n)],\n}\n)\npq.write_table(test, \"trips_big.parquet\",\nrow_group_size=100_000)\n```\n\nThe example file `trips.parquet` holds the six rows\nof the example table in two row groups of three\nrows. It takes 1,595 bytes. The test file\n`trips_big.parquet` holds 300,000 rows in three row\ngroups of 100,000 rows. It takes 15,353,361 bytes.\nOther writers make files of other sizes.\n\nThe CSV file is the test table written with\n`pyarrow.csv.write_csv`, which puts text in quotes.\nIt takes 19,625,110 bytes. The SQLite file holds\nthe same rows in the table `t (id INTEGER PRIMARY\nKEY, city TEXT, fare REAL, note TEXT)`. It takes\n20,017,152 bytes. Each query ran in Python on one\nthread, with pyarrow and the `sqlite3` module. The\nParquet queries used the footer statistics to\nchoose row groups.\n\nThe width test wrote 100,000 rows of decimal\nnumbers with the expression `round(rng.uniform(0,\n100), 2)` from `random.Random(7)`. The columns are\n`c0`, `c1`, and so on, and the row groups have\n50,000 rows.\n\nThe compression sizes compare columns of the test\ntable. Each CSV column is written with\n`pyarrow.csv.write_csv` and compressed with ZSTD\nthrough `pyarrow.compress`. Each Parquet column\ncomes from `pyarrow.parquet.write_table` with\n`compression=\"zstd\"`. The `city` and `fare` columns\nuse dictionary encoding. The `id` column uses\n`column_encoding={\"id\": \"DELTA_BINARY_PACKED\"}`,\nwith `use_dictionary` listing the other columns.\nThe whole-table sizes compare the whole CSV file\nwith the whole Parquet file under the same codec.\nThe one-column read sums `fare` from a\nZSTD-compressed CSV file and from the Parquet file,\nwith the method of the queries above. The estimates\nin the text round these results.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-3920b1c5238c",
+      "originalText": "About the Numbers\nThe numbers in this map come from files that scripts generated in November 2026. The example file `trips.parquet` is stored beside this map, in the folder `mind-maps/de/parquet/` of the mind-map repository. The script below writes it again and also creates the test file `trips_big.parquet`. Run the script in an empty folder, because it writes both files to the current folder. It uses [pyarrow](https://arrow.apache.org/docs/python/generated/pyarrow.parquet.write_table.html) 18.1.0:\n\n```python\nimport random\n\nimport pyarrow as pa\nimport pyarrow.parquet as pq\n\nexample = pa.table(\n    {\n        \"id\": pa.array([1, 2, 3, 4, 5, 6], pa.int64()),\n        \"city\": [\"Perth\", \"Perth\", \"Sydney\", \"Sydney\", \"Perth\", \"Perth\"],\n        \"fare\": [12.5, 8.0, 20.0, 15.5, 9.0, 11.0],\n    }\n)\npq.write_table(example, \"trips.parquet\", row_group_size=3)\n\nrng = random.Random(42)\nn = 300_000\ncities = [\"Perth\", \"Sydney\", \"Melbourne\", \"Brisbane\"]\nletters = \"abcdefghijklmnopqrstuvwxyz0123456789\"\ntest = pa.table(\n    {\n        \"id\": pa.array(range(n), pa.int64()),\n        \"city\": [rng.choice(cities) for _ in range(n)],\n        \"fare\": [round(rng.uniform(5, 60), 2) for _ in range(n)],\n        \"note\": [\"\".join(rng.choices(letters, k=40)) for _ in range(n)],\n    }\n)\npq.write_table(test, \"trips_big.parquet\", row_group_size=100_000)\n```\n\nThe example file `trips.parquet` holds the six rows of the example table in two row groups of three rows. It takes 1,595 bytes. The test file `trips_big.parquet` holds 300,000 rows in three row groups of 100,000 rows. It takes 15,353,361 bytes. Other writers make files of other sizes.\n\nThe CSV file is the test table written with `pyarrow.csv.write_csv`, which puts text in quotes. It takes 19,625,110 bytes. The SQLite file holds the same rows in the table `t (id INTEGER PRIMARY KEY, city TEXT, fare REAL, note TEXT)`. It takes 20,017,152 bytes. Each query ran in Python on one thread, with pyarrow and the `sqlite3` module. The Parquet queries used the footer statistics to choose row groups.\n\nThe width test wrote 100,000 rows of decimal numbers with the expression `round(rng.uniform(0, 100), 2)` from `random.Random(7)`. The columns are `c0`, `c1`, and so on, and the row groups have 50,000 rows.\n\nThe compression sizes compare columns of the test table. Each CSV column is written with `pyarrow.csv.write_csv` and compressed with ZSTD through `pyarrow.compress`. Each Parquet column comes from `pyarrow.parquet.write_table` with `compression=\"zstd\"`. The `city` and `fare` columns use dictionary encoding. The `id` column uses `column_encoding={\"id\": \"DELTA_BINARY_PACKED\"}`, with `use_dictionary` listing the other columns. The whole-table sizes compare the whole CSV file with the whole Parquet file under the same codec. The one-column read sums `fare` from a ZSTD-compressed CSV file and from the Parquet file, with the method of the queries above. The estimates in the text round these results.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "about-the-numbers"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5743326106,
+      "isDeleted": false,
+      "id": "edge-d3e9ff277eda",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 353.62484109773425,
+      "y": 2134.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 143586,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          399.28400508487255,
+          -1534.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-acd079a9820e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-31e5c2ec3c3a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.df33e5599a6a459b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9424522875,
+      "isDeleted": false,
+      "id": "edge-0ea08bf657a9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 794.9340627279358,
+      "y": 545.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 143903,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          263.44770240700234,
+          -205.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-31e5c2ec3c3a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-fb8d4ceb6ff8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.7c7b41167c5462b4"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7335417498,
+      "isDeleted": false,
+      "id": "edge-0f24e28faddf",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1217.278787878788,
+      "y": 442.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 669292,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          262.371212121212,
+          1614.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2f9b59148846",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3293bd507246",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.1abc2a478cfe699b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1139999095,
+      "isDeleted": false,
+      "id": "edge-f15c209f04fd",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 809.7347871235722,
+      "y": 545.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 591680,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          188.9009345794393,
+          -103.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-31e5c2ec3c3a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2f9b59148846",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.1b3cc3f235976632"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7640299713,
+      "isDeleted": false,
+      "id": "edge-39ec8819e716",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 810.0,
+      "y": 561.1432635411925,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 422099,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180.0000000000001,
+          -41.78425125170679
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-31e5c2ec3c3a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e12dc140eaea",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.80416aeedc0bc3d7"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1313064645,
+      "isDeleted": false,
+      "id": "edge-60caba4c12ef",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1199.4,
+      "y": 601.5,
+      "strokeColor": "#F59E0B",
+      "backgroundColor": "transparent",
+      "seed": 424138,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          -40.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-47455e3cb314",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e12dc140eaea",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.e55f325955936987"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5722779815,
+      "isDeleted": false,
+      "id": "edge-6054930a34d6",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1232.0159732185557,
+      "y": 821.5,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 547496,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          244.76805356288878,
+          825.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-47455e3cb314",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9361947c8f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.00e5498779772751"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7368075707,
+      "isDeleted": false,
+      "id": "edge-46d33d71161e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 810.0,
+      "y": 588.5385753299954,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 890308,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180.0000000000001,
+          56.838871187983614
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-31e5c2ec3c3a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-47455e3cb314",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.827b0788dc4ebcea"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3657040980,
+      "isDeleted": false,
+      "id": "edge-d2a785703e72",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 792.2957518543493,
+      "y": 600.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 126069,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          276.73607552258943,
+          233.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-31e5c2ec3c3a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f643f8e37a19",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a0721c61532f48a1"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5063977911,
+      "isDeleted": false,
+      "id": "edge-52dac00894ab",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 425.1350048216008,
+      "y": 2134.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 120436,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          389.72999035679845,
+          -428.125
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-acd079a9820e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e4518a3b165f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.00028d7e5d46a1a1"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9405184542,
+      "isDeleted": false,
+      "id": "edge-aeda64f1bf04",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1120.0,
+      "y": 1568.6591520861373,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 356606,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180.0,
+          -24.226110363391626
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e4518a3b165f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-17667ed2b7ea",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.7627da1693df6a4d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7270472439,
+      "isDeleted": false,
+      "id": "edge-b60a37b3db47",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1120.0,
+      "y": 1651.690360026918,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 514075,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180.0,
+          48.67934051144016
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e4518a3b165f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9361947c8f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.251753f9f6112523"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9658356721,
+      "isDeleted": false,
+      "id": "edge-94ce88d5660e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1718.8000000000002,
+      "y": 1757.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 282831,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          179.99999999999955,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-9361947c8f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-dbe717ef8462",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.43696b5fec556b57"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8966989438,
+      "isDeleted": false,
+      "id": "edge-6ae10dfb7d2d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2317.6,
+      "y": 1757.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 562774,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-dbe717ef8462",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-767013ce0ee0",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.691cdc74101b4b64"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5264323863,
+      "isDeleted": false,
+      "id": "edge-57ad6b54c1fa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1070.3986928104575,
+      "y": 1706.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 640829,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          283.602614379085,
+          200.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e4518a3b165f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d7eb6b340a11",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5a057db41989763e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7574675774,
+      "isDeleted": false,
+      "id": "edge-1f395b172cd3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 450.1089494163424,
+      "y": 2354.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 932629,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          390.1124513618678,
+          343.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-acd079a9820e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a5ee6e6159f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.12a6c721d89b0647"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1253127708,
+      "isDeleted": false,
+      "id": "edge-258aea9d7b9b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 967.9484767941117,
+      "y": 2697.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 687447,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          439.64620731956666,
+          -459.625
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-a5ee6e6159f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3293bd507246",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e8e7fd6e2f2915a2"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1844177369,
+      "isDeleted": false,
+      "id": "edge-912901763b66",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1699.6000000000001,
+      "y": 2102.136226034309,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 819318,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          179.99999999999977,
+          -39.35418768920317
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3293bd507246",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d43ee08881f9",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.af18072a52897ba7"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6266423935,
+      "isDeleted": false,
+      "id": "edge-cb1400b12750",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1699.6000000000001,
+      "y": 2191.863773965691,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 754061,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          179.99999999999977,
+          39.35418768920317
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3293bd507246",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d11c13b0cd12",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c4ad071cdd943e24"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6709920661,
+      "isDeleted": false,
+      "id": "edge-f86536919768",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6,
+      "y": 2494.8222754793137,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 197022,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -210.54556390977427,
+          88.3027245206863
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-360d77bbb974",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-42f263f6eb8d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.8bdd2b3ccda14542"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1999256226,
+      "isDeleted": false,
+      "id": "edge-7b2a73665899",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1699.6000000000001,
+      "y": 2236.7275479313826,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 639964,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          179.99999999999977,
+          78.70837537840544
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3293bd507246",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-360d77bbb974",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.cc1358eb5d6ff0b0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7079694054,
+      "isDeleted": false,
+      "id": "edge-5dfe4ea39023",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1503.1692307692308,
+      "y": 2167.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 1622,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          1.661538461538612,
+          -40.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-d45498bb6340",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d7eb6b340a11",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.791b96f8802636fd"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8626999696,
+      "isDeleted": false,
+      "id": "edge-ea8bb8fa5833",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 984.2382757725267,
+      "y": 2697.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 103637,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          379.76811217865486,
+          -310.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-a5ee6e6159f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d45498bb6340",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.548857e0d49adf13"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4495144852,
+      "isDeleted": false,
+      "id": "edge-fcab63f033cc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1109.2,
+      "y": 2723.561046511628,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 46525,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180.0,
+          -31.39534883720944
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-a5ee6e6159f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-42f263f6eb8d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.58e7659423417d6a"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7486641098,
+      "isDeleted": false,
+      "id": "edge-5f92badd5176",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2088.5,
+      "y": 2625.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 481411,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          40.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-959f0806c0d1",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b07779aeda7b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.322f939b46d53c93"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9696270694,
+      "isDeleted": false,
+      "id": "edge-757a7f320c6f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1039.1322217214963,
+      "y": 2819.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 625983,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          250.06777827850374,
+          117.76324278438051
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-a5ee6e6159f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-be3163a8d496",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.9cbfbc09ca4f6248"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7901159949,
+      "isDeleted": false,
+      "id": "edge-57b6b0d1fed3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 979.6324907975461,
+      "y": 2819.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 622717,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          420.6254723926379,
+          366.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-a5ee6e6159f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-773d311b5dc5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.36fccaad953eec5d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4102604456,
+      "isDeleted": false,
+      "id": "edge-3ea7f15785a3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 359.4427278013124,
+      "y": 2354.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 295182,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          428.2248691751807,
+          1367.625
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-acd079a9820e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-1e048dd34df2",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c22e2ee7b02a254d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2463981882,
+      "isDeleted": false,
+      "id": "edge-7d2cd1710c50",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 848.1442885771544,
+      "y": 3722.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 895158,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          214.2557114228457,
+          -112.39865433137084
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-1e048dd34df2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7d0da0082d57",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.9125e95792bee541"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3963267774,
+      "isDeleted": false,
+      "id": "edge-39a7b30f4b76",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1281.4889305816137,
+      "y": 3649.75,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 795091,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          212.55647279549703,
+          -1522.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6a28a06f2c9f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d7eb6b340a11",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.62a4d8ff8fcc4d79"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8390192088,
+      "isDeleted": false,
+      "id": "edge-185008eb9883",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 882.4000000000001,
+      "y": 3749.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 899103,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-1e048dd34df2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6a28a06f2c9f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6fb0b9531ccbd217"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2679985959,
+      "isDeleted": false,
+      "id": "edge-913ebbc03686",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1284.9883436356756,
+      "y": 3888.75,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 585772,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          211.22331272864903,
+          -1761.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3bac4ac70436",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d7eb6b340a11",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.a162063ca3670e75"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6030912130,
+      "isDeleted": false,
+      "id": "edge-fcaecac21b12",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 848.1442885771544,
+      "y": 3776.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 7395,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          214.2557114228457,
+          112.39865433137084
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-1e048dd34df2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3bac4ac70436",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c0f73e9a448fb1d6"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3401445386,
+      "isDeleted": false,
+      "id": "edge-642c23f729a0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 357.43139931740615,
+      "y": 2354.375,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 540972,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          529.0372013651877,
+          1794.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-acd079a9820e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3920b1c5238c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.7348deb656faa4c9"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {
+    "file-c13bababb445": {
+      "id": "file-c13bababb445",
+      "mimeType": "image/svg+xml",
+      "dataURL": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIGRhdGEtZDItdmVyc2lvbj0idjAuOS4wIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWluWU1pbiBtZWV0IiB2aWV3Qm94PSIwIDAgNjU2IDcwNiIgd2lkdGg9IjY1NiIgaGVpZ2h0PSI3MDYiPjxzdmcgY2xhc3M9ImQyLTI3OTYxNTEzMDIgZDItc3ZnIiB3aWR0aD0iNjU2IiBoZWlnaHQ9IjcwNiIgdmlld0JveD0iLTI1IC0yNSA2NTYgNzA2Ij48cmVjdCB4PSItMjUiIHk9Ii0yNSIgd2lkdGg9IjY1NiIgaGVpZ2h0PSI3MDYiIHJ4PSIwIiBmaWxsPSIjRkZGRkZGIiBjbGFzcz0iIGZpbGwtTjciIHN0cm9rZS13aWR0aD0iMCIgLz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWwouZDItMjc5NjE1MTMwMiAudGV4dCB7Cglmb250LWZhbWlseTogImQyLTI3OTYxNTEzMDItZm9udC1yZWd1bGFyIjsKfQpAZm9udC1mYWNlIHsKCWZvbnQtZmFtaWx5OiBkMi0yNzk2MTUxMzAyLWZvbnQtcmVndWxhcjsKCXNyYzogdXJsKCJkYXRhOmFwcGxpY2F0aW9uL2ZvbnQtd29mZjtiYXNlNjQsZDA5R1JnQUJBQUFBQUE2WUFBb0FBQUFBRmV3QUFndUZBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUJQVXk4eUFBQUE5QUFBQUdBQUFBQmdYZC9WbzJOdFlYQUFBQUZVQUFBQW9nQUFBTmdEa2dUV1oyeDVaZ0FBQWZnQUFBZ1BBQUFLa0NWSXoxbG9aV0ZrQUFBS0NBQUFBRFlBQUFBMkc0VWUzMmhvWldFQUFBcEFBQUFBSkFBQUFDUUtoQVhqYUcxMGVBQUFDbVFBQUFDRUFBQUFoRGlOQmx0c2IyTmhBQUFLNkFBQUFFUUFBQUJFTE5ndnFHMWhlSEFBQUFzc0FBQUFJQUFBQUNBQU9RRDJibUZ0WlFBQUMwd0FBQU1yQUFBSUZBYkRWVTF3YjNOMEFBQU9lQUFBQUNBQUFBQWcvOUVBTWdBREFna0JrQUFGQUFBQ2lnSllBQUFBU3dLS0FsZ0FBQUZlQURJQkl3QUFBZ3NGQXdNRUF3SUNCR0FBQXZjQUFBQURBQUFBQUFBQUFBQkJSRUpQQUVBQUlQLy9BdTcvQmdBQUE5Z0JFU0FBQVo4QUFBQUFBZVlDbEFBQUFDQUFBM2ljZk0zSlNjVUFBSVRoTHlidWNkODNTQUVlRkVIUXV3M1lnWUpJUUZFRUVXdHhRYkVDQzdBRG0zQzcyOEVJUWQ3eE1ZZTVmUENqVUNwUXE3eWowYWk2MzdSdDE1NTlCdzRkTzlVNmQrbmFiZkl2dHV6MHhKRVRyVE1YcnR3aytjaHZmdktkejN6bExhOTV5WE9lOHBpSDNPZXVhL1pmWWQyQ1JVdVdyVmkxWnNPQVVtWFFrR0VqUm8wWlY1c3dhY3EwR2JQbXpQTUhBQUQvL3dNQVFRd3FVQUFBZUp4a2xsMXNJK1hWeDg4emRqekoyazR5NnhtUHYrMlpTVHorZHVJWnp6anh4eVNPblRpSkhYdWRoTjNrSlFuWmhHVGZ3bTY3RVdWTG9idW9vTEpGVzNWVnVLaFV4SWVLVktpS0JFSUNla0hWVWtHWHRpQWh0YlJWcTRyMklxQ0NxcEs2SHl1NjQyckdTY2pTcTJjdVJ1ZC96dm4vem5rZTZJSWxBQ3lOUFFvRzZJRStPQTRVZ0VBd3hDREQ4eHd1QzdMTTBRYVpSd1MraFA2Z1hrVm9XalJLa25HNCtHSHhua3VYMEttTDJLTTM3aHg5Y0h2NzlkVUxGOVJ2N0g2Z3B0RGJId0NDWlFEMFIrd3FtUFY0RkVNSkZFY3gxREw2c3ZxNzY5ZlJNSFoxOHUycHYwNEJBS2I5aXdXd3E5QUx0UGEza0xMYktkS0UyemdEUnhCQ1NrcUxRWTViZm12aVRMWlIrdDdxNHhmTzFack4yam5zS25laVZGMGgxRDhqU3YwUUxTbGo0eUxvOGNSMkM3MkE5c0FGQXdBMEcweUxraXdHZ3h4cndubEpFbEoyaXVCNHptVGlVNUtjTnBrbzB2NWEvc1EzdjBORVE1RVpiNERkR0YxcWxIQURlOExPRmJoNzFsT1c2ZkhHSXVIUGNBRnl4QjQrKzMvcXU2T2VTSkgxUDlTWFM0WUhBWU5tdTRVK3dhNkJEUUlBWFd5UTUzQ09FQ2k4bzBYcVFsb05yQW1uN0hZVVpxY0RCcnpZeEpoNmFPMTBkbTB5VjgrVy9XTmNRTEV3M2hSMjdiVlRYdjVyNStmdkxwUzNseHNiYktEdG9UdDFKZG90OUhPMEJ3N3c2enBhWVhvNXBBbG43SFloSmNtMHlXUmdkQ2xFajMrdW9HektLN2NqVEgybDYrUWtsM1Y3L2ZWZklLTXlJcHl3NUhmcWpaM0NmV2VzenA3YXJSUWhrVDRVbktuVkFRQ0JEd0FwMks4NkxIQnBPUzFxS2pRZTVGaEs4NUc0clZnc1Q5T1IvdU51VDJsN0czMjMwRldiT2RtREs1YlYyb1M2QWdBR2lMY0Q2Q08wQjhPUWg5cWhDK25na1VNUEtsQ2M3cmFKWTNuZENtRy9aNGFEbmxHazNiYlBBQnZzL1BQUHBTOEVtZU5PMXViZ1V3dkQ1SUQxMlUyQ0htcWtlTlo2ZkhCNGRYRXhkNjRheWVlaTBWeGVtbHdRa2d1OVRML0xNZnRlU2ZHUDJJM21rTWVmc0JySlVqUTlGOEc3bFA2MFg2eUdDYk9icEgxeVBsNU5vaGVVZERxWFM2Y1Y5WEkreUxxTVJsdUU0aE1BN1RhVUFlQkY3Q1VzcUhVSlRPQy9UL01HYVF6QWI3RnIwTmVwbFJBSThzQ1FaeFBoWm0rUEVjZk4zWGJMU0JyYnV2R29qVUNvWURRQ2dpWUE5akhhQTBicnRVQUxPalAwQWFXRVppVitlRFpMdUNGUWpXYVV2dUJjYkhhNkdVdElwV1lzS1pYUTdpU1hISTZGeGZVVjlaY29YQ3JNcWsvdUgvdmMvQTN0UVIrNGIrTG1aallwMG83NnN0dUtzcDNOYlNuS1ZrNnAxWlRDM0p3bHQ5Tm83dVJ5TzgzR1RxNjBQYjl3NXN6Qy9MYkdZN010b0UvUVhvZDcrakI3TFNySEJubWEydmV0dzcyV1BGT1BycDdPcm1YWUNSYTdvR092RERDRnQ3QVhNNTdRUStlYmR4ZDhyc1dua2VrbTd2VWVvVlcwQjhTUkh0RjRaNkFKTGF5ekV2YlMvUmF5enovaFJMdW5FdEt4aXRHWUtxalhPdDU0MmkzMEFOcURpTzROTCt1amtoYURRVDZCSGJLOTN3STc3Y08wQXQ0UlY3bHdvQlFkR21JRU4xdU1MTlhqYzU2UVV3b2tvcjRoTjFlS2grc1czaU03bWJqZnlkTEhyRXc2bkswSGFOSG1pSGhvTDJXMk1uS0NMNFowZlVlN2hjcllPVzI3Nld4d2FWa1c5RUU2Wk9URHVYeWxlcXo4d0FOTXhPcXo5Sk5KeTNJRldRdGRseTlQcUh2eDRSNWpBVGZyc1diYkxmUTIyZ1h5TTV3UlFtZW52VmVyekVlSGdsbFc2d3RidGF5dklGSDlUYW5BUjlHUzZxcUdoclI4QUxDWDBLN09uRUd3MmUyYWNiTHR5SmVCTXdTRFdqamM4TVJEQzVYdVh0elkzZDh6MjZqMkVOM0c3ajU4YXU2cm01TTlmVDNHN3Y1akpiU3J2czlPc093RWk1eEh2bHlvaXlzTkRwWTU5VCtBb0JjQVBZOTJ3UWtneUx4QTcwdkpBazV6L0w0VzN2dkVJMHZqWm9mVmFMYWJzN2M4OHZqU2xOWFZhN1E2TEVYMWd6dHNFWktNMk83NCtCL243VEdLaXRMbjlYNVkya24wTTdRTDdxUGV5dkxSc2d5OTJISy8xOUxmVGZhRXBUN3pUeGMzekU2ejBVd2VPOWw0bVVpVzN6RVp4N0d1Ykh3QXZhLyszVjlobVVvQVdXL3NEVlhqR3VPeGRndTlqajBNNWdQM3hIM0VqODdOOWR2T25yMXQ3ZXpadFV5cGxNbVV5NWJubm56cW1XZWVldks1NHFVclYrNjk5OHFWUzNxdWRRRDBNbllSTEFCQ1d0dXNraVFMaEVEVnYzVlhiTnlsUEZoQzc2YTc2ZjRiYjVRNjNMcmFMZlFqN09ILzVaWkxwNlNEeWRxLzBVaDl4alJ5UDZwdUJTTGV1Y3pvREw5VUxkWFpyQkNhOE1ZR2x6UHpkNDZKbzQzTW1rWG1KRjlpTEIwY0NTZ0JpVWxLQTE2Uml5L1dSbWRJbzNXK21HbkdBTk5tRGYwYXV3ZzlHbW15b0cxdERRZGJta2tqTFdlT09uUE5pSXdXVjYrZy9na1J0NTQ4dWZkRFY4Vkp4MmhWZkY1QzMxYnZLajZ2MWVCc3Q5QlBzSXNRK0V3TmV1bzJodUx3VDFmUlg2cWJUTWhieldSUHpCU1lwRGRHSWVWZkJKM3d5a3RTL3JSRllpUlB2RDVSbkNGdEhpUk12V3Jwalo0cWw5ZFRXcTh3R0dxMzBKdTZUeUVBeEpyd0F5SERwL3R1ZjhwTitPR2FRbDMraXE5N0twOGN5NHFGemRIeTV4VngxcDJ3Wlh6eG1TVG1hL0R6RytJaXFvUmlLNmRyU21GYS9VSHA2MXYzUHpiRmV3WGFMVnk0ZlRDNmNUcC9xL2Jvd0NEVWJxRWZIK2piT25PdHE5a09xNVprZlM4ZVhiNWZ6R1lEVS83dVNqNHhma3FvdVJLazdOUHVIMThqMU53UUZ3VmxjNlI4RHIxYW1BN0ZWOVpyTi83TmUwVGFJMzVwS3hqVGhVdVh0KzkvVEh0Q0FZSmsreFo0QTNiZ09BRE5TeEp2WXJranNFNlEwU0dFbVRBSE4rQU1ERTUrZjhpbWhKRFg0L2FMOGJGMS9WNGJiN2ZnRmZSN2pOZWNRdjhQSnUzczNFL3dOTm9GZzc1N2lXWVQ3YW91UU8wM3NSbVFzWmUwOXgxeFJNamg5enNjZmo4MjQzVTZmRDZIMDZzeG9NZUdIVERmUEVGZmNYS2MwOEZ4RnM3dDVUaXZtNFAvQWdBQS8vOERBRHR1TEFvQUFBRUFBQUFDQzRWenEzblpYdzg4OVFBREErZ0FBQUFBMkYyZ29RQUFBQURkWmk4Mi9qcisyd2h2QThnQUFBQURBQUlBQUFBQUFBQUFBUUFBQTlqKzd3QUFDSmorT3Y0NkNHOEFBUUFBQUFBQUFBQUFBQUFBQUFBQUFDRUNqUUJaQU1nQUFBSVBBRm9DT1FCYUFmZ0FOQUlwQUZJQjhBQXVBU1FBSGdINEFDMEE5Z0JGQVA4QVVnTTlBRklDSGdBdUFpc0FVZ0ZiQUZJQm93QWNBVklBR0FJZ0FFc0N6Z0FZQWI0QURnSFRBQXdCOFFBc0FmRUFUd0h4QUJvQjhRQVJBZkVBR1FIeEFEQUI4UUFvQVBrQUx3RDVBRUVBOWdCU0FBRC95UUQ1QUVFQUFBQXNBQ3dBUWdCcUFLSUExZ0VLQVN3Qm1BR2tBY0FCOGdJZUFsSUNjZ0t5QXRnQytnTTBBMkFEa0FPMkE4NEVEQVF3QkdRRXBBVGtCUVFGRUFVY0JUSUZTQUFCQUFBQUlRQ01BQXdBWmdBSEFBRUFBQUFBQUFBQUFBQUFBQUFBQkFBRGVKeWNsTjlxRzFjUXhuK0tKYldoTkJmRkJPZkduTXUyT0NzMTJDR3hyOVoxVEpZYUs5VXEvUU9sc0piV2twQzB1K3l1NUxqMEFYcmR0K2hiNUtyUDBZY292UzR6R2luYXRCQXNRc3kzT2pQZmZHZm1td1BzOGc4NzFPcjNnVCtiUHhpdXNkODhObnlQQjgwRHd6dGNOUDR5WE4rSWFUQm8vR3E0eVplTnJ1R1BlRnYvM2ZESEhOWi9ObnlmdmZxNTRVOTRVdDgxL09tTzQyL0REemprN1JMWDRCbS9HYTZ4UjJiNEhydjhaSGlIaHhobnJjNUQyb1liZk1hKzRTYjdRSTh4SlZQR0pBeHhYRE5teUp5Y21JS1FtSnd4MThRTWNBVDRUQ24xMTRSSWtXUDR2NzlHaEpUa1JNbzRvc1F4SldSS1JNSElHSC9SckpSWFdsSHE1SXFrbWsvSmlJZ3J6WmdRa2VCSUdaS1NFRE5SbnBLU2pHTmF0Q2pvcTk2TWtnS1BnakZUUEZKeWhyVG9jTTRGUFVhTUtYQ2NLNU1vQzBtNXB1U0dTT3M3aTVETzlJbEpLRXpWbklTQjZuU3FMOWJzZ0FzY0hUS04zV1MrcURBYzRQaE9zMFdieERpK3d0UC9ia05adGU1S1RjUkMreWs5dkdLcU9tOTBnaVB0dU5UMStWWnh5VEZ1cS81VWxYeTRSd05WSjdNZWM4VmM1eS96a3p4Umt1RGNIajZoT2loMGozQ2M2bmRBcUIzNW5vQWVMK253bXA1KyszVHA0bk5KajRBWG10dWhpK05yT2x4eXBobUI0dVhadVRybWtoOXhmRU9nTWNJZFczK2s1L0wxaHN6Y0xkckZHWEtQR1psdWdjeFk3aS9PajdlYXNPeFFXbkZIb2E3bzZ4NUpwT3lCZEVYMkxHSm9yc2pVRlRQdDVjb2JoZlZ2WUk2UTAxSm4rKzVjdG1GaHU3ZmE0bHRTM1dISDNEVEo1SmFLUGpSVjd6M1AzT2cvajRnQktWY2EwU2RsUm91U1c3M2JLeUxtVEhHY3FZOWY2cGFVK09zY3FYT3JMb21acVlLQVJIbHlNdjBibVc5QzA5NnYrTjdaV3lLYk45TWRuYXh2dFUwVllVNDJadlJhdTdjNkM2M0w4Y1lFV2piVjFISmt3c0s4dktsNFg2SzlpdjVRM1YvbzY1YnltQzZ4dnE0eS8vdy83OEFUUE5vY2NzUUpJNjBqL0FrTGV5UGErazYwZWM2SjltQkNyRkh5YXI3UmJnbkRFUjVQT2VLSTV6eXRjUHFjY1VxSGt6dG9YR1oxT09YRmV5ZWJIRzdONG96bkQxWFRWcjJPeCt1dloxdlA2L003K1BJTERpb3ZveWlYUGNoWkdOczcvMThTTVJNdGJtK3pMKzRSM3I4QUFBRC8vd01BQjF0TU1BQUFBd0FBQUFBQUFQL09BRElBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE9PSIpOwp9Ci5kMi0yNzk2MTUxMzAyIC50ZXh0LWJvbGQgewoJZm9udC1mYW1pbHk6ICJkMi0yNzk2MTUxMzAyLWZvbnQtYm9sZCI7Cn0KQGZvbnQtZmFjZSB7Cglmb250LWZhbWlseTogZDItMjc5NjE1MTMwMi1mb250LWJvbGQ7CglzcmM6IHVybCgiZGF0YTphcHBsaWNhdGlvbi9mb250LXdvZmY7YmFzZTY0LGQwOUdSZ0FCQUFBQUFCRGNBQW9BQUFBQUdVQUFBZ3VGQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCUFV5OHlBQUFBOUFBQUFHQUFBQUJnWHhIWHJtTnRZWEFBQUFGVUFBQUFwQUFBQU40RUFRVWZaMng1WmdBQUFmZ0FBQW9VQUFBTmlMdmhWd1ZvWldGa0FBQU1EQUFBQURZQUFBQTJHMzhlMUdob1pXRUFBQXhFQUFBQUpBQUFBQ1FLZndYcWFHMTBlQUFBREdnQUFBQ3NBQUFBckZFV0J0RnNiMk5oQUFBTkZBQUFBRmdBQUFCWVNZNU5MbTFoZUhBQUFBMXNBQUFBSUFBQUFDQUFRd0QzYm1GdFpRQUFEWXdBQUFNdkFBQUlLZ2p3VmtGd2IzTjBBQUFRdkFBQUFDQUFBQUFnLzlFQU1nQURBaW9DdkFBRkFBQUNpZ0pZQUFBQVN3S0tBbGdBQUFGZUFESUJLUUFBQWdzSEF3TUVBd0lDQkdBQUF2Y0FBQUFEQUFBQUFBQUFBQUJCUkVKUEFDQUFJUC8vQXU3L0JnQUFBOWdCRVNBQUFaOEFBQUFBQWZBQ2xBQUFBQ0FBQTNpY2RNMDVMZ2NCQUVmaGI4emZQaGo3TmhpN1FrUkxwMUVMSjFDS1FxSVFya080QUszQ0ZkeEFMMnFKNGljUjBja3J2K0toVUNwUTZYaEZvMWFxdExidDJMUHZ3S0VqSjg1Y3VIS1Q4S3U3ZjNyczFMbEwxMG5lOHBYUHZPY2pMM25PVXg3emtQdmM1ZmJuODMrRlRSc2FDeFl0YVMxYnNXck51aTFkU2gzZGV2VHEwMi9Bb01xUVlTTnFvOGFNbXpCcHlyUVpzK2JNOHcwQUFQLy9Bd0F4WFNjTGVKeGtWbjFzRytVWmY5N1hqcTl4cmtuOGNmNCtPNzd6M2RsT2JNYyszMTNpT0hHY09FNlRKczFIUDVMU3BDa1ZoZEswU2RlbUpOQVdKbzJCQksxQVNyVVYyQUJWcThZUVRHSnNmNHdwbTRZME1VU2wvVkVZMGpRRUE0UVkzVWRnMW9aWVlrL3ZPVTNUN2cvNy9lZTk1L2s5ditmM1BMOFhhbUFVQUIvR2w4QUF0ZEFBVm1BQVpFdlFJc2lTeEZPYXJHbTgwNkJKeUVLTlltdjU2bytraURFU01VYWJMZ2NlbXBsQnd3ZnhwZlhqQjRZUEgvNzNURWRIK2ZsZnZsRytpRTYvQVlBcjN3RGdYbndCYXNFQ1lLTmtTUlFsM21ReTJHUWJML0hVWjQxUE5tejNiamZTN20rdXZYYnRCK0czd21nd20wM095ZWtUNWUvaUMrc0x6ejBIQUlCZ0dBQjlyc2NodUpnZ0l6TThNNHllSzMvOThjZjR3cm52bjFzSEFNRGtIbTdGRjRBR082bEFUamtjak4xazRubkdJcWVVdE1qend4L3RPRk1zTHZTTjdWanF6aGJ3QldscVpPaHc0Z00wZmxTTzNvcXhHMStBZW5CdWlVRVJ3Q1NLV2cxem8rOVVJYWRjdW5wK2JDalQyWmtad2hlRXlWMDdwcDNsLzk2NGdRNGxXMXRGQUFSOHBZVE4rREpFQVdvNFVkSWNqbW9BU1lwakphMnFjc3JocEVTUjUweU0zZUYwNnBsTXlONzlTR29Qdnk4Y2o4bk5lNE5ac2VQK1F0dko2TTZtYmttTXRVZjNkQlF6YzNSci9JaGY1TmdBYXczVko0b0pkVExkRXAxMmV3TSt2OS9DdWZiMHFWTnRnQ0ZhS2FGMzBScTRnUWR3Y3FLU1ZqVTlIU1hweVJrTFQvcWhwVlJOTVJFTXZ5Nk1QcnFNK1VpZ082UWtaak16OXk2WmpZSCtiVzdCdGlzYm9DZHl1eVliZ3BLTHVac056WjBxZnlyNytGTk8yNFM1bVhVNWRlN3lsUkoyNEJXd1E2QmFNVS94RnBtaDlHUjZjUktwbitjb3h1RkFmY0ZlMWtpZlhqYXlCUzQ3bWNqT1RJcnF2cGFJUFV3SG14Uzg4c3FRaCszNjF0RGVCM05MeGFISFl1OVk2M1V0aENvbHRJTFd3S05uRUcvUldHVlJUcW1hMDJSQzdyNzUvSTRIQ3ZGK1h4L2ZwT1J5cmE2NExTUHNvenZQak85ZTZQUTdaOWloZlBjdzAzQ295VnZ0dTFRcG9UVzhBalpvdXNtVkhsaFM1QzBzM1d6V1YxUHpIVFBwU0p2YnRMeGtObnFLMkNWWmJjMTJYazNRVHo0NGRxYkw1eHI2eVhwdjBzTXYyZDN2V090Nyt3ZjZBT3ZZLzRMV3dBV0IyOUFUYXFnZ1VRZkJicERUSkFzSzlKL3E2VDNlMFQrZE1PTHkrK1ppVWxHVDRzRm5YNWRhT0pYdVdoZ2ZXOGpsWmdzMm9WYVZnL3M5ZnBTSktBbFNDd0lYQUZyQWI1TlR0dkNLZG9mV3lQaFk3dXJwQ1kzMkJ0S04zdTBlMnV2ZnZ4K2RQMUhqVmZhbGFkUHhtcHFnNkQ5ZC9nNkFBYmhLREZOb0RSTFFBWU02TTZLUzFoUWQrOGFoeWltbnpQQWJ3OFpKaENDWnlNdHVNaGxJd3pkSXMyMU1EeWZxVjc3S0hHenJ0M21iWEo1STVxRFNFdnpGQ0ZXYm50VFlnSldMakU3ZFhUZzN5RW9TeTBwU0pOVXRDYkk3U0hzN3IzdmFXckpoNC9ad3dKdHFORm9MemRtUk1EMWJ4OW5iQjBQbUJvZk4ydEVyajhYUjI5R0lGQW1ISTlIeWNzanRiRFFZWEc0ZlcrVW1UNXF0YXhUa1RXMHlGdDZpazA1WjhzdVViMmRxYkdDWmJmS0ZYWGpsbGYzdTV0bnA4alVVVk1OdVovazFxRlJBQTRBUDhIVXNRZ1FBS0lqQ0U1dXgvWGdGYU1LN2JKRTFtZXdOaXNrL1pmemhpei85MVFzbmMzaWxQUGU3YStVLy83Yi9JWEsvVWtKV3ZBSU5PcStLUmJac0N2ajNReDNMbHRvYXltU2xCZnJBVHN5dnYrKzBJblNpaGlMZkFSaFl0QVpCUFk5VDFtdHczbFlKdFhubXlRd1hrMHJlRmh4TWp1NWNacHVFVnZLWFFLdmRnVmh6bUV2ZUxLKzEvTnJHY1pNbnRBYjJyVG0yOHJSa05qWU5ieEtGVm5QKzJHMDhWZld1YTZjQnZQK25kNU8wUlJuSWtac3ZGT1p6dWJsQ1lTNFhpOGRqOFZoc1kxWTdGM2FQbitsY0hPN09ENUdSM2VBWlBZWFd3SHBiL1pSNEM1bDNTR1I4WnRkMmQ2T3YwNDVXSjFMSm1wcEhqTVpJcXZ3UklHQXFKZlFDV2dOSjUvM1dYaGFyZTNrekdObktmc3pZVGRlVDk0azlYQzRROUxOeGo3OGpmUC9lOW9sQWp5ZnRhVzhYbXpvalIya3hNT1gyT20wV2g4MU1oOW9qZmZzazE2VGRJYm5jOVhWOGU3eDN1cW85UzZXRTV2QUNjWllhVGxRVVh0RTBtVXpqbHNVRlV5T0ZJY3REaTRzOFM3dk5UcHRHSDl2MzlnblRvNCtlZmlzcW1JeXpKcm9hSzFzcG9hL1JLdGp2MEk1bFkxMzljV3hnMmQva0V4M0xTM1dHd0NBOU80M1M1UStWaUlkRk84cU5mVUlMSUtKVFZFR3JzQjFBTnNoT2g0TklTZE5rdytzL3Z0UnR0cG1OdFRaei91SVZ0UHFGTUN4Snc4SVg1VVk5ZHowQUtxRlZjQVBJTm1uTGg1U1QzL0I0aXFxLy9OVHpMV2FIMmJqTnVvMjcvUFF6ejdmU1R0cFlhNitWRVA3SEtOUE1NTTNNYU9YTGNhYUZZWm9kNHlRdVhlbEM2MmdWdkZ2N29tbTNRYXZIUzQ1Z2c0ZXliaFBDWnVvM2wvcnJyR2JqTmt0dDl1SXJ6cmFSTjAzR2s2Z214SHJRSis5eFJZSHY1OThyMTNYdDNmQjJvVkpDTi9EalVMZWh4MnF2R1R2Um9xcWtkZjBRT1RyUXRudlBuNytYL054aHB6UHNkb1ZkcmpEOThwVXJWNjlldWZMeUtlSGd4TVFVeDAxTlRCd1VDTzRpQVBvVFBrdjRsSWxkS0txcWtlVlNmR0l4dllNN3ZyaUk1ZytZZmZiMXRVV0NBNEVmQUgyS0h3Y2Z1ZCtGbGZRV1Q5YTNKbkZNbVJIR3poZVRFVTV6alNZT0YzSUhsWTZwdEN2citQYWU0ZlAzeHhKSnlUT1NrbE1IT3BYNWVkVlFjNDdFZFZSSzZFUDhPRVMyOHFmWHBhVFUyN0l3ZGhQeFlKTHJYOE1uK0FKYkRDZmFmSU45KzdyRElxZjVCMXNPWnc0L3FNbGFmMzZXVG9XbmZTRXA1SXM0amliRW9PRDMzQ1UySDlpZExEcU1qY05kSGJ1YlNVMFliQURvYTN3V2Fva2liVEp4QnlJRG14SlViSVFMbm5ueHNScGtwRDMxcWZMZlAvLzV3QURhZGw5Z3pPOVJ2ZVc1eTBmUXcrV0xKeStUR3B5VkV2b0luNFhBSFRXUTBaWnNRWWFuTmxuNno2N2pZZzliQ0NjemJTMCtnZTJ4b3FOL3JRdUsyb0cyL0RFNkxVeDdoRlN5TlZWdmphTDh1Y1dHNkVTaGVFOWF4eHFwbE5EZmRCMkVBUkJub200bU1kemFVUnRtYWRvd0NMdkpoR3h1Mlc1dUN3WVRDWC9uWE4vQW1kN2NsSCs0VWZQeEdkN2dIbURIWnpNelNHQzVuZTFKTlJVdC95SC81UHppNVlGWVlOTHFGU1lHbS9pWkl6MHpKRCtDRmdEMEdUNnJ6MTBYMW9KS2tLazNVQytZdUdLMi9BbDZRK3NWR28zSFhucDI5N203ZWg4NCt6UlpIZ2I5TGZlNXJoa0owcHZiOUpZRGIyMnA0VTdQRlNYOWVZZW8zRDJaWEV4b1RVOTFUQnhMQmVQZGJVZDhVaVRFUnJPMDBNcGx3NHd2UTdlTXlKbEJsOUczSTZXT1JHZEc0djBPbzN0WExqVWFSdy9IV29WWVNKQmF5dTlKWVovQVdtd0tHMDBBQnE1U1FwL3BmRVlBYk5WZHByTm4yK3lncXBHbndTWllndGIwVW12SUxkdk1HdGZVMnBtYjl1OXFWSDJoOWhCMkQ3RHEzbFRtVUhzWElSbjlMQlhWT1MzVGNYK1Z5a0FvT3RIYmMwak9QM0h5Z1djR0FFRm5wUVQvaEZlaDd1YkxyVXJIOTBSWkZrVlpwaFVwckNoaFNTSGN4eXRkQ09CVjRoMU9TVlVsanVPM2ZETGtiOHNnYk1TOHFvcXA5TlNidSt4NW9Ua3N4Z2Z6NDBzQXhQdjFYT2hMTEFGNTRoZkFSTTZxSjhHN2FCVU11aWRaOHN0b3Rkd0lxUElxYm9mZCtEckJadG1TU0lqSEJTRWV4KzFSbm85R2VUNEsvd01BQVAvL0F3QTNyTUwvQUFFQUFBQUNDNFhVWWc2elh3ODg5UUFCQStnQUFBQUEyRjJnaEFBQUFBRGRaaTgyL2pmK3hBaHRBL0VBQVFBREFBSUFBQUFBQUFBQUFRQUFBOWorN3dBQUNKaitOLzQzQ0cwQUFRQUFBQUFBQUFBQUFBQUFBQUFBQUNzQ3NnQlFBTWdBQUFJOS8vb0NEQUJOQWxRQVRRSmxBRTBDTEFBakFnOEFLZ0k5QUVFQjB3QWtBajBBSndJR0FDUUJWUUFZQWhZQUlnSTdBRUVCRkFBM0FpUUFRUUVlQUVFRFdRQkJBandBUVFJckFDUUJqZ0JCQWJzQUZRRi9BQkVDT0FBOEFnc0FEQUlDQUE0Q0NRQU1BaEFBSlFJUUFFWUNFQUFlQWhBQUZnSVFBQk1DRUFBWEFoQUFLUUlRQUN3Q0VBQXFBaEFBSWdFc0FEMEJMQUF1QVN3QVBRRVVBRUVBQVArdEFBQUFMQUFzQUZBQVpBQ0dBS3dBN0FFa0FWWUJnZ0cwQWVnQ0RnSjJBcGdDcEFLOEF0Z0RDZ01zQTFnRGVBTzBBOW9EL0FRWUJFUUVkQVNnQkxnRTVBVWlCVVlGZUFXNEJkSUdJQVpnQm5ZR2xnYWlCcTRHeEFBQkFBQUFLd0NRQUF3QVl3QUhBQUVBQUFBQUFBQUFBQUFBQUFBQUJBQURlSnljbE05dUcyVVV4WDlPYk5NS3dRSkZWYnFKdmdXTElyVmpVeVZWMjZ3bXBGWkdSSEh3dUNBa2hEUzJKN2JsOGN6SU0zWWFub0ExYjhGYmRNVkQ4QnlJTmJyWDE2NWRFQVVyaW5WbTV2NDUzN25uZnNBQmY3SlBwWG9mK0syZUdxNXdWTDgydk1lOStvWGhmVnIxUGNOVkh0VitOMXhqVUZzWXJ2TjVyV1A0STk1V2Z6RjhqK1BxajRidmMxaHRHZjZZcDlVRHc1L3NPLzR3L0NuSHZGM2lDanpuWjhNVkRza043M0hBRDRiM2VZRFZyRlI1UU5Od2pjODRNbHpuQ09neXBpUmhUTW9ReHcxamhzeVpFVk1RRWpOanpBMHhBeHdCUGdtbHZrMkpGRG1HLy9nMklxUmtScVFWUjVRNEVrSVNJZ3BHVnZFbnpjcTQxbzdTWjZaSXV2bVVqSWpvYWNhRWlCUkh4cENNbEppSjFpa3B5WGxKZ3dZRmZlV2JVMUxnVVRBbXdTTmp4cEFHYlZwYzBtWEVtQUpIU3lzSnM1Q01HMHB1aWJTL3N3aFJwazlNU21HczVxUU1sS2RUZnJGbUIxemlhSk5yN0dibHk2MEtqM0Y4cTluQ1RXSWNYK0xwdjl0Z3R0MTN4U1ppb1hxS2hqMFM1WG1yRXh5cDR0TFg1eHZGSlM5eE8rbXp6ZVRER2cyVW5jeDZUSSs1emwvbUozbkNKTVc1UTN4Q2RWRG9IdUk0MCtlQVVCWDVqb0F1RjdSNVRWZWZmVHAwOExtaVM4QXJ6VzNUd2ZFVmJhNDQxNHhBOGZKYlN4MXp4ZmM0dmliUUdLa2RtejZpdVR5OUlUZDNDM2R4aHB4alNxNWJJRE9XODR2ejQ1MG1MRHVVYmJtalVGZjBkWThrVXZaQVZKRTlpeGlhSzNKMXhWUzFYSG1qTVAwRzVnajVXdXBzMzMyWGJWalk3cTIyK0k1TWQ5Z3hOMDR5dVNXakQwM1ZlODh6dC9ybkVURWdvNmNSZlRLbU5DaTUwN05kRXpFbndYR3VQcjdRTFNueDF6blM1MDVkRWpOVkJnR3AxcG1SNjI5a3ZnbU5lMy9MOTg3dUV0bThxZTdvWkgycVhicEk1WFJqUnE5VnZkVzMwRlNPTnliUXNLbG1saU1UbHNyTGs0cjNKZHJiNGgrcSt3dTkzVEtlY0VaR3d1QnZOOEJUUEpvY2M4SXBJKzBnbFZNV2RqczA5WVpvOG9KVFBmMkVXS1Brdm55ak9rbUZFenllY2NJSkwzajJubzRySnM2NHVEV1h6ZDQrNTV6UjV2US9uV0laMythTVYrdDMvOTcxVjJYYTFMTTRucXlmbnU4OHhVZi93NjFmOEhqcnZ1em9MU0NiczdCcTc3Ymlpb2lwY0hHSG0xcTRoM2gvQVFBQS8vOERBUFMzVDFFQUFBTUFBQUFBQUFEL3pnQXlBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE9Iik7Cn1dXT48L3N0eWxlPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbLnNoYXBlIHsKICBzaGFwZS1yZW5kZXJpbmc6IGdlb21ldHJpY1ByZWNpc2lvbjsKICBzdHJva2UtbGluZWpvaW46IHJvdW5kOwp9Ci5jb25uZWN0aW9uIHsKICBzdHJva2UtbGluZWNhcDogcm91bmQ7CiAgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsKfQouYmxlbmQgewogIG1peC1ibGVuZC1tb2RlOiBtdWx0aXBseTsKICBvcGFjaXR5OiAwLjU7Cn0KCgkJLmQyLTI3OTYxNTEzMDIgLmZpbGwtTjd7ZmlsbDojRkZGRkZGO30KCQkuZDItMjc5NjE1MTMwMiAuc3Ryb2tlLUIye3N0cm9rZTojMEQzMkIyO30uYXBwZW5kaXggdGV4dC50ZXh0e2ZpbGw6IzBBMEYyNX0ubWR7LS1jb2xvci1mZy1kZWZhdWx0OiMwQTBGMjU7LS1jb2xvci1mZy1tdXRlZDojNjc2QzdFOy0tY29sb3ItZmctc3VidGxlOiM5NDk5QUI7LS1jb2xvci1jYW52YXMtZGVmYXVsdDojRkZGRkZGOy0tY29sb3ItY2FudmFzLXN1YnRsZTojRUVGMUY4Oy0tY29sb3ItYm9yZGVyLWRlZmF1bHQ6IzBEMzJCMjstLWNvbG9yLWJvcmRlci1tdXRlZDojMEQzMkIyOy0tY29sb3ItbmV1dHJhbC1tdXRlZDojRUVGMUY4Oy0tY29sb3ItYWNjZW50LWZnOiMwRDMyQjI7LS1jb2xvci1hY2NlbnQtZW1waGFzaXM6IzBEMzJCMjstLWNvbG9yLWF0dGVudGlvbi1zdWJ0bGU6IzY3NkM3RTstLWNvbG9yLWRhbmdlci1mZzpyZWQ7fS5saWdodC1jb2Rle2Rpc3BsYXk6IGJsb2NrfS5kYXJrLWNvZGV7ZGlzcGxheTogbm9uZX1dXT48L3N0eWxlPjxnIGNsYXNzPSJabWxzWlE9PSB6b25lIj48ZyBjbGFzcz0ic2hhcGUiID48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNjA2IiBoZWlnaHQ9IjY1NiIgcng9IjEyIiBzdHJva2U9IiNDQkQ1RTEiIGZpbGw9IiNGMUY1RjkiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjMwMyIgeT0iMjUiIGZpbGw9IiMzMzQxNTUiIGNsYXNzPSJ0ZXh0IiBzdHlsZT0idGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtc2l6ZToyMHB4Ij5FeGFtcGxlIGZpbGU6IDEsNTk1IGJ5dGVzPC90ZXh0PjwvZz48ZyBjbGFzcz0iWm1sc1pTNXpkR0Z5ZEE9PSBleHRlcm5hbCI+PGcgY2xhc3M9InNoYXBlIiA+PHJlY3QgeD0iMTYiIHk9IjM2IiB3aWR0aD0iNTc0IiBoZWlnaHQ9IjgyIiByeD0iOCIgc3Ryb2tlPSIjNDc1NTY5IiBmaWxsPSIjRkZGRkZGIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjI7c3Ryb2tlLWRhc2hhcnJheTo4LjAwMDAwMCw3Ljg5MjUxMTsiIC8+PC9nPjx0ZXh0IHg9IjMwMyIgeT0iNzQuNSIgZmlsbD0iIzFFMjkzQiIgY2xhc3M9InRleHQtYm9sZCIgc3R5bGU9InRleHQtYW5jaG9yOm1pZGRsZTtmb250LXNpemU6MTZweCI+PHRzcGFuIHg9IjMwMyIgZHk9IjAiPlBBUjE8L3RzcGFuPjx0c3BhbiB4PSIzMDMiIGR5PSIxOC41Ij5ieXRlcyAwIHRvIDQ8L3RzcGFuPjwvdGV4dD48L2c+PGcgY2xhc3M9IlptbHNaUzV5WnpBPSB6b25lX2FsdCI+PGcgY2xhc3M9InNoYXBlIiA+PHJlY3QgeD0iMTYiIHk9IjEzNCIgd2lkdGg9IjU3NCIgaGVpZ2h0PSIxNDciIHJ4PSIxMiIgc3Ryb2tlPSIjQzdEMkZFIiBmaWxsPSIjRUVGMkZGIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjI7IiAvPjwvZz48dGV4dCB4PSIzMDMiIHk9IjE1NyIgZmlsbD0iIzMzNDE1NSIgY2xhc3M9InRleHQiIHN0eWxlPSJ0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1zaXplOjE4cHgiPlJvdyBncm91cCAwOiByb3dzIDEgdG8gMywgYnl0ZXMgNCB0byAzMDU8L3RleHQ+PC9nPjxnIGNsYXNzPSJabWxzWlM1eVp6RT0gem9uZV9hbHQiPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjE2IiB5PSIyOTciIHdpZHRoPSI1NzQiIGhlaWdodD0iMTQ3IiByeD0iMTIiIHN0cm9rZT0iI0M3RDJGRSIgZmlsbD0iI0VFRjJGRiIgc3R5bGU9InN0cm9rZS13aWR0aDoyOyIgLz48L2c+PHRleHQgeD0iMzAzIiB5PSIzMjAiIGZpbGw9IiMzMzQxNTUiIGNsYXNzPSJ0ZXh0IiBzdHlsZT0idGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtc2l6ZToxOHB4Ij5Sb3cgZ3JvdXAgMTogcm93cyA0IHRvIDYsIGJ5dGVzIDMwNSB0byA2MDY8L3RleHQ+PC9nPjxnIGNsYXNzPSJabWxzWlM1bWIyOTBaWEk9IHN0b3JlIj48ZyBjbGFzcz0ic2hhcGUiID48cmVjdCB4PSIxNiIgeT0iNDYwIiB3aWR0aD0iNTc0IiBoZWlnaHQ9IjgyIiBzdHJva2U9IiMwMzY5QTEiIGZpbGw9IiNFMEYyRkUiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjMwMyIgeT0iNDk4LjUiIGZpbGw9IiMxRTI5M0IiIGNsYXNzPSJ0ZXh0LWJvbGQiIHN0eWxlPSJ0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1zaXplOjE2cHgiPjx0c3BhbiB4PSIzMDMiIGR5PSIwIj5Gb290ZXI6IGJ5dGVzIDYwNiB0byAxLDU4NzwvdHNwYW4+PHRzcGFuIHg9IjMwMyIgZHk9IjE4LjUiPnNjaGVtYSwgY2h1bmsgYnl0ZSByYW5nZXMsIG1pbiBhbmQgbWF4IHZhbHVlczwvdHNwYW4+PC90ZXh0PjwvZz48ZyBjbGFzcz0iWm1sc1pTNWxibVE9IGV4dGVybmFsIj48ZyBjbGFzcz0ic2hhcGUiID48cmVjdCB4PSIxNiIgeT0iNTU4IiB3aWR0aD0iNTc0IiBoZWlnaHQ9IjgyIiByeD0iOCIgc3Ryb2tlPSIjNDc1NTY5IiBmaWxsPSIjRkZGRkZGIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjI7c3Ryb2tlLWRhc2hhcnJheTo4LjAwMDAwMCw3Ljg5MjUxMTsiIC8+PC9nPjx0ZXh0IHg9IjMwMyIgeT0iNTk2LjUiIGZpbGw9IiMxRTI5M0IiIGNsYXNzPSJ0ZXh0LWJvbGQiIHN0eWxlPSJ0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1zaXplOjE2cHgiPjx0c3BhbiB4PSIzMDMiIGR5PSIwIj5Gb290ZXIgbGVuZ3RoLCB0aGVuIFBBUjE8L3RzcGFuPjx0c3BhbiB4PSIzMDMiIGR5PSIxOC41Ij5ieXRlcyAxLDU4NyB0byAxLDU5NTwvdHNwYW4+PC90ZXh0PjwvZz48ZyBjbGFzcz0iWm1sc1pTNXlaekF1YVdRPSBib3giPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjMyIiB5PSIxNjciIHdpZHRoPSIxNDMiIGhlaWdodD0iOTgiIHJ4PSI4IiBzdHJva2U9IiM0NzU1NjkiIGZpbGw9IiNGRkZGRkYiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjEwMy41IiB5PSIyMDUuNSIgZmlsbD0iIzFFMjkzQiIgY2xhc3M9InRleHQtYm9sZCIgc3R5bGU9InRleHQtYW5jaG9yOm1pZGRsZTtmb250LXNpemU6MTZweCI+PHRzcGFuIHg9IjEwMy41IiBkeT0iMCI+aWQ8L3RzcGFuPjx0c3BhbiB4PSIxMDMuNSIgZHk9IjE3LjY2NjY2NyI+MSwgMiwgMzwvdHNwYW4+PHRzcGFuIHg9IjEwMy41IiBkeT0iMTcuNjY2NjY3Ij5ieXRlcyA0IHRvIDExNDwvdHNwYW4+PC90ZXh0PjwvZz48ZyBjbGFzcz0iWm1sc1pTNXlaekF1WTJsMGVRPT0gYm94Ij48ZyBjbGFzcz0ic2hhcGUiID48cmVjdCB4PSIxOTEiIHk9IjE2NyIgd2lkdGg9IjE5MyIgaGVpZ2h0PSI5OCIgcng9IjgiIHN0cm9rZT0iIzQ3NTU2OSIgZmlsbD0iI0ZGRkZGRiIgc3R5bGU9InN0cm9rZS13aWR0aDoyOyIgLz48L2c+PHRleHQgeD0iMjg3LjUiIHk9IjIwNS41IiBmaWxsPSIjMUUyOTNCIiBjbGFzcz0idGV4dC1ib2xkIiBzdHlsZT0idGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtc2l6ZToxNnB4Ij48dHNwYW4geD0iMjg3LjUiIGR5PSIwIj5jaXR5PC90c3Bhbj48dHNwYW4geD0iMjg3LjUiIGR5PSIxNy42NjY2NjciPlBlcnRoLCBQZXJ0aCwgU3lkbmV5PC90c3Bhbj48dHNwYW4geD0iMjg3LjUiIGR5PSIxNy42NjY2NjciPmJ5dGVzIDExNCB0byAxOTY8L3RzcGFuPjwvdGV4dD48L2c+PGcgY2xhc3M9IlptbHNaUzV5WnpBdVptRnlaUT09IGJveCI+PGcgY2xhc3M9InNoYXBlIiA+PHJlY3QgeD0iNDAwIiB5PSIxNjciIHdpZHRoPSIxNTkiIGhlaWdodD0iOTgiIHJ4PSI4IiBzdHJva2U9IiM0NzU1NjkiIGZpbGw9IiNGRkZGRkYiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjQ3OS41IiB5PSIyMDUuNSIgZmlsbD0iIzFFMjkzQiIgY2xhc3M9InRleHQtYm9sZCIgc3R5bGU9InRleHQtYW5jaG9yOm1pZGRsZTtmb250LXNpemU6MTZweCI+PHRzcGFuIHg9IjQ3OS41IiBkeT0iMCI+ZmFyZTwvdHNwYW4+PHRzcGFuIHg9IjQ3OS41IiBkeT0iMTcuNjY2NjY3Ij4xMi41LCA4LjAsIDIwLjA8L3RzcGFuPjx0c3BhbiB4PSI0NzkuNSIgZHk9IjE3LjY2NjY2NyI+Ynl0ZXMgMTk2IHRvIDMwNTwvdHNwYW4+PC90ZXh0PjwvZz48ZyBjbGFzcz0iWm1sc1pTNXlaekV1YVdRPSBib3giPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjMyIiB5PSIzMzAiIHdpZHRoPSIxNTkiIGhlaWdodD0iOTgiIHJ4PSI4IiBzdHJva2U9IiM0NzU1NjkiIGZpbGw9IiNGRkZGRkYiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjExMS41IiB5PSIzNjguNSIgZmlsbD0iIzFFMjkzQiIgY2xhc3M9InRleHQtYm9sZCIgc3R5bGU9InRleHQtYW5jaG9yOm1pZGRsZTtmb250LXNpemU6MTZweCI+PHRzcGFuIHg9IjExMS41IiBkeT0iMCI+aWQ8L3RzcGFuPjx0c3BhbiB4PSIxMTEuNSIgZHk9IjE3LjY2NjY2NyI+NCwgNSwgNjwvdHNwYW4+PHRzcGFuIHg9IjExMS41IiBkeT0iMTcuNjY2NjY3Ij5ieXRlcyAzMDUgdG8gNDE1PC90c3Bhbj48L3RleHQ+PC9nPjxnIGNsYXNzPSJabWxzWlM1eVp6RXVZMmwwZVE9PSBib3giPjxnIGNsYXNzPSJzaGFwZSIgPjxyZWN0IHg9IjIwNyIgeT0iMzMwIiB3aWR0aD0iMTkyIiBoZWlnaHQ9Ijk4IiByeD0iOCIgc3Ryb2tlPSIjNDc1NTY5IiBmaWxsPSIjRkZGRkZGIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjI7IiAvPjwvZz48dGV4dCB4PSIzMDMiIHk9IjM2OC41IiBmaWxsPSIjMUUyOTNCIiBjbGFzcz0idGV4dC1ib2xkIiBzdHlsZT0idGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtc2l6ZToxNnB4Ij48dHNwYW4geD0iMzAzIiBkeT0iMCI+Y2l0eTwvdHNwYW4+PHRzcGFuIHg9IjMwMyIgZHk9IjE3LjY2NjY2NyI+U3lkbmV5LCBQZXJ0aCwgUGVydGg8L3RzcGFuPjx0c3BhbiB4PSIzMDMiIGR5PSIxNy42NjY2NjciPmJ5dGVzIDQxNSB0byA0OTc8L3RzcGFuPjwvdGV4dD48L2c+PGcgY2xhc3M9IlptbHNaUzV5WnpFdVptRnlaUT09IGJveCI+PGcgY2xhc3M9InNoYXBlIiA+PHJlY3QgeD0iNDE1IiB5PSIzMzAiIHdpZHRoPSIxNTkiIGhlaWdodD0iOTgiIHJ4PSI4IiBzdHJva2U9IiM0NzU1NjkiIGZpbGw9IiNGRkZGRkYiIHN0eWxlPSJzdHJva2Utd2lkdGg6MjsiIC8+PC9nPjx0ZXh0IHg9IjQ5NC41IiB5PSIzNjguNSIgZmlsbD0iIzFFMjkzQiIgY2xhc3M9InRleHQtYm9sZCIgc3R5bGU9InRleHQtYW5jaG9yOm1pZGRsZTtmb250LXNpemU6MTZweCI+PHRzcGFuIHg9IjQ5NC41IiBkeT0iMCI+ZmFyZTwvdHNwYW4+PHRzcGFuIHg9IjQ5NC41IiBkeT0iMTcuNjY2NjY3Ij4xNS41LCA5LjAsIDExLjA8L3RzcGFuPjx0c3BhbiB4PSI0OTQuNSIgZHk9IjE3LjY2NjY2NyI+Ynl0ZXMgNDk3IHRvIDYwNjwvdHNwYW4+PC90ZXh0PjwvZz48bWFzayBpZD0iZDItMjc5NjE1MTMwMiIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iLTI1IiB5PSItMjUiIHdpZHRoPSI2NTYiIGhlaWdodD0iNzA2Ij4KPHJlY3QgeD0iLTI1IiB5PSItMjUiIHdpZHRoPSI2NTYiIGhlaWdodD0iNzA2IiBmaWxsPSJ3aGl0ZSI+PC9yZWN0PgoKPC9tYXNrPjwvc3ZnPjwvc3ZnPgo=",
+      "created": 1794796351089,
+      "lastRetrieved": 1794796351089
+    }
+  }
+}
