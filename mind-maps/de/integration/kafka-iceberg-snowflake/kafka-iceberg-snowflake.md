@@ -86,13 +86,9 @@ For example, the sink unwraps the record from the [CDC source connector](#cdc-ou
 
 A REST catalog is an Iceberg catalog that clients reach through the open Iceberg REST API over HTTPS. Like every catalog, it maps each table name to the table's current metadata file. The [Iceberg map](../../iceberg/iceberg.md) explains that role. Because the API is a standard, any engine with an Iceberg client can use it. Here, the sink writes through it, and Snowflake reads through it.
 
-The catalog also controls access, with identities of its own. A principal is the catalog's identity for a program, such as the sink or Snowflake. The catalog creates and manages it. When you create a service principal, the catalog gives it a client ID and a secret. The program signs in with them through OAuth (open authorization) client credentials, a standard sign-in method for programs.
-
-Permissions reach a principal through a chain. Privileges go to a catalog role, a catalog role goes to a principal role, and a principal role goes to principals. The sink's chain ends in privileges to create tables and write data, often granted together as CATALOG_MANAGE_CONTENT. Snowflake's chain ends in TABLE_READ_DATA only. The [Apache Polaris access control guide](https://polaris.apache.org/in-dev/unreleased/managing-security/access-control/) describes the chain.
+The catalog also controls access. Each program signs in as a principal, the catalog's own identity for that program, with a client ID and a secret. Roles decide what each principal may do: Snowflake's principal can only read, and the sink's principal can create and write tables. The [Iceberg in Snowflake map](../../snowflake/iceberg/snowflake-iceberg.md) explains principals, roles, and Snowflake Open Catalog in detail.
 
 If two writers commit to one table at the same time, the catalog accepts one commit and rejects the other, which then retries.
-
-Snowflake Open Catalog is a managed version of Apache Polaris, an open-source REST catalog.
 
 ### Iceberg commit {#iceberg-commit}
 
@@ -114,15 +110,13 @@ Three details matter in practice. The VTTS is missing, not zero, after a partial
 
 ### Credential vending {#credential-vending}
 
-Credential vending means that the catalog hands out short-lived storage credentials together with a table. The credentials are scoped to that table's location in S3. So a trusted reader needs no storage role of its own. Table access is then managed in one place: the catalog's roles. A writer can use vended credentials too, or keep its own storage keys.
+Credential vending means that the catalog hands out short-lived storage credentials, scoped to one table, together with that table. A reader then needs no storage role of its own.
 
-In Snowflake, the object that connects to an external catalog is a catalog integration. It turns this on with ACCESS_DELEGATION_MODE = VENDED_CREDENTIALS. The default is EXTERNAL_VOLUME_CREDENTIALS, which needs an external volume instead. An external volume is a Snowflake object. It names the S3 location and an IAM (AWS Identity and Access Management) role that Snowflake assumes to read it. The [catalog integration reference](https://docs.snowflake.com/en/sql-reference/sql/create-catalog-integration-rest) lists both modes.
+In Snowflake, the object that connects to an external catalog is a catalog integration, and it turns vending on. The other option is an external volume: a Snowflake object that names the S3 location and an IAM (AWS Identity and Access Management) role to assume. The [Iceberg in Snowflake map](../../snowflake/iceberg/snowflake-iceberg.md) explains all three objects.
 
 ### Catalog-linked database {#catalog-linked-database}
 
-A catalog-linked database is a Snowflake database that mirrors one or more namespaces of a remote Iceberg catalog. Each namespace appears as a schema, and each table appears as an Iceberg table.
-
-Snowflake polls the catalog, every 30 seconds by default. It finds new tables on its own, and it picks up each table's new commits. No table needs its own setup in Snowflake. The [Snowflake guide](https://docs.snowflake.com/en/user-guide/tables-iceberg-catalog-linked-database) describes the options.
+A catalog-linked database is a Snowflake database that mirrors namespaces of a catalog, and it picks up new tables and new commits on its own. The [Iceberg in Snowflake map](../../snowflake/iceberg/snowflake-iceberg.md) explains it, and compares it with one Iceberg table per source table.
 
 ## Data flow {#data-flow}
 
@@ -262,7 +256,7 @@ Finds the tables through the catalog and reads their files in place.
 
 #### Inputs {#snowflake-inputs}
 
-The read side takes two inputs: each table's current metadata from the catalog, and the files in S3 that the metadata lists. Both ways to bind Snowflake to the catalog take these same inputs: a catalog-linked database, and one Iceberg table per source table. They differ only in how Snowflake gets into S3, as Under the hood shows.
+The read side takes two inputs: each table's current metadata from the catalog, and the files in S3 that the metadata lists. Both ways to bind Snowflake to the catalog take these same inputs: a catalog-linked database, and one Iceberg table per source table.
 
 Snowflake reaches the catalog through a catalog integration. This Snowflake object stores the catalog's web address, the catalog's name, and the client ID and secret that Snowflake signs in with. Snowflake signs in to the catalog. It sends the ID and secret to the catalog, gets back a short-lived token, and shows that token on every catalog request. The integration also names the principal role that the token should carry.
 
@@ -278,41 +272,89 @@ Catalog names are case-sensitive and usually lowercase. Snowflake turns unquoted
 
 #### Under the hood {#snowflake-under-the-hood}
 
-Snowflake can bind to the catalog in two ways. This table shows each one as it is usually set up:
+Snowflake binds to the catalog in one of two ways: a catalog-linked database, or one Iceberg table per source table. The [Iceberg in Snowflake map](../../snowflake/iceberg/snowflake-iceberg.md) compares them and explains how to choose.
 
-| | Catalog-linked database | One Iceberg table per source table |
-| --- | --- | --- |
-| Snowflake objects | A catalog integration and one database | A catalog integration, an external volume, and one CREATE ICEBERG TABLE per table |
-| A new table appears | On the next poll after the sink creates it | Only after the sink creates it and someone registers it |
-| New commits appear | On the next poll | Only with AUTO_REFRESH on, or after a manual refresh |
-| S3 access | Vended credentials | The external volume's IAM role |
-
-In an ordinary database, CREATE ICEBERG TABLE does not create a table in the catalog. It registers a table that the catalog already has, under a Snowflake name. Until the sink has created that table, the statement fails with "table not found in catalog". So the per-table way needs two steps. First, build the catalog integration, the external volume, and the database. Then register each table after its first record has arrived. A source that sends no records never gets a table, so its registration keeps failing.
-
-For a table of its own, AUTO_REFRESH is off by default, as the [CREATE ICEBERG TABLE reference](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-rest) shows. Then Snowflake never polls the catalog for that table. The table keeps an old snapshot while the sink keeps committing, and nothing reports an error.
+In this pipeline, the choice decides how new tables and commits reach Snowflake. The sink creates a table in the catalog when the first record for it arrives. A catalog-linked database finds that table on its next poll. With one table per source table, someone registers the table in Snowflake after that first record. So setup runs in two steps: first the catalog integration, the external volume, and the database, then each table. A source that sends no records never gets a table, so its registration keeps failing.
 
 For example, suppose the sink creates a new table at 10:00 and commits every 5 minutes. With a catalog-linked database, the table appears in Snowflake by about 10:00:30. Each later commit follows within a minute or so. With one table per source table, the table appears only after someone registers it in Snowflake. If AUTO_REFRESH is off, it then keeps the snapshot it found, while the sink commits 288 times a day.
-
-The per-table way is older and more manual, and Snowflake still supports it. The catalog-linked database removes the per-table setup and the two-step order. It has [limits](https://docs.snowflake.com/en/user-guide/tables-iceberg-catalog-linked-database#considerations-for-using-a-catalog-linked-database-for-iceberg-tables): it works only with an Iceberg REST catalog, and it supports no replication, cloning, or UNDROP. Renaming a table in the catalog drops and recreates it in Snowflake. As of November 2026, one Snowflake reference page still labels the feature as preview.
-
-Choose a catalog-linked database when you want every table in a namespace, kept current with no table-by-table work. Choose the per-table way when you want only some of the tables, or your own names in an existing database. It also fits when you need a feature that the linked database lacks.
-
-Either way, Snowflake does not copy the catalog's permissions. Grant SELECT on future Iceberg tables in each schema, so that new tables are readable when they appear. In a catalog-linked database, a grant on a schema fails until the first sync has created that schema.
 
 ## End-to-end concerns {#end-to-end-concerns}
 
 > type: category
 
-These problems belong to the whole path, not to one part.
+These problems belong to the whole path.
 
 ### Freshness {#freshness}
 
+Freshness is how old the newest row is when a query reads it. The delay adds up across four steps:
+
+1. The record waits in Kafka until the sink reads it, usually for seconds.
+2. The record waits in a data file until the next commit, for up to one commit interval.
+3. The commit itself takes up to the commit timeout.
+4. Snowflake picks up the new snapshot at its next poll, every 30 seconds by default.
+
+A dbt model that runs on a schedule adds its own wait on top.
+
+For example, with 5-minute commits, a 90-second timeout, and a 30-second poll, a record can take about 7 minutes to reach Snowflake. An hourly dbt run can add up to another hour.
+
+To measure the delay, compare each snapshot's REFRESHED_ON time in Snowflake with its [valid-through timestamp](#valid-through-timestamp). ICEBERG_TABLE_SNAPSHOT_REFRESH_HISTORY returns both. Alert on the age of the VTTS, because row counts look normal when data is only late.
+
 ### Duplicates and updates {#duplicates-and-updates}
+
+The sink appends every record as a new row, so a table can hold several rows for one source row. Three things cause this.
+
+First, CDC sends every change of a row. An insert and a later update arrive as two rows, with the operation in __op and the change's position in the log in __source_commit_lsn. For example, down event 7001 gets one row from 08:00 with no end time, and one row from 09:30 with the end time. A model that wants the current state keeps the latest row for each primary key, ordered by __source_commit_lsn. The two rows differ, so removing identical rows keeps both.
+
+Second, deletes. By default, the unwrap transform turns a delete into a tombstone, which the sink cannot write as a row. With the transform's delete handling set to rewrite, a delete arrives as a row flagged __deleted, and the model can drop that key.
+
+Third, delivery is at least once. A replay after a failure sends records again. In Iceberg sink version 1.10, a change of coordinator can also add the same data file to two snapshots ([Iceberg issue 16282](https://github.com/apache/iceberg/issues/16282)). Models that merge on a key, such as a dbt incremental model with a unique_key, absorb these copies.
 
 ### Schema changes {#schema-changes}
 
+A schema change travels through every layer, and each layer has its own rule:
+
+1. The [schema registry](#schema-registry) checks the new version against its compatibility rule. Under FULL_TRANSITIVE, an optional new field passes, and a type change fails at the producer.
+2. A CDC source follows a new column only after an administrator recreates the table's capture instance.
+3. The sink, with schema evolution on, adds each new field as a new column.
+4. Snowflake shows the new column after its next refresh of the table.
+5. dbt models use the column once a model selects it.
+
+For example, a producer adds an optional field battery_level. The registry accepts it, the next records carry it, and the sink adds a column at its next commit. Snowflake shows the column within a minute, and the column reaches a mart once a model selects it.
+
 ### Silent failures {#silent-failures}
+
+Several failures stop data while every status looks healthy. A query against a stalled table returns the last good snapshot, so readers get old data and no error. These are the usual causes:
+
+- Rejected records. With errors.tolerance = all, a record that fails conversion goes to a dead-letter queue (DLQ), a Kafka topic that holds bad records for review. The pipeline keeps running, so the loss shows only in the DLQ.
+- Failed commits. In Iceberg sink version 1.10, a commit that keeps failing is logged only as a warning, and the tasks stay RUNNING.
+- Partial commits and a shared control topic. The sink's [commit cycle](#sink-under-the-hood) explains both.
+- A Snowflake table without [auto-refresh](../../snowflake/iceberg/snowflake-iceberg.md). Snowflake keeps an old snapshot while the sink keeps committing.
+
+For example, if two connectors share a control topic, the log shows a complete commit every 5 minutes, and each commit holds zero rows.
+
+Detection works on outcomes. Alert on the age of each table's VTTS or latest snapshot, on Snowflake's REFRESHED_ON time, and on any message in the DLQ. Connector status shows only whether the tasks run.
 
 ### Table maintenance {#table-maintenance}
 
+Frequent commits leave many small files and many snapshots. With 5-minute commits, each table gains 288 snapshots a day, and each commit adds at least one file per task. Reads slow down as the file count and the metadata grow.
+
+Four jobs keep a table healthy. Compaction merges small files, snapshot expiry removes old snapshots, and orphan-file cleanup deletes files that no snapshot uses. A manifest rewrite tidies the metadata. The [Iceberg map](../../iceberg/iceberg.md) explains each job.
+
+Snowflake maintains Snowflake-managed tables itself. For a table that an external catalog owns, the catalog's owner probably schedules the jobs, for example with Spark's Iceberg maintenance procedures. A maintenance commit can race a sink commit. The catalog then accepts one commit, and the other retries.
+
 ### Access and identities {#access-and-identities}
+
+Each hop has its own identity, set up in its own place, so each break looks different:
+
+| Hop | Identity | Where it is set up |
+| --- | --- | --- |
+| The CDC connector reads the database | A database login that can read the change tables | The database |
+| Producers and connectors use Kafka | Client certificates, called mutual TLS, plus schema registry credentials | The Kafka service |
+| The sink commits to the catalog | A catalog principal with a client ID and a secret | The catalog |
+| The sink writes data files | Storage keys of its own, or vended credentials | The cloud account |
+| The catalog writes metadata files and vends credentials | An IAM role that the catalog assumes | The cloud account |
+| Snowflake reads the catalog | A read-only catalog principal | The catalog, and a Snowflake catalog integration |
+| Snowflake reads the files | Vended credentials, or an external volume's role | The catalog, or the cloud account |
+| dbt reads the tables | A Snowflake role with grants on the database | Snowflake |
+
+So the write path uses two storage identities: the sink's, for data files, and the catalog's, for metadata files. A failure in the write path stops new data. A failure in the read path makes existing tables unreadable, while ingestion looks healthy. The [Iceberg in Snowflake map](../../snowflake/iceberg/snowflake-iceberg.md) explains principals, roles, and storage access.

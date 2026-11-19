@@ -2,7 +2,7 @@
 
 > type: category
 
-How does Snowflake work with Iceberg tables, and where does Snowflake Open Catalog fit? Snowflake can be the catalog for an Iceberg table, or it can use tables that another catalog owns. Snowflake Open Catalog is a separate catalog service that many engines can share.
+How does Snowflake work with Iceberg tables, and where does Snowflake Open Catalog fit? A catalog stores one value for each Iceberg table: the location of its current metadata file, called the pointer. Snowflake can hold that value itself, as in a Snowflake-managed table. Another catalog, such as Snowflake Open Catalog, can hold it instead. Snowflake then connects to the table through a catalog integration. Snowflake Open Catalog is a separate catalog service that many engines can share.
 
 ## Main concepts {#main-concepts}
 
@@ -10,7 +10,9 @@ How does Snowflake work with Iceberg tables, and where does Snowflake Open Catal
 
 ### External volume {#external-volume}
 
-An external volume is a Snowflake object that points to a location in your cloud storage, such as an S3 bucket. Snowflake uses it to reach the data files and the Iceberg metadata files of a table that lives in your storage. The [CREATE EXTERNAL VOLUME reference](https://docs.snowflake.com/en/sql-reference/sql/create-external-volume) lists its settings.
+An external volume is a Snowflake object that points to a location in your cloud storage, such as an S3 bucket. Snowflake uses it to reach the data files and the Iceberg metadata files of a table that lives in your storage.
+
+The volume names an IAM (AWS Identity and Access Management) role in your cloud account. Snowflake assumes that role through its own IAM user, with an external ID that the role's trust policy must list. `DESC EXTERNAL VOLUME` shows both values. `ALLOW_WRITES`, `TRUE` by default, controls whether Snowflake may write through the volume. The [CREATE EXTERNAL VOLUME reference](https://docs.snowflake.com/en/sql-reference/sql/create-external-volume) lists its settings.
 
 ### Snowflake-managed Iceberg table {#snowflake-managed-table}
 
@@ -20,6 +22,23 @@ Snowflake generates the Iceberg metadata files itself, for version 2 or 3 of the
 
 Snowflake handles all lifecycle maintenance for the table, such as compaction, and you can turn compaction off. The [Iceberg tables overview](https://docs.snowflake.com/en/user-guide/tables-iceberg) describes the two table types.
 
+### Iceberg REST catalog {#iceberg-rest-catalog}
+
+"Iceberg REST catalog" names a protocol, not a product. The Iceberg project defines the [REST Catalog API](https://iceberg.apache.org/rest-catalog-spec/) as an OpenAPI spec. As of November 2026, these products implement it:
+
+| Catalog | Run by | Evidence |
+| --- | --- | --- |
+| Apache Polaris | Open source (Apache Software Foundation) | The [Apache Software Foundation press release](https://news.apache.org/foundation/entry/the-apache-software-foundation-graduates-two-open-source-projects-from-incubator) says it implements the Iceberg REST API. |
+| Snowflake Open Catalog | Snowflake (hosted Polaris) | The [Open Catalog overview](https://docs.snowflake.com/en/user-guide/opencatalog/overview) says it is built on the Iceberg REST protocol. |
+| Snowflake Horizon Catalog | Snowflake | The [Horizon docs](https://docs.snowflake.com/en/user-guide/snowflake-horizon) offer an Iceberg REST Catalog API for Spark, Flink, and Trino. |
+| Project Nessie | Open source | The [Nessie site](https://projectnessie.org/) has a guide for configuring Nessie with Iceberg REST. |
+| Lakekeeper | Open source (written in Rust) | The [Lakekeeper docs](https://docs.lakekeeper.io/) call it a standards-compliant Iceberg REST catalog. |
+| Apache Gravitino | Open source (Apache Software Foundation) | The [Gravitino docs](https://gravitino.apache.org/docs/latest/iceberg-rest-service/) say its Iceberg REST server implements the Iceberg REST API spec. |
+| Databricks Unity Catalog | Databricks | The [Databricks docs](https://docs.databricks.com/aws/en/external-access/iceberg) say it implements the spec at `/api/2.1/unity-catalog/iceberg-rest`. |
+| AWS Glue Data Catalog | AWS | The [AWS docs](https://docs.aws.amazon.com/glue/latest/dg/connect-glu-iceberg-rest.html) show an Iceberg REST endpoint, such as `https://glue.us-east-1.amazonaws.com/iceberg`. |
+| Amazon S3 Tables, Microsoft OneLake | AWS, Microsoft | The [Snowflake REST integration page](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-rest) lists them as commonly used REST catalogs. |
+| Cloudflare Basin Catalog | Cloudflare | The [Cloudflare docs](https://developers.cloudflare.com/basin-catalog/) say it exposes a standard Iceberg REST catalog interface. The R2 Data Catalog address redirects to this page. |
+
 ### Catalog integration {#catalog-integration}
 
 A catalog integration is a Snowflake object that holds the settings for an external Iceberg catalog: the catalog type, its address and name, and the sign-in details. For example, an integration for Snowflake Open Catalog has three key settings:
@@ -28,7 +47,13 @@ A catalog integration is a Snowflake object that holds the settings for an exter
 - `REST_CONFIG = (CATALOG_URI = '<account URL>' CATALOG_NAME = '<catalog name>')` gives the catalog address and name.
 - `REST_AUTHENTICATION = (TYPE = OAUTH OAUTH_CLIENT_ID = '<id>' OAUTH_CLIENT_SECRET = '<secret>' ...)` gives the sign-in details.
 
-For other Iceberg REST catalogs, `CATALOG_SOURCE = ICEBERG_REST` selects the type. The [Open Catalog integration reference](https://docs.snowflake.com/en/sql-reference/sql/create-catalog-integration-open-catalog) and the [Iceberg REST integration reference](https://docs.snowflake.com/en/sql-reference/sql/create-catalog-integration-rest) list all settings.
+Three more settings decide how an Open Catalog integration behaves:
+
+- `ACCESS_DELEGATION_MODE` chooses [credential vending](#credential-vending) or an external volume for storage access.
+- `OAUTH_ALLOWED_SCOPES` names the principal role that the token carries, such as `PRINCIPAL_ROLE:readers` or `PRINCIPAL_ROLE:ALL`.
+- `REFRESH_INTERVAL_SECONDS` sets how often Snowflake polls the catalog, 30 seconds by default.
+
+The client ID and secret belong to the principal that Snowflake signs in as. For other Iceberg REST catalogs, `CATALOG_SOURCE = ICEBERG_REST` selects the type, and it also works for Open Catalog. The [Open Catalog integration reference](https://docs.snowflake.com/en/sql-reference/sql/create-catalog-integration-open-catalog) and the [Iceberg REST integration reference](https://docs.snowflake.com/en/sql-reference/sql/create-catalog-integration-rest) list all settings.
 
 ### Externally managed Iceberg table {#externally-managed-table}
 
@@ -40,21 +65,30 @@ The catalog's owner is probably responsible for maintenance, such as compaction.
 
 ### Snowflake Open Catalog {#snowflake-open-catalog}
 
-Snowflake Open Catalog is Snowflake's hosted version of Apache Polaris, an open-source Iceberg REST catalog. Its job is to give many engines read and write access to the same Iceberg tables. Snowflake, Spark, Flink, Trino, and a Kafka sink connector can all use it.
+[Apache Polaris](https://polaris.apache.org/) is the software, and it implements the Iceberg REST API ([Apache Software Foundation press release](https://news.apache.org/foundation/entry/the-apache-software-foundation-graduates-two-open-source-projects-from-incubator)). Snowflake Open Catalog is Snowflake's hosted service that runs it. Its job is to give many engines read and write access to the same Iceberg tables. Snowflake, Spark, Flink, Trino, and a Kafka sink connector can all use it.
 
 It is a Snowflake account of its own type, with its own web interface, users, and principals. An organization administrator creates it in Snowsight, under Admin > Accounts, or with CREATE ACCOUNT ... POLARIS = TRUE. Its REST endpoint has the form https://<org>-<account>.snowflakecomputing.com/polaris/api/catalog.
 
-It is probably separate because its clients are other engines, which need only a catalog API and identities of their own. As of November 2026, only organizations that already have an Open Catalog account can create more. The [Open Catalog overview](https://docs.snowflake.com/en/user-guide/opencatalog/overview) describes the service.
+As of November 2026, only organizations that already have an Open Catalog account can create more. The [Open Catalog overview](https://docs.snowflake.com/en/user-guide/opencatalog/overview) describes the service.
+
+Four names appear in the sources:
+
+| Name | What it is | Source |
+| --- | --- | --- |
+| Apache Polaris | An open-source catalog for Apache Iceberg. It became an Apache Software Foundation Top-Level Project in 2026. | [Polaris blog, 19 February](https://polaris.apache.org/blog/2026/02/19/apache-polaris-graduates-to-top-level-project/), [Apache Software Foundation press release, 5 March](https://news.apache.org/foundation/entry/the-apache-software-foundation-graduates-two-open-source-projects-from-incubator) |
+| Polaris Catalog | The 2024 name of Snowflake's hosted service. Snowflake announced it in June 2024 for the broader data ecosystem, which includes Snowflake customers. | [announcement, 3 June 2024](https://www.snowflake.com/en/blog/introducing-polaris-catalog/), [release note, 18 October 2024](https://docs.snowflake.com/en/release-notes/2024/other/2024-10-18-snowflake-open-catalog-ga) |
+| Snowflake Open Catalog | The current name of that service. It is a managed service for Apache Polaris, hosted in Snowflake-managed infrastructure. | [overview](https://docs.snowflake.com/en/user-guide/opencatalog/overview) |
+| Snowflake Horizon Catalog | The catalog that Snowflake runs for Snowflake-managed tables. External engines reach it through Polaris APIs. | [developer guide](https://www.snowflake.com/en/developers/guides/interoperable/), [Horizon docs](https://docs.snowflake.com/en/user-guide/snowflake-horizon) |
 
 ### Internal and external catalogs {#internal-and-external-catalogs}
 
-An Open Catalog account holds one or more catalogs, and each catalog holds namespaces, which group tables much as schemas do in Snowflake. Iceberg clients choose a catalog by name, in a setting called warehouse. Here, warehouse means the catalog name.
+An Open Catalog account holds one or more catalogs, and each catalog holds namespaces. Iceberg clients choose a catalog by name, in a setting called warehouse. Here, warehouse means the catalog name.
 
 A catalog is internal or external. Open Catalog manages an internal catalog, and engines, including Snowflake, read and write its tables through Open Catalog. An external catalog mirrors tables that another catalog manages, for example Snowflake through catalog sync. Its tables are read-only in Open Catalog.
 
 ### Principal and roles {#principal-and-roles}
 
-A principal is Open Catalog's identity for a program, such as Snowflake, a Spark job, or a Kafka sink connector. Open Catalog creates and manages it. When you create a service connection for an engine, Open Catalog creates a service principal with a client ID and a secret. The engine signs in with them through OAuth (open authorization) client credentials, a standard sign-in method for programs, and gets a short-lived token.
+A principal is Open Catalog's identity for a program, such as Snowflake, a Spark job, or a Kafka sink connector. Open Catalog creates and manages it. When you create a service connection for an engine, Open Catalog creates a service principal with a client ID and a secret. The engine signs in with them through OAuth (open authorization) client credentials, a standard sign-in method for programs, and gets a short-lived token. The token expires, often after about an hour, so a long-running client such as a sink connector must refresh it.
 
 Permissions reach a principal through a chain. Privileges go to a catalog role, a catalog role goes to a principal role, and a principal role goes to principals. A catalog role belongs to one catalog, and a principal role spans the whole account. When a client asks for a token, it names the principal role it wants, such as PRINCIPAL_ROLE:readers, or PRINCIPAL_ROLE:ALL for every role it holds.
 
@@ -64,9 +98,29 @@ TABLE_READ_DATA reads a table through short-lived read-only storage credentials.
 
 ### Credential vending {#credential-vending}
 
+Credential vending means that the catalog hands out short-lived storage credentials together with a table. The credentials are scoped to that table's location in storage. So a trusted reader needs no storage role of its own, and table access is managed in one place: the catalog's roles.
+
+The [Iceberg REST catalog spec](https://github.com/apache/iceberg/blob/main/open-api/rest-catalog-open-api.yaml) defines how any client asks for it. On a table lookup, the client sends the header `X-Iceberg-Access-Delegation: vended-credentials`. The catalog decides whether to vend, and returns the credentials in the `storage-credentials` field of its answer.
+
+In Open Catalog, vending is a setting on each catalog, and it is off by default for external catalogs. A principal whose roles hold TABLE_READ_DATA gets read-only credentials, and the write privileges give credentials that can also write. A writer can use vended credentials, or keep storage keys of its own.
+
+In Snowflake, the catalog integration turns vending on with ACCESS_DELEGATION_MODE = VENDED_CREDENTIALS, for both CATALOG_SOURCE = POLARIS and ICEBERG_REST. The default, EXTERNAL_VOLUME_CREDENTIALS, uses an external volume instead.
+
+For example, Snowflake reads tables through a catalog-linked database whose integration vends credentials. With each table lookup, the catalog returns the table's metadata location and credentials for that table's prefix, such as s3://lake/sensors/readings/. Snowflake needs no external volume for these tables.
+
+The setting serves every Iceberg table that uses the integration: the tables of a catalog-linked database, and tables of their own. A table of its own then leaves out EXTERNAL_VOLUME, for example `CREATE ICEBERG TABLE readings CATALOG = 'open_catalog_int' CATALOG_NAMESPACE = 'sensors' CATALOG_TABLE_NAME = 'readings' AUTO_REFRESH = TRUE`. The [vended credentials guide](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-vended-credentials) describes the setup.
+
+### Namespace and schema {#namespace-and-schema}
+
+> edge.related: internal-and-external-catalogs, catalog-linked-database
+
+A namespace is a logical entity inside a catalog that can hold tables or views. A schema is a logical grouping of database objects inside one Snowflake database ([Snowflake DDL reference](https://docs.snowflake.com/en/sql-reference/ddl-database)).
+
+They do the same job, but they are not the same object. Both group tables below a higher level. The Polaris docs say other systems call a namespace a schema or a database ([Polaris entities page](https://polaris.apache.org/in-dev/unreleased/entities/)). In a catalog-linked database, each namespace appears as one schema.
+
 ### Catalog-linked database {#catalog-linked-database}
 
-A catalog-linked database is a Snowflake database that mirrors one or more namespaces of a remote Iceberg REST catalog, such as Snowflake Open Catalog. Each namespace appears as a schema, and each table appears as an Iceberg table.
+A catalog-linked database is a Snowflake database that mirrors one or more namespaces of a remote Iceberg REST catalog, such as Snowflake Open Catalog. Each table appears as an Iceberg table.
 
 Snowflake polls the catalog, every 30 seconds by default (SYNC_INTERVAL_SECONDS). It finds new namespaces and tables on its own, and it picks up each table's new commits. No table needs its own setup in Snowflake. When its principal has the privileges, Snowflake can also create tables in the catalog and run INSERT, UPDATE, DELETE, and MERGE on them.
 
@@ -78,11 +132,19 @@ CREATE DATABASE lake LINKED_CATALOG = (CATALOG = 'open_catalog_int', ALLOWED_NAM
 
 Within about 30 seconds, the catalog's tables readings and alarms appear as lake."sensors"."readings" and lake."sensors"."alarms". The names keep the catalog's lowercase, so queries quote them.
 
+The Snowflake guide sets up a linked database with a catalog integration that vends credentials. When the catalog does not support vending, the database also names an external volume, for example `CREATE DATABASE lake LINKED_CATALOG = (CATALOG = 'open_catalog_int') EXTERNAL_VOLUME = 'lake_volume'`. The [CREATE DATABASE (catalog-linked) reference](https://docs.snowflake.com/en/sql-reference/sql/create-database-catalog-linked) lists the settings.
+
 Snowflake permissions are granted separately from the catalog's roles. Grant SELECT on future Iceberg tables in each schema, so that new tables are readable when they appear. A grant on a schema fails until the first sync has created that schema.
 
 The linked database has [limits](https://docs.snowflake.com/en/user-guide/tables-iceberg-catalog-linked-database#considerations-for-using-a-catalog-linked-database-for-iceberg-tables). It works only with a catalog integration for an Iceberg REST catalog, and it supports no replication, cloning, or UNDROP. Renaming a table in the catalog drops and recreates it in Snowflake. As of November 2026, one Snowflake reference page still labels the feature as preview. The [Snowflake guide](https://docs.snowflake.com/en/user-guide/tables-iceberg-catalog-linked-database) describes the options.
 
 ### Auto-refresh {#auto-refresh}
+
+Auto-refresh keeps an externally managed Iceberg table in Snowflake up to date with its catalog. Snowflake polls the catalog for the table's current metadata, and moves the table to each new snapshot. When auto-refresh is off, the table stays on the snapshot it had until someone runs ALTER ICEBERG TABLE <name> REFRESH.
+
+A table of its own needs AUTO_REFRESH = TRUE, because the default is FALSE. Tables in a catalog-linked database pick up new commits on their own. The catalog integration's REFRESH_INTERVAL_SECONDS sets how often Snowflake polls, 30 seconds by default.
+
+Two checks show what happens. SYSTEM$AUTO_REFRESH_STATUS('<table>') reports whether auto-refresh runs for a table. ICEBERG_TABLE_SNAPSHOT_REFRESH_HISTORY lists each refresh, with its time, REFRESHED_ON, and the snapshot's summary. The [auto-refresh guide](https://docs.snowflake.com/en/user-guide/tables-iceberg-auto-refresh) describes the setup.
 
 ### Query caches {#query-caches}
 
@@ -113,9 +175,26 @@ Holds the Iceberg tables that users query, and the objects that connect them to 
 
 #### Inputs {#account-inputs}
 
+The Snowflake account takes three kinds of input:
+
+- table metadata and tokens from catalogs, through catalog integrations;
+- data files and metadata files from cloud storage, through external volumes or vended credentials;
+- SQL from users and tools, such as dbt.
+
 #### Outputs {#account-outputs}
 
+The account returns query results from Iceberg tables that Snowflake roles can query. For Snowflake-managed tables, it also writes new data files and metadata files to storage.
+
 #### Under the hood {#account-under-the-hood}
+
+For a table that an external catalog owns, Snowflake keeps a chain of objects:
+
+1. A catalog integration that signs in to the catalog.
+2. Storage access: vended credentials, or an external volume.
+3. A database: a catalog-linked database, or an ordinary database with one Iceberg table per catalog table.
+4. Grants that let Snowflake roles use the database, its schemas, and its Iceberg tables.
+
+A break in any link stops the read, but each link fails differently. A wrong client secret fails at sign-in. A missing trust entry fails when Snowflake reads files. A missing grant fails only for the roles that lack it.
 
 #### A query, in order {#account-query-order}
 
@@ -182,7 +261,7 @@ For each sign-in, Open Catalog returns a short-lived token. For each table looku
 
 #### Under the hood {#open-catalog-under-the-hood}
 
-Each catalog has storage settings: a default base location, such as s3://bucket/prefix, optional extra locations, and an IAM (AWS Identity and Access Management) role in your cloud account. Open Catalog has one IAM user for the whole account. You add that user to the role's trust policy, with an external ID, and Open Catalog assumes the role to reach table data, metadata files, and manifest files.
+Each catalog has storage settings: a default base location, such as s3://bucket/prefix, optional extra locations, and an IAM role in your cloud account. Open Catalog has one IAM user for the whole account. You add that user to the role's trust policy, with an external ID, and Open Catalog assumes the role to reach table data, metadata files, and manifest files.
 
 With that access, Open Catalog writes the new metadata file on each commit. It probably also uses the role to create the short-lived credentials that it vends. The [catalog setup guide](https://docs.snowflake.com/en/user-guide/opencatalog/create-catalog) lists the storage settings.
 
@@ -214,7 +293,17 @@ Which decisions shape an Iceberg setup in Snowflake?
 
 ### Snowflake or an external catalog {#choice-catalog-owner}
 
+This choice decides which catalog owns the table, and so which engines write it.
+
+With Snowflake as the catalog, the table is Snowflake-managed. Snowflake writes and maintains it, and other engines read and write it through Horizon Catalog.
+
+With an external catalog, such as Snowflake Open Catalog, the table is externally managed. Engines such as a Kafka sink connector write it through that catalog. Snowflake reads it through a catalog integration, either as a table of its own or in a catalog-linked database.
+
+Choose Snowflake as the catalog when Snowflake writes the data. Choose an external catalog when other engines write it, and Snowflake mostly reads it.
+
 ### Catalog-linked database or one table per source table {#choice-binding}
+
+> edge.related: credential-vending
 
 Snowflake can bind to an external catalog in two ways. This table shows each one as it is usually set up:
 
@@ -224,11 +313,18 @@ Snowflake can bind to an external catalog in two ways. This table shows each one
 | A new table appears | On the next poll after a writer creates it in the catalog | Only after someone registers it with CREATE ICEBERG TABLE |
 | New commits appear | On the next poll | Only with AUTO_REFRESH on, or after a manual refresh |
 | S3 access | Vended credentials | The external volume's IAM role |
+| Infrastructure as code, such as Terraform | The integration and the database, declared once | One resource per table, and a change and an apply for each new table |
+
+Storage access is a setting of the catalog integration, so either binding can use vended credentials or an external volume, as credential vending explains.
 
 In an ordinary database, CREATE ICEBERG TABLE registers a table that the catalog already has, under a Snowflake name. The statement fails with "table not found in catalog" until a writer has created the table in the catalog.
 
-For a table of its own, AUTO_REFRESH is off by default, as the [CREATE ICEBERG TABLE reference](https://docs.snowflake.com/en/sql-reference/sql/create-iceberg-table-rest) shows. Then Snowflake never polls the catalog for that table. The table keeps an old snapshot while writers keep committing, and nothing reports an error.
+For a table of its own, [auto-refresh](#auto-refresh) is off by default. The table then keeps an old snapshot while writers keep committing, and nothing reports an error.
 
-The per-table way is older and more manual, and Snowflake still supports it. Choose a catalog-linked database when you want every table in a namespace, kept current with no table-by-table work. Choose the per-table way when you want only some of the tables, or your own names in an existing database. It also fits when you need a feature that the linked database lacks.
+Infrastructure as code (IaC) declares objects in files, and a tool such as Terraform creates them when someone runs an apply. With the per-table way, each table is one resource, such as [`snowflake_iceberg_table_from_rest`](https://github.com/snowflakedb/terraform-provider-snowflake/blob/v2.23.0/docs/resources/iceberg_table_from_rest.md) in the Snowflake Terraform provider. Each new source table needs a change to the files and an apply, and that apply fails with "table not found in catalog" until a writer has created the table. With a catalog-linked database, the files declare the integration and the database once, and new tables in a linked namespace need no change.
+
+As of provider version 2.23.0 (November 2026), the per-table resource is a preview feature. The [`snowflake_database`](https://github.com/snowflakedb/terraform-provider-snowflake/blob/v2.23.0/docs/resources/database.md) resource has the settings of an ordinary database, so a linked database is created with SQL, for example through the [`snowflake_execute`](https://github.com/snowflakedb/terraform-provider-snowflake/blob/v2.23.0/docs/resources/execute.md) resource.
+
+The per-table way is older and more manual, and Snowflake still supports it. Choose a catalog-linked database when you want every table in a namespace, kept current with no table-by-table work. Choose the per-table way when you want only some of the tables, or your own names in an existing database. It also fits when you need a feature that the linked database lacks. With IaC, it also lets a team review each new table before Snowflake exposes it.
 
 ### Horizon Catalog or catalog sync {#choice-publishing}

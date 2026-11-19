@@ -18,7 +18,16 @@ The engine or the catalog that commits a change writes them. Each commit adds ne
 
 The metadata files form a small tree ([Table Anatomy](#table-anatomy-table-anatomy)). At the top, a [metadata file](#metadata-file-metadata-file) holds the table state, including a list of snapshots. Snapshot is an Iceberg term: the complete set of data files at one point in time ([Snapshot](#snapshot-snapshot)). Each snapshot names one [manifest list](#manifest-list-manifest-list), and the manifest list names the manifests. Manifest is an Iceberg term for a file that lists data files with their statistics ([Manifest File](#manifest-file-manifest-file)). The specification lists every field in [Table Metadata Fields](https://iceberg.apache.org/spec/#table-metadata-fields), [Snapshots](https://iceberg.apache.org/spec/#snapshots), [Manifest Lists](https://iceberg.apache.org/spec/#manifest-lists), and [Manifest Schema](https://iceberg.apache.org/spec/#manifest-schema).
 
-Two external parts complete the picture: a catalog and an engine. Catalog is an Iceberg term here. An Iceberg catalog holds one pointer per table: the location of the table's current metadata file ([Catalog Role](#catalog-role-catalog-role)). In a data warehouse, a catalog is a rich metadata service, so the word can mislead ([Metadata Is Not in the Catalog](#metadata-is-not-in-the-catalog-metadata-not-in-catalog)). Common catalogs are the Iceberg REST catalog, AWS Glue, Apache Polaris, Project Nessie, Unity Catalog, and Snowflake Open Catalog ([Common Catalogs](#common-catalogs-common-catalogs)). An engine is the compute: the program that reads and writes the files and runs the SQL ([Engine Role](#engine-role-engine-role)). Spark, Trino, Flink, DuckDB, BigQuery, Athena, and Snowflake can all act as the engine ([Common Engines](#common-engines-common-engines)).
+| Level | What it is | File name |
+| --- | --- | --- |
+| Catalog | One pointer per table, to the table's current metadata file | No file. The pointer is a value that the catalog stores. |
+| Metadata file | JSON. Holds the schemas, the partition specs, the list of snapshots, and which snapshot is current | Set by the spec: `<version>-<uuid>.metadata.json` when a catalog service commits, for example `00042-<uuid>.metadata.json`, and `v<version>.metadata.json` for a table that commits by renaming a file. |
+| Snapshot | The table at one point in time. It has one manifest list | No file. A snapshot is an entry in the metadata file. |
+| Manifest list | Avro. Lists the manifests of one snapshot, with partition ranges and file counts per manifest | Java library convention: `snap-<snapshot id>-<attempt>-<commit uuid>.avro` |
+| Manifest | Avro. One row per data file: path, partition values, row count, column statistics, and a status of existing, added, or deleted | Java library convention: `<commit uuid>-m<number>.avro` |
+| Data files | Parquet. The rows | Java library convention: `<partition id>-<task id>-<operation id>-<file count>.parquet`, for example `00001-1794863044828-<uuid>-00001.parquet` |
+
+Two external parts complete the picture: a catalog and an engine. A [catalog](#catalog-role-catalog-role) is an Iceberg term for the service that knows which tables exist and where each table's current metadata file is. It stores that location as one pointer per table. In a data warehouse, a catalog is a rich metadata service, so the word can mislead ([Metadata Is Not in the Catalog](#metadata-is-not-in-the-catalog-metadata-not-in-catalog)). Common catalogs are the Iceberg REST catalog, AWS Glue, Apache Polaris, Project Nessie, Unity Catalog, and Snowflake Open Catalog ([Common Catalogs](#common-catalogs-common-catalogs)). An engine is the compute: the program that reads and writes the files and runs the SQL ([Engine Role](#engine-role-engine-role)). Spark, Trino, Flink, DuckDB, BigQuery, Athena, and Snowflake can all act as the engine ([Common Engines](#common-engines-common-engines)).
 
 A commit is the Iceberg step that makes a write part of the table. Each commit writes new files, then swaps that pointer in one atomic step ([Write Path](#write-path-write-path)). This swap is what makes a write ACID: atomic, consistent, isolated, and durable. For example, a reader sees all of a change or none of it. The swap is also what gives you snapshots and time travel. Time travel means a query reads the table as it was at an older snapshot ([Time Travel](#time-travel-time-travel)). To read, the engine asks the catalog for the pointer, reads the metadata, skips the files that cannot match the query, and runs the SQL ([Read Path](#read-path-read-path)).
 
@@ -345,7 +354,7 @@ Iceberg needs two external roles: a catalog that owns the table pointer, and one
 
 > type: concept
 
-The catalog maps a table name to its current metadata file, and it performs the pointer swap as one atomic operation. It also holds namespaces, and it is often where access control lives. Without a catalog there is no safe commit, because two writers could overwrite each other. The catalog stays deliberately thin: it owns the pointer, the names, and the permissions, not the table metadata itself.
+In Iceberg, a catalog is the service that knows which tables exist and where each table's current metadata file is. For each table, it stores one pointer: the location of that file. It groups table names into namespaces, and it moves a table's pointer in one atomic step at each commit. Without a catalog there is no safe commit, because two writers could overwrite each other. It often also controls who may read or write a table. The catalog stays deliberately thin: it owns the pointer, the names, and the permissions. The table's metadata and data stay as files in object storage. A catalog can be a table in a database, a vendor service such as AWS Glue or Snowflake Open Catalog, or a REST catalog server that you run.
 
 #### Metadata Is Not in the Catalog {#metadata-not-in-catalog}
 
@@ -407,6 +416,17 @@ The library is Iceberg's code inside the engine process. [Engine Role](#engine-r
 
 You tell an engine about Iceberg in its catalog settings. The settings name the catalog type and its address, and often the sign-in details.
 
+You tell the engine only where the catalog is and how to sign in. You never tell it where each table's data is. The data location travels inside the metadata:
+
+engine settings → catalog → current metadata file → manifests → data files in S3
+
+1. The engine's catalog settings name the catalog. The two nodes below show them for Snowflake and Spark.
+2. The catalog returns the pointer to the table's current metadata file.
+3. The metadata file holds the table's `location`. The [spec](https://iceberg.apache.org/spec/) defines it as the table's base location, where writers store data files, manifests, and metadata files.
+4. The manifests hold the path of each data file.
+5. The engine needs permission to read that storage. In Snowflake, this is an external volume, or short-lived credentials that the catalog hands out. The [Iceberg in Snowflake map](../snowflake/iceberg/snowflake-iceberg.md) explains both.
+6. For a new table, the catalog chooses the location. For example, a Snowflake Open Catalog catalog has a default base location, such as `s3://bucket/prefix`, in its storage settings.
+
 ##### Catalog Settings in Snowflake {#catalog-settings-snowflake}
 
 > type: concept
@@ -436,6 +456,16 @@ In SQL, `rest_prod.db.table` then names a table in that catalog.
 > type: concept
 
 A catalog can be a table in a database, a service that a vendor runs, or a REST catalog server that you run. With a vendor-run catalog, such as AWS Glue or Snowflake, the vendor runs the process. [Common Catalogs](#common-catalogs-common-catalogs) lists the names.
+
+Every catalog keeps a small store of table names and their pointers. The kinds differ in what runs, where that store lives, and how the engine reaches it:
+
+| Kind | What runs | Where the pointer is stored | How the engine reaches it |
+| --- | --- | --- | --- |
+| [JDBC catalog](#jdbc-catalog-jdbc-catalog) | No catalog server. Only a relational database, such as PostgreSQL. | One row per table in the table `iceberg_tables`, in the column `metadata_location` | The Iceberg library inside the engine sends SQL to the database over JDBC. |
+| [REST catalog server](#rest-catalog-server-rest-catalog-server), such as Apache Polaris, Snowflake Open Catalog, or Lakekeeper | A server that offers the Iceberg REST API over HTTP. Snowflake Open Catalog runs Polaris for you. | In Polaris, a back-end store set by `polaris.persistence.type`: `relational-jdbc`, a database, or `in-memory`, the default ([application.properties](https://github.com/apache/polaris/blob/a52f812/runtime/defaults/src/main/resources/application.properties#L146-L150)) | HTTP calls to the REST API |
+| Vendor service with its own API, such as AWS Glue | AWS runs it. | A parameter named `metadata_location` on the table's Glue entry ([read](https://github.com/apache/iceberg/blob/4616acf/aws/src/main/java/org/apache/iceberg/aws/glue/GlueTableOperations.java#L131), [write](https://github.com/apache/iceberg/blob/4616acf/aws/src/main/java/org/apache/iceberg/aws/glue/GlueTableOperations.java#L295)) | The Glue API, through the AWS SDK |
+
+So a catalog is a store of pointers, sometimes behind an API server. A REST catalog is an API server with its own database behind it. A JDBC catalog is only the database.
 
 #### JDBC Catalog {#jdbc-catalog}
 
