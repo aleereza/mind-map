@@ -1,0 +1,4026 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7278067179,
+      "isDeleted": false,
+      "id": "node-75ada95d871d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120,
+      "y": 2850.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220,
+      "seed": 199433,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-75ada95d871d"
+        },
+        {
+          "id": "edge-2424069ad876",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c2d34a108587",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d3c9d1363c5f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c3341f5255b3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6123563729,
+      "isDeleted": false,
+      "id": "text-75ada95d871d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 2850.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 2677.5,
+      "seed": 526353,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Terraform\nTerraform is an infrastructure as\ncode tool from HashiCorp ([What is\nTerraform?](https://developer.hash\nicorp.com/terraform/intro)).\nInfrastructure as code (IaC) is a\nDevOps term. It means that you\ndescribe your infrastructure in\ntext files and keep the files in\nGit. The files replace clicks in a\nweb console and one-off SQL\nscripts. For a data engineer,\ninfrastructure is the set of\nobjects that the data lives in and\nruns on. Examples are a Snowflake\ndatabase, warehouse, role or\ngrant, an Aiven Kafka service,\ntopic or ACL (access control\nlist), and an S3 bucket for\nIceberg files.\n\nTerraform files are declarative.\nDeclarative means that a file\nstates the end result, not the\nsteps. You write \"a warehouse\nnamed TRANSFORM_DEV_WH with size\nXSMALL\". Terraform finds the steps\nthat get there: create the\nwarehouse, change one setting, or\ndelete it.\n\nFour parts make this work. Each\npart uses the parts before it:\n\n- Configuration: the `.tf` files\nthat you write. They are made of\nblocks in HCL, the HashiCorp\nConfiguration Language\n([Configuration and HCL](#configur\nation-and-hcl-configuration-and-hc\nl)). A `resource` block declares\none object that Terraform owns\n([Resource](#resource-resource)).\n- Provider: a plugin that turns\nresource blocks into API calls for\none product. Terraform itself\nknows no product. The Snowflake\nprovider turns a warehouse block\ninto `CREATE WAREHOUSE` and `ALTER\nWAREHOUSE` statements\n([Provider](#provider-provider)).\n- State: a JSON file in which\nTerraform records which real\nobject belongs to which resource\nblock ([State](#state-state)). A\nbackend is the place where the\nstate file lives, for example an\nS3 bucket\n([Backend](#backend-backend)).\n- Plan: the list of creates,\nchanges and deletes that makes the\nreal objects match the\nconfiguration\n([Plan](#plan-plan)).\n\nThe unit of work is one folder.\nTerraform reads all the `.tf`\nfiles in one folder as one\nconfiguration, which it calls a\nmodule. The folder where you run\nTerraform is the root module, and\neach root module has its own state\n([Module](#module-module)). One\nrepo can hold many root modules,\nfor example one for each\nenvironment.\n\nEach change goes through three\ncommands. `terraform init`\ndownloads the providers and\nconnects to the backend.\n`terraform plan` reads the\nconfiguration, the variable\nvalues, the state and the real\nobjects, and prints the plan\n([terraform plan](#terraform-plan-\nterraform-plan)). A plan changes\nnothing. `terraform apply` makes\nthe changes through the providers\nand writes the new state.\n\nNow compare dbt, which is also\ndeclarative. In dbt, you write a\n`SELECT`, and dbt writes the\n`CREATE TABLE`. In Terraform, you\nwrite the warehouse that you want,\nand the provider writes the\n`CREATE WAREHOUSE`. The two tools\nmanage different objects.\nTerraform plans changes only for\nthe objects in its configuration\nand state. dbt creates the tables\nand views of its models each time\nit runs, so no Terraform state\nlists them ([Where Terraform Fits]\n(#where-terraform-fits-where-terra\nform-fits)).\n\nThe map has three parts. Main\nConcepts defines the words.\nReading a Terraform Repo says\nwhere to look and which file names\nTerraform treats in a special way\n([File\nNames](#file-names-file-names)).\nData Flow follows one change from\nthe files to the real objects, and\nlists the data that goes into a\nplan.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-75ada95d871d",
+      "originalText": "Terraform\nTerraform is an infrastructure as code tool from HashiCorp ([What is Terraform?](https://developer.hashicorp.com/terraform/intro)). Infrastructure as code (IaC) is a DevOps term. It means that you describe your infrastructure in text files and keep the files in Git. The files replace clicks in a web console and one-off SQL scripts. For a data engineer, infrastructure is the set of objects that the data lives in and runs on. Examples are a Snowflake database, warehouse, role or grant, an Aiven Kafka service, topic or ACL (access control list), and an S3 bucket for Iceberg files.\n\nTerraform files are declarative. Declarative means that a file states the end result, not the steps. You write \"a warehouse named TRANSFORM_DEV_WH with size XSMALL\". Terraform finds the steps that get there: create the warehouse, change one setting, or delete it.\n\nFour parts make this work. Each part uses the parts before it:\n\n- Configuration: the `.tf` files that you write. They are made of blocks in HCL, the HashiCorp Configuration Language ([Configuration and HCL](#configuration-and-hcl-configuration-and-hcl)). A `resource` block declares one object that Terraform owns ([Resource](#resource-resource)).\n- Provider: a plugin that turns resource blocks into API calls for one product. Terraform itself knows no product. The Snowflake provider turns a warehouse block into `CREATE WAREHOUSE` and `ALTER WAREHOUSE` statements ([Provider](#provider-provider)).\n- State: a JSON file in which Terraform records which real object belongs to which resource block ([State](#state-state)). A backend is the place where the state file lives, for example an S3 bucket ([Backend](#backend-backend)).\n- Plan: the list of creates, changes and deletes that makes the real objects match the configuration ([Plan](#plan-plan)).\n\nThe unit of work is one folder. Terraform reads all the `.tf` files in one folder as one configuration, which it calls a module. The folder where you run Terraform is the root module, and each root module has its own state ([Module](#module-module)). One repo can hold many root modules, for example one for each environment.\n\nEach change goes through three commands. `terraform init` downloads the providers and connects to the backend. `terraform plan` reads the configuration, the variable values, the state and the real objects, and prints the plan ([terraform plan](#terraform-plan-terraform-plan)). A plan changes nothing. `terraform apply` makes the changes through the providers and writes the new state.\n\nNow compare dbt, which is also declarative. In dbt, you write a `SELECT`, and dbt writes the `CREATE TABLE`. In Terraform, you write the warehouse that you want, and the provider writes the `CREATE WAREHOUSE`. The two tools manage different objects. Terraform plans changes only for the objects in its configuration and state. dbt creates the tables and views of its models each time it runs, so no Terraform state lists them ([Where Terraform Fits](#where-terraform-fits-where-terraform-fits)).\n\nThe map has three parts. Main Concepts defines the words. Reading a Terraform Repo says where to look and which file names Terraform treats in a special way ([File Names](#file-names-file-names)). Data Flow follows one change from the files to the real objects, and lists the data that goes into a plan.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6419357612,
+      "isDeleted": false,
+      "id": "node-8e90703e6ba8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 1859.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 388.4,
+      "height": 122.0,
+      "seed": 47162,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-8e90703e6ba8"
+        },
+        {
+          "id": "edge-2424069ad876",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c120a92baf66",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ab88afa77ad2",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-9728c846a970",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0f01be5c29aa",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4fffb9109e9e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5f1ce9bea6ff",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f410782e124d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5eaaaa53308d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-e0d0d8a4ce44",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4d546b1eedc8",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d49e5968aeb7",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-main-concepts"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8365619907,
+      "isDeleted": false,
+      "id": "text-8e90703e6ba8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 1875.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 356.4,
+      "height": 90.0,
+      "seed": 899699,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Main Concepts\nThe concepts come in dependency\norder: each concept uses only the\nconcepts before it.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-8e90703e6ba8",
+      "originalText": "Main Concepts\nThe concepts come in dependency order: each concept uses only the concepts before it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-main-concepts"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7070872191,
+      "isDeleted": false,
+      "id": "node-45d19e1c479c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 841610,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-45d19e1c479c"
+        },
+        {
+          "id": "edge-c120a92baf66",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "where-terraform-fits"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3261449894,
+      "isDeleted": false,
+      "id": "text-45d19e1c479c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 1015.0,
+      "seed": 751949,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Where Terraform Fits\nTerraform can manage any product that has an\nAPI and a provider. The [Terraform\nRegistry](https://registry.terraform.io/)\npublishes the providers. On 2026-11-16, the\nRegistry listed these providers for the\nproducts in this stack:\n\n| Product | Provider | Latest version |\nExample resource types |\n| --- | --- | --- | --- |\n| Snowflake | [`snowflakedb/snowflake`](https:\n//registry.terraform.io/providers/snowflakedb/\nsnowflake/latest/docs) | 2.23.0 |\n`snowflake_database`, `snowflake_schema`,\n`snowflake_warehouse`,\n`snowflake_account_role`,\n`snowflake_grant_privileges_to_account_role`,\n`snowflake_external_volume` |\n| Aiven for Apache Kafka | [`aiven/aiven`](htt\nps://registry.terraform.io/providers/aiven/aiv\nen/latest/docs) | 4.66.0 | `aiven_kafka`,\n`aiven_kafka_topic`, `aiven_kafka_user`,\n`aiven_kafka_acl`, `aiven_kafka_connector` |\n| dbt Cloud | [`dbt-labs/dbtcloud`](https://re\ngistry.terraform.io/providers/dbt-labs/dbtclou\nd/latest/docs) | 1.12.13 | `dbtcloud_project`,\n`dbtcloud_environment`, `dbtcloud_job` |\n| AWS, for the S3 bucket of Iceberg files | [`\nhashicorp/aws`](https://registry.terraform.io/\nproviders/hashicorp/aws/latest/docs) | 6.73.0\n| `aws_s3_bucket`, `aws_iam_role` |\n\nSnowflake says that its provider manages\n\"warehouses, databases, schemas, tables,\nroles, grants, and more\" ([Snowflake Terraform\nprovider](https://docs.snowflake.com/en/user-g\nuide/terraform)).\n\nEach object needs one owner. Terraform changes\nonly the objects in its configuration and\nstate. Other tools create other objects:\n\n- dbt creates the tables and views of its\nmodels each time it runs. No Terraform state\nlists them. The [dbt\nmap](../dbt/dbt-deep-mental-model.md)\ndescribes dbt.\n- A Kafka producer writes events into a topic.\nTerraform can create the topic and its ACLs.\nThe events are data, not infrastructure. The\n[Kafka map](../kafka/kafka.md) describes\nKafka.\n- An Iceberg sink writes Parquet and metadata\nfiles into a bucket. Terraform can create the\nbucket and the roles that may write to it. The\n[Iceberg map](../iceberg/iceberg.md) describes\nIceberg.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-45d19e1c479c",
+      "originalText": "Where Terraform Fits\nTerraform can manage any product that has an API and a provider. The [Terraform Registry](https://registry.terraform.io/) publishes the providers. On 2026-11-16, the Registry listed these providers for the products in this stack:\n\n| Product | Provider | Latest version | Example resource types |\n| --- | --- | --- | --- |\n| Snowflake | [`snowflakedb/snowflake`](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs) | 2.23.0 | `snowflake_database`, `snowflake_schema`, `snowflake_warehouse`, `snowflake_account_role`, `snowflake_grant_privileges_to_account_role`, `snowflake_external_volume` |\n| Aiven for Apache Kafka | [`aiven/aiven`](https://registry.terraform.io/providers/aiven/aiven/latest/docs) | 4.66.0 | `aiven_kafka`, `aiven_kafka_topic`, `aiven_kafka_user`, `aiven_kafka_acl`, `aiven_kafka_connector` |\n| dbt Cloud | [`dbt-labs/dbtcloud`](https://registry.terraform.io/providers/dbt-labs/dbtcloud/latest/docs) | 1.12.13 | `dbtcloud_project`, `dbtcloud_environment`, `dbtcloud_job` |\n| AWS, for the S3 bucket of Iceberg files | [`hashicorp/aws`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) | 6.73.0 | `aws_s3_bucket`, `aws_iam_role` |\n\nSnowflake says that its provider manages \"warehouses, databases, schemas, tables, roles, grants, and more\" ([Snowflake Terraform provider](https://docs.snowflake.com/en/user-guide/terraform)).\n\nEach object needs one owner. Terraform changes only the objects in its configuration and state. Other tools create other objects:\n\n- dbt creates the tables and views of its models each time it runs. No Terraform state lists them. The [dbt map](../dbt/dbt-deep-mental-model.md) describes dbt.\n- A Kafka producer writes events into a topic. Terraform can create the topic and its ACLs. The events are data, not infrastructure. The [Kafka map](../kafka/kafka.md) describes Kafka.\n- An Iceberg sink writes Parquet and metadata files into a bucket. Terraform can create the bucket and the roles that may write to it. The [Iceberg map](../iceberg/iceberg.md) describes Iceberg.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "where-terraform-fits"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6138093822,
+      "isDeleted": false,
+      "id": "node-5121d75a8dac",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 44807,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5121d75a8dac"
+        },
+        {
+          "id": "edge-ab88afa77ad2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "configuration-and-hcl"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7528070258,
+      "isDeleted": false,
+      "id": "text-5121d75a8dac",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 752.5,
+      "seed": 98193,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Configuration and HCL\nTerraform code is called configuration. You\nwrite it in HCL, the HashiCorp Configuration\nLanguage, in files with the extension `.tf` ([\nsyntax](https://developer.hashicorp.com/terraf\norm/language/syntax/configuration)). A\nconfiguration is a list of blocks. A block has\na type, zero or more labels, and a body of\narguments in braces:\n\n```hcl\nresource \"snowflake_warehouse\" \"transform\" {\nname           =\n\"TRANSFORM_${local.suffix}_WH\"\nwarehouse_size = \"XSMALL\"\nauto_suspend   = 60\n}\n```\n\nHere `resource` is the block type.\n`snowflake_warehouse` is the resource type,\nwhich the Snowflake provider defines.\n`transform` is a local name that only\nTerraform uses. `name`, `warehouse_size` and\n`auto_suspend` are arguments. `${...}` inserts\nthe value of an expression into a string.\n\nA configuration uses these block types:\n\n- `terraform`: the Terraform version, the\nproviders and their versions, and the backend.\n- `provider`: the connection settings of one\nprovider.\n- `resource`: an object that Terraform\ncreates, changes and deletes.\n- `data`: an object that Terraform only reads.\n- `variable`: an input value.\n- `locals`: named expressions inside one\nmodule.\n- `output`: a value that the module returns.\n- `module`: a call to another module.\n- `moved` and `import`: instructions that\nchange what the state records.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-5121d75a8dac",
+      "originalText": "Configuration and HCL\nTerraform code is called configuration. You write it in HCL, the HashiCorp Configuration Language, in files with the extension `.tf` ([syntax](https://developer.hashicorp.com/terraform/language/syntax/configuration)). A configuration is a list of blocks. A block has a type, zero or more labels, and a body of arguments in braces:\n\n```hcl\nresource \"snowflake_warehouse\" \"transform\" {\n  name           = \"TRANSFORM_${local.suffix}_WH\"\n  warehouse_size = \"XSMALL\"\n  auto_suspend   = 60\n}\n```\n\nHere `resource` is the block type. `snowflake_warehouse` is the resource type, which the Snowflake provider defines. `transform` is a local name that only Terraform uses. `name`, `warehouse_size` and `auto_suspend` are arguments. `${...}` inserts the value of an expression into a string.\n\nA configuration uses these block types:\n\n- `terraform`: the Terraform version, the providers and their versions, and the backend.\n- `provider`: the connection settings of one provider.\n- `resource`: an object that Terraform creates, changes and deletes.\n- `data`: an object that Terraform only reads.\n- `variable`: an input value.\n- `locals`: named expressions inside one module.\n- `output`: a value that the module returns.\n- `module`: a call to another module.\n- `moved` and `import`: instructions that change what the state records.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "configuration-and-hcl"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6609677296,
+      "isDeleted": false,
+      "id": "node-90c5d1358d12",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 686253,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-90c5d1358d12"
+        },
+        {
+          "id": "edge-9728c846a970",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "provider"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6982668441,
+      "isDeleted": false,
+      "id": "text-90c5d1358d12",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 1015.0,
+      "seed": 117656,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Provider\nA provider is a plugin: a separate program\nthat Terraform downloads and starts. The\nprovider knows the API of one product.\nTerraform decides what to do and in which\norder, and the provider makes the API calls.\nFor Snowflake, the provider builds SQL\nstatements such as `CREATE WAREHOUSE`\n([provider source](https://github.com/snowflak\nedb/terraform-provider-snowflake/blob/v2.23.0/\npkg/sdk/warehouses_gen.go#L51-L55)).\n\nEach provider has a source address of the form\n`[<hostname>/]<namespace>/<type>`. The\nhostname defaults to `registry.terraform.io`,\nso `snowflakedb/snowflake` means\n`registry.terraform.io/snowflakedb/snowflake`.\nThe namespace is the publisher, and the type\nis the product ([source addresses](https://dev\neloper.hashicorp.com/terraform/language/provid\ners/requirements#source-addresses)).\n\nTwo blocks set up a provider. The `terraform`\nblock says which provider and which versions\nto use. The `provider` block says how to\nconnect. These blocks come from About the\nExamples:\n\n```hcl\nterraform {\nrequired_version = \">= 1.5\"\n\nrequired_providers {\nsnowflake = {\nsource  = \"snowflakedb/snowflake\"\nversion = \"2.23.0\"\n}\n}\n}\n\nprovider \"snowflake\" {\norganization_name = var.snowflake_organization\naccount_name      = var.snowflake_account\nuser              = var.snowflake_user\nrole              = var.snowflake_role\nauthenticator     = \"SNOWFLAKE_JWT\"\nprivate_key       = file(var.private_key_path)\n}\n```\n\nTerraform acts as this user with this role.\nThe role's privileges therefore limit what an\napply can do in Snowflake. `SNOWFLAKE_JWT`\nselects key-pair authentication, which the\n[authentication\nmap](../authentication/authentication.md)\nexplains. The credentials come from input\nvariables, so the `.tf` files hold no secret.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-90c5d1358d12",
+      "originalText": "Provider\nA provider is a plugin: a separate program that Terraform downloads and starts. The provider knows the API of one product. Terraform decides what to do and in which order, and the provider makes the API calls. For Snowflake, the provider builds SQL statements such as `CREATE WAREHOUSE` ([provider source](https://github.com/snowflakedb/terraform-provider-snowflake/blob/v2.23.0/pkg/sdk/warehouses_gen.go#L51-L55)).\n\nEach provider has a source address of the form `[<hostname>/]<namespace>/<type>`. The hostname defaults to `registry.terraform.io`, so `snowflakedb/snowflake` means `registry.terraform.io/snowflakedb/snowflake`. The namespace is the publisher, and the type is the product ([source addresses](https://developer.hashicorp.com/terraform/language/providers/requirements#source-addresses)).\n\nTwo blocks set up a provider. The `terraform` block says which provider and which versions to use. The `provider` block says how to connect. These blocks come from About the Examples:\n\n```hcl\nterraform {\n  required_version = \">= 1.5\"\n\n  required_providers {\n    snowflake = {\n      source  = \"snowflakedb/snowflake\"\n      version = \"2.23.0\"\n    }\n  }\n}\n\nprovider \"snowflake\" {\n  organization_name = var.snowflake_organization\n  account_name      = var.snowflake_account\n  user              = var.snowflake_user\n  role              = var.snowflake_role\n  authenticator     = \"SNOWFLAKE_JWT\"\n  private_key       = file(var.private_key_path)\n}\n```\n\nTerraform acts as this user with this role. The role's privileges therefore limit what an apply can do in Snowflake. `SNOWFLAKE_JWT` selects key-pair authentication, which the [authentication map](../authentication/authentication.md) explains. The credentials come from input variables, so the `.tf` files hold no secret.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "provider"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6098198218,
+      "isDeleted": false,
+      "id": "node-7a1047389735",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 672389,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7a1047389735"
+        },
+        {
+          "id": "edge-0f01be5c29aa",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "resource"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7164865055,
+      "isDeleted": false,
+      "id": "text-7a1047389735",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 735.0,
+      "seed": 124303,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Resource\nA resource block declares one object that\nTerraform creates, changes and deletes. The\nresource type comes from a provider. This\ntopic comes from the Aiven provider's example \n([`aiven_kafka_topic`](https://registry.terraf\norm.io/providers/aiven/aiven/latest/docs/resou\nrces/kafka_topic)):\n\n```hcl\nresource \"aiven_kafka_topic\" \"orders\" {\nproject      = \"my-project\"\nservice_name = \"my-kafka\"\ntopic_name   = \"orders\"\npartitions   = 3\nreplication  = 3\n}\n```\n\nTerraform names each object by its address:\nthe resource type, a dot, and the local name,\nhere `aiven_kafka_topic.orders`. In a child\nmodule, the address starts with the module\npath, as in\n`module.kafka.aiven_kafka_topic.orders`. A\nblock with `for_each` makes one object for\neach key, as in\n`aiven_kafka_topic.cdc[\"orders\"]` ([resource a\nddressing](https://developer.hashicorp.com/ter\nraform/cli/state/resource-addressing)). Plan\noutput, the state, and `moved` and `import`\nblocks all use addresses.\n\nAnother block reads an attribute through the\naddress, for example\n`aiven_kafka_topic.orders.topic_name`.\nTerraform infers from such a reference that\nthe topic must exist first. The `depends_on`\nargument is only for a dependency that no\nreference shows ([depends_on](https://develope\nr.hashicorp.com/terraform/language/meta-argume\nnts/depends_on)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7a1047389735",
+      "originalText": "Resource\nA resource block declares one object that Terraform creates, changes and deletes. The resource type comes from a provider. This topic comes from the Aiven provider's example ([`aiven_kafka_topic`](https://registry.terraform.io/providers/aiven/aiven/latest/docs/resources/kafka_topic)):\n\n```hcl\nresource \"aiven_kafka_topic\" \"orders\" {\n  project      = \"my-project\"\n  service_name = \"my-kafka\"\n  topic_name   = \"orders\"\n  partitions   = 3\n  replication  = 3\n}\n```\n\nTerraform names each object by its address: the resource type, a dot, and the local name, here `aiven_kafka_topic.orders`. In a child module, the address starts with the module path, as in `module.kafka.aiven_kafka_topic.orders`. A block with `for_each` makes one object for each key, as in `aiven_kafka_topic.cdc[\"orders\"]` ([resource addressing](https://developer.hashicorp.com/terraform/cli/state/resource-addressing)). Plan output, the state, and `moved` and `import` blocks all use addresses.\n\nAnother block reads an attribute through the address, for example `aiven_kafka_topic.orders.topic_name`. Terraform infers from such a reference that the topic must exist first. The `depends_on` argument is only for a dependency that no reference shows ([depends_on](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "resource"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8899943508,
+      "isDeleted": false,
+      "id": "node-aafc847bbd43",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 649305,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-aafc847bbd43"
+        },
+        {
+          "id": "edge-4fffb9109e9e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "data-source"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1994712179,
+      "isDeleted": false,
+      "id": "text-aafc847bbd43",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 402.5,
+      "seed": 534381,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Data Source\nA `data` block reads an object that Terraform\ndoes not manage. Terraform never changes that\nobject. Terraform reads it during the plan,\nunless the block depends on a value that only\nthe apply can know ([data sources](https://dev\neloper.hashicorp.com/terraform/language/data-s\nources)). This example comes from the\nSnowflake provider's docs ([`snowflake_warehou\nses`](https://registry.terraform.io/providers/\nsnowflakedb/snowflake/latest/docs/data-sources\n/warehouses)):\n\n```hcl\ndata \"snowflake_warehouses\" \"like_prefix\" {\nlike = \"prefix%\"\n}\n```\n\nOther blocks read the result as `data.snowflak\ne_warehouses.like_prefix.warehouses`. A data\nsource suits an object that another team,\nanother tool or another state owns.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-aafc847bbd43",
+      "originalText": "Data Source\nA `data` block reads an object that Terraform does not manage. Terraform never changes that object. Terraform reads it during the plan, unless the block depends on a value that only the apply can know ([data sources](https://developer.hashicorp.com/terraform/language/data-sources)). This example comes from the Snowflake provider's docs ([`snowflake_warehouses`](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/data-sources/warehouses)):\n\n```hcl\ndata \"snowflake_warehouses\" \"like_prefix\" {\n  like = \"prefix%\"\n}\n```\n\nOther blocks read the result as `data.snowflake_warehouses.like_prefix.warehouses`. A data source suits an object that another team, another tool or another state owns.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "data-source"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7999287686,
+      "isDeleted": false,
+      "id": "node-41e049809498",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 490801,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-41e049809498"
+        },
+        {
+          "id": "edge-5f1ce9bea6ff",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "variables-locals-outputs"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4468000802,
+      "isDeleted": false,
+      "id": "text-41e049809498",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 1015.0,
+      "seed": 403272,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Variables, Locals, and Outputs\nThese three blocks are the inputs, the\ninternal names and the results of a module:\n\n- A `variable` block declares an input. Code\nreads it as `var.<name>`.\n- A `locals` block names an expression, so\nthat you write it once. Code reads it as\n`local.<name>`.\n- An `output` block returns a value. The root\nmodule prints its outputs after an apply and\nkeeps them in the state. A parent module reads\nthe output of a child as\n`module.<name>.<output>`.\n\nThese blocks come from About the Examples:\n\n```hcl\nvariable \"environment\" {\ntype        = string\ndescription = \"Short name of the environment,\nsuch as dev or prod.\"\n}\n\nlocals {\nsuffix = upper(var.environment)\n}\n\noutput \"raw_database_name\" {\nvalue = snowflake_database.raw.name\n}\n```\n\nThe root module gets variable values from\nseveral sources. When two sources set the same\nvariable, the first source in this list wins\n([assign values](https://developer.hashicorp.c\nom/terraform/language/values/variables#assign-\nvalues-to-variables)):\n\n1. `-var` and `-var-file` options on the\ncommand line, in the order given.\n2. `*.auto.tfvars` and `*.auto.tfvars.json`\nfiles, in lexical order.\n3. The file `terraform.tfvars.json`.\n4. The file `terraform.tfvars`.\n5. Environment variables named\n`TF_VAR_<name>`.\n6. The `default` argument of the `variable`\nblock.\n\nA child module gets its values from the\narguments of its `module` block. The argument\n`sensitive = true` hides a value in the plan\noutput. Terraform still stores the value in\nthe state ([sensitive values](https://develope\nr.hashicorp.com/terraform/language/values/vari\nables#sensitive-values-in-variables)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-41e049809498",
+      "originalText": "Variables, Locals, and Outputs\nThese three blocks are the inputs, the internal names and the results of a module:\n\n- A `variable` block declares an input. Code reads it as `var.<name>`.\n- A `locals` block names an expression, so that you write it once. Code reads it as `local.<name>`.\n- An `output` block returns a value. The root module prints its outputs after an apply and keeps them in the state. A parent module reads the output of a child as `module.<name>.<output>`.\n\nThese blocks come from About the Examples:\n\n```hcl\nvariable \"environment\" {\n  type        = string\n  description = \"Short name of the environment, such as dev or prod.\"\n}\n\nlocals {\n  suffix = upper(var.environment)\n}\n\noutput \"raw_database_name\" {\n  value = snowflake_database.raw.name\n}\n```\n\nThe root module gets variable values from several sources. When two sources set the same variable, the first source in this list wins ([assign values](https://developer.hashicorp.com/terraform/language/values/variables#assign-values-to-variables)):\n\n1. `-var` and `-var-file` options on the command line, in the order given.\n2. `*.auto.tfvars` and `*.auto.tfvars.json` files, in lexical order.\n3. The file `terraform.tfvars.json`.\n4. The file `terraform.tfvars`.\n5. Environment variables named `TF_VAR_<name>`.\n6. The `default` argument of the `variable` block.\n\nA child module gets its values from the arguments of its `module` block. The argument `sensitive = true` hides a value in the plan output. Terraform still stores the value in the state ([sensitive values](https://developer.hashicorp.com/terraform/language/values/variables#sensitive-values-in-variables)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "variables-locals-outputs"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5659161471,
+      "isDeleted": false,
+      "id": "node-fbd34a2b6e6a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 779523,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-fbd34a2b6e6a"
+        },
+        {
+          "id": "edge-f410782e124d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-e66fecb7af15",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "module"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3832430244,
+      "isDeleted": false,
+      "id": "text-fbd34a2b6e6a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 595.0,
+      "seed": 855676,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Module\nA module is the set of `.tf` files in one\nfolder. Terraform does not read subfolders:\neach subfolder is a separate module ([files\nand directories](https://developer.hashicorp.c\nom/terraform/language/files)). The root module\nis the folder where you run Terraform. A child\nmodule is a module that another module calls\nwith a `module` block:\n\n```hcl\nmodule \"orders_topic\" {\nsource     = \"./modules/kafka-topic\"\ntopic_name = \"orders\"\npartitions = 3\n}\n```\n\n`source` says where the module is. It can be a\nlocal path, which must begin with `./` or\n`../`, a Terraform Registry address with a\n`version`, or a Git URL ([module sources](http\ns://developer.hashicorp.com/terraform/language\n/modules/sources)). The other arguments fill\nthe variables of the child module. The\naddresses of the child's resources start with\n`module.orders_topic.`.\n\nA module works like a function. Its variables\nare the parameters, its resources are the\nbody, and its outputs are the return values.\nThe root module and all the modules that it\ncalls form one configuration, and all their\nobjects go into one state.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-fbd34a2b6e6a",
+      "originalText": "Module\nA module is the set of `.tf` files in one folder. Terraform does not read subfolders: each subfolder is a separate module ([files and directories](https://developer.hashicorp.com/terraform/language/files)). The root module is the folder where you run Terraform. A child module is a module that another module calls with a `module` block:\n\n```hcl\nmodule \"orders_topic\" {\n  source     = \"./modules/kafka-topic\"\n  topic_name = \"orders\"\n  partitions = 3\n}\n```\n\n`source` says where the module is. It can be a local path, which must begin with `./` or `../`, a Terraform Registry address with a `version`, or a Git URL ([module sources](https://developer.hashicorp.com/terraform/language/modules/sources)). The other arguments fill the variables of the child module. The addresses of the child's resources start with `module.orders_topic.`.\n\nA module works like a function. Its variables are the parameters, its resources are the body, and its outputs are the return values. The root module and all the modules that it calls form one configuration, and all their objects go into one state.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "module"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9415938753,
+      "isDeleted": false,
+      "id": "node-aa4a5f8125f2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 458121,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-aa4a5f8125f2"
+        },
+        {
+          "id": "edge-5eaaaa53308d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-98b7b134e315",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b62f403c3700",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-44075abcf957",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "state"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9518869217,
+      "isDeleted": false,
+      "id": "text-aa4a5f8125f2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 1032.5,
+      "seed": 61146,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "State\nState is Terraform's record of the objects\nthat it manages. Its main job is to bind each\nresource address to one real object ([purpose\nof state](https://developer.hashicorp.com/terr\naform/language/state/purpose)). Without the\nstate, Terraform cannot tell whether a\nwarehouse in Snowflake belongs to\n`snowflake_warehouse.transform` or to someone\nelse.\n\nBy default, the state is the file\n`terraform.tfstate` in the root module folder.\nTerraform keeps the previous version in\n`terraform.tfstate.backup` ([state](https://de\nveloper.hashicorp.com/terraform/language/state\n)). The file is JSON. This excerpt comes from\nthe import in About the Examples. The real\nfile has 4,445 bytes, and the warehouse has 23\nattributes. The excerpt leaves out most\nattributes and some other fields:\n\n```json\n{\n\"version\": 4,\n\"terraform_version\": \"1.15.8\",\n\"resources\": [\n{\n\"mode\": \"managed\",\n\"type\": \"snowflake_warehouse\",\n\"name\": \"agent\",\n\"provider\": \"provider[\\\"registry.terraform.io/\nsnowflakedb/snowflake\\\"]\",\n\"instances\": [\n{\n\"attributes\": {\n\"auto_resume\": \"true\",\n\"auto_suspend\": 60,\n\"id\": \"\\\"AGENT_WH\\\"\",\n\"name\": \"AGENT_WH\",\n\"warehouse_size\": \"XSMALL\"\n}\n}\n]\n}\n]\n}\n```\n\n`type` and `name` together give the address\n`snowflake_warehouse.agent`. `id` is the key\nwith which the provider finds the object\nagain. For a Snowflake warehouse, the ID is\nthe name in double quotes. Do not edit the\nfile by hand. The commands `terraform state\nlist`, `terraform state show`, `terraform\nstate mv` and `terraform state rm` read and\nchange it ([state commands](https://developer.\nhashicorp.com/terraform/cli/state)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-aa4a5f8125f2",
+      "originalText": "State\nState is Terraform's record of the objects that it manages. Its main job is to bind each resource address to one real object ([purpose of state](https://developer.hashicorp.com/terraform/language/state/purpose)). Without the state, Terraform cannot tell whether a warehouse in Snowflake belongs to `snowflake_warehouse.transform` or to someone else.\n\nBy default, the state is the file `terraform.tfstate` in the root module folder. Terraform keeps the previous version in `terraform.tfstate.backup` ([state](https://developer.hashicorp.com/terraform/language/state)). The file is JSON. This excerpt comes from the import in About the Examples. The real file has 4,445 bytes, and the warehouse has 23 attributes. The excerpt leaves out most attributes and some other fields:\n\n```json\n{\n  \"version\": 4,\n  \"terraform_version\": \"1.15.8\",\n  \"resources\": [\n    {\n      \"mode\": \"managed\",\n      \"type\": \"snowflake_warehouse\",\n      \"name\": \"agent\",\n      \"provider\": \"provider[\\\"registry.terraform.io/snowflakedb/snowflake\\\"]\",\n      \"instances\": [\n        {\n          \"attributes\": {\n            \"auto_resume\": \"true\",\n            \"auto_suspend\": 60,\n            \"id\": \"\\\"AGENT_WH\\\"\",\n            \"name\": \"AGENT_WH\",\n            \"warehouse_size\": \"XSMALL\"\n          }\n        }\n      ]\n    }\n  ]\n}\n```\n\n`type` and `name` together give the address `snowflake_warehouse.agent`. `id` is the key with which the provider finds the object again. For a Snowflake warehouse, the ID is the name in double quotes. Do not edit the file by hand. The commands `terraform state list`, `terraform state show`, `terraform state mv` and `terraform state rm` read and change it ([state commands](https://developer.hashicorp.com/terraform/cli/state)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "state"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4561996907,
+      "isDeleted": false,
+      "id": "node-91f7470b1fd8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1907.2,
+      "y": 1940.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220,
+      "seed": 11993,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-91f7470b1fd8"
+        },
+        {
+          "id": "edge-98b7b134e315",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "state-holds-secrets"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5507571481,
+      "isDeleted": false,
+      "id": "text-91f7470b1fd8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1919.2,
+      "y": 1940.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 678817,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "State Holds Secrets\nThe state file and saved plan files hold\nattribute values in plain text. That includes\npasswords and keys that the configuration\ngives to a resource ([manage sensitive data](h\nttps://developer.hashicorp.com/terraform/langu\nage/manage-sensitive-data)). `sensitive =\ntrue` hides a value only in the output. Keep\nthe state in a backend with access control,\nand never commit it to Git ([.gitignore advice\n](https://developer.hashicorp.com/terraform/la\nnguage/style#gitignore)). A variable with\n`ephemeral = true` stays out of state and plan\nfiles, with some limits on where you can use\nit.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-91f7470b1fd8",
+      "originalText": "State Holds Secrets\nThe state file and saved plan files hold attribute values in plain text. That includes passwords and keys that the configuration gives to a resource ([manage sensitive data](https://developer.hashicorp.com/terraform/language/manage-sensitive-data)). `sensitive = true` hides a value only in the output. Keep the state in a backend with access control, and never commit it to Git ([.gitignore advice](https://developer.hashicorp.com/terraform/language/style#gitignore)). A variable with `ephemeral = true` stays out of state and plan files, with some limits on where you can use it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "state-holds-secrets"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5361787809,
+      "isDeleted": false,
+      "id": "node-62fdfbd55d19",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1907.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 453899,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-62fdfbd55d19"
+        },
+        {
+          "id": "edge-9e80fb6cb0c5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b62f403c3700",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "import"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8037722996,
+      "isDeleted": false,
+      "id": "text-62fdfbd55d19",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1919.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 507.5,
+      "seed": 218371,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Import\nImport brings an object that already exists\nunder Terraform management. Terraform reads\nthe object and writes it into the state.\nImport does not change the object ([import](ht\ntps://developer.hashicorp.com/terraform/langua\nge/import)). A team uses import to adopt\nobjects that someone created by hand.\n\nThe command form writes the state at once. In\nAbout the Examples, this command read an\nexisting warehouse with a read-only role:\n\n`terraform import snowflake_warehouse.agent\n'\"AGENT_WH\"'`\n\nEach provider's docs give the ID format. For a\nSnowflake warehouse, it is the name in double\nquotes ([warehouse import](https://registry.te\nrraform.io/providers/snowflakedb/snowflake/lat\nest/docs/resources/warehouse#import)). An\n`import` block in a `.tf` file does the same\njob through a normal plan and apply, so a\nreviewer sees the import in the plan first\n([import block](https://developer.hashicorp.co\nm/terraform/language/block/import)). After an\nimport, read the next plan line by line.\nOutside Changes Get Reverted shows the first\nplan after this import.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-62fdfbd55d19",
+      "originalText": "Import\nImport brings an object that already exists under Terraform management. Terraform reads the object and writes it into the state. Import does not change the object ([import](https://developer.hashicorp.com/terraform/language/import)). A team uses import to adopt objects that someone created by hand.\n\nThe command form writes the state at once. In About the Examples, this command read an existing warehouse with a read-only role:\n\n`terraform import snowflake_warehouse.agent '\"AGENT_WH\"'`\n\nEach provider's docs give the ID format. For a Snowflake warehouse, it is the name in double quotes ([warehouse import](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/warehouse#import)). An `import` block in a `.tf` file does the same job through a normal plan and apply, so a reviewer sees the import in the plan first ([import block](https://developer.hashicorp.com/terraform/language/block/import)). After an import, read the next plan line by line. Outside Changes Get Reverted shows the first plan after this import.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "import"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9413954540,
+      "isDeleted": false,
+      "id": "node-2d8b0709a4fd",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1907.2,
+      "y": 2460.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 643393,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2d8b0709a4fd"
+        },
+        {
+          "id": "edge-44075abcf957",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "moved-block"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7763839838,
+      "isDeleted": false,
+      "id": "text-2d8b0709a4fd",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1919.2,
+      "y": 2460.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 367.5,
+      "seed": 553152,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Moved Block\nBy default, Terraform reads a changed address\nas a delete at the old address and a create at\nthe new address ([refactoring](https://develop\ner.hashicorp.com/terraform/language/modules/de\nvelop/refactoring)). So a new local name, or a\nmove into a module, would drop the object and\ncreate a new one. A `moved` block tells\nTerraform that the object now has a new\naddress:\n\n```hcl\nmoved {\nfrom = snowflake_warehouse.transform\nto   = module.warehouses.snowflake_warehouse.t\nransform\n}\n```\n\nThe next plan then changes only the address in\nthe state. The real object stays as it is.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2d8b0709a4fd",
+      "originalText": "Moved Block\nBy default, Terraform reads a changed address as a delete at the old address and a create at the new address ([refactoring](https://developer.hashicorp.com/terraform/language/modules/develop/refactoring)). So a new local name, or a move into a module, would drop the object and create a new one. A `moved` block tells Terraform that the object now has a new address:\n\n```hcl\nmoved {\n  from = snowflake_warehouse.transform\n  to   = module.warehouses.snowflake_warehouse.transform\n}\n```\n\nThe next plan then changes only the address in the state. The real object stays as it is.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "moved-block"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5508493934,
+      "isDeleted": false,
+      "id": "node-754a08ddf8bc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 2720.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 106209,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-754a08ddf8bc"
+        },
+        {
+          "id": "edge-e0d0d8a4ce44",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "backend"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7497940553,
+      "isDeleted": false,
+      "id": "text-754a08ddf8bc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 2720.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 892.5,
+      "seed": 369965,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Backend\nA backend decides where the state lives.\nWithout a `backend` block, the state is the\nlocal file `terraform.tfstate`. A team keeps\nthe state in a shared, remote place, so that\nevery run sees the same state. Terraform has\nbackends for S3, Azure Storage (`azurerm`),\nGoogle Cloud Storage (`gcs`), PostgreSQL\n(`pg`), Kubernetes and others ([backends](http\ns://developer.hashicorp.com/terraform/language\n/backend)). A `cloud` block in place of a\n`backend` block stores the state in HCP\nTerraform, the hosted service of HashiCorp\n([terraform block](https://developer.hashicorp\n.com/terraform/language/block/terraform)).\nThis is an S3 backend:\n\n```hcl\nterraform {\nbackend \"s3\" {\nbucket       = \"my-terraform-state\"\nkey          = \"snowflake/terraform.tfstate\"\nregion       = \"us-west-2\"\nuse_lockfile = true\n}\n}\n```\n\nA backend block cannot use variables, locals\nor data sources. To change the backend for\neach environment, a repo leaves some arguments\nout of the block and gives them to `terraform\ninit`, for example `terraform init\n-backend-config=prod.s3.tfbackend`. HashiCorp\ncalls this a partial configuration and\nrecommends the file name `*.<backend\nname>.tfbackend` ([partial configuration](http\ns://developer.hashicorp.com/terraform/language\n/backend#partial-configuration)).\n\nA lock stops two runs from writing the same\nstate at the same time ([state locking](https:\n//developer.hashicorp.com/terraform/language/s\ntate/locking)). With `use_lockfile = true`,\nthe S3 backend writes a lock file next to the\nstate, named `<key>.tflock`. Some repos set\n`dynamodb_table` in place of it, which locks\nthrough a DynamoDB table. The docs mark\nDynamoDB locking as deprecated ([S3 backend](h\nttps://developer.hashicorp.com/terraform/langu\nage/backend/s3)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-754a08ddf8bc",
+      "originalText": "Backend\nA backend decides where the state lives. Without a `backend` block, the state is the local file `terraform.tfstate`. A team keeps the state in a shared, remote place, so that every run sees the same state. Terraform has backends for S3, Azure Storage (`azurerm`), Google Cloud Storage (`gcs`), PostgreSQL (`pg`), Kubernetes and others ([backends](https://developer.hashicorp.com/terraform/language/backend)). A `cloud` block in place of a `backend` block stores the state in HCP Terraform, the hosted service of HashiCorp ([terraform block](https://developer.hashicorp.com/terraform/language/block/terraform)). This is an S3 backend:\n\n```hcl\nterraform {\n  backend \"s3\" {\n    bucket       = \"my-terraform-state\"\n    key          = \"snowflake/terraform.tfstate\"\n    region       = \"us-west-2\"\n    use_lockfile = true\n  }\n}\n```\n\nA backend block cannot use variables, locals or data sources. To change the backend for each environment, a repo leaves some arguments out of the block and gives them to `terraform init`, for example `terraform init -backend-config=prod.s3.tfbackend`. HashiCorp calls this a partial configuration and recommends the file name `*.<backend name>.tfbackend` ([partial configuration](https://developer.hashicorp.com/terraform/language/backend#partial-configuration)).\n\nA lock stops two runs from writing the same state at the same time ([state locking](https://developer.hashicorp.com/terraform/language/state/locking)). With `use_lockfile = true`, the S3 backend writes a lock file next to the state, named `<key>.tflock`. Some repos set `dynamodb_table` in place of it, which locks through a DynamoDB table. The docs mark DynamoDB locking as deprecated ([S3 backend](https://developer.hashicorp.com/terraform/language/backend/s3)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "backend"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9022607015,
+      "isDeleted": false,
+      "id": "node-a279fe916f63",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 2980.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 397249,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a279fe916f63"
+        },
+        {
+          "id": "edge-4d546b1eedc8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "workspace"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5881211691,
+      "isDeleted": false,
+      "id": "text-a279fe916f63",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 2980.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 192668,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Workspace\nA CLI workspace is one more state for the same\nconfiguration and the same backend ([workspace\ns](https://developer.hashicorp.com/terraform/l\nanguage/state/workspaces)). Every backend\nstarts with the workspace `default`. The\ncommands `terraform workspace new prod` and\n`terraform workspace select prod` choose the\nstate that the next plan uses. Code reads the\ncurrent name as `terraform.workspace`:\n\n```hcl\nresource \"snowflake_warehouse\" \"transform\" {\nname           =\n\"TRANSFORM_${upper(terraform.workspace)}_WH\"\nwarehouse_size = terraform.workspace == \"prod\"\n? \"LARGE\" : \"XSMALL\"\n}\n```\n\nWith the S3 backend, the state of the\nworkspace `prod` lives at `env:/prod/<key>` in\nthe bucket ([S3 backend](https://developer.has\nhicorp.com/terraform/language/backend/s3)).\nHashiCorp advises against CLI workspaces for\nenvironments that need separate credentials\nand access controls ([CLI workspaces](https://\ndeveloper.hashicorp.com/terraform/cli/workspac\nes)). HCP Terraform also uses the word\nworkspace, for a different object.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a279fe916f63",
+      "originalText": "Workspace\nA CLI workspace is one more state for the same configuration and the same backend ([workspaces](https://developer.hashicorp.com/terraform/language/state/workspaces)). Every backend starts with the workspace `default`. The commands `terraform workspace new prod` and `terraform workspace select prod` choose the state that the next plan uses. Code reads the current name as `terraform.workspace`:\n\n```hcl\nresource \"snowflake_warehouse\" \"transform\" {\n  name           = \"TRANSFORM_${upper(terraform.workspace)}_WH\"\n  warehouse_size = terraform.workspace == \"prod\" ? \"LARGE\" : \"XSMALL\"\n}\n```\n\nWith the S3 backend, the state of the workspace `prod` lives at `env:/prod/<key>` in the bucket ([S3 backend](https://developer.hashicorp.com/terraform/language/backend/s3)). HashiCorp advises against CLI workspaces for environments that need separate credentials and access controls ([CLI workspaces](https://developer.hashicorp.com/terraform/cli/workspaces)). HCP Terraform also uses the word workspace, for a different object.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "workspace"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8312755764,
+      "isDeleted": false,
+      "id": "node-bed97175b06e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1298.4,
+      "y": 3370.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 729673,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-bed97175b06e"
+        },
+        {
+          "id": "edge-b28a3ca7430e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d49e5968aeb7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-92e8ace00b78",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1ff67a6d8404",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "plan"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1646835496,
+      "isDeleted": false,
+      "id": "text-bed97175b06e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1310.4,
+      "y": 3370.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 1347.5,
+      "seed": 379667,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plan\nA plan is the list of actions that makes the\nreal objects match the configuration. A plan\nchanges no real object. Each action has a\nsymbol ([plan output](https://developer.hashic\norp.com/terraform/cli/commands/plan#understand\n-plan-output)):\n\n| Symbol | Action | Meaning |\n| --- | --- | --- |\n| `+` | Create | The object does not exist.\nTerraform creates it. |\n| `~` | Update in place | Terraform changes\nthe object without deleting it. |\n| `-` | Destroy | Terraform deletes the\nobject. |\n| `-/+` | Replace | Terraform deletes the\nobject and then creates a new one. |\n\nThe plan in About the Examples creates a\ndatabase and a warehouse in Snowflake. This is\nthe warehouse part of its output and the\nsummary:\n\n```text\n# snowflake_warehouse.transform will be\ncreated\n+ resource \"snowflake_warehouse\" \"transform\" {\n+ auto_resume                         =\n\"default\"\n+ auto_suspend                        = 60\n+ enable_query_acceleration           =\n\"default\"\n+ fully_qualified_name                = (known\nafter apply)\n+ id                                  = (known\nafter apply)\n+ max_concurrency_level               = (known\nafter apply)\n+ name                                =\n\"TRANSFORM_DEV_WH\"\n+ parameters                          = (known\nafter apply)\n+ query_acceleration_max_scale_factor = -1\n+ show_output                         = (known\nafter apply)\n+ statement_queued_timeout_in_seconds = (known\nafter apply)\n+ statement_timeout_in_seconds        = (known\nafter apply)\n+ warehouse_size                      =\n\"XSMALL\"\n}\n\nPlan: 2 to add, 0 to change, 0 to destroy.\n```\n\n`(known after apply)` marks a value that only\nthe API can give, such as the ID. The values\nfrom the configuration, such as the name,\nappear in full. `\"default\"` and `-1` are\nspecial values of the Snowflake provider. They\nmean \"use the Snowflake default\" ([warehouse r\nesource](https://registry.terraform.io/provide\nrs/snowflakedb/snowflake/latest/docs/resources\n/warehouse)).\n\n`terraform plan` alone makes a speculative\nplan, which is a preview. `terraform plan\n-out=dev.tfplan` saves the plan in a file, and\n`terraform apply dev.tfplan` then makes\nexactly those changes ([plan command](https://\ndeveloper.hashicorp.com/terraform/cli/commands\n/plan)). The saved file in About the Examples\nis a zip archive of 4,375 bytes. It holds the\nplan, two state snapshots, a copy of each\n`.tf` file and the lock file.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-bed97175b06e",
+      "originalText": "Plan\nA plan is the list of actions that makes the real objects match the configuration. A plan changes no real object. Each action has a symbol ([plan output](https://developer.hashicorp.com/terraform/cli/commands/plan#understand-plan-output)):\n\n| Symbol | Action | Meaning |\n| --- | --- | --- |\n| `+` | Create | The object does not exist. Terraform creates it. |\n| `~` | Update in place | Terraform changes the object without deleting it. |\n| `-` | Destroy | Terraform deletes the object. |\n| `-/+` | Replace | Terraform deletes the object and then creates a new one. |\n\nThe plan in About the Examples creates a database and a warehouse in Snowflake. This is the warehouse part of its output and the summary:\n\n```text\n  # snowflake_warehouse.transform will be created\n  + resource \"snowflake_warehouse\" \"transform\" {\n      + auto_resume                         = \"default\"\n      + auto_suspend                        = 60\n      + enable_query_acceleration           = \"default\"\n      + fully_qualified_name                = (known after apply)\n      + id                                  = (known after apply)\n      + max_concurrency_level               = (known after apply)\n      + name                                = \"TRANSFORM_DEV_WH\"\n      + parameters                          = (known after apply)\n      + query_acceleration_max_scale_factor = -1\n      + show_output                         = (known after apply)\n      + statement_queued_timeout_in_seconds = (known after apply)\n      + statement_timeout_in_seconds        = (known after apply)\n      + warehouse_size                      = \"XSMALL\"\n    }\n\nPlan: 2 to add, 0 to change, 0 to destroy.\n```\n\n`(known after apply)` marks a value that only the API can give, such as the ID. The values from the configuration, such as the name, appear in full. `\"default\"` and `-1` are special values of the Snowflake provider. They mean \"use the Snowflake default\" ([warehouse resource](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/warehouse)).\n\n`terraform plan` alone makes a speculative plan, which is a preview. `terraform plan -out=dev.tfplan` saves the plan in a file, and `terraform apply dev.tfplan` then makes exactly those changes ([plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)). The saved file in About the Examples is a zip archive of 4,375 bytes. It holds the plan, two state snapshots, a copy of each `.tf` file and the lock file.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "plan"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5065729707,
+      "isDeleted": false,
+      "id": "node-a171b546f733",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1907.2,
+      "y": 3240.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220,
+      "seed": 480262,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a171b546f733"
+        },
+        {
+          "id": "edge-92e8ace00b78",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "replacement-destroys-data"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5001825789,
+      "isDeleted": false,
+      "id": "text-a171b546f733",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1919.2,
+      "y": 3240.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 367.5,
+      "seed": 760063,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Replacement Destroys Data\nSome arguments cannot change on a live object.\nA change to such an argument makes a replace\n(`-/+`), and the plan marks the argument with\n`# forces replacement`. For an\n`aiven_kafka_topic`, a change to `topic_name`,\n`project` or `service_name` forces a new topic\n([Aiven topic docs](https://registry.terraform\n.io/providers/aiven/aiven/latest/docs/resource\ns/kafka_topic)). A new topic name in the\nconfiguration therefore deletes the topic with\nall its messages, and creates an empty topic.\n\n`lifecycle { prevent_destroy = true }` in a\nresource block makes Terraform reject every\nplan that destroys the object. It does not\nprotect the object when someone deletes the\nwhole block, because Terraform then no longer\nreads the setting ([lifecycle](https://develop\ner.hashicorp.com/terraform/language/meta-argum\nents/lifecycle)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a171b546f733",
+      "originalText": "Replacement Destroys Data\nSome arguments cannot change on a live object. A change to such an argument makes a replace (`-/+`), and the plan marks the argument with `# forces replacement`. For an `aiven_kafka_topic`, a change to `topic_name`, `project` or `service_name` forces a new topic ([Aiven topic docs](https://registry.terraform.io/providers/aiven/aiven/latest/docs/resources/kafka_topic)). A new topic name in the configuration therefore deletes the topic with all its messages, and creates an empty topic.\n\n`lifecycle { prevent_destroy = true }` in a resource block makes Terraform reject every plan that destroys the object. It does not protect the object when someone deletes the whole block, because Terraform then no longer reads the setting ([lifecycle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "replacement-destroys-data"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1359710198,
+      "isDeleted": false,
+      "id": "node-918b95bd5e1c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1907.2,
+      "y": 3500.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220,
+      "seed": 177799,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-918b95bd5e1c"
+        },
+        {
+          "id": "edge-9e80fb6cb0c5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1ff67a6d8404",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "outside-changes-get-reverted"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2012622834,
+      "isDeleted": false,
+      "id": "text-918b95bd5e1c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1919.2,
+      "y": 3500.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 1365.0,
+      "seed": 260084,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Outside Changes Get Reverted\nTerraform makes each argument that it manages\nmatch the configuration. A plan therefore\nreverts a change that someone made outside\nTerraform, for example in Snowsight. This is\nthe first plan after the import in About the\nExamples. The real warehouse had `AUTO_SUSPEND\n= 60`, and the configuration said 300. The\n`show_output` lines are left out:\n\n```text\nsnowflake_warehouse.agent: Refreshing state...\n[id=\"AGENT_WH\"]\n\n# snowflake_warehouse.agent will be updated\nin-place\n~ resource \"snowflake_warehouse\" \"agent\" {\n~ auto_resume                         = \"true\"\n-> \"default\"\n~ auto_suspend                        = 60 ->\n300\n~ enable_query_acceleration           = \"true\"\n-> \"default\"\n- generation                          = \"2\" ->\nnull\nid                                  =\n\"\\\"AGENT_WH\\\"\"\n- max_cluster_count                   = 1 ->\nnull\n- min_cluster_count                   = 1 ->\nnull\nname                                =\n\"AGENT_WH\"\n~ query_acceleration_max_scale_factor = 8 ->\n-1\n- scaling_policy                      =\n\"STANDARD\" -> null\n- warehouse_type                      =\n\"STANDARD\" -> null\n# (8 unchanged attributes hidden)\n}\n\nPlan: 0 to add, 1 to change, 0 to destroy.\n```\n\nOnly the `auto_suspend` line comes from the\nconfiguration. The other eight lines are\narguments that the configuration does not set:\n\n- The three `~` lines get the provider's value\n`\"default\"` or `-1`, which means the Snowflake\ndefault. For this warehouse, the Snowflake\ndefaults are the current values: `AUTO_RESUME`\nis `TRUE`, `ENABLE_QUERY_ACCELERATION` is\n`TRUE` for a standard warehouse, and\n`QUERY_ACCELERATION_MAX_SCALE_FACTOR` is 8\n([CREATE WAREHOUSE](https://docs.snowflake.com\n/en/sql-reference/sql/create-warehouse)). A\nwarehouse with a value other than the default\nwould lose that value.\n- The five `-` lines set an argument to null.\nFor `warehouse_type`, the provider docs say\nthat the provider then sets the type to\n`STANDARD`. For the other four, the docs do\nnot say what an apply sends to Snowflake\n([warehouse resource](https://registry.terrafo\nrm.io/providers/snowflakedb/snowflake/latest/d\nocs/resources/warehouse)).\n\nWrite each setting that matters into the\nconfiguration, so that the plan shows no line\nfor it. To keep a change made outside\nTerraform, copy the value into the\nconfiguration. To make Terraform leave one\nargument alone, add `lifecycle {\nignore_changes = [auto_suspend] }` ([lifecycle\n](https://developer.hashicorp.com/terraform/la\nnguage/meta-arguments/lifecycle)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-918b95bd5e1c",
+      "originalText": "Outside Changes Get Reverted\nTerraform makes each argument that it manages match the configuration. A plan therefore reverts a change that someone made outside Terraform, for example in Snowsight. This is the first plan after the import in About the Examples. The real warehouse had `AUTO_SUSPEND = 60`, and the configuration said 300. The `show_output` lines are left out:\n\n```text\nsnowflake_warehouse.agent: Refreshing state... [id=\"AGENT_WH\"]\n\n  # snowflake_warehouse.agent will be updated in-place\n  ~ resource \"snowflake_warehouse\" \"agent\" {\n      ~ auto_resume                         = \"true\" -> \"default\"\n      ~ auto_suspend                        = 60 -> 300\n      ~ enable_query_acceleration           = \"true\" -> \"default\"\n      - generation                          = \"2\" -> null\n        id                                  = \"\\\"AGENT_WH\\\"\"\n      - max_cluster_count                   = 1 -> null\n      - min_cluster_count                   = 1 -> null\n        name                                = \"AGENT_WH\"\n      ~ query_acceleration_max_scale_factor = 8 -> -1\n      - scaling_policy                      = \"STANDARD\" -> null\n      - warehouse_type                      = \"STANDARD\" -> null\n        # (8 unchanged attributes hidden)\n    }\n\nPlan: 0 to add, 1 to change, 0 to destroy.\n```\n\nOnly the `auto_suspend` line comes from the configuration. The other eight lines are arguments that the configuration does not set:\n\n- The three `~` lines get the provider's value `\"default\"` or `-1`, which means the Snowflake default. For this warehouse, the Snowflake defaults are the current values: `AUTO_RESUME` is `TRUE`, `ENABLE_QUERY_ACCELERATION` is `TRUE` for a standard warehouse, and `QUERY_ACCELERATION_MAX_SCALE_FACTOR` is 8 ([CREATE WAREHOUSE](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse)). A warehouse with a value other than the default would lose that value.\n- The five `-` lines set an argument to null. For `warehouse_type`, the provider docs say that the provider then sets the type to `STANDARD`. For the other four, the docs do not say what an apply sends to Snowflake ([warehouse resource](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/warehouse)).\n\nWrite each setting that matters into the configuration, so that the plan shows no line for it. To keep a change made outside Terraform, copy the value into the configuration. To make Terraform leave one argument alone, add `lifecycle { ignore_changes = [auto_suspend] }` ([lifecycle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "outside-changes-get-reverted"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3328313832,
+      "isDeleted": false,
+      "id": "node-8a6143e51b8a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 4165.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 189.5,
+      "seed": 821626,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-8a6143e51b8a"
+        },
+        {
+          "id": "edge-c2d34a108587",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-454a1b3da74f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ddf6ae002cf5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-59a38848b467",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0ae0e62aae68",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-a-terraform-repo"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7560690465,
+      "isDeleted": false,
+      "id": "text-8a6143e51b8a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 4181.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 157.5,
+      "seed": 78672,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading a Terraform Repo\nA repo can hold many\nconfigurations. These nodes say\nwhich file names matter, how to\nfind each configuration, how repos\nare laid out, and in which order\nto read.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-8a6143e51b8a",
+      "originalText": "Reading a Terraform Repo\nA repo can hold many configurations. These nodes say which file names matter, how to find each configuration, how repos are laid out, and in which order to read.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-a-terraform-repo"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2958761453,
+      "isDeleted": false,
+      "id": "node-9640580c8c78",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 3760.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 513752,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9640580c8c78"
+        },
+        {
+          "id": "edge-454a1b3da74f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "file-names"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2187893231,
+      "isDeleted": false,
+      "id": "text-9640580c8c78",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 3760.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 1277.5,
+      "seed": 772086,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "File Names\nTerraform reads every `.tf` and `.tf.json`\nfile in a folder as one document. The split\ninto files has no effect on what Terraform\ndoes ([files and directories](https://develope\nr.hashicorp.com/terraform/language/files)). So\na resource in `main.tf` works the same in\n`warehouses.tf`. Only these names have a\nmeaning for Terraform:\n\n| Name | What Terraform does with it | In Git\n|\n| --- | --- | --- |\n| `*.tf`, `*.tf.json` | Reads all of them in\nthe folder as configuration. | Yes |\n| `override.tf`, `*_override.tf` | Reads them\nlast, and merges each block into the block of\nthe same name ([override files](https://develo\nper.hashicorp.com/terraform/language/files/ove\nrride)). | Yes |\n| `terraform.tfvars`, `terraform.tfvars.json`\n| Loads the variable values automatically. |\nYes, without secrets |\n| `*.auto.tfvars`, `*.auto.tfvars.json` |\nLoads the variable values automatically, in\nlexical order. | Yes, without secrets |\n| Any other `*.tfvars` | Loads the values only\nwith `-var-file=<file>`. | Yes, without\nsecrets |\n| `.terraform.lock.hcl` | Records the provider\nversions and checksums that `init` chose\n([lock file](https://developer.hashicorp.com/t\nerraform/language/files/dependency-lock)). |\nYes |\n| `.terraform/` | Holds the downloaded\nproviders and modules. | No |\n| `terraform.tfstate`,\n`terraform.tfstate.backup` | Local state. | No\n|\n| `.terraform.tfstate.lock.info` | Local state\nlock. | No |\n| The file after `plan -out=` | Saved plan. |\nNo |\n| `*.tftest.hcl` | Tests for `terraform test`\n([test files](https://developer.hashicorp.com/\nterraform/language/files/tests)). | Yes |\n\nThe \"In Git\" column follows the [style guide](\nhttps://developer.hashicorp.com/terraform/lang\nuage/style#gitignore).\n\nOther names are a convention for readers. The\nstyle guide recommends these names ([file name\ns](https://developer.hashicorp.com/terraform/l\nanguage/style#file-names)):\n\n- `terraform.tf`: the `terraform` block with\n`required_version` and `required_providers`.\nThe public [S3 bucket module](https://github.c\nom/terraform-aws-modules/terraform-aws-s3-buck\net) names this file `versions.tf`.\n- `backend.tf`: the backend configuration.\n- `providers.tf`: the `provider` blocks.\n- `variables.tf`, `outputs.tf`, `locals.tf`:\nthe `variable`, `output` and `locals` blocks.\n- `main.tf`: the resource and data blocks.\n\nA configuration can split `main.tf` by\nsubject, for example into `warehouses.tf`,\n`topics.tf` or `grants.tf`. Files such as\n`moved.tf` or `imports.tf` collect `moved` and\n`import` blocks. Terraform treats all of them\nas ordinary `.tf` files.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9640580c8c78",
+      "originalText": "File Names\nTerraform reads every `.tf` and `.tf.json` file in a folder as one document. The split into files has no effect on what Terraform does ([files and directories](https://developer.hashicorp.com/terraform/language/files)). So a resource in `main.tf` works the same in `warehouses.tf`. Only these names have a meaning for Terraform:\n\n| Name | What Terraform does with it | In Git |\n| --- | --- | --- |\n| `*.tf`, `*.tf.json` | Reads all of them in the folder as configuration. | Yes |\n| `override.tf`, `*_override.tf` | Reads them last, and merges each block into the block of the same name ([override files](https://developer.hashicorp.com/terraform/language/files/override)). | Yes |\n| `terraform.tfvars`, `terraform.tfvars.json` | Loads the variable values automatically. | Yes, without secrets |\n| `*.auto.tfvars`, `*.auto.tfvars.json` | Loads the variable values automatically, in lexical order. | Yes, without secrets |\n| Any other `*.tfvars` | Loads the values only with `-var-file=<file>`. | Yes, without secrets |\n| `.terraform.lock.hcl` | Records the provider versions and checksums that `init` chose ([lock file](https://developer.hashicorp.com/terraform/language/files/dependency-lock)). | Yes |\n| `.terraform/` | Holds the downloaded providers and modules. | No |\n| `terraform.tfstate`, `terraform.tfstate.backup` | Local state. | No |\n| `.terraform.tfstate.lock.info` | Local state lock. | No |\n| The file after `plan -out=` | Saved plan. | No |\n| `*.tftest.hcl` | Tests for `terraform test` ([test files](https://developer.hashicorp.com/terraform/language/files/tests)). | Yes |\n\nThe \"In Git\" column follows the [style guide](https://developer.hashicorp.com/terraform/language/style#gitignore).\n\nOther names are a convention for readers. The style guide recommends these names ([file names](https://developer.hashicorp.com/terraform/language/style#file-names)):\n\n- `terraform.tf`: the `terraform` block with `required_version` and `required_providers`. The public [S3 bucket module](https://github.com/terraform-aws-modules/terraform-aws-s3-bucket) names this file `versions.tf`.\n- `backend.tf`: the backend configuration.\n- `providers.tf`: the `provider` blocks.\n- `variables.tf`, `outputs.tf`, `locals.tf`: the `variable`, `output` and `locals` blocks.\n- `main.tf`: the resource and data blocks.\n\nA configuration can split `main.tf` by subject, for example into `warehouses.tf`, `topics.tf` or `grants.tf`. Files such as `moved.tf` or `imports.tf` collect `moved` and `import` blocks. Terraform treats all of them as ordinary `.tf` files.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "file-names"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2086497694,
+      "isDeleted": false,
+      "id": "node-bc7479f3a7eb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 4020.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 149226,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-bc7479f3a7eb"
+        },
+        {
+          "id": "edge-e66fecb7af15",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ddf6ae002cf5",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "root-module-folders"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9781723403,
+      "isDeleted": false,
+      "id": "text-bc7479f3a7eb",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 4020.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 542.5,
+      "seed": 333653,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Root Module Folders\nEach folder in which someone runs Terraform is\na root module with its own state. Two signs\nmark such a folder:\n\n- A `backend` or `cloud` block, which says\nwhere its state lives.\n- A committed `.terraform.lock.hcl`. Terraform\nwrites the lock file in the folder where\n`init` runs, and the style guide says to\ncommit it. Some repos do not commit it, so the\nbackend block is the more reliable sign.\n\nThese commands list the candidates from the\nrepo root:\n\n```bash\nfind . -name .terraform.lock.hcl -not -path\n'*/.terraform/*'\ngrep -rl --include='*.tf' -E '^\\s*(backend\n\"|cloud \\{)' .\n```\n\nA folder that other folders only call through\n`module` blocks is a child module. It needs\nneither sign, because it uses the backend and\nthe lock file of the root module that calls\nit. The standard module structure puts such\nmodules under `modules/` ([standard module str\nucture](https://developer.hashicorp.com/terraf\norm/language/modules/develop/structure)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-bc7479f3a7eb",
+      "originalText": "Root Module Folders\nEach folder in which someone runs Terraform is a root module with its own state. Two signs mark such a folder:\n\n- A `backend` or `cloud` block, which says where its state lives.\n- A committed `.terraform.lock.hcl`. Terraform writes the lock file in the folder where `init` runs, and the style guide says to commit it. Some repos do not commit it, so the backend block is the more reliable sign.\n\nThese commands list the candidates from the repo root:\n\n```bash\nfind . -name .terraform.lock.hcl -not -path '*/.terraform/*'\ngrep -rl --include='*.tf' -E '^\\s*(backend \"|cloud \\{)' .\n```\n\nA folder that other folders only call through `module` blocks is a child module. It needs neither sign, because it uses the backend and the lock file of the root module that calls it. The standard module structure puts such modules under `modules/` ([standard module structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "root-module-folders"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3487356452,
+      "isDeleted": false,
+      "id": "node-90a4a9dd4a50",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 4280.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 874690,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-90a4a9dd4a50"
+        },
+        {
+          "id": "edge-59a38848b467",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "repo-layouts"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8797311333,
+      "isDeleted": false,
+      "id": "text-90a4a9dd4a50",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 4280.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 507.5,
+      "seed": 501371,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Repo Layouts\nThe style guide shows three ways to separate\nenvironments and parts of the system\n([multiple environments](https://developer.has\nhicorp.com/terraform/language/style#multiple-e\nnvironments)):\n\n- One folder for each environment, such as\n`dev/`, `staging/` and `prod/`. Each folder\nhas its own `backend.tf`, so each environment\nhas its own state. All of them call the shared\nmodules in `modules/`.\n- One folder for each part of the system, such\nas `networking/`, `database/` and `compute/`.\nEach part has its own state, so a change in\none part cannot touch the objects of another\npart.\n- One configuration with one workspace for\neach environment. The Workspace node describes\nthe limits of CLI workspaces.\n\nValues that differ by environment can sit in\nfiles such as `prod.tfvars`, which a pipeline\npasses with `-var-file`. The style guide also\ncompares one repo for all configurations, a\nmonorepo, with one repo for each module\n([repository structure](https://developer.hash\nicorp.com/terraform/language/style#repository-\nstructure)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-90a4a9dd4a50",
+      "originalText": "Repo Layouts\nThe style guide shows three ways to separate environments and parts of the system ([multiple environments](https://developer.hashicorp.com/terraform/language/style#multiple-environments)):\n\n- One folder for each environment, such as `dev/`, `staging/` and `prod/`. Each folder has its own `backend.tf`, so each environment has its own state. All of them call the shared modules in `modules/`.\n- One folder for each part of the system, such as `networking/`, `database/` and `compute/`. Each part has its own state, so a change in one part cannot touch the objects of another part.\n- One configuration with one workspace for each environment. The Workspace node describes the limits of CLI workspaces.\n\nValues that differ by environment can sit in files such as `prod.tfvars`, which a pipeline passes with `-var-file`. The style guide also compares one repo for all configurations, a monorepo, with one repo for each module ([repository structure](https://developer.hashicorp.com/terraform/language/style#repository-structure)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "repo-layouts"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4612479971,
+      "isDeleted": false,
+      "id": "node-10e41087749c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 4540.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 383724,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-10e41087749c"
+        },
+        {
+          "id": "edge-0ae0e62aae68",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-order"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7486369438,
+      "isDeleted": false,
+      "id": "text-10e41087749c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 4540.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 560.0,
+      "seed": 125900,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading Order\nThis order answers the main questions about a\nconfiguration with the least reading:\n\n1. Find the root modules. Root Module Folders\nshows how.\n2. In each root module, read the `terraform`\nblock. It names the providers, their versions\nand the backend, so you learn which products\nthe folder changes and where the state lives.\n3. Read the `provider` blocks. They name the\naccount, the user and the role that Terraform\nacts as, and where the credentials come from.\n4. Read `variables.tf` and the `*.tfvars`\nfiles. They show what differs between\nenvironments.\n5. List the resource types. This command\ncounts the blocks in a folder:\n\n`grep -rhoE '^(resource|data|module) \"[^\"]+\"'\n--include='*.tf' . | sort | uniq -c`\n\nIn the example of About the Examples, it\nprints `1 resource \"snowflake_database\"` and\n`1 resource \"snowflake_warehouse\"`.\n6. Follow each `module` block to its `source`\nfolder, and read that module in the same\norder.\n7. Read the CI pipeline file, if the repo has\none. It shows which folder and which workspace\neach job uses, and which step needs an\napproval before apply.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-10e41087749c",
+      "originalText": "Reading Order\nThis order answers the main questions about a configuration with the least reading:\n\n1. Find the root modules. Root Module Folders shows how.\n2. In each root module, read the `terraform` block. It names the providers, their versions and the backend, so you learn which products the folder changes and where the state lives.\n3. Read the `provider` blocks. They name the account, the user and the role that Terraform acts as, and where the credentials come from.\n4. Read `variables.tf` and the `*.tfvars` files. They show what differs between environments.\n5. List the resource types. This command counts the blocks in a folder:\n\n   `grep -rhoE '^(resource|data|module) \"[^\"]+\"' --include='*.tf' . | sort | uniq -c`\n\n   In the example of About the Examples, it prints `1 resource \"snowflake_database\"` and `1 resource \"snowflake_warehouse\"`.\n6. Follow each `module` block to its `source` folder, and read that module in the same order.\n7. Read the CI pipeline file, if the repo has one. It shows which folder and which workspace each job uses, and which step needs an approval before apply.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-order"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3225162570,
+      "isDeleted": false,
+      "id": "node-6e42c4fdba11",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 5060.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 220,
+      "seed": 794619,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6e42c4fdba11"
+        },
+        {
+          "id": "edge-d3c9d1363c5f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-fd388ed5f91e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0746cb986b99",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c7f1777e59d8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-data-flow"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9413761445,
+      "isDeleted": false,
+      "id": "text-6e42c4fdba11",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 5060.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 225.0,
+      "seed": 306471,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Data Flow\nOne change flows like this:\n\n`.tf` files and variable values \u2192\n`terraform init` \u2192 `terraform\nplan`, which also reads the state\nand the real objects \u2192 the plan \u2192\n`terraform apply` \u2192 provider API\ncalls \u2192 changed real objects and a\nnew state",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-6e42c4fdba11",
+      "originalText": "Data Flow\nOne change flows like this:\n\n`.tf` files and variable values \u2192 `terraform init` \u2192 `terraform plan`, which also reads the state and the real objects \u2192 the plan \u2192 `terraform apply` \u2192 provider API calls \u2192 changed real objects and a new state",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-data-flow"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1984428357,
+      "isDeleted": false,
+      "id": "node-5b0cd6b71f86",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4800.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 394471,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5b0cd6b71f86"
+        },
+        {
+          "id": "edge-fd388ed5f91e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-init"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4091365515,
+      "isDeleted": false,
+      "id": "text-5b0cd6b71f86",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4800.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 700.0,
+      "seed": 173163,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "terraform init\n#### Inputs\n\n- The `terraform` block: `required_providers`\nand the backend.\n- The `source` of each `module` block.\n- The lock file `.terraform.lock.hcl`, if it\nexists.\n- `-backend-config` values for a partial\nbackend configuration.\n\n#### Outputs\n\n- The `.terraform/` folder with the providers\nand the remote modules. In About the Examples,\ninit put the Snowflake provider in `.terraform\n/providers/registry.terraform.io/snowflakedb/s\nnowflake/2.23.0/darwin_arm64`, and the folder\nhad 52 MB.\n- The lock file. In the example, it held one\nentry, for\n`registry.terraform.io/snowflakedb/snowflake`,\nwith `version = \"2.23.0\"` and 13 checksums.\n- A connection to the backend. Init does not\nchange the state.\n\n#### Under the hood\n\nFor each provider, init uses the version in\nthe lock file. Without a lock entry, it takes\nthe newest version that matches the `version`\nconstraint and records it. Init checks each\ndownload against the checksums in the lock\nfile. `terraform init -upgrade` takes newer\nversions within the constraints ([lock file](h\nttps://developer.hashicorp.com/terraform/langu\nage/files/dependency-lock)). Init is safe to\nrun many times ([init command](https://develop\ner.hashicorp.com/terraform/cli/commands/init))\n.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-5b0cd6b71f86",
+      "originalText": "terraform init\n#### Inputs\n\n- The `terraform` block: `required_providers` and the backend.\n- The `source` of each `module` block.\n- The lock file `.terraform.lock.hcl`, if it exists.\n- `-backend-config` values for a partial backend configuration.\n\n#### Outputs\n\n- The `.terraform/` folder with the providers and the remote modules. In About the Examples, init put the Snowflake provider in `.terraform/providers/registry.terraform.io/snowflakedb/snowflake/2.23.0/darwin_arm64`, and the folder had 52 MB.\n- The lock file. In the example, it held one entry, for `registry.terraform.io/snowflakedb/snowflake`, with `version = \"2.23.0\"` and 13 checksums.\n- A connection to the backend. Init does not change the state.\n\n#### Under the hood\n\nFor each provider, init uses the version in the lock file. Without a lock entry, it takes the newest version that matches the `version` constraint and records it. Init checks each download against the checksums in the lock file. `terraform init -upgrade` takes newer versions within the constraints ([lock file](https://developer.hashicorp.com/terraform/language/files/dependency-lock)). Init is safe to run many times ([init command](https://developer.hashicorp.com/terraform/cli/commands/init)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-init"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2408382465,
+      "isDeleted": false,
+      "id": "node-6d6ccb0c6521",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5060.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 597080,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6d6ccb0c6521"
+        },
+        {
+          "id": "edge-b28a3ca7430e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0746cb986b99",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-plan"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4077292243,
+      "isDeleted": false,
+      "id": "text-6d6ccb0c6521",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5060.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 805.0,
+      "seed": 787820,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "terraform plan\n#### Inputs\n\nThis list is all the data that goes into\nTerraform:\n\n- The configuration: every `.tf` file of the\nroot module and of the modules that it calls.\n- The variable values, from the sources that\nVariables, Locals, and Outputs lists.\n- The prior state, from the backend.\n- The real objects. The provider reads each\nobject in the state again. This step is the\nrefresh. In About the Examples, the plan\nprinted `snowflake_warehouse.agent: Refreshing\nstate... [id=\"AGENT_WH\"]`.\n- The results of the data sources, which the\nproviders read.\n- The credentials of each provider and of the\nbackend, from `provider` blocks, variables or\nenvironment variables.\n\n#### Outputs\n\n- The plan on the screen. With `-out`, also a\nsaved plan file.\n- No change to any real object. The state file\ndoes not change either: in About the Examples,\nits SHA-1 checksum was the same before and\nafter a plan.\n\n#### Under the hood\n\nThe plan command does three things ([plan comm\nand](https://developer.hashicorp.com/terraform\n/cli/commands/plan)). First, it reads the\ncurrent state of the real objects. Next, it\ncompares the configuration with that state.\nThen, it proposes the actions that remove the\ndifferences. Terraform orders the actions by a\ndependency graph, which it builds from the\nreferences between blocks. Objects that do not\ndepend on each other are handled in parallel,\n10 at a time by default. In About the\nExamples, a read-only Snowflake role was\nenough for every plan.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-6d6ccb0c6521",
+      "originalText": "terraform plan\n#### Inputs\n\nThis list is all the data that goes into Terraform:\n\n- The configuration: every `.tf` file of the root module and of the modules that it calls.\n- The variable values, from the sources that Variables, Locals, and Outputs lists.\n- The prior state, from the backend.\n- The real objects. The provider reads each object in the state again. This step is the refresh. In About the Examples, the plan printed `snowflake_warehouse.agent: Refreshing state... [id=\"AGENT_WH\"]`.\n- The results of the data sources, which the providers read.\n- The credentials of each provider and of the backend, from `provider` blocks, variables or environment variables.\n\n#### Outputs\n\n- The plan on the screen. With `-out`, also a saved plan file.\n- No change to any real object. The state file does not change either: in About the Examples, its SHA-1 checksum was the same before and after a plan.\n\n#### Under the hood\n\nThe plan command does three things ([plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)). First, it reads the current state of the real objects. Next, it compares the configuration with that state. Then, it proposes the actions that remove the differences. Terraform orders the actions by a dependency graph, which it builds from the references between blocks. Objects that do not depend on each other are handled in parallel, 10 at a time by default. In About the Examples, a read-only Snowflake role was enough for every plan.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-plan"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9868869343,
+      "isDeleted": false,
+      "id": "node-f740d3cd1c67",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5320.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220,
+      "seed": 550372,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f740d3cd1c67"
+        },
+        {
+          "id": "edge-c7f1777e59d8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-apply"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1227629360,
+      "isDeleted": false,
+      "id": "text-f740d3cd1c67",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5320.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 682.5,
+      "seed": 490555,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "terraform apply\n#### Inputs\n\n- A saved plan file. Terraform then makes\nexactly the planned changes, without a prompt.\n- Or no file. Terraform then makes a new plan,\nshows it, and waits for you to type `yes`.\n`-auto-approve` skips that question ([apply co\nmmand](https://developer.hashicorp.com/terrafo\nrm/cli/commands/apply)).\n- Credentials with the privileges to make the\nchanges.\n\n#### Outputs\n\n- Changed real objects, through the API calls\nof the providers. For Snowflake, the calls are\nSQL statements.\n- A new state in the backend.\n- The values of the root module outputs, on\nthe screen.\n\n#### Under the hood\n\nApply holds the state lock while it runs. When\nan API call fails, Terraform reports the\nerror, saves the state with the changes that\nit already made, unlocks the state and stops.\nIt does not roll back the finished changes.\nAfter you fix the cause, you run apply again\n([errors during apply](https://developer.hashi\ncorp.com/terraform/cli/commands/apply#errors-d\nuring-an-apply-operation)). With HCP\nTerraform, a speculative plan runs for each\npull request, and an apply starts after the\nmerge ([speculative plans on pull requests](ht\ntps://developer.hashicorp.com/terraform/cloud-\ndocs/workspaces/run/ui#speculative-plans-on-pu\nll-requests)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-f740d3cd1c67",
+      "originalText": "terraform apply\n#### Inputs\n\n- A saved plan file. Terraform then makes exactly the planned changes, without a prompt.\n- Or no file. Terraform then makes a new plan, shows it, and waits for you to type `yes`. `-auto-approve` skips that question ([apply command](https://developer.hashicorp.com/terraform/cli/commands/apply)).\n- Credentials with the privileges to make the changes.\n\n#### Outputs\n\n- Changed real objects, through the API calls of the providers. For Snowflake, the calls are SQL statements.\n- A new state in the backend.\n- The values of the root module outputs, on the screen.\n\n#### Under the hood\n\nApply holds the state lock while it runs. When an API call fails, Terraform reports the error, saves the state with the changes that it already made, unlocks the state and stops. It does not roll back the finished changes. After you fix the cause, you run apply again ([errors during apply](https://developer.hashicorp.com/terraform/cli/commands/apply#errors-during-an-apply-operation)). With HCP Terraform, a speculative plan runs for each pull request, and an apply starts after the merge ([speculative plans on pull requests](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/run/ui#speculative-plans-on-pull-requests)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-apply"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1539437347,
+      "isDeleted": false,
+      "id": "node-dd9eba267178",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 5580.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 410.0,
+      "height": 220,
+      "seed": 395563,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-dd9eba267178"
+        },
+        {
+          "id": "edge-c3341f5255b3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "about-the-examples"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9612018693,
+      "isDeleted": false,
+      "id": "text-dd9eba267178",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 730.0,
+      "y": 5580.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 390.0,
+      "height": 2112.5,
+      "seed": 721782,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Examples\nAll outputs in this map come from runs on\n2026-11-16, with Terraform 1.15.8 on macOS\n(darwin_arm64) and the provider\n`snowflakedb/snowflake` 2.23.0. The newest\nTerraform release on that day was 1.17.2. No\n`terraform apply` ran, so nothing changed in\nSnowflake.\n\nThe first example is a folder with six files:\n\n```hcl\n# terraform.tf\nterraform {\nrequired_version = \">= 1.5\"\n\nrequired_providers {\nsnowflake = {\nsource  = \"snowflakedb/snowflake\"\nversion = \"2.23.0\"\n}\n}\n}\n\n# providers.tf\nprovider \"snowflake\" {\norganization_name = var.snowflake_organization\naccount_name      = var.snowflake_account\nuser              = var.snowflake_user\nrole              = var.snowflake_role\nauthenticator     = \"SNOWFLAKE_JWT\"\nprivate_key       = file(var.private_key_path)\n}\n\n# variables.tf\nvariable \"environment\" {\ntype        = string\ndescription = \"Short name of the environment, such\nas dev or prod.\"\n}\n\nvariable \"private_key_path\" {\ntype = string\n}\n\nvariable \"snowflake_account\" {\ntype = string\n}\n\nvariable \"snowflake_organization\" {\ntype = string\n}\n\nvariable \"snowflake_role\" {\ntype = string\n}\n\nvariable \"snowflake_user\" {\ntype = string\n}\n\n# main.tf\nlocals {\nsuffix = upper(var.environment)\n}\n\nresource \"snowflake_database\" \"raw\" {\nname    = \"RAW_${local.suffix}\"\ncomment = \"Landing zone for Kafka and Iceberg\ndata.\"\n}\n\nresource \"snowflake_warehouse\" \"transform\" {\nname           = \"TRANSFORM_${local.suffix}_WH\"\nwarehouse_size = \"XSMALL\"\nauto_suspend   = 60\n}\n\n# outputs.tf\noutput \"raw_database_name\" {\nvalue = snowflake_database.raw.name\n}\n\n# dev.tfvars\nenvironment = \"dev\"\n```\n\nThese commands ran in that folder. The role was a\nread-only role. The `TF_VAR_` variables carry the\naccount and the key, so no file holds them:\n\n```bash\nexport TF_VAR_snowflake_organization=<org>\nTF_VAR_snowflake_account=<account>\nexport TF_VAR_snowflake_user=<user>\nTF_VAR_snowflake_role=<read-only role>\nexport TF_VAR_private_key_path=<path to the .p8\nkey>\nterraform init -input=false\nterraform plan -input=false -var-file=dev.tfvars\n-out=dev.tfplan\nunzip -l dev.tfplan\n```\n\nThe second example is a copy of `terraform.tf`,\n`providers.tf` and `variables.tf` without the\nvariable `environment`, and this `main.tf`:\n\n```hcl\nresource \"snowflake_warehouse\" \"agent\" {\nname           = \"AGENT_WH\"\nwarehouse_size = \"XSMALL\"\nauto_suspend   = 300\ncomment        = \"Shared warehouse for agent\nread-only queries\"\n}\n```\n\n`AGENT_WH` is an existing X-Small warehouse with\n`AUTO_SUSPEND = 60`. These commands ran with the\nsame environment variables:\n\n```bash\nterraform init -input=false\nterraform import snowflake_warehouse.agent\n'\"AGENT_WH\"'\nshasum terraform.tfstate\nterraform plan -input=false\nshasum terraform.tfstate\n```",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-dd9eba267178",
+      "originalText": "About the Examples\nAll outputs in this map come from runs on 2026-11-16, with Terraform 1.15.8 on macOS (darwin_arm64) and the provider `snowflakedb/snowflake` 2.23.0. The newest Terraform release on that day was 1.17.2. No `terraform apply` ran, so nothing changed in Snowflake.\n\nThe first example is a folder with six files:\n\n```hcl\n# terraform.tf\nterraform {\n  required_version = \">= 1.5\"\n\n  required_providers {\n    snowflake = {\n      source  = \"snowflakedb/snowflake\"\n      version = \"2.23.0\"\n    }\n  }\n}\n\n# providers.tf\nprovider \"snowflake\" {\n  organization_name = var.snowflake_organization\n  account_name      = var.snowflake_account\n  user              = var.snowflake_user\n  role              = var.snowflake_role\n  authenticator     = \"SNOWFLAKE_JWT\"\n  private_key       = file(var.private_key_path)\n}\n\n# variables.tf\nvariable \"environment\" {\n  type        = string\n  description = \"Short name of the environment, such as dev or prod.\"\n}\n\nvariable \"private_key_path\" {\n  type = string\n}\n\nvariable \"snowflake_account\" {\n  type = string\n}\n\nvariable \"snowflake_organization\" {\n  type = string\n}\n\nvariable \"snowflake_role\" {\n  type = string\n}\n\nvariable \"snowflake_user\" {\n  type = string\n}\n\n# main.tf\nlocals {\n  suffix = upper(var.environment)\n}\n\nresource \"snowflake_database\" \"raw\" {\n  name    = \"RAW_${local.suffix}\"\n  comment = \"Landing zone for Kafka and Iceberg data.\"\n}\n\nresource \"snowflake_warehouse\" \"transform\" {\n  name           = \"TRANSFORM_${local.suffix}_WH\"\n  warehouse_size = \"XSMALL\"\n  auto_suspend   = 60\n}\n\n# outputs.tf\noutput \"raw_database_name\" {\n  value = snowflake_database.raw.name\n}\n\n# dev.tfvars\nenvironment = \"dev\"\n```\n\nThese commands ran in that folder. The role was a read-only role. The `TF_VAR_` variables carry the account and the key, so no file holds them:\n\n```bash\nexport TF_VAR_snowflake_organization=<org> TF_VAR_snowflake_account=<account>\nexport TF_VAR_snowflake_user=<user> TF_VAR_snowflake_role=<read-only role>\nexport TF_VAR_private_key_path=<path to the .p8 key>\nterraform init -input=false\nterraform plan -input=false -var-file=dev.tfvars -out=dev.tfplan\nunzip -l dev.tfplan\n```\n\nThe second example is a copy of `terraform.tf`, `providers.tf` and `variables.tf` without the variable `environment`, and this `main.tf`:\n\n```hcl\nresource \"snowflake_warehouse\" \"agent\" {\n  name           = \"AGENT_WH\"\n  warehouse_size = \"XSMALL\"\n  auto_suspend   = 300\n  comment        = \"Shared warehouse for agent read-only queries\"\n}\n```\n\n`AGENT_WH` is an existing X-Small warehouse with `AUTO_SUSPEND = 60`. These commands ran with the same environment variables:\n\n```bash\nterraform init -input=false\nterraform import snowflake_warehouse.agent '\"AGENT_WH\"'\nshasum terraform.tfstate\nterraform plan -input=false\nshasum terraform.tfstate\n```",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "about-the-examples"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7345789734,
+      "isDeleted": false,
+      "id": "edge-2424069ad876",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 387.3192307692308,
+      "y": 2850.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 597364,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          492.3219230769231,
+          -869.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-75ada95d871d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.77ceb8138e2b1b91"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8277483000,
+      "isDeleted": false,
+      "id": "edge-c120a92baf66",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 935.6257988165681,
+      "y": 1859.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 616774,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          533.5375147928995,
+          -1519.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-45d19e1c479c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5fd5e172c0cdd154"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7641706603,
+      "isDeleted": false,
+      "id": "edge-ab88afa77ad2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 939.5213986013987,
+      "y": 1859.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 307651,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          522.6170629370631,
+          -1259.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5121d75a8dac",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4616c964c79157fc"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9080807898,
+      "isDeleted": false,
+      "id": "edge-9728c846a970",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 945.1483760683761,
+      "y": 1859.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 684733,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          506.843076923077,
+          -999.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-90c5d1358d12",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.faeb2cbd9463d4b0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8782167277,
+      "isDeleted": false,
+      "id": "edge-0f01be5c29aa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 953.9907692307693,
+      "y": 1859.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 902375,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          482.0553846153848,
+          -739.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7a1047389735",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a8643975586241f0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6359929347,
+      "isDeleted": false,
+      "id": "edge-4fffb9109e9e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 969.9070769230769,
+      "y": 1859.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 385066,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          437.43753846153857,
+          -479.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-aafc847bbd43",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.0edc61b8f4d44d9d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6139535844,
+      "isDeleted": false,
+      "id": "edge-5f1ce9bea6ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1007.0451282051283,
+      "y": 1859.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 703345,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          333.32923076923066,
+          -219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-41e049809498",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.b7ee2ab6219fb374"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8577589442,
+      "isDeleted": false,
+      "id": "edge-f410782e124d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1108.4,
+      "y": 1877.4696765498652,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 197258,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -41.61051212938014
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-fbd34a2b6e6a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.44f25fbb3c9207f5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5669663594,
+      "isDeleted": false,
+      "id": "edge-5eaaaa53308d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1007.0451282051283,
+      "y": 1981.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 775434,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          333.32923076923066,
+          219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-aa4a5f8125f2",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.46149612277f86bb"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8834520671,
+      "isDeleted": false,
+      "id": "edge-98b7b134e315",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1717.2000000000003,
+      "y": 2220.5716162943495,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 119085,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          -81.143232588699
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aa4a5f8125f2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-91f7470b1fd8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.94cacf49711fa5cb"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4489355819,
+      "isDeleted": false,
+      "id": "edge-9e80fb6cb0c5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 2116.6,
+      "y": 2420.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 639030,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0,
+          1080.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-62fdfbd55d19",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-918b95bd5e1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.bd8f85ddaf8d21b0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4943697833,
+      "isDeleted": false,
+      "id": "edge-b62f403c3700",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1717.2000000000003,
+      "y": 2310.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 668432,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aa4a5f8125f2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-62fdfbd55d19",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.bb60ab3080583de3"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1490445755,
+      "isDeleted": false,
+      "id": "edge-44075abcf957",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1717.2000000000003,
+      "y": 2399.4283837056505,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 336723,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          81.143232588699
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aa4a5f8125f2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2d8b0709a4fd",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.8c2e9080d318f521"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7346004284,
+      "isDeleted": false,
+      "id": "edge-e0d0d8a4ce44",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 953.9907692307693,
+      "y": 1981.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 206319,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          482.0553846153848,
+          739.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-754a08ddf8bc",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.30dd145e1109e66c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7198477255,
+      "isDeleted": false,
+      "id": "edge-4d546b1eedc8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 945.1483760683761,
+      "y": 1981.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 553154,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          506.843076923077,
+          999.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a279fe916f63",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.04d2fac986bb5e7f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4173551243,
+      "isDeleted": false,
+      "id": "edge-b28a3ca7430e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1508.5029585798818,
+      "y": 3590.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 533888,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          9.394082840236706,
+          1470.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bed97175b06e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6d6ccb0c6521",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.a1fdb03157e2700b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4487866437,
+      "isDeleted": false,
+      "id": "edge-d49e5968aeb7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 937.4112820512821,
+      "y": 1981.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 614296,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          528.5323076923078,
+          1389.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8e90703e6ba8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-bed97175b06e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.89684d3869672a0e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9527701895,
+      "isDeleted": false,
+      "id": "edge-92e8ace00b78",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1717.2000000000003,
+      "y": 3435.285808147175,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 920432,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          -40.57161629434995
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bed97175b06e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a171b546f733",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.98041bbaa8fb163f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6080083511,
+      "isDeleted": false,
+      "id": "edge-1ff67a6d8404",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1717.2000000000003,
+      "y": 3524.714191852825,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 72674,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          40.57161629434995
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bed97175b06e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-918b95bd5e1c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.77baa8d906920a45"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5524193556,
+      "isDeleted": false,
+      "id": "edge-c2d34a108587",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 375.7692307692308,
+      "y": 3070.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 716267,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          505.49999999999994,
+          1095.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-75ada95d871d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-8a6143e51b8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e25945c6f7e4eb08"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5086446777,
+      "isDeleted": false,
+      "id": "edge-454a1b3da74f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1071.8382051282051,
+      "y": 4165.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 677234,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          287.09000000000015,
+          -185.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8a6143e51b8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9640580c8c78",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3310017bde13f1d1"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3093177662,
+      "isDeleted": false,
+      "id": "edge-e66fecb7af15",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1528.3846153846155,
+      "y": 4020.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 996531,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -19.56923076923067,
+          -2120.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bc7479f3a7eb",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-fbd34a2b6e6a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.992f3ee9ed5ac7ed"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8261331061,
+      "isDeleted": false,
+      "id": "edge-ddf6ae002cf5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1130.0,
+      "y": 4215.906684315023,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 276298,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -40.8669755129049
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8a6143e51b8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-bc7479f3a7eb",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.0eb59884ffb1e73e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7558092976,
+      "isDeleted": false,
+      "id": "edge-59a38848b467",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1130.0,
+      "y": 4304.093315684977,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 295034,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          40.8669755129049
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8a6143e51b8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-90a4a9dd4a50",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.b5c6a0d4d0062b45"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1127256209,
+      "isDeleted": false,
+      "id": "edge-0ae0e62aae68",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1071.8382051282051,
+      "y": 4354.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 169752,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          287.09000000000015,
+          185.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8a6143e51b8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-10e41087749c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3b6172a19327d9cd"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1065288290,
+      "isDeleted": false,
+      "id": "edge-d3c9d1363c5f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 354.5954751131222,
+      "y": 3070.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 578349,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          535.4090497737557,
+          1990.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-75ada95d871d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6e42c4fdba11",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e758da5edee278d2"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4603534713,
+      "isDeleted": false,
+      "id": "edge-fd388ed5f91e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 5083.362270450752,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 973204,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -82.47078464106835
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6e42c4fdba11",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5b0cd6b71f86",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.0e43b76e359c47a8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4146460479,
+      "isDeleted": false,
+      "id": "edge-0746cb986b99",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 5170.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 412469,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6e42c4fdba11",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6d6ccb0c6521",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.bb16be672392fa80"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3454975922,
+      "isDeleted": false,
+      "id": "edge-c7f1777e59d8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 5256.637729549248,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 698930,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          82.47078464106835
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6e42c4fdba11",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f740d3cd1c67",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.b391ac402f3dd7ad"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7885385241,
+      "isDeleted": false,
+      "id": "edge-c3341f5255b3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 349.1758241758242,
+      "y": 3070.0,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 468371,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          551.6483516483518,
+          2510.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-75ada95d871d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-dd9eba267178",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.5bd9cd2a5396e014"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
