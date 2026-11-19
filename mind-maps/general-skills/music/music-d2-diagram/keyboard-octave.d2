@@ -1,0 +1,240 @@
+# One octave of the piano keyboard, C4 to C5, with the name and frequency of each key.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+classes: {
+  white: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  white_alt: {
+    style: {
+      fill: "#E2E8F0"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  middle_c: {
+    style: {
+      fill: "#FDE68A"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  tuning_a: {
+    style: {
+      fill: "#BFDBFE"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  black: {
+    style: {
+      fill: "#1E293B"
+      stroke: "#0F172A"
+      stroke-width: 1
+      border-radius: 3
+      font-color: "#FFFFFF"
+    }
+  }
+  ink: {
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 0
+    }
+  }
+  head_open: {
+    shape: oval
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  head_filled: {
+    shape: oval
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  note_c4: {
+    shape: oval
+    style: {
+      fill: "#FDE68A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  label: {
+    shape: text
+    style: {
+      font-color: "#0F172A"
+    }
+  }
+  tag: {
+    style: {
+      fill: transparent
+      stroke-width: 0
+      font-color: "#0F172A"
+      bold: false
+    }
+  }
+}
+
+title: "One octave: 12 semitones from C4 to C5, and the frequency doubles" {
+  class: label
+  left: 0
+  top: 0
+  width: 800
+  style.font-size: 18
+}
+group2: "group of two black keys" {
+  class: label
+  left: 70
+  top: 40
+  width: 162
+  style.font-size: 14
+}
+group3: "group of three black keys" {
+  class: label
+  left: 370
+  top: 40
+  width: 262
+  style.font-size: 14
+}
+w_C4: "C4\n261.63 Hz" {
+  class: middle_c
+  left: 0
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+w_D4: "D4\n293.66 Hz" {
+  class: white
+  left: 100
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+w_E4: "E4\n329.63 Hz" {
+  class: white
+  left: 200
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+w_F4: "F4\n349.23 Hz" {
+  class: white
+  left: 300
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+w_G4: "G4\n392.00 Hz" {
+  class: white
+  left: 400
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+w_A4: "A4\n440.00 Hz" {
+  class: tuning_a
+  left: 500
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+w_B4: "B4\n493.88 Hz" {
+  class: white
+  left: 600
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+w_C5: "C5\n523.25 Hz" {
+  class: white
+  left: 700
+  top: 70
+  width: 100
+  height: 280
+  label.near: bottom-center
+  style.font-size: 17
+}
+b_Cs4: "C♯4\nD♭4\n277.18" {
+  class: black
+  left: 69
+  top: 70
+  width: 62
+  height: 172
+  label.near: bottom-center
+  style.font-size: 14
+}
+b_Ds4: "D♯4\nE♭4\n311.13" {
+  class: black
+  left: 169
+  top: 70
+  width: 62
+  height: 172
+  label.near: bottom-center
+  style.font-size: 14
+}
+b_Fs4: "F♯4\nG♭4\n369.99" {
+  class: black
+  left: 369
+  top: 70
+  width: 62
+  height: 172
+  label.near: bottom-center
+  style.font-size: 14
+}
+b_Gs4: "G♯4\nA♭4\n415.30" {
+  class: black
+  left: 469
+  top: 70
+  width: 62
+  height: 172
+  label.near: bottom-center
+  style.font-size: 14
+}
+b_As4: "A♯4\nB♭4\n466.16" {
+  class: black
+  left: 569
+  top: 70
+  width: 62
+  height: 172
+  label.near: bottom-center
+  style.font-size: 14
+}

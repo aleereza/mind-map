@@ -1,0 +1,706 @@
+# The grand staff from F2 to G5. Each line and space sits above its white key. Every step has the same height, so the gap between the staves is narrower than in printed music.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+classes: {
+  white: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  white_alt: {
+    style: {
+      fill: "#E2E8F0"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  middle_c: {
+    style: {
+      fill: "#FDE68A"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  tuning_a: {
+    style: {
+      fill: "#BFDBFE"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  black: {
+    style: {
+      fill: "#1E293B"
+      stroke: "#0F172A"
+      stroke-width: 1
+      border-radius: 3
+      font-color: "#FFFFFF"
+    }
+  }
+  ink: {
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 0
+    }
+  }
+  head_open: {
+    shape: oval
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  head_filled: {
+    shape: oval
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  note_c4: {
+    shape: oval
+    style: {
+      fill: "#FDE68A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  label: {
+    shape: text
+    style: {
+      font-color: "#0F172A"
+    }
+  }
+  tag: {
+    style: {
+      fill: transparent
+      stroke-width: 0
+      font-color: "#0F172A"
+      bold: false
+    }
+  }
+}
+
+line_G2: "" {
+  class: ink
+  left: 24
+  top: 216
+  width: 808
+  height: 2
+}
+line_B2: "" {
+  class: ink
+  left: 24
+  top: 202
+  width: 808
+  height: 2
+}
+line_D3: "" {
+  class: ink
+  left: 24
+  top: 188
+  width: 808
+  height: 2
+}
+line_F3: "" {
+  class: ink
+  left: 24
+  top: 174
+  width: 808
+  height: 2
+}
+line_A3: "" {
+  class: ink
+  left: 24
+  top: 160
+  width: 808
+  height: 2
+}
+line_E4: "" {
+  class: ink
+  left: 24
+  top: 132
+  width: 808
+  height: 2
+}
+line_G4: "" {
+  class: ink
+  left: 24
+  top: 118
+  width: 808
+  height: 2
+}
+line_B4: "" {
+  class: ink
+  left: 24
+  top: 104
+  width: 808
+  height: 2
+}
+line_D5: "" {
+  class: ink
+  left: 24
+  top: 90
+  width: 808
+  height: 2
+}
+line_F5: "" {
+  class: ink
+  left: 24
+  top: 76
+  width: 808
+  height: 2
+}
+system: "" {
+  class: ink
+  left: 24
+  top: 76
+  width: 3
+  height: 142
+}
+clef_g: "𝄞" {
+  class: label
+  left: 30
+  top: 40
+  width: 60
+  style.font-size: 100
+}
+clef_f: "𝄢" {
+  class: label
+  left: 32
+  top: 134
+  width: 50
+  style.font-size: 72
+}
+note_F2: "" {
+  class: head_open
+  left: 102
+  top: 217
+  width: 20
+  height: 14
+}
+note_G2: "" {
+  class: head_open
+  left: 134
+  top: 210
+  width: 20
+  height: 14
+}
+note_A2: "" {
+  class: head_open
+  left: 166
+  top: 203
+  width: 20
+  height: 14
+}
+note_B2: "" {
+  class: head_open
+  left: 198
+  top: 196
+  width: 20
+  height: 14
+}
+note_C3: "" {
+  class: head_open
+  left: 230
+  top: 189
+  width: 20
+  height: 14
+}
+note_D3: "" {
+  class: head_open
+  left: 262
+  top: 182
+  width: 20
+  height: 14
+}
+note_E3: "" {
+  class: head_open
+  left: 294
+  top: 175
+  width: 20
+  height: 14
+}
+note_F3: "" {
+  class: head_open
+  left: 326
+  top: 168
+  width: 20
+  height: 14
+}
+note_G3: "" {
+  class: head_open
+  left: 358
+  top: 161
+  width: 20
+  height: 14
+}
+note_A3: "" {
+  class: head_open
+  left: 390
+  top: 154
+  width: 20
+  height: 14
+}
+note_B3: "" {
+  class: head_open
+  left: 422
+  top: 147
+  width: 20
+  height: 14
+}
+ledger_C4: "" {
+  class: ink
+  left: 448
+  top: 146
+  width: 32
+  height: 2
+}
+note_C4: "" {
+  class: note_c4
+  left: 454
+  top: 140
+  width: 20
+  height: 14
+}
+note_D4: "" {
+  class: head_open
+  left: 486
+  top: 133
+  width: 20
+  height: 14
+}
+note_E4: "" {
+  class: head_open
+  left: 518
+  top: 126
+  width: 20
+  height: 14
+}
+note_F4: "" {
+  class: head_open
+  left: 550
+  top: 119
+  width: 20
+  height: 14
+}
+note_G4: "" {
+  class: head_open
+  left: 582
+  top: 112
+  width: 20
+  height: 14
+}
+note_A4: "" {
+  class: head_open
+  left: 614
+  top: 105
+  width: 20
+  height: 14
+}
+note_B4: "" {
+  class: head_open
+  left: 646
+  top: 98
+  width: 20
+  height: 14
+}
+note_C5: "" {
+  class: head_open
+  left: 678
+  top: 91
+  width: 20
+  height: 14
+}
+note_D5: "" {
+  class: head_open
+  left: 710
+  top: 84
+  width: 20
+  height: 14
+}
+note_E5: "" {
+  class: head_open
+  left: 742
+  top: 77
+  width: 20
+  height: 14
+}
+note_F5: "" {
+  class: head_open
+  left: 774
+  top: 70
+  width: 20
+  height: 14
+}
+note_G5: "" {
+  class: head_open
+  left: 806
+  top: 63
+  width: 20
+  height: 14
+}
+key_F2: "F2" {
+  class: white
+  left: 96
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_G2: "G2" {
+  class: white
+  left: 128
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_A2: "A2" {
+  class: white
+  left: 160
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_B2: "B2" {
+  class: white
+  left: 192
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_C3: "C3" {
+  class: white
+  left: 224
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_D3: "D3" {
+  class: white
+  left: 256
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_E3: "E3" {
+  class: white
+  left: 288
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_F3: "F3" {
+  class: white
+  left: 320
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_G3: "G3" {
+  class: white
+  left: 352
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_A3: "A3" {
+  class: white
+  left: 384
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_B3: "B3" {
+  class: white
+  left: 416
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_C4: "C4" {
+  class: middle_c
+  left: 448
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_D4: "D4" {
+  class: white
+  left: 480
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_E4: "E4" {
+  class: white
+  left: 512
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_F4: "F4" {
+  class: white
+  left: 544
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_G4: "G4" {
+  class: white
+  left: 576
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_A4: "A4" {
+  class: white
+  left: 608
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_B4: "B4" {
+  class: white
+  left: 640
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_C5: "C5" {
+  class: white
+  left: 672
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_D5: "D5" {
+  class: white
+  left: 704
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_E5: "E5" {
+  class: white
+  left: 736
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_F5: "F5" {
+  class: white
+  left: 768
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+key_G5: "G5" {
+  class: white
+  left: 800
+  top: 258
+  width: 32
+  height: 150
+  label.near: bottom-center
+  style.font-size: 13
+}
+bkey_Fs2: "" {
+  class: black
+  left: 118
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Gs2: "" {
+  class: black
+  left: 150
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_As2: "" {
+  class: black
+  left: 182
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Cs3: "" {
+  class: black
+  left: 246
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Ds3: "" {
+  class: black
+  left: 278
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Fs3: "" {
+  class: black
+  left: 342
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Gs3: "" {
+  class: black
+  left: 374
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_As3: "" {
+  class: black
+  left: 406
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Cs4: "" {
+  class: black
+  left: 470
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Ds4: "" {
+  class: black
+  left: 502
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Fs4: "" {
+  class: black
+  left: 566
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Gs4: "" {
+  class: black
+  left: 598
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_As4: "" {
+  class: black
+  left: 630
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Cs5: "" {
+  class: black
+  left: 694
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Ds5: "" {
+  class: black
+  left: 726
+  top: 258
+  width: 20
+  height: 95
+}
+bkey_Fs5: "" {
+  class: black
+  left: 790
+  top: 258
+  width: 20
+  height: 95
+}
+t_treble: "treble staff: right hand" {
+  class: tag
+  left: 106
+  top: 41
+  width: 236
+  height: 39
+  style.font-size: 15
+  label.near: center-left
+}
+t_bass: "bass staff: left hand" {
+  class: tag
+  left: 602
+  top: 229
+  width: 230
+  height: 39
+  style.font-size: 15
+  label.near: center-right
+}
+t_middle_c: "middle C" {
+  class: tag
+  left: 414
+  top: 408
+  width: 100
+  height: 38
+  style.font-size: 14
+}

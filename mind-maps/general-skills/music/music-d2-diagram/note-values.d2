@@ -1,0 +1,667 @@
+# Note values from the whole note to the sixteenth note. Each row fills the same time as the row above, with notes half as long. Eighth and sixteenth notes are joined by beams.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+classes: {
+  white: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  white_alt: {
+    style: {
+      fill: "#E2E8F0"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  middle_c: {
+    style: {
+      fill: "#FDE68A"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  tuning_a: {
+    style: {
+      fill: "#BFDBFE"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  black: {
+    style: {
+      fill: "#1E293B"
+      stroke: "#0F172A"
+      stroke-width: 1
+      border-radius: 3
+      font-color: "#FFFFFF"
+    }
+  }
+  ink: {
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 0
+    }
+  }
+  head_open: {
+    shape: oval
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  head_filled: {
+    shape: oval
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  note_c4: {
+    shape: oval
+    style: {
+      fill: "#FDE68A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  label: {
+    shape: text
+    style: {
+      font-color: "#0F172A"
+    }
+  }
+  tag: {
+    style: {
+      fill: transparent
+      stroke-width: 0
+      font-color: "#0F172A"
+      bold: false
+    }
+  }
+}
+
+title: "Each row fills one 4/4 bar. Each note lasts half as long as a note in the row above." {
+  class: tag
+  left: 0
+  top: 0
+  width: 940
+  height: 41
+  style.font-size: 17
+  label.near: center-left
+}
+row0_label: "whole note (UK: semibreve), 4 beats" {
+  class: tag
+  left: 0
+  top: 70
+  width: 332
+  height: 39
+  style.font-size: 15
+  label.near: center-left
+}
+r0_n0: "" {
+  class: head_open
+  left: 611
+  top: 84
+  width: 18
+  height: 13
+}
+row1_label: "half note (UK: minim), 2 beats" {
+  class: tag
+  left: 0
+  top: 144
+  width: 290
+  height: 39
+  style.font-size: 15
+  label.near: center-left
+}
+r1_n0: "" {
+  class: head_open
+  left: 451
+  top: 158
+  width: 18
+  height: 13
+}
+r1_s0: "" {
+  class: ink
+  left: 467
+  top: 124
+  width: 2
+  height: 38
+}
+r1_n1: "" {
+  class: head_open
+  left: 771
+  top: 158
+  width: 18
+  height: 13
+}
+r1_s1: "" {
+  class: ink
+  left: 787
+  top: 124
+  width: 2
+  height: 38
+}
+row2_label: "quarter note (UK: crotchet), 1 beat" {
+  class: tag
+  left: 0
+  top: 218
+  width: 332
+  height: 39
+  style.font-size: 15
+  label.near: center-left
+}
+r2_n0: "" {
+  class: head_filled
+  left: 371
+  top: 232
+  width: 18
+  height: 13
+}
+r2_s0: "" {
+  class: ink
+  left: 387
+  top: 198
+  width: 2
+  height: 38
+}
+r2_n1: "" {
+  class: head_filled
+  left: 531
+  top: 232
+  width: 18
+  height: 13
+}
+r2_s1: "" {
+  class: ink
+  left: 547
+  top: 198
+  width: 2
+  height: 38
+}
+r2_n2: "" {
+  class: head_filled
+  left: 691
+  top: 232
+  width: 18
+  height: 13
+}
+r2_s2: "" {
+  class: ink
+  left: 707
+  top: 198
+  width: 2
+  height: 38
+}
+r2_n3: "" {
+  class: head_filled
+  left: 851
+  top: 232
+  width: 18
+  height: 13
+}
+r2_s3: "" {
+  class: ink
+  left: 867
+  top: 198
+  width: 2
+  height: 38
+}
+row3_label: "eighth note (UK: quaver), 1/2 beat" {
+  class: tag
+  left: 0
+  top: 292
+  width: 323
+  height: 39
+  style.font-size: 15
+  label.near: center-left
+}
+r3_n0: "" {
+  class: head_filled
+  left: 331
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s0: "" {
+  class: ink
+  left: 347
+  top: 272
+  width: 2
+  height: 38
+}
+r3_n1: "" {
+  class: head_filled
+  left: 411
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s1: "" {
+  class: ink
+  left: 427
+  top: 272
+  width: 2
+  height: 38
+}
+r3_n2: "" {
+  class: head_filled
+  left: 491
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s2: "" {
+  class: ink
+  left: 507
+  top: 272
+  width: 2
+  height: 38
+}
+r3_n3: "" {
+  class: head_filled
+  left: 571
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s3: "" {
+  class: ink
+  left: 587
+  top: 272
+  width: 2
+  height: 38
+}
+r3_n4: "" {
+  class: head_filled
+  left: 651
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s4: "" {
+  class: ink
+  left: 667
+  top: 272
+  width: 2
+  height: 38
+}
+r3_n5: "" {
+  class: head_filled
+  left: 731
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s5: "" {
+  class: ink
+  left: 747
+  top: 272
+  width: 2
+  height: 38
+}
+r3_n6: "" {
+  class: head_filled
+  left: 811
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s6: "" {
+  class: ink
+  left: 827
+  top: 272
+  width: 2
+  height: 38
+}
+r3_n7: "" {
+  class: head_filled
+  left: 891
+  top: 306
+  width: 18
+  height: 13
+}
+r3_s7: "" {
+  class: ink
+  left: 907
+  top: 272
+  width: 2
+  height: 38
+}
+r3_beam0_0: "" {
+  class: ink
+  left: 347
+  top: 272
+  width: 82
+  height: 4
+}
+r3_beam2_0: "" {
+  class: ink
+  left: 507
+  top: 272
+  width: 82
+  height: 4
+}
+r3_beam4_0: "" {
+  class: ink
+  left: 667
+  top: 272
+  width: 82
+  height: 4
+}
+r3_beam6_0: "" {
+  class: ink
+  left: 827
+  top: 272
+  width: 82
+  height: 4
+}
+row4_label: "sixteenth note (UK: semiquaver), 1/4 beat" {
+  class: tag
+  left: 0
+  top: 366
+  width: 384
+  height: 39
+  style.font-size: 15
+  label.near: center-left
+}
+r4_n0: "" {
+  class: head_filled
+  left: 311
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s0: "" {
+  class: ink
+  left: 327
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n1: "" {
+  class: head_filled
+  left: 351
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s1: "" {
+  class: ink
+  left: 367
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n2: "" {
+  class: head_filled
+  left: 391
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s2: "" {
+  class: ink
+  left: 407
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n3: "" {
+  class: head_filled
+  left: 431
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s3: "" {
+  class: ink
+  left: 447
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n4: "" {
+  class: head_filled
+  left: 471
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s4: "" {
+  class: ink
+  left: 487
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n5: "" {
+  class: head_filled
+  left: 511
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s5: "" {
+  class: ink
+  left: 527
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n6: "" {
+  class: head_filled
+  left: 551
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s6: "" {
+  class: ink
+  left: 567
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n7: "" {
+  class: head_filled
+  left: 591
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s7: "" {
+  class: ink
+  left: 607
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n8: "" {
+  class: head_filled
+  left: 631
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s8: "" {
+  class: ink
+  left: 647
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n9: "" {
+  class: head_filled
+  left: 671
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s9: "" {
+  class: ink
+  left: 687
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n10: "" {
+  class: head_filled
+  left: 711
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s10: "" {
+  class: ink
+  left: 727
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n11: "" {
+  class: head_filled
+  left: 751
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s11: "" {
+  class: ink
+  left: 767
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n12: "" {
+  class: head_filled
+  left: 791
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s12: "" {
+  class: ink
+  left: 807
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n13: "" {
+  class: head_filled
+  left: 831
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s13: "" {
+  class: ink
+  left: 847
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n14: "" {
+  class: head_filled
+  left: 871
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s14: "" {
+  class: ink
+  left: 887
+  top: 346
+  width: 2
+  height: 38
+}
+r4_n15: "" {
+  class: head_filled
+  left: 911
+  top: 380
+  width: 18
+  height: 13
+}
+r4_s15: "" {
+  class: ink
+  left: 927
+  top: 346
+  width: 2
+  height: 38
+}
+r4_beam0_0: "" {
+  class: ink
+  left: 327
+  top: 346
+  width: 122
+  height: 4
+}
+r4_beam0_1: "" {
+  class: ink
+  left: 327
+  top: 353
+  width: 122
+  height: 4
+}
+r4_beam4_0: "" {
+  class: ink
+  left: 487
+  top: 346
+  width: 122
+  height: 4
+}
+r4_beam4_1: "" {
+  class: ink
+  left: 487
+  top: 353
+  width: 122
+  height: 4
+}
+r4_beam8_0: "" {
+  class: ink
+  left: 647
+  top: 346
+  width: 122
+  height: 4
+}
+r4_beam8_1: "" {
+  class: ink
+  left: 647
+  top: 353
+  width: 122
+  height: 4
+}
+r4_beam12_0: "" {
+  class: ink
+  left: 807
+  top: 346
+  width: 122
+  height: 4
+}
+r4_beam12_1: "" {
+  class: ink
+  left: 807
+  top: 353
+  width: 122
+  height: 4
+}
