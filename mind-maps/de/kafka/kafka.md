@@ -98,7 +98,7 @@ A hosted offering that exposes Kafka-compatible cluster endpoints while the prov
 
 > type: concept
 
-A fully managed Apache Kafka service that runs in Aiven's cloud or a bring-your-own-cloud environment. Aiven operates the cluster and offers managed scaling, Kafka Connect, monitoring, and local, tiered, or object-storage-backed topic options.
+Aiven's managed service for Apache Kafka. The Aiven section under Ecosystem & Interfaces explains what Aiven runs, where it runs, and how apps connect.
 
 ###### Davra {#davra}
 
@@ -128,9 +128,11 @@ Google Cloud's managed service for open-source Apache Kafka. It automates broker
 
 > type: procedure
 
-You already found the first Kafka idea yourself: C remembers where it is. Below, each stage starts with a problem. Then we invent a fix and give it its Kafka name.
+Below, each stage starts with a problem. Then we invent a fix and give it its Kafka name.
 
 **The example.** P is a camera at a site gate. Every 2 seconds it makes one video chunk of about 500 KB: chunk 0, 1, 2, and so on. That is 43,200 chunks a day, about 21.6 GB. C is a video player in an office.
+
+The first Kafka idea is already in this setup: C remembers where it is.
 
 (A note before we start: real video sites send video through CDNs (content delivery networks), not through Kafka. Kafka's default maximum record size is about 1 MB. But the mechanics are the same for any stream of records, so the example still works.)
 
@@ -141,9 +143,9 @@ You already found the first Kafka idea yourself: C remembers where it is. Below,
 
 ![Sequence diagram: the player opens a TCP connection to the camera, asks for chunk 7, gets it, remembers next = 8, and asks for chunk 8](kafka-d2-diagram/stage-0-direct-tcp.d2.svg)
 
-One small correction to your picture. In TCP, one side waits for connections and the other side connects. If C asks in a loop, C connects to P, so **C needs P's address**. If P pushed the chunks, P would need C's address. Either way, one side must know where the other one is.
+In TCP, one side waits for connections and the other side connects. If C asks in a loop, C connects to P, so **C needs P's address**. If P pushed the chunks, P would need C's address. Either way, one side must know where the other one is.
 
-TCP also numbers its bytes, with sequence numbers. But those numbers exist only inside one connection. Your chunk number survives a reconnect. That is the start of Kafka's **offset**.
+TCP also numbers its bytes, with sequence numbers. But those numbers exist only inside one connection. The chunk number that C keeps survives a reconnect. That is the start of Kafka's **offset**.
 
 What goes wrong:
 1. **Both must be online.** C's laptop sleeps for 10 minutes, and P makes 300 chunks during that time. Either P stores them, or they are lost.
@@ -226,7 +228,7 @@ What this solves:
 
 **Result.** Suppose a reader is away for longer than retention. Its bookmark then points at deleted data. The `auto.offset.reset` setting decides what it does next. It can start at the oldest record that is still kept (`earliest`) or at the end (`latest`).
 
-Newer Kafka versions can also move old segments to object storage, such as S3. This is **tiered storage**, and it makes long retention cheaper. Your doc mentions it in the Aiven node.
+Newer Kafka versions can also move old segments to object storage, such as S3. This is **tiered storage**, and it makes long retention cheaper. The Kafka Service node in the Aiven section mentions it too.
 
 ### Stage 6: Different kinds of data {#stage-6-kinds-of-data}
 
@@ -237,7 +239,7 @@ Newer Kafka versions can also move old segments to object storage, such as S3. T
 
 **Invention.** Keep one separate, named log for each kind of data: `video-chunks`, `motion-alerts` and `sensor-readings`. A reader asks for a log by name.
 
-**Kafka word:** **topic**. As we discussed, a topic is a place, not a tag.
+**Kafka word:** **topic**. A topic is a place: each record lives in its topic's log.
 
 ### Stage 7: Too much for one machine {#stage-7-too-much-for-one-machine}
 
@@ -379,7 +381,7 @@ You do not need these for the core idea, but you will see them:
 | Bookmarks are lost when a process crashes | Save bookmarks in Kafka | commit, `__consumer_offsets`, lag |
 | Retries and crashes cause duplicates | Producer IDs, sequence numbers, all-or-nothing writes | idempotent producer, transactions |
 
-Last step: change "video chunk" to "sensor reading" and "camera" to "gateway". Then you have the setup that your `kafka.md` describes.
+Last step: change "video chunk" to "sensor reading" and "camera" to "gateway". Then you have the IoT setup that the Basics and Data Flow sections describe.
 
 ## Runtime Model {#runtime-model}
 
@@ -516,3 +518,213 @@ The consumer can trigger an alert, perform a calculation, or use a sink to write
 ## Ecosystem & Interfaces {#ecosystem-and-interfaces}
 
 > type: category
+
+### Kafka Connect {#kafka-connect}
+
+> type: concept
+> edge.related: sink, stage-13-tools-around-the-core
+
+Kafka Connect is the part of Apache Kafka that moves data between Kafka and other systems ([Kafka Connect overview](https://kafka.apache.org/44/kafka-connect/overview/)). You configure a ready-made connector, and Kafka Connect runs it. This replaces a custom producer or consumer program for each outside system.
+
+Kafka Connect runs as its own processes, called workers. The workers are separate from the brokers. Each worker uses a normal Kafka client to read and write topics. Apache Kafka ships the framework. Most connector plugins come from other projects, for example Debezium for databases and Snowflake for Snowflake.
+
+A record passes through Kafka Connect in a fixed order:
+
+- Source: outside system → source task → transforms → converter → Kafka topic
+- Sink: Kafka topic → converter → transforms → sink task → outside system
+
+The child nodes explain each part:
+
+- A connector is a plugin plus a configuration for one outside system.
+- A Connect cluster is the group of workers that runs the connectors' tasks.
+- A converter turns records into bytes and back, and a transform changes one record at a time.
+- The example loads the `sensor-readings` topic into Snowflake.
+
+#### Connector {#connect-connector}
+
+> type: concept
+
+A connector is a plugin plus a configuration. The plugin is a Java library that knows one outside system. The configuration says which plugin to use, which topics to read or write, and how to reach the outside system. Each worker loads plugins from the folders in its `plugin.path` setting.
+
+There are two kinds of connector:
+
+- A source connector reads an outside system and writes records to Kafka, like a producer. For example, the [Debezium PostgreSQL connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html) reads the database's change log. It writes the changes of each table to one topic, named topicPrefix.schemaName.tableName, for example `pg.public.equipment`.
+- A sink connector reads Kafka topics and writes the records to an outside system, like a consumer. For example, the Snowflake connector writes records into Snowflake tables.
+
+Every connector configuration has these keys ([Kafka Connect user guide](https://kafka.apache.org/44/kafka-connect/user-guide/)):
+
+- `name`: a unique name for the connector.
+- `connector.class`: the plugin's Java class.
+- `tasks.max`: the highest number of tasks. The connector can start fewer tasks.
+- `topics`: for a sink, the topics to read.
+- `key.converter` and `value.converter`: the formats of keys and values in Kafka. Each one overrides the worker's default.
+
+#### Connect Cluster {#connect-cluster}
+
+> type: concept
+> edge.related: stage-11-bookmark-storage
+
+A Connect cluster is a group of workers that share the work of the connectors. A worker is one Java process. Kafka Connect has two modes ([Kafka Connect user guide](https://kafka.apache.org/44/kafka-connect/user-guide/)):
+
+- Standalone mode runs one worker. The worker keeps the source offsets in a local file. This mode suits one small job, such as reading one log file.
+- Distributed mode runs many workers with the same `group.id`. They keep their shared state in three compacted Kafka topics: the connector configurations, the source offsets and the statuses. If a worker stops, the other workers take over its tasks.
+
+A task is a unit of work that copies data. A connector splits its job into at most `tasks.max` tasks, and the cluster spreads the tasks across the workers.
+
+A source offset is a source connector's position in the outside system, such as a place in the database's change log. A sink connector keeps its position as a normal consumer group. Its tasks form one group, named `connect-` plus the connector name. Kafka shares the topic's partitions among the tasks and keeps their committed offsets in `__consumer_offsets`.
+
+You manage a Connect cluster through its REST API. Every worker serves it, on port 8083 by default. `POST /connectors` creates a connector from a JSON object with a `name` and a `config`. `GET /connectors/{name}/status` shows the state of the connector and of each task. By default, anyone who can reach the REST API can start and stop connectors. Give access to it only to trusted users.
+
+#### Converter and Transform {#connect-converter-transform}
+
+> type: concept
+> edge.related: karapace
+
+Kafka stores only bytes. Inside Kafka Connect, a record has typed fields. A converter translates between the two. It turns a record into bytes on the way into Kafka. It turns bytes into a record on the way out. Because the converter is separate from the connector, any connector can use any format. Common converters:
+
+- `StringConverter` reads and writes plain text.
+- `JsonConverter` reads and writes JSON text.
+- `AvroConverter` reads and writes compact Avro bytes. It keeps each schema in a Schema Registry, and each message carries only the schema ID. The Karapace node explains the Schema Registry.
+
+A transform, or single message transform (SMT), changes one record as it passes through a connector. It can add, remove or rename a field, or send the record to another topic. A connector lists its transforms, in order, in the `transforms` key. In a source connector, the transforms run before the converter. In a sink connector, they run after it.
+
+#### Example: Topic to Snowflake {#connect-snowflake-example}
+
+> type: concept
+
+This example loads the `sensor-readings` topic of the IoT setup into Snowflake. The topic has 3 partitions. Each value is JSON text, such as `{"sensor_id": 42, "temperature_c": 21.4}`. The sink uses version 4 of the [Snowflake connector for Kafka](https://docs.snowflake.com/en/user-guide/kafka-connector/setup-kafka). A `POST /connectors` request with this body creates it:
+
+```json
+{
+  "name": "sensor-readings-to-snowflake",
+  "config": {
+    "connector.class": "com.snowflake.kafka.connector.SnowflakeStreamingSinkConnector",
+    "tasks.max": "3",
+    "topics": "sensor-readings",
+    "snowflake.topic2table.map": "sensor-readings:SENSOR_READINGS",
+    "snowflake.url.name": "https://myorg-myaccount.snowflakecomputing.com",
+    "snowflake.user.name": "KAFKA_LOADER",
+    "snowflake.private.key": "<private key>",
+    "snowflake.role.name": "KAFKA_LOADER_ROLE",
+    "snowflake.database.name": "IOT",
+    "snowflake.schema.name": "RAW",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "snowflake.streaming.validate.compatibility.with.classic": "false"
+  }
+}
+```
+
+Then this happens:
+
+1. Kafka Connect starts 3 tasks. They join the consumer group `connect-sensor-readings-to-snowflake`, and each task reads 1 partition.
+2. Each task turns the JSON bytes into a record with the `JsonConverter`.
+3. The task sends the records through Snowpipe Streaming, Snowflake's API that writes rows straight into tables.
+4. If the table `IOT.RAW.SENSOR_READINGS` is missing, the connector creates it. Each JSON field becomes a column, so the reading above becomes a row with 42 in `sensor_id` and 21.4 in `temperature_c`.
+
+Two other setups load the same topic:
+
+- With `snowflake.autocreate.table.type` set to `iceberg`, the connector creates a Snowflake-managed Apache Iceberg table instead.
+- The Apache Iceberg sink connector writes Iceberg tables to S3, and Snowflake reads them in place. The [Kafka → Iceberg → Snowflake map](../integration/kafka-iceberg-snowflake/kafka-iceberg-snowflake.md) explains this setup.
+
+### Aiven {#aiven}
+
+> type: concept
+> edge.related: managed-kafka-service, aiven-kafka
+
+Aiven is a company that runs open-source data services for you in the cloud ([Get started with Aiven](https://aiven.io/docs/get-started)). Its services include Apache Kafka, Kafka Connect, PostgreSQL and OpenSearch.
+
+Each Aiven service is a managed service, as the Managed Kafka Service node describes. Aiven creates the machines, installs the open-source software, and keeps it patched and running. You get a host name, a port and credentials, and you use the software through its normal interface. For Kafka, that interface is the Kafka protocol, so your apps keep their normal Kafka client.
+
+Where Aiven sits is easiest to see as four layers, from the bottom up:
+
+1. A cloud provider, such as AWS, Google Cloud or Azure, supplies the machines, disks and networks.
+2. Aiven creates services on those machines and operates them.
+3. The services run the open-source software: Kafka brokers, Kafka Connect workers and Karapace.
+4. You build on the services. You create topics, schemas and connectors, and your apps produce and consume records.
+
+![Where Aiven sits: an Aiven project holds a Kafka Connect service with a Debezium source and a Snowflake sink, and a Kafka service with the brokers and Karapace; your PostgreSQL database, Snowflake tables and apps are outside it, and a cloud provider is under it](kafka-d2-diagram/aiven-in-the-kafka-landscape.d2.svg)
+
+You control Aiven with one of these tools. All of them change the same projects and services:
+
+- The Aiven Console, a web app.
+- The `avn` command-line tool.
+- The Aiven API.
+- The Aiven provider for Terraform. The [Terraform map](../terraform/terraform.md) shows it in use.
+- The Aiven Operator for Kubernetes.
+
+Snowflake offers the same deal for its own database: you pick a cloud and a region, and Snowflake runs the machines. Aiven offers this deal for open-source software.
+
+#### Projects and Services {#aiven-projects-services}
+
+> type: concept
+
+Aiven groups everything in three levels ([organizations, units and projects](https://aiven.io/docs/platform/concepts/orgs-units-projects)):
+
+- An organization holds all your projects, users and billing. Inside it, organizational units can group projects, for example by department. Units are optional.
+- A project holds a group of services. Teams often make one project per environment, such as `dev` and `prod`. Access rights and network settings apply to all services in a project.
+- A service is one running product, such as one Kafka cluster or one Kafka Connect cluster. When you create a service, you choose its cloud provider, region and plan. The plan sets the size of the service and its price. The service name is fixed after you create the service.
+
+To scale a service up or down, you change its plan ([scale services](https://aiven.io/docs/platform/howto/scale-services)). The Aiven Console shows each service's CPU, memory, disk and network use on its Metrics tab ([service integrations](https://aiven.io/docs/platform/concepts/service-integration)).
+
+For example, the project `iot-prod` holds the Kafka service `kafka-iot` and the Kafka Connect service `connect-iot`. Inside the Kafka service, you create topics, service users and access rules. The [Aiven provider for Terraform](https://registry.terraform.io/providers/aiven/aiven/latest/docs) has one resource for each of these objects: `aiven_kafka`, `aiven_kafka_connect`, `aiven_kafka_topic`, `aiven_kafka_user`, `aiven_kafka_acl` and `aiven_kafka_connector`.
+
+#### Where Services Run {#aiven-where-services-run}
+
+> type: concept
+
+An Aiven service runs on the machines of a cloud provider, in the region that you choose. The machines can be in one of two places ([bring your own cloud](https://aiven.io/docs/platform/concepts/byoc)):
+
+- Aiven Cloud is the usual option. The machines are in cloud accounts that Aiven owns. Aiven also manages the storage, the backups and the security setup.
+- With bring your own cloud (BYOC), Aiven creates a custom cloud inside your AWS, Google Cloud or Azure account. Aiven runs the services there. The data stays in your account, and your cloud discounts apply to the machines. BYOC needs a commitment deal with Aiven and the Advanced or Premium support tier.
+
+In both cases, Aiven operates the services. Your apps reach a service through its host name and port. A project can also have its own virtual private cloud (VPC). You can peer the VPC with your cloud network for private connections ([VPC peering](https://aiven.io/docs/platform/howto/list-vpc-peering)).
+
+#### Kafka Service {#aiven-kafka-service}
+
+> type: concept
+> edge.related: stage-5-disk-fills-up
+
+Aiven's Kafka product is Aiven for Apache Kafka ([overview](https://aiven.io/docs/products/kafka)). It runs Apache Kafka, so every Kafka client works with it. You choose one of two service types when you create the service, and the type is fixed after that:
+
+- Standard Kafka is the type for new customers. It runs Kafka 4 with KRaft, on Aiven Cloud only. Its classic topics keep only recent data on the broker disks, 15 minutes or 5 GB per partition. Tiered storage moves the older segments to object storage. Its diskless topics keep all their data in object storage. Aiven bills compute, storage and network use separately ([Standard Kafka](https://aiven.io/docs/products/kafka/standard-kafka-overview)).
+- Classic Kafka is the earlier type, for existing customers and for the Free and Developer tiers. A fixed plan sets the brokers' compute, memory and local disk. Tiered storage is optional, and Classic Kafka can run in BYOC ([Classic Kafka](https://aiven.io/docs/products/kafka/classic-kafka-overview)).
+
+Aiven for Apache Kafka MirrorMaker 2 copies topics from one Kafka service to another, for example to another region, or from a Classic to a Standard service.
+
+#### Connecting Clients {#aiven-connecting-clients}
+
+> type: concept
+> edge.related: kafka-client
+
+An app connects to an Aiven Kafka service as to any Kafka cluster. It puts the service's host name and port into its `bootstrap.servers` setting. Every connection uses TLS encryption ([authentication types](https://aiven.io/docs/products/kafka/concepts/auth-types)).
+
+The app signs in as a service user, a Kafka identity that belongs to one Kafka service. There are two sign-in methods:
+
+- SASL, with a user name and a password. New services turn SASL on by default, and Aiven recommends the SCRAM-SHA-256 mechanism ([connect with Python](https://aiven.io/docs/products/kafka/howto/connect-with-python)).
+- A client certificate, also called mutual TLS. The app shows an access key and an access certificate from Aiven. The Aiven Console offers them as the files `service.key` and `service.cert` ([keystore and truststore](https://aiven.io/docs/products/kafka/howto/keystore-truststore)).
+
+The app also trusts the project's CA certificate, the file `ca.pem`, which signs the broker certificates. Access control lists (ACLs) then decide what each service user may do, for example read the topics that start with `sensor-` ([ACLs](https://aiven.io/docs/products/kafka/concepts/acl)). A new service has the user `avnadmin`, with admin rights on all topics.
+
+#### Kafka Connect Service {#aiven-kafka-connect}
+
+> type: concept
+> edge.related: kafka-connect
+
+Aiven for Apache Kafka Connect is a Connect cluster in distributed mode that Aiven runs for you ([Aiven for Apache Kafka Connect](https://aiven.io/docs/products/kafka/kafka-connect)). Aiven operates the workers, and you create the connectors. The workers run in one of three places:
+
+- On the nodes of the Kafka service. This is the low-cost way to start. It needs a Classic Kafka service on a business or premium plan, and the workers share CPU and memory with the brokers ([enable Kafka Connect](https://aiven.io/docs/products/kafka/kafka-connect/howto/enable-connect)).
+- In a dedicated Kafka Connect service, which a service integration joins to the Kafka service. It has its own CPU and memory and scales on its own. Standard Kafka needs this setup ([get started](https://aiven.io/docs/products/kafka/kafka-connect/get-started)).
+- In your own Connect cluster, which connects to the Aiven Kafka service like any other client ([bring your own Connect cluster](https://aiven.io/docs/products/kafka/kafka-connect/howto/bring-your-own-kafka-connect-cluster)). For example, a change data capture (CDC) source connector reads a database's change log. It can run on a server inside the database's network, and connect out to Aiven over TLS. The [Kafka → Iceberg → Snowflake map](../integration/kafka-iceberg-snowflake/kafka-iceberg-snowflake.md) shows this setup.
+
+Aiven supplies many connector plugins ([available connectors](https://aiven.io/docs/products/kafka/kafka-connect/concepts/list-of-connector-plugins)). Examples are Debezium for databases, JDBC, Amazon S3, the Apache Iceberg sink and the Snowflake sink. You can also upload your own plugins. You create a connector in the Aiven Console, with the command `avn service connector create <service> @config.json`, or with the Terraform resource `aiven_kafka_connector`. All three take the configuration as one flat set of keys, with `name` next to the others ([Snowflake sink on Aiven](https://aiven.io/docs/products/kafka/kafka-connect/howto/snowflake-sink)).
+
+#### Karapace {#karapace}
+
+> type: concept
+
+Karapace is Aiven's open-source Schema Registry and REST proxy ([Karapace](https://aiven.io/docs/products/kafka/karapace)). It runs with the Aiven Kafka service, on the service's host name with its own port. You turn on each part separately.
+
+- A Schema Registry stores the schema of each topic's keys and values, in versions. A schema lists the fields and their types. Producers and consumers fetch schemas from it to serialize and deserialize records. The registry checks each new version against the older ones and refuses a version that would break readers. Karapace supports Avro, Protobuf and JSON Schema. Its API matches the API of Confluent's Schema Registry, so clients and converters for Confluent's registry work with it ([Karapace README](https://github.com/Aiven-Open/karapace)).
+- The REST proxy lets a program produce and consume records over HTTP, for example with `curl`.

@@ -1,0 +1,236 @@
+# Where Aiven sits: a cloud provider at the bottom, the Aiven project with its Kafka and Kafka Connect services in the middle, and your own systems outside.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+style.fill: "#FAF8F4"
+
+classes: {
+  yours: {
+    style: {
+      fill: "#F3E8DF"
+      stroke: "#C29C84"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 20
+      bold: false
+      font-color: "#5B3B29"
+    }
+  }
+  tool: {
+    style: {
+      fill: "#F1F0EC"
+      stroke: "#BDB8AE"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 20
+      bold: false
+      font-color: "#55524B"
+    }
+  }
+  project: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#A9A39A"
+      stroke-width: 2
+      stroke-dash: 4
+      border-radius: 14
+      font-size: 22
+      bold: true
+      font-color: "#3D3B36"
+    }
+  }
+  connect_svc: {
+    style: {
+      fill: "#F1EEF5"
+      stroke: "#B5A9C9"
+      stroke-width: 2
+      border-radius: 12
+      font-size: 20
+      bold: true
+      font-color: "#463A5C"
+    }
+  }
+  connector: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#B5A9C9"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 20
+      bold: false
+      font-color: "#463A5C"
+    }
+  }
+  kafka_svc: {
+    style: {
+      fill: "#EDF0F6"
+      stroke: "#A5B0CB"
+      stroke-width: 2
+      border-radius: 12
+      font-size: 20
+      bold: true
+      font-color: "#2E3A57"
+    }
+  }
+  kafka_box: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#A5B0CB"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 20
+      bold: false
+      font-color: "#2E3A57"
+    }
+  }
+  cloud: {
+    style: {
+      fill: "#ECEAE4"
+      stroke: "#BDB8AE"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 20
+      bold: false
+      font-color: "#55524B"
+    }
+  }
+  note: {
+    shape: text
+    style: {
+      font-size: 20
+      bold: false
+      font-color: "#5F5B53"
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#7D8698"
+      stroke-width: 2
+      font-size: 20
+      font-color: "#4F5664"
+    }
+  }
+  manage: {
+    style: {
+      stroke: "#A9A39A"
+      stroke-width: 2
+      stroke-dash: 4
+      font-size: 20
+      font-color: "#5F5B53"
+    }
+  }
+}
+
+tools: "Aiven Console, avn CLI, Aiven API, Terraform" {
+  class: tool
+  left: 330
+  top: 0
+  width: 740
+  height: 60
+}
+
+project: "Aiven project: Aiven runs everything inside" {
+  class: project
+  left: 330
+  top: 110
+  width: 740
+  height: 650
+
+  connect: "Kafka Connect service" {
+    class: connect_svc
+    left: 0
+    top: 0
+    width: 620
+    height: 190
+
+    debezium: "Debezium PostgreSQL\nsource connector" {
+      class: connector
+      left: 0
+      top: 0
+      width: 230
+      height: 70
+    }
+
+    sfsink: "Snowflake\nsink connector" {
+      class: connector
+      left: 270
+      top: 0
+      width: 230
+      height: 70
+    }
+  }
+
+  kafka: "Kafka service" {
+    class: kafka_svc
+    left: 0
+    top: 240
+    width: 620
+    height: 290
+
+    brokers: "Kafka brokers: topics, partitions, offsets" {
+      class: kafka_box
+      left: 0
+      top: 0
+      width: 500
+      height: 70
+    }
+
+    karapace: "Karapace: Schema Registry, REST proxy" {
+      class: kafka_box
+      left: 0
+      top: 100
+      width: 500
+      height: 70
+    }
+  }
+}
+
+postgres: "PostgreSQL\ndatabase" {
+  class: yours
+  left: 40
+  top: 230
+  width: 230
+  height: 70
+}
+
+snowflake: "Snowflake\ntables" {
+  class: yours
+  left: 1130
+  top: 230
+  width: 230
+  height: 70
+}
+
+apps: "Your apps:\nproducers, consumers" {
+  class: yours
+  left: 40
+  top: 470
+  width: 230
+  height: 70
+}
+
+cloud: "Cloud provider: AWS, Google Cloud or Azure\nAiven Cloud uses Aiven's accounts. BYOC uses your account." {
+  class: cloud
+  left: 330
+  top: 810
+  width: 740
+  height: 80
+}
+
+legend: "Solid arrows show the direction of data." {
+  class: note
+  left: 330
+  top: 910
+}
+
+tools -> project: "create and change" {class: manage}
+postgres -> project.connect.debezium: {class: flow}
+project.connect.debezium -> project.kafka.brokers: {class: flow}
+project.kafka.brokers -> project.connect.sfsink: {class: flow}
+project.connect.sfsink -> snowflake: {class: flow}
+apps <-> project.kafka.brokers: {class: flow}
