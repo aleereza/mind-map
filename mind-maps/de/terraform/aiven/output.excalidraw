@@ -1,0 +1,5721 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9501534574,
+      "isDeleted": false,
+      "id": "node-ef126ead0b76",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120.0,
+      "y": 3858.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 365857,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ef126ead0b76"
+        },
+        {
+          "id": "edge-2ebf6af5455a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b072783de2d8",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-e96366841812",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-e9bf501696ab",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-023cdfb73caf",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-aiven"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6607898067,
+      "isDeleted": false,
+      "id": "text-ef126ead0b76",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 3858.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 2385.0,
+      "seed": 884399,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Terraform for Aiven\nThe Aiven provider lets Terraform\nmanage Aiven projects, services\nand the objects inside services.\nAiven maintains it under the\nsource address `aiven/aiven`\n([provider docs](https://registry.\nterraform.io/providers/aiven/aiven\n/latest/docs)). The provider calls\nthe Aiven API with an API token\n([provider configuration](https://\ngithub.com/aiven/terraform-provide\nr-aiven/blob/v4.66.0/internal/plug\nin/provider.go#L71-L83)). It does\nnot connect to Kafka as a client.\nThe [Kafka map](../../kafka/kafka.\nmd#aiven-aiven) explains what\nAiven runs, and the [Terraform\nmap](../terraform.md) explains\nTerraform itself.\n\nThe unit is one Aiven project and\nthe services in it. Aiven groups\neverything in three levels: an\norganization holds projects, and a\nproject holds services ([Projects\nand Services](../../kafka/kafka.md\n#projects-and-services-aiven-proje\ncts-services)). A service is one\nrunning product, such as a Kafka\ncluster or a Kafka Connect\ncluster. Inside a Kafka service\nlive the objects that a data\nengineer touches most: topics,\naccess rules, schemas and\nconnectors.\n\nEach object has its own resource,\nand each resource has one key\nidea:\n\n- A service is a machine with\ndata. Its name is its identity, so\na new name means a new, empty\nservice ([A Service Holds Data](#a\n-service-holds-data-a-service-hold\ns-data)).\n- The advanced settings of a\nservice only grow. Removing a\nsetting from the code leaves the\nlive value in place ([Service\nSettings Only Grow](#service-setti\nngs-only-grow-service-settings-onl\ny-grow)).\n- A topic is known by its name. A\nnew name means a new, empty topic\n([The Topic Name Is the Key](#the-\ntopic-name-is-the-key-the-topic-na\nme-is-the-key)).\n- A connector is a flat map of\nstrings that the provider hardly\nchecks ([A Connector Is a Map of S\ntrings](#a-connector-is-a-map-of-s\ntrings-a-connector-is-a-map-of-str\nings)).\n- A schema subject is a list of\nversions that only grows ([Schema\nSubjects Only Grow](#schema-subjec\nts-only-grow-schema-subjects-only-\ngrow)).\n- Aiven has two kinds of access\nrule, and both can apply to one\nuser ([Two ACL Models](#two-acl-mo\ndels-two-acl-models)).\n\nTwo more ideas explain surprising\nplans. The provider is built on\ntwo Terraform libraries, and each\nresource behaves like its library\n([Two Libraries in One Provider](#\ntwo-libraries-in-one-provider-two-\nlibraries-in-one-provider)). Aiven\nalso changes some things on its\nown, outside any plan ([Aiven\nChanges Things Too](#aiven-changes\n-things-too-aiven-changes-things-t\noo)).\n\nNow compare the Snowflake\nprovider. Both manage a service\nthat someone else runs.\nSnowflake's provider speaks SQL,\nand Aiven's provider speaks REST.\nIn both, the most dangerous line\nin a plan is a replacement of an\nobject that holds data.\n\nThe map has four parts. Mental\nModels explains the ideas above.\nReading an Aiven Configuration\nsays what you will see and where\nto look first. Pitfalls lists the\nfailures that experienced users\nplan around. Good and Bad\nDecisions compares the main design\nchoices.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-ef126ead0b76",
+      "originalText": "Terraform for Aiven\nThe Aiven provider lets Terraform manage Aiven projects, services and the objects inside services. Aiven maintains it under the source address `aiven/aiven` ([provider docs](https://registry.terraform.io/providers/aiven/aiven/latest/docs)). The provider calls the Aiven API with an API token ([provider configuration](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/internal/plugin/provider.go#L71-L83)). It does not connect to Kafka as a client. The [Kafka map](../../kafka/kafka.md#aiven-aiven) explains what Aiven runs, and the [Terraform map](../terraform.md) explains Terraform itself.\n\nThe unit is one Aiven project and the services in it. Aiven groups everything in three levels: an organization holds projects, and a project holds services ([Projects and Services](../../kafka/kafka.md#projects-and-services-aiven-projects-services)). A service is one running product, such as a Kafka cluster or a Kafka Connect cluster. Inside a Kafka service live the objects that a data engineer touches most: topics, access rules, schemas and connectors.\n\nEach object has its own resource, and each resource has one key idea:\n\n- A service is a machine with data. Its name is its identity, so a new name means a new, empty service ([A Service Holds Data](#a-service-holds-data-a-service-holds-data)).\n- The advanced settings of a service only grow. Removing a setting from the code leaves the live value in place ([Service Settings Only Grow](#service-settings-only-grow-service-settings-only-grow)).\n- A topic is known by its name. A new name means a new, empty topic ([The Topic Name Is the Key](#the-topic-name-is-the-key-the-topic-name-is-the-key)).\n- A connector is a flat map of strings that the provider hardly checks ([A Connector Is a Map of Strings](#a-connector-is-a-map-of-strings-a-connector-is-a-map-of-strings)).\n- A schema subject is a list of versions that only grows ([Schema Subjects Only Grow](#schema-subjects-only-grow-schema-subjects-only-grow)).\n- Aiven has two kinds of access rule, and both can apply to one user ([Two ACL Models](#two-acl-models-two-acl-models)).\n\nTwo more ideas explain surprising plans. The provider is built on two Terraform libraries, and each resource behaves like its library ([Two Libraries in One Provider](#two-libraries-in-one-provider-two-libraries-in-one-provider)). Aiven also changes some things on its own, outside any plan ([Aiven Changes Things Too](#aiven-changes-things-too-aiven-changes-things-too)).\n\nNow compare the Snowflake provider. Both manage a service that someone else runs. Snowflake's provider speaks SQL, and Aiven's provider speaks REST. In both, the most dangerous line in a plan is a replacement of an object that holds data.\n\nThe map has four parts. Mental Models explains the ideas above. Reading an Aiven Configuration says what you will see and where to look first. Pitfalls lists the failures that experienced users plan around. Good and Bad Decisions compares the main design choices.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-aiven"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7535566927,
+      "isDeleted": false,
+      "id": "node-99f9f5c60fa8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 1079.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 471471,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-99f9f5c60fa8"
+        },
+        {
+          "id": "edge-2ebf6af5455a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0fca8352bb4d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-3a7bf619e2a2",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d8b201b08588",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0d87601fbce9",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c56f017332f6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-03521f2f551d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-bb714d6db07b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-8a7c914a1f44",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-mental-models"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7661444631,
+      "isDeleted": false,
+      "id": "text-99f9f5c60fa8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 1095.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 450522,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Mental Models\nThe models come in dependency\norder: each model uses only\nthe models before it.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-99f9f5c60fa8",
+      "originalText": "Mental Models\nThe models come in dependency order: each model uses only the models before it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-mental-models"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2081664702,
+      "isDeleted": false,
+      "id": "node-a06a5a1e9089",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 644930,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a06a5a1e9089"
+        },
+        {
+          "id": "edge-d8b4cc365149",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0fca8352bb4d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "a-service-holds-data"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9251147719,
+      "isDeleted": false,
+      "id": "text-a06a5a1e9089",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 472.5,
+      "seed": 252777,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "A Service Holds Data\nAn `aiven_kafka` or `aiven_kafka_connect`\nresource stands for a service: machines, disks\nand the software on them. A change of\n`service_name` or `project` replaces the\nservice. The provider's own docs warn that the\nservice and all its data are deleted before\nAiven creates the new one ([provider warning](\nhttps://github.com/aiven/terraform-provider-ai\nven/blob/v4.66.0/docs/index.md#L43-L47)).\n\nThe same page asks you to set\n`termination_protection = true` on every\nproduction service. Aiven itself enforces this\nflag, so it also blocks a delete from the\nconsole or the CLI. It does not protect topics\nor other objects inside the service ([terminat\nion_protection](https://github.com/aiven/terra\nform-provider-aiven/blob/v4.66.0/docs/resource\ns/kafka.md#L69)).\n\nThe children of a service, such as topics,\nACLs and connectors, name the service in\n`project` and `service_name`. Those two fields\nforce a replacement on each child too. So a\nreplaced service also replaces everything\ninside it.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a06a5a1e9089",
+      "originalText": "A Service Holds Data\nAn `aiven_kafka` or `aiven_kafka_connect` resource stands for a service: machines, disks and the software on them. A change of `service_name` or `project` replaces the service. The provider's own docs warn that the service and all its data are deleted before Aiven creates the new one ([provider warning](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/index.md#L43-L47)).\n\nThe same page asks you to set `termination_protection = true` on every production service. Aiven itself enforces this flag, so it also blocks a delete from the console or the CLI. It does not protect topics or other objects inside the service ([termination_protection](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka.md#L69)).\n\nThe children of a service, such as topics, ACLs and connectors, name the service in `project` and `service_name`. Those two fields force a replacement on each child too. So a replaced service also replaces everything inside it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "a-service-holds-data"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1895446946,
+      "isDeleted": false,
+      "id": "node-5368e92b6534",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 666757,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5368e92b6534"
+        },
+        {
+          "id": "edge-3a7bf619e2a2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "service-settings-only-grow"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8007419267,
+      "isDeleted": false,
+      "id": "text-5368e92b6534",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 472.5,
+      "seed": 142432,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Service Settings Only Grow\nA Kafka service has a block of advanced\nsettings, `kafka_user_config`. It holds broker\ndefaults, the Kafka version, and switches for\nKafka Connect, the Schema Registry and the\nREST proxy. The provider warns: \"There's no\nway to reset advanced configuration options to\ndefault. Options that you add cannot be\nremoved later\" ([kafka_user_config](https://gi\nthub.com/aiven/terraform-provider-aiven/blob/v\n4.66.0/docs/resources/kafka.md#L60)).\n\nSo the code shows only the settings that\nsomeone added and kept. A setting that someone\nremoved from the code still runs on the\nservice. To change it, set a new value; to\nlearn the live value, read the service in the\nAiven Console.\n\nBroker defaults in this block also apply to\ntopics. For example,\n`kafka.log_retention_bytes` sets the broker\ndefault for the topic setting\n`retention.bytes`, which every topic without\nits own value uses. That limit counts per\npartition ([Kafka topic settings](https://kafk\na.apache.org/39/generated/topic_config.html)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-5368e92b6534",
+      "originalText": "Service Settings Only Grow\nA Kafka service has a block of advanced settings, `kafka_user_config`. It holds broker defaults, the Kafka version, and switches for Kafka Connect, the Schema Registry and the REST proxy. The provider warns: \"There's no way to reset advanced configuration options to default. Options that you add cannot be removed later\" ([kafka_user_config](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka.md#L60)).\n\nSo the code shows only the settings that someone added and kept. A setting that someone removed from the code still runs on the service. To change it, set a new value; to learn the live value, read the service in the Aiven Console.\n\nBroker defaults in this block also apply to topics. For example, `kafka.log_retention_bytes` sets the broker default for the topic setting `retention.bytes`, which every topic without its own value uses. That limit counts per partition ([Kafka topic settings](https://kafka.apache.org/39/generated/topic_config.html)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "service-settings-only-grow"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8793755169,
+      "isDeleted": false,
+      "id": "node-c2fea1178b0e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 761590,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c2fea1178b0e"
+        },
+        {
+          "id": "edge-1d7bbdfb6844",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-557842d4bd48",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d8b201b08588",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "the-topic-name-is-the-key"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2115467382,
+      "isDeleted": false,
+      "id": "text-c2fea1178b0e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 490.0,
+      "seed": 433378,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "The Topic Name Is the Key\nAn `aiven_kafka_topic` is known by three\nfields: `project`, `service_name` and\n`topic_name`. A change to any of them forces a\nnew topic ([topic fields](https://github.com/a\niven/terraform-provider-aiven/blob/v4.66.0/doc\ns/resources/kafka_topic.md#L84-L87)). Kafka\ncannot rename a topic, so the old topic and\nits messages are deleted.\n\nThe provider also refuses two changes at plan\ntime ([plan checks](https://github.com/aiven/t\nerraform-provider-aiven/blob/v4.66.0/internal/\nplugin/service/kafkatopic/topic.go#L161-L186))\n:\n\n- A smaller `partitions` value fails with\n\"number of partitions cannot be decreased\".\n- A new topic resource whose name already\nexists in the service fails with \"topic\nconflict, already exists\".\n\nThe `config` block holds only the topic\nsettings that you set. Removing the block does\nnot reset the topic: it keeps its last values \n([config](https://github.com/aiven/terraform-p\nrovider-aiven/blob/v4.66.0/docs/resources/kafk\na_topic.md#L91)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c2fea1178b0e",
+      "originalText": "The Topic Name Is the Key\nAn `aiven_kafka_topic` is known by three fields: `project`, `service_name` and `topic_name`. A change to any of them forces a new topic ([topic fields](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka_topic.md#L84-L87)). Kafka cannot rename a topic, so the old topic and its messages are deleted.\n\nThe provider also refuses two changes at plan time ([plan checks](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/internal/plugin/service/kafkatopic/topic.go#L161-L186)):\n\n- A smaller `partitions` value fails with \"number of partitions cannot be decreased\".\n- A new topic resource whose name already exists in the service fails with \"topic conflict, already exists\".\n\nThe `config` block holds only the topic settings that you set. Removing the block does not reset the topic: it keeps its last values ([config](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka_topic.md#L91)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "the-topic-name-is-the-key"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7318967018,
+      "isDeleted": false,
+      "id": "node-b7298129b221",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 288556,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b7298129b221"
+        },
+        {
+          "id": "edge-0601db225c22",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0d87601fbce9",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "a-connector-is-a-map-of-strings"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5729220400,
+      "isDeleted": false,
+      "id": "text-b7298129b221",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 350.0,
+      "seed": 721967,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "A Connector Is a Map of Strings\nAn `aiven_kafka_connector` runs one Kafka\nConnect connector on a Connect service. Its\n`config` is one flat map of strings, the same\nkeys that the Connect REST API takes. The\nprovider checks only one thing: `config.name`\nmust equal `connector_name` ([name check](http\ns://github.com/aiven/terraform-provider-aiven/\nblob/v4.66.0/internal/sdkprovider/service/kafk\na/kafka_connector.go#L115-L129)). It accepts\nany other key, including keys that Kafka\nConnect ignores.\n\nA refresh copies the live configuration into\nthe state, and an update sends the whole map.\nThe resource has no field for task health, so\na plan cannot show a connector whose tasks\nhave failed. The [Kafka map](../../kafka/kafka\n.md#kafka-connect-service-aiven-kafka-connect)\nexplains where Connect runs on Aiven.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b7298129b221",
+      "originalText": "A Connector Is a Map of Strings\nAn `aiven_kafka_connector` runs one Kafka Connect connector on a Connect service. Its `config` is one flat map of strings, the same keys that the Connect REST API takes. The provider checks only one thing: `config.name` must equal `connector_name` ([name check](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/internal/sdkprovider/service/kafka/kafka_connector.go#L115-L129)). It accepts any other key, including keys that Kafka Connect ignores.\n\nA refresh copies the live configuration into the state, and an update sends the whole map. The resource has no field for task health, so a plan cannot show a connector whose tasks have failed. The [Kafka map](../../kafka/kafka.md#kafka-connect-service-aiven-kafka-connect) explains where Connect runs on Aiven.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "a-connector-is-a-map-of-strings"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1075796043,
+      "isDeleted": false,
+      "id": "node-2fe1bc9b4e86",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 360316,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2fe1bc9b4e86"
+        },
+        {
+          "id": "edge-77db64ca9a6d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c56f017332f6",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "schema-subjects-only-grow"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7661423462,
+      "isDeleted": false,
+      "id": "text-2fe1bc9b4e86",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 420.0,
+      "seed": 189023,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Schema Subjects Only Grow\nAn `aiven_kafka_schema` stands for one subject\nin the Schema Registry, which Aiven runs with\nKarapace ([Karapace](../../kafka/kafka.md#kara\npace-karapace)). A subject is a list of schema\nversions. An edit to the schema in Terraform\nregisters a new version; it never rewrites an\nold one. The plan checks the new schema\nagainst the version in the state, and it fails\nwith \"schema is not compatible with previous\nversion\" when the check fails ([schema resourc\ne](https://github.com/aiven/terraform-provider\n-aiven/blob/v4.66.0/internal/sdkprovider/servi\nce/kafkaschema/kafka_schema.go#L444-L501)).\n\nThe compatibility rule comes from\n`compatibility_level` on the subject, or from\nthe registry-wide\n`aiven_kafka_schema_configuration`. Destroying\nthat resource sets the global level back to\nBACKWARD ([schema configuration](https://githu\nb.com/aiven/terraform-provider-aiven/blob/v4.6\n6.0/internal/sdkprovider/service/kafkaschema/k\nafka_schema_configuration.go#L129-L150)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2fe1bc9b4e86",
+      "originalText": "Schema Subjects Only Grow\nAn `aiven_kafka_schema` stands for one subject in the Schema Registry, which Aiven runs with Karapace ([Karapace](../../kafka/kafka.md#karapace-karapace)). A subject is a list of schema versions. An edit to the schema in Terraform registers a new version; it never rewrites an old one. The plan checks the new schema against the version in the state, and it fails with \"schema is not compatible with previous version\" when the check fails ([schema resource](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/internal/sdkprovider/service/kafkaschema/kafka_schema.go#L444-L501)).\n\nThe compatibility rule comes from `compatibility_level` on the subject, or from the registry-wide `aiven_kafka_schema_configuration`. Destroying that resource sets the global level back to BACKWARD ([schema configuration](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/internal/sdkprovider/service/kafkaschema/kafka_schema_configuration.go#L129-L150)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "schema-subjects-only-grow"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8384551973,
+      "isDeleted": false,
+      "id": "node-ac84019c3524",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 930905,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ac84019c3524"
+        },
+        {
+          "id": "edge-94b000f61e9a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-03521f2f551d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "two-acl-models"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1587586563,
+      "isDeleted": false,
+      "id": "text-ac84019c3524",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 350.0,
+      "seed": 421422,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Two ACL Models\nAn ACL is an access control list: a rule that\nlets a service user do something. Aiven has\ntwo kinds ([ACLs](https://aiven.io/docs/produc\nts/kafka/concepts/acl)):\n\n- Aiven ACLs, with `aiven_kafka_acl`. Each\ngrants `read`, `write`, `readwrite` or `admin`\non topics. Users and topics can use wildcards.\n- Kafka-native ACLs, with\n`aiven_kafka_native_acl`. They follow Apache\nKafka's own model, with `ALLOW` and `DENY`\nrules on more kinds of resources.\n\nBoth apply at the same time, and a `DENY` rule\nwins over any grant. In Aiven ACLs, `*`\nmatches zero or more characters and `?`\nmatches exactly one. The Schema Registry has\nits own ACLs, in\n`aiven_kafka_schema_registry_acl`.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-ac84019c3524",
+      "originalText": "Two ACL Models\nAn ACL is an access control list: a rule that lets a service user do something. Aiven has two kinds ([ACLs](https://aiven.io/docs/products/kafka/concepts/acl)):\n\n- Aiven ACLs, with `aiven_kafka_acl`. Each grants `read`, `write`, `readwrite` or `admin` on topics. Users and topics can use wildcards.\n- Kafka-native ACLs, with `aiven_kafka_native_acl`. They follow Apache Kafka's own model, with `ALLOW` and `DENY` rules on more kinds of resources.\n\nBoth apply at the same time, and a `DENY` rule wins over any grant. In Aiven ACLs, `*` matches zero or more characters and `?` matches exactly one. The Schema Registry has its own ACLs, in `aiven_kafka_schema_registry_acl`.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "two-acl-models"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3746588247,
+      "isDeleted": false,
+      "id": "node-0e9c16f4aea7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 552166,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-0e9c16f4aea7"
+        },
+        {
+          "id": "edge-538b28e415d5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-bb714d6db07b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "two-libraries-in-one-provider"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8135283785,
+      "isDeleted": false,
+      "id": "text-0e9c16f4aea7",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 560.0,
+      "seed": 874209,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Two Libraries in One Provider\nThe provider combines two Terraform libraries:\nthe older SDKv2 and the newer Plugin Framework\n(PF). Aiven moves resources to PF one at a\ntime. After a move, a resource stores only the\nvalues that you set, and it drops blocks that\nyour configuration does not have ([upgrade gui\nde](https://github.com/aiven/terraform-provide\nr-aiven/blob/v4.66.0/docs/guides/upgrade-guide\n-v3-to-v4.md#L104-L191)). The first plan after\nsuch an upgrade can therefore show changes\nthat remove blocks. Aiven says that applying\nthem is safe.\n\n| Resource | Moved to PF in |\n| --- | --- |\n| `aiven_kafka_schema_registry_acl` | 4.57.0 |\n| `aiven_kafka_topic` | 4.59.0 |\n| `aiven_kafka_acl`, `aiven_kafka_native_acl`,\n`aiven_kafka_user` | 4.61.0 |\n| `aiven_service_integration`,\n`aiven_service_integration_endpoint` | 4.66.0\n|\n\nThe table comes from the [changelog](https://g\nithub.com/aiven/terraform-provider-aiven/blob/\nv4.66.0/CHANGELOG.md). `aiven_kafka`,\n`aiven_kafka_connect`,\n`aiven_kafka_connector`, the schema resources\nand `aiven_project` were still on SDKv2 in\n4.66.0. Each release marks such changes with\n**IMPORTANT** in the changelog.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-0e9c16f4aea7",
+      "originalText": "Two Libraries in One Provider\nThe provider combines two Terraform libraries: the older SDKv2 and the newer Plugin Framework (PF). Aiven moves resources to PF one at a time. After a move, a resource stores only the values that you set, and it drops blocks that your configuration does not have ([upgrade guide](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/guides/upgrade-guide-v3-to-v4.md#L104-L191)). The first plan after such an upgrade can therefore show changes that remove blocks. Aiven says that applying them is safe.\n\n| Resource | Moved to PF in |\n| --- | --- |\n| `aiven_kafka_schema_registry_acl` | 4.57.0 |\n| `aiven_kafka_topic` | 4.59.0 |\n| `aiven_kafka_acl`, `aiven_kafka_native_acl`, `aiven_kafka_user` | 4.61.0 |\n| `aiven_service_integration`, `aiven_service_integration_endpoint` | 4.66.0 |\n\nThe table comes from the [changelog](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/CHANGELOG.md). `aiven_kafka`, `aiven_kafka_connect`, `aiven_kafka_connector`, the schema resources and `aiven_project` were still on SDKv2 in 4.66.0. Each release marks such changes with **IMPORTANT** in the changelog.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "two-libraries-in-one-provider"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4379018390,
+      "isDeleted": false,
+      "id": "node-bb76505ce05d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 996761,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-bb76505ce05d"
+        },
+        {
+          "id": "edge-aeabefd7e0ba",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-8a7c914a1f44",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-changes-things-too"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6457743618,
+      "isDeleted": false,
+      "id": "text-bb76505ce05d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 490.0,
+      "seed": 111405,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Aiven Changes Things Too\nAiven operates the services, so some changes\nhappen outside Terraform:\n\n- Maintenance updates install the latest\nconnector plugin when no version is pinned\n([connector versions](https://aiven.io/docs/pr\noducts/kafka/kafka-connect/howto/manage-connec\ntor-versions)).\n- Aiven issues new service-user certificates\nabout three months before they expire. The\ncertificates are valid for 820 days ([renew ce\nrtificates](https://aiven.io/docs/products/kaf\nka/howto/renew-ssl-certs)).\n- The power state of a service is outside\nTerraform. You turn a service on or off in the\nAiven Console or the CLI ([state](https://gith\nub.com/aiven/terraform-provider-aiven/blob/v4.\n66.0/docs/resources/kafka.md#L87)).\n- After a power cycle, Aiven restores topics,\nusers, ACLs, schemas and Connect settings from\na configuration backup. It does not restore\nthe messages in classic topics ([configuration\nbackups](https://aiven.io/docs/products/kafka/\nconcepts/configuration-backup)).\n\nNone of these changes shows in a plan before\nit happens.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-bb76505ce05d",
+      "originalText": "Aiven Changes Things Too\nAiven operates the services, so some changes happen outside Terraform:\n\n- Maintenance updates install the latest connector plugin when no version is pinned ([connector versions](https://aiven.io/docs/products/kafka/kafka-connect/howto/manage-connector-versions)).\n- Aiven issues new service-user certificates about three months before they expire. The certificates are valid for 820 days ([renew certificates](https://aiven.io/docs/products/kafka/howto/renew-ssl-certs)).\n- The power state of a service is outside Terraform. You turn a service on or off in the Aiven Console or the CLI ([state](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka.md#L87)).\n- After a power cycle, Aiven restores topics, users, ACLs, schemas and Connect settings from a configuration backup. It does not restore the messages in classic topics ([configuration backups](https://aiven.io/docs/products/kafka/concepts/configuration-backup)).\n\nNone of these changes shows in a plan before it happens.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-changes-things-too"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5041791214,
+      "isDeleted": false,
+      "id": "node-51522b90e902",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 2497.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 144.5,
+      "seed": 78328,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-51522b90e902"
+        },
+        {
+          "id": "edge-b072783de2d8",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c045731b82d8",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d051f44d5bcc",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-862c55934662",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-aiven-configuration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8092169546,
+      "isDeleted": false,
+      "id": "text-51522b90e902",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 2513.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 112.5,
+      "seed": 511363,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading an Aiven Configuration\nThese nodes say what you will find\nin the files, in which order to\nread them, and what each kind of\nplan line means.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-51522b90e902",
+      "originalText": "Reading an Aiven Configuration\nThese nodes say what you will find in the files, in which order to read them, and what each kind of plan line means.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-aiven-configuration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1796833002,
+      "isDeleted": false,
+      "id": "node-35bfa397880f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 354427,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-35bfa397880f"
+        },
+        {
+          "id": "edge-c045731b82d8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-what-you-will-see"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5498510130,
+      "isDeleted": false,
+      "id": "text-35bfa397880f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 805.0,
+      "seed": 666258,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What You Will See\n| Resource | Aiven object | What to check |\nImport ID |\n| --- | --- | --- | --- |\n| `aiven_project` | project |\n`aiven_organization_project` will replace it\n([project doc](https://github.com/aiven/terraf\norm-provider-aiven/blob/v4.66.0/docs/resources\n/project.md#L11)) | `PROJECT` |\n| `aiven_kafka` | Kafka service |\n`service_name`, `plan`,\n`termination_protection`, `kafka_user_config`\n| `PROJECT/SERVICE_NAME` |\n| `aiven_kafka_connect` | Kafka Connect\nservice | Its integration with the Kafka\nservice | `PROJECT/SERVICE_NAME` |\n| `aiven_service_integration`,\n`aiven_service_integration_endpoint` | link\nbetween services, and an outside target such\nas Prometheus | The type, and secrets in the\nendpoint | `PROJECT/INTEGRATION_ID` |\n| `aiven_kafka_topic` | topic | Name source,\n`partitions`, `replication`, `config` |\n`PROJECT/SERVICE_NAME/TOPIC_NAME` |\n| `aiven_kafka_user` | service user | Password\nand key in state |\n`PROJECT/SERVICE_NAME/USERNAME` |\n| `aiven_kafka_acl`, `aiven_kafka_native_acl`\n| access rule | Wildcard reach; every field\nforces a new rule |\n`PROJECT/SERVICE_NAME/ACL_ID` |\n| `aiven_kafka_schema`,\n`aiven_kafka_schema_configuration` | subject,\nregistry-wide rule | Compatibility level |\n`PROJECT/SERVICE_NAME/SUBJECT` |\n| `aiven_kafka_connector` | connector | Target\nservice, secrets in `config`, stable\n`connector_name` |\n`PROJECT/SERVICE_NAME/CONNECTOR_NAME` |\n\nThe import IDs come from the Import section of\neach [resource doc](https://github.com/aiven/t\nerraform-provider-aiven/tree/v4.66.0/docs/reso\nurces). Aiven generates the ID of an ACL, so\nyou find it in the console or the API before\nan import.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-35bfa397880f",
+      "originalText": "What You Will See\n| Resource | Aiven object | What to check | Import ID |\n| --- | --- | --- | --- |\n| `aiven_project` | project | `aiven_organization_project` will replace it ([project doc](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/project.md#L11)) | `PROJECT` |\n| `aiven_kafka` | Kafka service | `service_name`, `plan`, `termination_protection`, `kafka_user_config` | `PROJECT/SERVICE_NAME` |\n| `aiven_kafka_connect` | Kafka Connect service | Its integration with the Kafka service | `PROJECT/SERVICE_NAME` |\n| `aiven_service_integration`, `aiven_service_integration_endpoint` | link between services, and an outside target such as Prometheus | The type, and secrets in the endpoint | `PROJECT/INTEGRATION_ID` |\n| `aiven_kafka_topic` | topic | Name source, `partitions`, `replication`, `config` | `PROJECT/SERVICE_NAME/TOPIC_NAME` |\n| `aiven_kafka_user` | service user | Password and key in state | `PROJECT/SERVICE_NAME/USERNAME` |\n| `aiven_kafka_acl`, `aiven_kafka_native_acl` | access rule | Wildcard reach; every field forces a new rule | `PROJECT/SERVICE_NAME/ACL_ID` |\n| `aiven_kafka_schema`, `aiven_kafka_schema_configuration` | subject, registry-wide rule | Compatibility level | `PROJECT/SERVICE_NAME/SUBJECT` |\n| `aiven_kafka_connector` | connector | Target service, secrets in `config`, stable `connector_name` | `PROJECT/SERVICE_NAME/CONNECTOR_NAME` |\n\nThe import IDs come from the Import section of each [resource doc](https://github.com/aiven/terraform-provider-aiven/tree/v4.66.0/docs/resources). Aiven generates the ID of an ACL, so you find it in the console or the API before an import.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-what-you-will-see"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5155260492,
+      "isDeleted": false,
+      "id": "node-5a33a3177131",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 2460.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 525738,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5a33a3177131"
+        },
+        {
+          "id": "edge-d051f44d5bcc",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-where-to-look-first"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3165662983,
+      "isDeleted": false,
+      "id": "text-5a33a3177131",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 2460.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 595.0,
+      "seed": 332751,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Where to Look First\nRead an Aiven configuration in this order:\n\n1. `required_providers` and the lock file. The\nversion decides which resources use which\nlibrary, and which IMPORTANT changelog notes\napply.\n2. The `provider \"aiven\"` block and the token\nbehind it. The token decides which projects\nTerraform can reach and whether it can read\nsecrets.\n3. The `aiven_kafka` and `aiven_kafka_connect`\nblocks. Find where `project` and\n`service_name` come from, because they are the\nidentity. Then read `plan`,\n`termination_protection`, `lifecycle` and\n`kafka_user_config`.\n4. The `for_each` keys of topics, ACLs and\nconnectors. A changed key without a `moved`\nblock plans a destroy and a create.\n5. The topics. Check `partitions`,\n`replication` and the `config` keys. Note\ntopics that other tools also create, such as\ndead-letter topics of connectors.\n6. The ACLs. Check how far each wildcard\nreaches, and which users exist outside\nTerraform.\n7. The schemas and the registry-wide\ncompatibility level.\n8. The connectors. Check the target service,\nsecrets in `config`, `depends_on` on ACLs, and\nplugin version pins.\n9. The integrations and endpoints, and the\noutputs that other code reads.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-5a33a3177131",
+      "originalText": "Where to Look First\nRead an Aiven configuration in this order:\n\n1. `required_providers` and the lock file. The version decides which resources use which library, and which IMPORTANT changelog notes apply.\n2. The `provider \"aiven\"` block and the token behind it. The token decides which projects Terraform can reach and whether it can read secrets.\n3. The `aiven_kafka` and `aiven_kafka_connect` blocks. Find where `project` and `service_name` come from, because they are the identity. Then read `plan`, `termination_protection`, `lifecycle` and `kafka_user_config`.\n4. The `for_each` keys of topics, ACLs and connectors. A changed key without a `moved` block plans a destroy and a create.\n5. The topics. Check `partitions`, `replication` and the `config` keys. Note topics that other tools also create, such as dead-letter topics of connectors.\n6. The ACLs. Check how far each wildcard reaches, and which users exist outside Terraform.\n7. The schemas and the registry-wide compatibility level.\n8. The connectors. Check the target service, secrets in `config`, `depends_on` on ACLs, and plugin version pins.\n9. The integrations and endpoints, and the outputs that other code reads.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-where-to-look-first"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1461646068,
+      "isDeleted": false,
+      "id": "node-2c9934afea16",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 2720.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 29851,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2c9934afea16"
+        },
+        {
+          "id": "edge-862c55934662",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-plan-signals"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7338946400,
+      "isDeleted": false,
+      "id": "text-2c9934afea16",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 2720.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 437.5,
+      "seed": 439310,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `-/+ aiven_kafka ... # forces replacement` |\nThe service and all its data will be deleted,\nand every child object replaced. |\n| `-/+ aiven_kafka_topic ... # forces\nreplacement` | The topic and its messages will\nbe deleted. |\n| `number of partitions cannot be decreased` |\nThe plan stops; Kafka cannot remove\npartitions. |\n| `topic conflict, already exists` | A topic\nwith this name exists outside this resource:\nimport it, or add a `moved` block. |\n| `schema is not compatible with previous\nversion` | The schema edit breaks the\ncompatibility rule. |\n| `~` on a connector `config` without a code\nchange | Someone changed the connector outside\nTerraform; the apply will revert it. |\n| `~` on integrations right after a provider\nupgrade | A resource moved to the Plugin\nFramework; see the changelog's IMPORTANT\nnotes. |",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2c9934afea16",
+      "originalText": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `-/+ aiven_kafka ... # forces replacement` | The service and all its data will be deleted, and every child object replaced. |\n| `-/+ aiven_kafka_topic ... # forces replacement` | The topic and its messages will be deleted. |\n| `number of partitions cannot be decreased` | The plan stops; Kafka cannot remove partitions. |\n| `topic conflict, already exists` | A topic with this name exists outside this resource: import it, or add a `moved` block. |\n| `schema is not compatible with previous version` | The schema edit breaks the compatibility rule. |\n| `~` on a connector `config` without a code change | Someone changed the connector outside Terraform; the apply will revert it. |\n| `~` on integrations right after a provider upgrade | A resource moved to the Plugin Framework; see the changelog's IMPORTANT notes. |",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-plan-signals"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1491983825,
+      "isDeleted": false,
+      "id": "node-83e0698ed072",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 4578.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 122.0,
+      "seed": 348668,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-83e0698ed072"
+        },
+        {
+          "id": "edge-e96366841812",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-997266ec56de",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-152edbd144d7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d5f16560c032",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4778251625,
+      "isDeleted": false,
+      "id": "text-83e0698ed072",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 4594.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 90.0,
+      "seed": 692569,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pitfalls\nThe pitfalls fall into three\ngroups: data loss, connectors, and\noperations.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-83e0698ed072",
+      "originalText": "Pitfalls\nThe pitfalls fall into three groups: data loss, connectors, and operations.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3043552025,
+      "isDeleted": false,
+      "id": "node-7834294d9203",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 3292.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 402.0,
+      "height": 94.0,
+      "seed": 332626,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7834294d9203"
+        },
+        {
+          "id": "edge-997266ec56de",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-127ba49c9eb5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1e756aebacc8",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0b6a23100a82",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-data-loss-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4886707986,
+      "isDeleted": false,
+      "id": "text-7834294d9203",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 3304.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 378.0,
+      "height": 70.0,
+      "seed": 98694,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Data Loss Pitfalls\nThese pitfalls delete messages. A plan shows\neach of them, so they are caught when\nsomeone reads the plan.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7834294d9203",
+      "originalText": "Data Loss Pitfalls\nThese pitfalls delete messages. A plan shows each of them, so they are caught when someone reads the plan.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-data-loss-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5609327379,
+      "isDeleted": false,
+      "id": "node-4c4e3fb8d3ed",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1901.2,
+      "y": 2980.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 445214,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4c4e3fb8d3ed"
+        },
+        {
+          "id": "edge-d8b4cc365149",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-127ba49c9eb5",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "service-replacement"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9147598137,
+      "isDeleted": false,
+      "id": "text-4c4e3fb8d3ed",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1913.2,
+      "y": 2980.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 297.5,
+      "seed": 859469,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Service Replacement\nA new `service_name` or `project`, for example\nfrom a typo in an input file, replaces the\nKafka service. Every topic, ACL and connector\ninside it is replaced too.\n`termination_protection` makes the delete fail\nin Aiven, and `lifecycle { prevent_destroy =\ntrue }` makes the plan fail before anything\nruns. The old topic-level\n`termination_protection` is checked only by\nthe provider, and only at apply ([issue 1596](\nhttps://github.com/aiven/terraform-provider-ai\nven/issues/1596)). Use `prevent_destroy`\ninstead, as the topic docs advise ([topic docs\n](https://github.com/aiven/terraform-provider-\naiven/blob/v4.66.0/docs/resources/kafka_topic.\nmd#L94)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-4c4e3fb8d3ed",
+      "originalText": "Service Replacement\nA new `service_name` or `project`, for example from a typo in an input file, replaces the Kafka service. Every topic, ACL and connector inside it is replaced too. `termination_protection` makes the delete fail in Aiven, and `lifecycle { prevent_destroy = true }` makes the plan fail before anything runs. The old topic-level `termination_protection` is checked only by the provider, and only at apply ([issue 1596](https://github.com/aiven/terraform-provider-aiven/issues/1596)). Use `prevent_destroy` instead, as the topic docs advise ([topic docs](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka_topic.md#L94)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "service-replacement"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6608577432,
+      "isDeleted": false,
+      "id": "node-7d8f2f207504",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1901.2,
+      "y": 3240.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 194526,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7d8f2f207504"
+        },
+        {
+          "id": "edge-1d7bbdfb6844",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1e756aebacc8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "topic-identity"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5602579938,
+      "isDeleted": false,
+      "id": "text-7d8f2f207504",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1913.2,
+      "y": 3243.25,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 840062,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Topic Identity\nA rename in the code deletes the topic with\nits messages and creates an empty one. A\nchanged `for_each` key without a `moved` block\nplans the same. When the new topic has the\nsame name, the plan fails with \"topic\nconflict, already exists\". The same error\nappears when a tool such as Kafka Connect\nalready created the topic, for example a\ndead-letter topic. In that case, import the\ntopic.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7d8f2f207504",
+      "originalText": "Topic Identity\nA rename in the code deletes the topic with its messages and creates an empty one. A changed `for_each` key without a `moved` block plans the same. When the new topic has the same name, the plan fails with \"topic conflict, already exists\". The same error appears when a tool such as Kafka Connect already created the topic, for example a dead-letter topic. In that case, import the topic.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "topic-identity"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7776772294,
+      "isDeleted": false,
+      "id": "node-9670ed5dfb6c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1901.2,
+      "y": 3479.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 511126,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9670ed5dfb6c"
+        },
+        {
+          "id": "edge-557842d4bd48",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0b6a23100a82",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "partition-changes"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5529022288,
+      "isDeleted": false,
+      "id": "text-9670ed5dfb6c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1913.2,
+      "y": 3479.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 472.5,
+      "seed": 396977,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Partition Changes\nRaising `partitions` is an in-place change,\nbut it changes where keys go. The producer\npicks the partition as `hash(key) %\npartitions` ([Kafka partitioner](https://githu\nb.com/apache/kafka/blob/4.1.0/clients/src/main\n/java/org/apache/kafka/clients/producer/intern\nals/BuiltInPartitioner.java#L329-L330)), and\nKafka does not move existing records ([Kafka o\nperations](https://github.com/apache/kafka/blo\nb/b87eb4f673075dc7bb410443689241fcb0302560/doc\ns/operations/basic-kafka-operations.md#L59)).\nThis table uses Kafka's own hash function,\nfrom About the Sources:\n\n| Key | Partition with 3 partitions |\nPartition with 6 partitions |\n| --- | --- | --- |\n| `truck-17` | 2 | 2 |\n| `truck-42` | 2 | 5 |\n| `truck-88` | 1 | 4 |\n\nAfter the change, new records for `truck-42`\ngo to partition 5, while its older records\nstay in partition 2. A consumer that needs all\nevents of one key in order can then read a\nnewer event before an older one.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9670ed5dfb6c",
+      "originalText": "Partition Changes\nRaising `partitions` is an in-place change, but it changes where keys go. The producer picks the partition as `hash(key) % partitions` ([Kafka partitioner](https://github.com/apache/kafka/blob/4.1.0/clients/src/main/java/org/apache/kafka/clients/producer/internals/BuiltInPartitioner.java#L329-L330)), and Kafka does not move existing records ([Kafka operations](https://github.com/apache/kafka/blob/b87eb4f673075dc7bb410443689241fcb0302560/docs/operations/basic-kafka-operations.md#L59)). This table uses Kafka's own hash function, from About the Sources:\n\n| Key | Partition with 3 partitions | Partition with 6 partitions |\n| --- | --- | --- |\n| `truck-17` | 2 | 2 |\n| `truck-42` | 2 | 5 |\n| `truck-88` | 1 | 4 |\n\nAfter the change, new records for `truck-42` go to partition 5, while its older records stay in partition 2. A consumer that needs all events of one key in order can then read a newer event before an older one.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "partition-changes"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4140642322,
+      "isDeleted": false,
+      "id": "node-93b753fd9f36",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4330.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 368.40000000000003,
+      "height": 76.5,
+      "seed": 962664,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-93b753fd9f36"
+        },
+        {
+          "id": "edge-152edbd144d7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-dbe50ccf92ff",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-11680c9d0db5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f842d732580f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-556e5cb8d4d7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c2282fa8bd97",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-connector-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8524680879,
+      "isDeleted": false,
+      "id": "text-93b753fd9f36",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4342.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 344.40000000000003,
+      "height": 52.5,
+      "seed": 72371,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Connector Pitfalls\nThese pitfalls do not show as errors. The\nconnector runs, but not as the code says.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-93b753fd9f36",
+      "originalText": "Connector Pitfalls\nThese pitfalls do not show as errors. The connector runs, but not as the code says.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-connector-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9496474332,
+      "isDeleted": false,
+      "id": "node-862386f375a4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1867.6000000000001,
+      "y": 3739.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 977494,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-862386f375a4"
+        },
+        {
+          "id": "edge-dbe50ccf92ff",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "secrets-in-connector-config"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9560753902,
+      "isDeleted": false,
+      "id": "text-862386f375a4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 3739.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 297.5,
+      "seed": 263737,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secrets in Connector Config\nThe provider stopped marking connector\n`config` as sensitive in 4.2.0 ([changelog](ht\ntps://github.com/aiven/terraform-provider-aive\nn/blob/v4.66.0/CHANGELOG.md#L1399)). A plan\nprints each value that does not come from a\nsensitive variable, and the state stores every\nvalue in plain text. In Aiven, any user with\n`service:data:write` can read connector\nconfigurations, which \"can contain secrets in\nplain text\" ([permissions](https://aiven.io/do\ncs/platform/concepts/permissions)). Kafka\nConnect secret providers keep the value out:\nthe config holds a reference to AWS Secrets\nManager instead ([secret providers](https://ai\nven.io/docs/products/kafka/kafka-connect/howto\n/configure-secret-providers)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-862386f375a4",
+      "originalText": "Secrets in Connector Config\nThe provider stopped marking connector `config` as sensitive in 4.2.0 ([changelog](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/CHANGELOG.md#L1399)). A plan prints each value that does not come from a sensitive variable, and the state stores every value in plain text. In Aiven, any user with `service:data:write` can read connector configurations, which \"can contain secrets in plain text\" ([permissions](https://aiven.io/docs/platform/concepts/permissions)). Kafka Connect secret providers keep the value out: the config holds a reference to AWS Secrets Manager instead ([secret providers](https://aiven.io/docs/products/kafka/kafka-connect/howto/configure-secret-providers)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "secrets-in-connector-config"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4948919972,
+      "isDeleted": false,
+      "id": "node-a45b66d24f88",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1867.6000000000001,
+      "y": 3999.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 513431,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a45b66d24f88"
+        },
+        {
+          "id": "edge-0601db225c22",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-11680c9d0db5",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "connector-drift"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3221760845,
+      "isDeleted": false,
+      "id": "text-a45b66d24f88",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 3999.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 332.5,
+      "seed": 738227,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Connector Drift\nAn edit in the Aiven Console shows in the next\nplan, and the apply reverts it. For example,\nthe console option for automatic restart is\nthe key `_aiven.restart.on.failure` in the\nconnector config ([provider example](https://g\nithub.com/aiven/terraform-provider-aiven/blob/\nv4.66.0/examples/postgres/postgres_debezium_ka\nfka/debezium_connector.tf#L24)); put it in the\ncode to keep it. A change of `connector_name`\nor `service_name` creates a new connector. A\nsink connector reads with the consumer group\n`connect-<connector name>` ([Kafka source](htt\nps://github.com/apache/kafka/blob/4.1.0/connec\nt/runtime/src/main/java/org/apache/kafka/conne\nct/util/SinkUtils.java#L39-L41)). So a new\nname starts a new group with no saved offsets,\nand it reads the topic again from its\nconfigured start point.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a45b66d24f88",
+      "originalText": "Connector Drift\nAn edit in the Aiven Console shows in the next plan, and the apply reverts it. For example, the console option for automatic restart is the key `_aiven.restart.on.failure` in the connector config ([provider example](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/examples/postgres/postgres_debezium_kafka/debezium_connector.tf#L24)); put it in the code to keep it. A change of `connector_name` or `service_name` creates a new connector. A sink connector reads with the consumer group `connect-<connector name>` ([Kafka source](https://github.com/apache/kafka/blob/4.1.0/connect/runtime/src/main/java/org/apache/kafka/connect/util/SinkUtils.java#L39-L41)). So a new name starts a new group with no saved offsets, and it reads the topic again from its configured start point.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "connector-drift"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6918415047,
+      "isDeleted": false,
+      "id": "node-44344e6522c3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1867.6000000000001,
+      "y": 4259.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 94541,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-44344e6522c3"
+        },
+        {
+          "id": "edge-f842d732580f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "keys-that-connect-ignores"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2572851341,
+      "isDeleted": false,
+      "id": "text-44344e6522c3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 4259.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 420.0,
+      "seed": 32347,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Keys That Kafka Connect Ignores\nThe provider accepts any key, and Kafka's\nconfig classes only log unused keys at info\nlevel ([AbstractConfig](https://github.com/apa\nche/kafka/blob/4.1.0/clients/src/main/java/org\n/apache/kafka/common/config/AbstractConfig.jav\na#L386-L391)). So a misplaced setting does\nnothing, and no error says so. Two examples:\n\n- A consumer setting for one connector needs\nthe prefix `consumer.override.`, for example\n`consumer.override.max.poll.records` ([Kafka\nConnect user guide](https://github.com/apache/\nkafka/blob/b87eb4f673075dc7bb410443689241fcb03\n02560/docs/kafka-connect/user-guide.md#L57)).\n- `offset.flush.interval.ms` is a worker\nsetting. It is not a connector setting\n([worker settings](https://kafka.apache.org/39\n/generated/connect_config.html)).\n\nAiven also says that `plugin_version` inside a\nconnector config has no effect ([connector ver\nsions](https://aiven.io/docs/products/kafka/ka\nfka-connect/howto/manage-connector-versions)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-44344e6522c3",
+      "originalText": "Keys That Kafka Connect Ignores\nThe provider accepts any key, and Kafka's config classes only log unused keys at info level ([AbstractConfig](https://github.com/apache/kafka/blob/4.1.0/clients/src/main/java/org/apache/kafka/common/config/AbstractConfig.java#L386-L391)). So a misplaced setting does nothing, and no error says so. Two examples:\n\n- A consumer setting for one connector needs the prefix `consumer.override.`, for example `consumer.override.max.poll.records` ([Kafka Connect user guide](https://github.com/apache/kafka/blob/b87eb4f673075dc7bb410443689241fcb0302560/docs/kafka-connect/user-guide.md#L57)).\n- `offset.flush.interval.ms` is a worker setting. It is not a connector setting ([worker settings](https://kafka.apache.org/39/generated/connect_config.html)).\n\nAiven also says that `plugin_version` inside a connector config has no effect ([connector versions](https://aiven.io/docs/products/kafka/kafka-connect/howto/manage-connector-versions)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "keys-that-connect-ignores"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4395952925,
+      "isDeleted": false,
+      "id": "node-4a432a5b72c4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1867.6000000000001,
+      "y": 4519.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 508245,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4a432a5b72c4"
+        },
+        {
+          "id": "edge-aeabefd7e0ba",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-556e5cb8d4d7",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "unpinned-plugin-versions"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6264363132,
+      "isDeleted": false,
+      "id": "text-4a432a5b72c4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 4519.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 297.5,
+      "seed": 823980,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Unpinned Plugin Versions\nWithout a pin, Aiven installs the latest\nconnector plugin version during maintenance,\nand it can remove deprecated versions\n([connector versions](https://aiven.io/docs/pr\noducts/kafka/kafka-connect/howto/manage-connec\ntor-versions)). A connector can then change\nbehavior with no code change. The pin lives on\nthe service, not on the connector. A Connect\nservice takes `plugin_versions` in\n`kafka_connect_user_config`. When Connect runs\non the Kafka nodes, the Kafka service takes\n`kafka_connect_plugin_versions` in\n`kafka_user_config` ([Connect service doc](htt\nps://github.com/aiven/terraform-provider-aiven\n/blob/v4.66.0/docs/resources/kafka_connect.md#\nL125)). A new pin restarts Kafka Connect.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-4a432a5b72c4",
+      "originalText": "Unpinned Plugin Versions\nWithout a pin, Aiven installs the latest connector plugin version during maintenance, and it can remove deprecated versions ([connector versions](https://aiven.io/docs/products/kafka/kafka-connect/howto/manage-connector-versions)). A connector can then change behavior with no code change. The pin lives on the service, not on the connector. A Connect service takes `plugin_versions` in `kafka_connect_user_config`. When Connect runs on the Kafka nodes, the Kafka service takes `kafka_connect_plugin_versions` in `kafka_user_config` ([Connect service doc](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka_connect.md#L125)). A new pin restarts Kafka Connect.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "unpinned-plugin-versions"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1862569661,
+      "isDeleted": false,
+      "id": "node-afa06ca3786f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1867.6000000000001,
+      "y": 4779.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 953365,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-afa06ca3786f"
+        },
+        {
+          "id": "edge-c2282fa8bd97",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "connectors-before-integration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7028316563,
+      "isDeleted": false,
+      "id": "text-afa06ca3786f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6000000000001,
+      "y": 4779.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 339828,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Connectors Before Their Integration\nA dedicated Connect service reaches Kafka\nthrough an `aiven_service_integration` of type\n`kafka_connect`. The provider's docs give the\norder: the Kafka service, the topics, the\nConnect service, the integration, and then the\nconnectors ([setup order](https://github.com/a\niven/terraform-provider-aiven/blob/v4.66.0/int\nernal/sdkprovider/service/kafka/kafka_connect.\ngo#L16-L26)). A connector that refers only to\nthe Connect service name has no dependency on\nthe integration. Add `depends_on` on the\nintegration, so Terraform keeps this order.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-afa06ca3786f",
+      "originalText": "Connectors Before Their Integration\nA dedicated Connect service reaches Kafka through an `aiven_service_integration` of type `kafka_connect`. The provider's docs give the order: the Kafka service, the topics, the Connect service, the integration, and then the connectors ([setup order](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/internal/sdkprovider/service/kafka/kafka_connect.go#L16-L26)). A connector that refers only to the Connect service name has no dependency on the integration. Add `depends_on` on the integration, so Terraform keeps this order.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "connectors-before-integration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8598104611,
+      "isDeleted": false,
+      "id": "node-755f14a6211b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5630.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 385.2,
+      "height": 76.5,
+      "seed": 404280,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-755f14a6211b"
+        },
+        {
+          "id": "edge-d5f16560c032",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ec752ce9457d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a4cb6bef2395",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f0b19d927eb6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c97f434108e1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-22555f79e186",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-operations-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2594445666,
+      "isDeleted": false,
+      "id": "text-755f14a6211b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5634.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 361.2,
+      "height": 70.0,
+      "seed": 398542,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Operations Pitfalls\nThese pitfalls come from provider\nversions, schemas, access rules and\nservice state.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-755f14a6211b",
+      "originalText": "Operations Pitfalls\nThese pitfalls come from provider versions, schemas, access rules and service state.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-operations-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9669306056,
+      "isDeleted": false,
+      "id": "node-b743fd201b04",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1884.4,
+      "y": 5039.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 225419,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b743fd201b04"
+        },
+        {
+          "id": "edge-538b28e415d5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ec752ce9457d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "floating-provider-version"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2890733006,
+      "isDeleted": false,
+      "id": "text-b743fd201b04",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.4,
+      "y": 5039.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 108859,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Floating Provider Version\nA constraint such as `>= 4.46.0` with no\ncommitted lock file installs each new release\non the next run. Release 4.66.0, for example,\nmoved integrations to the Plugin Framework, so\ntheir first plan can show removed blocks. It\nalso fails the plan when one side of an\nintegration sets both an endpoint ID and a\nservice name ([4.66.0 notes](https://github.co\nm/aiven/terraform-provider-aiven/blob/v4.66.0/\nCHANGELOG.md#L15-L33)). Commit\n`.terraform.lock.hcl`, and raise the version\non purpose.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b743fd201b04",
+      "originalText": "Floating Provider Version\nA constraint such as `>= 4.46.0` with no committed lock file installs each new release on the next run. Release 4.66.0, for example, moved integrations to the Plugin Framework, so their first plan can show removed blocks. It also fails the plan when one side of an integration sets both an endpoint ID and a service name ([4.66.0 notes](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/CHANGELOG.md#L15-L33)). Commit `.terraform.lock.hcl`, and raise the version on purpose.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "floating-provider-version"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1778233515,
+      "isDeleted": false,
+      "id": "node-3369451edb89",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1884.4,
+      "y": 5299.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 749750,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3369451edb89"
+        },
+        {
+          "id": "edge-77db64ca9a6d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a4cb6bef2395",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "schema-registry-edits"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2853667699,
+      "isDeleted": false,
+      "id": "text-3369451edb89",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.4,
+      "y": 5304.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 634281,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Schema Registry Edits\nThe plan checks a schema edit only against the\nversion in the state. With a `*_TRANSITIVE`\nlevel, or with versions that producers\nregistered themselves, the plan can pass and\nthe apply can fail. Removing\n`compatibility_level` from a subject keeps its\nlast value. Renaming the subject or changing\n`schema_type` deletes the subject softly and\nregisters it again ([schema doc](https://githu\nb.com/aiven/terraform-provider-aiven/blob/v4.6\n6.0/docs/resources/kafka_schema.md#L6)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-3369451edb89",
+      "originalText": "Schema Registry Edits\nThe plan checks a schema edit only against the version in the state. With a `*_TRANSITIVE` level, or with versions that producers registered themselves, the plan can pass and the apply can fail. Removing `compatibility_level` from a subject keeps its last value. Renaming the subject or changing `schema_type` deletes the subject softly and registers it again ([schema doc](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka_schema.md#L6)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "schema-registry-edits"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7372888732,
+      "isDeleted": false,
+      "id": "node-ba8da7c65a77",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1884.4,
+      "y": 5559.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 5557,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ba8da7c65a77"
+        },
+        {
+          "id": "edge-94b000f61e9a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f0b19d927eb6",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "acl-matching"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6387527712,
+      "isDeleted": false,
+      "id": "text-ba8da7c65a77",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.4,
+      "y": 5564.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 767,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "ACL Matching\nIn an Aiven ACL, `*` matches zero or more\ncharacters, dots included. So the topic\npattern `orders.*` also matches\n`orders.dlq.retry`. Every field of an ACL\nforces a new resource, so an edit deletes the\nrule and then creates the new one, with a\nshort gap in between ([ACL fields](https://git\nhub.com/aiven/terraform-provider-aiven/blob/v4\n.66.0/docs/resources/kafka_acl.md#L40-L44)). A\nnew service also has a default ACL that gives\n`avnadmin` the `admin` right on all topics.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-ba8da7c65a77",
+      "originalText": "ACL Matching\nIn an Aiven ACL, `*` matches zero or more characters, dots included. So the topic pattern `orders.*` also matches `orders.dlq.retry`. Every field of an ACL forces a new resource, so an edit deletes the rule and then creates the new one, with a short gap in between ([ACL fields](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka_acl.md#L40-L44)). A new service also has a default ACL that gives `avnadmin` the `admin` right on all topics.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "acl-matching"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4658349664,
+      "isDeleted": false,
+      "id": "node-9a691568dab3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1884.4,
+      "y": 5819.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 786955,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9a691568dab3"
+        },
+        {
+          "id": "edge-c97f434108e1",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "powered-off-services"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6995428251,
+      "isDeleted": false,
+      "id": "text-9a691568dab3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.4,
+      "y": 5819.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 652543,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Powered-Off Services\nWhile a service is off, plans fail, because\nthe provider first checks that the service is\nrunning ([service check](https://github.com/ai\nven/terraform-provider-aiven/blob/v4.66.0/inte\nrnal/schemautil/service.go#L1365-L1410)). A\ntopic missing after a power cycle drops out of\nthe state and is planned again ([topic doc](ht\ntps://github.com/aiven/terraform-provider-aive\nn/blob/v4.66.0/docs/resources/kafka_topic.md#L\n10)). Aiven deletes a service that stays off\nfor more than 180 days ([power off](https://ai\nven.io/docs/platform/concepts/service-power-cy\ncle)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9a691568dab3",
+      "originalText": "Powered-Off Services\nWhile a service is off, plans fail, because the provider first checks that the service is running ([service check](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/internal/schemautil/service.go#L1365-L1410)). A topic missing after a power cycle drops out of the state and is planned again ([topic doc](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka_topic.md#L10)). Aiven deletes a service that stays off for more than 180 days ([power off](https://aiven.io/docs/platform/concepts/service-power-cycle)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "powered-off-services"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2308701503,
+      "isDeleted": false,
+      "id": "node-d166d4d64d24",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1884.4,
+      "y": 6079.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 859080,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d166d4d64d24"
+        },
+        {
+          "id": "edge-22555f79e186",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "secrets-token-cannot-read"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8362393215,
+      "isDeleted": false,
+      "id": "text-d166d4d64d24",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.4,
+      "y": 6079.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 912742,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secrets the Token Cannot Read\nThe provider asks the Aiven API for secrets\nwhen it reads some resources, such as service\nusers and integration endpoints. From 1 March\n2027 the API redacts secrets unless the\ntoken's role may read them ([4.66.0 notes](htt\nps://github.com/aiven/terraform-provider-aiven\n/blob/v4.66.0/CHANGELOG.md#L34-L39); [secret r\nedaction](https://aiven.io/docs/tools/api/secr\net-redaction)). A token without such a role\nthen makes these plans fail. The environment\nvariable `AIVEN_INCLUDE_SECRETS=false` reads\nthe resources without secrets.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d166d4d64d24",
+      "originalText": "Secrets the Token Cannot Read\nThe provider asks the Aiven API for secrets when it reads some resources, such as service users and integration endpoints. From 1 March 2027 the API redacts secrets unless the token's role may read them ([4.66.0 notes](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/CHANGELOG.md#L34-L39); [secret redaction](https://aiven.io/docs/tools/api/secret-redaction)). A token without such a role then makes these plans fail. The environment variable `AIVEN_INCLUDE_SECRETS=false` reads the resources without secrets.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "secrets-token-cannot-read"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3163695195,
+      "isDeleted": false,
+      "id": "node-4f722e2ab6c3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 6898.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 99.5,
+      "seed": 913473,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4f722e2ab6c3"
+        },
+        {
+          "id": "edge-e9bf501696ab",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0aa12074a385",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5ac69652f4de",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6d7d46477c77",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-db7c01d3b198",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-63dd32fac093",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-decisions"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8230719143,
+      "isDeleted": false,
+      "id": "text-4f722e2ab6c3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 6914.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 67.5,
+      "seed": 151508,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Good and Bad Decisions\nEach node compares a choice with\nits alternative.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-4f722e2ab6c3",
+      "originalText": "Good and Bad Decisions\nEach node compares a choice with its alternative.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-decisions"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8417114509,
+      "isDeleted": false,
+      "id": "node-6e0ed3bfa060",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6339.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 656702,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6e0ed3bfa060"
+        },
+        {
+          "id": "edge-0aa12074a385",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dedicated-or-shared-connect"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9354620381,
+      "isDeleted": false,
+      "id": "text-6e0ed3bfa060",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6339.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 193817,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Dedicated or Shared Connect\nKafka Connect can run on the nodes of the\nKafka service or in a dedicated Connect\nservice ([enable Kafka Connect](https://aiven.\nio/docs/products/kafka/kafka-connect/howto/ena\nble-connect)). On the Kafka nodes it costs\nnothing extra, but it shares CPU and memory\nwith the brokers and needs a business or\npremium plan. A dedicated service costs more\nand scales on its own. The trade-off is cost\nagainst the stability of the brokers. Moving a\nconnector between the two recreates it, so\nchoose before the first apply.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-6e0ed3bfa060",
+      "originalText": "Dedicated or Shared Connect\nKafka Connect can run on the nodes of the Kafka service or in a dedicated Connect service ([enable Kafka Connect](https://aiven.io/docs/products/kafka/kafka-connect/howto/enable-connect)). On the Kafka nodes it costs nothing extra, but it shares CPU and memory with the brokers and needs a business or premium plan. A dedicated service costs more and scales on its own. The trade-off is cost against the stability of the brokers. Moving a connector between the two recreates it, so choose before the first apply.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dedicated-or-shared-connect"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2413878636,
+      "isDeleted": false,
+      "id": "node-c9a8e99c5313",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6599.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 679338,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c9a8e99c5313"
+        },
+        {
+          "id": "edge-5ac69652f4de",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "service-users-in-code-or-by-hand"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1671347843,
+      "isDeleted": false,
+      "id": "text-c9a8e99c5313",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6599.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 159242,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Service Users in Code or by Hand\n`aiven_kafka_user` puts each service user in\ncode, with drift detection. Its password and\naccess key then sit in the state in plain\ntext, and write-only arguments need Terraform\n1.11 or later ([storing passwords](https://git\nhub.com/aiven/terraform-provider-aiven/blob/v4\n.66.0/docs/guides/storing-passwords.md)).\nUsers made by hand keep secrets out of the\nstate, but nothing checks them, and the ACLs\nrefer to names that Terraform cannot see.\nEither way, certificate renewal is a manual\nstep ([renew certificates](https://aiven.io/do\ncs/products/kafka/howto/renew-ssl-certs)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c9a8e99c5313",
+      "originalText": "Service Users in Code or by Hand\n`aiven_kafka_user` puts each service user in code, with drift detection. Its password and access key then sit in the state in plain text, and write-only arguments need Terraform 1.11 or later ([storing passwords](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/guides/storing-passwords.md)). Users made by hand keep secrets out of the state, but nothing checks them, and the ACLs refer to names that Terraform cannot see. Either way, certificate renewal is a manual step ([renew certificates](https://aiven.io/docs/products/kafka/howto/renew-ssl-certs)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "service-users-in-code-or-by-hand"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4483266795,
+      "isDeleted": false,
+      "id": "node-9a537d2af2ee",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6859.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 387225,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9a537d2af2ee"
+        },
+        {
+          "id": "edge-6d7d46477c77",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "secret-references"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7576690908,
+      "isDeleted": false,
+      "id": "text-9a537d2af2ee",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6871.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 400814,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secret References over Secret Values\nA connector config can hold a secret value, or\na reference that Kafka Connect resolves at run\ntime from AWS Secrets Manager or from\nenvironment variables ([secret providers](http\ns://aiven.io/docs/products/kafka/kafka-connect\n/howto/configure-secret-providers)). The\nreference keeps the secret out of the state,\nthe plan and the connector API. It costs one\nmore setup step on the Connect service.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9a537d2af2ee",
+      "originalText": "Secret References over Secret Values\nA connector config can hold a secret value, or a reference that Kafka Connect resolves at run time from AWS Secrets Manager or from environment variables ([secret providers](https://aiven.io/docs/products/kafka/kafka-connect/howto/configure-secret-providers)). The reference keeps the secret out of the state, the plan and the connector API. It costs one more setup step on the Connect service.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "secret-references"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7885523018,
+      "isDeleted": false,
+      "id": "node-e58ec16a78e0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 7098.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 805960,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e58ec16a78e0"
+        },
+        {
+          "id": "edge-db7c01d3b198",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pin-everything-that-moves"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3625851941,
+      "isDeleted": false,
+      "id": "text-e58ec16a78e0",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 7110.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 128442,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pin Everything That Moves\nThree versions change behavior without a code\nchange: the provider, the connector plugins\nand Karapace. Commit the lock file for the\nprovider. Pin plugins with `plugin_versions`\nand Karapace with `karapace_version` ([Kafka r\nesource](https://github.com/aiven/terraform-pr\novider-aiven/blob/v4.66.0/docs/resources/kafka\n.md#L134)). Then raise each pin on purpose,\nand read the release notes first.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e58ec16a78e0",
+      "originalText": "Pin Everything That Moves\nThree versions change behavior without a code change: the provider, the connector plugins and Karapace. Commit the lock file for the provider. Pin plugins with `plugin_versions` and Karapace with `karapace_version` ([Kafka resource](https://github.com/aiven/terraform-provider-aiven/blob/v4.66.0/docs/resources/kafka.md#L134)). Then raise each pin on purpose, and read the release notes first.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pin-everything-that-moves"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1072929818,
+      "isDeleted": false,
+      "id": "node-2ac9b7129236",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 7337.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 491982,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2ac9b7129236"
+        },
+        {
+          "id": "edge-63dd32fac093",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-project-per-environment"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5324985417,
+      "isDeleted": false,
+      "id": "text-2ac9b7129236",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 7337.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 612745,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Project per Environment\nAiven recommends separate projects for\nenvironments such as development and\nproduction ([organizations and projects](https\n://aiven.io/docs/platform/concepts/orgs-units-\nprojects)). It also recommends one application\nuser, with its own token, for each tool\n([application users](https://aiven.io/docs/pla\ntform/concepts/application-users)). Then a\ntoken for development cannot touch production,\nand each token can be rotated alone. One\nshared token for all environments is simpler,\nbut it gives every pipeline the rights of all\nof them.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2ac9b7129236",
+      "originalText": "One Project per Environment\nAiven recommends separate projects for environments such as development and production ([organizations and projects](https://aiven.io/docs/platform/concepts/orgs-units-projects)). It also recommends one application user, with its own token, for each tool ([application users](https://aiven.io/docs/platform/concepts/application-users)). Then a token for development cannot touch production, and each token can be rotated alone. One shared token for all environments is simpler, but it gives every pipeline the rights of all of them.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-project-per-environment"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7859410741,
+      "isDeleted": false,
+      "id": "node-8ee2140372f2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 7597.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 417.8,
+      "height": 220.0,
+      "seed": 885908,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-8ee2140372f2"
+        },
+        {
+          "id": "edge-023cdfb73caf",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aiven-about-the-sources"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6878898072,
+      "isDeleted": false,
+      "id": "text-8ee2140372f2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 730.0,
+      "y": 7597.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 397.8,
+      "height": 877.5,
+      "seed": 508701,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Sources\nThe provider facts come from the `aiven/aiven`\nrepository at tag v4.66.0, the latest release on\n2026-11-23. The Aiven facts come from aiven.io/docs\non the same day.\n\nThe partition table comes from this Python script.\nIt copies Kafka's `murmur2` function and its\ndefault partitioner, and it checks itself against\nthree test values from Kafka's own tests ([UtilsTes\nt](https://github.com/apache/kafka/blob/4.1.0/clien\nts/src/test/java/org/apache/kafka/common/utils/Util\nsTest.java#L106-L118)):\n\n```python\ndef murmur2(data: bytes) -> int:\nlength = len(data)\nm, r = 0x5BD1E995, 24\nh = (0x9747B28C ^ length) & 0xFFFFFFFF\nfor i in range(length // 4):\ni4 = i * 4\nk = data[i4] | data[i4 + 1] << 8 | data[i4 + 2] <<\n16 | data[i4 + 3] << 24\nk = (k * m) & 0xFFFFFFFF\nk ^= k >> r\nk = (k * m) & 0xFFFFFFFF\nh = (h * m) & 0xFFFFFFFF\nh ^= k\nrest = length % 4\nif rest == 3:\nh ^= data[(length & ~3) + 2] << 16\nif rest >= 2:\nh ^= data[(length & ~3) + 1] << 8\nif rest >= 1:\nh ^= data[length & ~3]\nh = (h * m) & 0xFFFFFFFF\nh ^= h >> 13\nh = (h * m) & 0xFFFFFFFF\nh ^= h >> 15\nreturn h - (1 << 32) if h & 0x80000000 else h\n\n\ndef partition(key: str, partitions: int) -> int:\nreturn (murmur2(key.encode()) & 0x7FFFFFFF) %\npartitions\n\n\nassert murmur2(b\"21\") == -973932308\nassert murmur2(b\"foobar\") == -790332482\nassert murmur2(b\"a-little-bit-long-string\") ==\n-985981536\nfor key in [\"truck-17\", \"truck-42\", \"truck-88\"]:\nprint(key, partition(key, 3), partition(key, 6))\n```",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-8ee2140372f2",
+      "originalText": "About the Sources\nThe provider facts come from the `aiven/aiven` repository at tag v4.66.0, the latest release on 2026-11-23. The Aiven facts come from aiven.io/docs on the same day.\n\nThe partition table comes from this Python script. It copies Kafka's `murmur2` function and its default partitioner, and it checks itself against three test values from Kafka's own tests ([UtilsTest](https://github.com/apache/kafka/blob/4.1.0/clients/src/test/java/org/apache/kafka/common/utils/UtilsTest.java#L106-L118)):\n\n```python\ndef murmur2(data: bytes) -> int:\n    length = len(data)\n    m, r = 0x5BD1E995, 24\n    h = (0x9747B28C ^ length) & 0xFFFFFFFF\n    for i in range(length // 4):\n        i4 = i * 4\n        k = data[i4] | data[i4 + 1] << 8 | data[i4 + 2] << 16 | data[i4 + 3] << 24\n        k = (k * m) & 0xFFFFFFFF\n        k ^= k >> r\n        k = (k * m) & 0xFFFFFFFF\n        h = (h * m) & 0xFFFFFFFF\n        h ^= k\n    rest = length % 4\n    if rest == 3:\n        h ^= data[(length & ~3) + 2] << 16\n    if rest >= 2:\n        h ^= data[(length & ~3) + 1] << 8\n    if rest >= 1:\n        h ^= data[length & ~3]\n        h = (h * m) & 0xFFFFFFFF\n    h ^= h >> 13\n    h = (h * m) & 0xFFFFFFFF\n    h ^= h >> 15\n    return h - (1 << 32) if h & 0x80000000 else h\n\n\ndef partition(key: str, partitions: int) -> int:\n    return (murmur2(key.encode()) & 0x7FFFFFFF) % partitions\n\n\nassert murmur2(b\"21\") == -973932308\nassert murmur2(b\"foobar\") == -790332482\nassert murmur2(b\"a-little-bit-long-string\") == -985981536\nfor key in [\"truck-17\", \"truck-42\", \"truck-88\"]:\n    print(key, partition(key, 3), partition(key, 6))\n```",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aiven-about-the-sources"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3069155847,
+      "isDeleted": false,
+      "id": "edge-2ebf6af5455a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 347.4939013611455,
+      "y": 3858.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 509000,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          543.4322078840374,
+          -2657.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-ef126ead0b76",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.06f60693e2c0340a"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2743483939,
+      "isDeleted": false,
+      "id": "edge-d8b4cc365149",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1510.2153846153847,
+      "y": 340.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 514988,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          576.3692307692309,
+          2640.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-a06a5a1e9089",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4c4e3fb8d3ed",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.bd0c0d2affe1f49c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8736408960,
+      "isDeleted": false,
+      "id": "edge-0fca8352bb4d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 942.4668131868132,
+      "y": 1079.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 947650,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          473.28483516483516,
+          -739.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a06a5a1e9089",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.30fbd8717c9da3e3"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3834320171,
+      "isDeleted": false,
+      "id": "edge-3a7bf619e2a2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 958.0935384615384,
+      "y": 1079.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 497002,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          429.47876923076933,
+          -479.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5368e92b6534",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.45629b0e54d4fd07"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1547783798,
+      "isDeleted": false,
+      "id": "edge-1d7bbdfb6844",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1512.7240393898437,
+      "y": 860.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 438904,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          573.8837613438886,
+          2380.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-c2fea1178b0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7d8f2f207504",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.b4da4d3fbc7e2bd6"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8607944468,
+      "isDeleted": false,
+      "id": "edge-557842d4bd48",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1510.3930257132793,
+      "y": 860.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 869185,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          576.0139485734412,
+          2619.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-c2fea1178b0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9670ed5dfb6c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.f179627090cdcf88"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4828481359,
+      "isDeleted": false,
+      "id": "edge-d8b201b08588",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 994.5558974358975,
+      "y": 1079.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 281394,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          327.26461538461547,
+          -219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c2fea1178b0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3632cf13c293e432"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9863864104,
+      "isDeleted": false,
+      "id": "edge-0601db225c22",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1507.170635688932,
+      "y": 1120.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 340764,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          548.8587286221361,
+          2879.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b7298129b221",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a45b66d24f88",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.0f43aa6bcda52101"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6362386633,
+      "isDeleted": false,
+      "id": "edge-0d87601fbce9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 1099.0905971173645,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 190749,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -42.38160603980782
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b7298129b221",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6519187968852abc"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7355054785,
+      "isDeleted": false,
+      "id": "edge-77db64ca9a6d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1502.3478618023678,
+      "y": 1380.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 321889,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          575.3042763952649,
+          3919.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2fe1bc9b4e86",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3369451edb89",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.d3c5d298272f7c71"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1139068041,
+      "isDeleted": false,
+      "id": "edge-c56f017332f6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 1180.9094028826355,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 211289,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          42.38160603980782
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2fe1bc9b4e86",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.25877b8d5a083cad"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7175792187,
+      "isDeleted": false,
+      "id": "edge-94b000f61e9a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1502.3478618023678,
+      "y": 1640.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 900702,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          575.3042763952649,
+          3919.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-ac84019c3524",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ba8da7c65a77",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.31e55b20008a8f79"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4614468087,
+      "isDeleted": false,
+      "id": "edge-03521f2f551d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 994.5558974358975,
+      "y": 1201.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 502204,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          327.26461538461547,
+          219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ac84019c3524",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4e8190a7332bfe20"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5041104196,
+      "isDeleted": false,
+      "id": "edge-538b28e415d5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1506.0975885680261,
+      "y": 1900.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 851180,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          567.804822863948,
+          3139.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-0e9c16f4aea7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b743fd201b04",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.ad8729575fe89884"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2242923648,
+      "isDeleted": false,
+      "id": "edge-bb714d6db07b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 958.0935384615384,
+      "y": 1201.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 745737,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          429.47876923076933,
+          479.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-0e9c16f4aea7",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5c24ce72885f82b5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9974574653,
+      "isDeleted": false,
+      "id": "edge-aeabefd7e0ba",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1511.3989143078713,
+      "y": 2160.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 780496,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          540.4021713842574,
+          2359.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bb76505ce05d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4a432a5b72c4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.c4baa05dee8aec53"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1007379528,
+      "isDeleted": false,
+      "id": "edge-8a7c914a1f44",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 942.4668131868132,
+      "y": 1201.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 725375,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          473.28483516483516,
+          739.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-99f9f5c60fa8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-bb76505ce05d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3ba9a16db89848f9"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7330484792,
+      "isDeleted": false,
+      "id": "edge-b072783de2d8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 371.76868072935287,
+      "y": 3858.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 685440,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          517.1127994279586,
+          -1216.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-ef126ead0b76",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-51522b90e902",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5f2b446132ac66b8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6308132915,
+      "isDeleted": false,
+      "id": "edge-c045731b82d8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 2497.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 198780,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          -96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-51522b90e902",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-35bfa397880f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.03beb0b3eafdf35e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3163192489,
+      "isDeleted": false,
+      "id": "edge-d051f44d5bcc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 2570.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 965210,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-51522b90e902",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5a33a3177131",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c95e80d3a5bafef9"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1163410632,
+      "isDeleted": false,
+      "id": "edge-862c55934662",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 2642.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 953587,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-51522b90e902",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2c9934afea16",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.12136fb93fa39f58"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9339838418,
+      "isDeleted": false,
+      "id": "edge-e96366841812",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 422.4754098360656,
+      "y": 4078.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 366786,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          443.0700447093889,
+          500.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-ef126ead0b76",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-83e0698ed072",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.90e230b0cb79fc90"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6938496850,
+      "isDeleted": false,
+      "id": "edge-997266ec56de",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 947.3127692307693,
+      "y": 4578.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 790694,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          541.5347692307693,
+          -1192.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-83e0698ed072",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7834294d9203",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.332f866ebd1a5f75"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3104789826,
+      "isDeleted": false,
+      "id": "edge-127ba49c9eb5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1623.3014028056111,
+      "y": 3292.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 486943,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          277.8985971943887,
+          -115.48251165889405
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7834294d9203",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4c4e3fb8d3ed",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.bc75a0a75c28d3c1"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7284863397,
+      "isDeleted": false,
+      "id": "edge-1e756aebacc8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1711.2,
+      "y": 3339.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 257229,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999977,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7834294d9203",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7d8f2f207504",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.ce8164ce99e8715d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4434926875,
+      "isDeleted": false,
+      "id": "edge-0b6a23100a82",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1623.3014028056111,
+      "y": 3386.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 465600,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          277.8985971943887,
+          115.48251165889405
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7834294d9203",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9670ed5dfb6c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.280d35f785e55f19"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2867388382,
+      "isDeleted": false,
+      "id": "edge-152edbd144d7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1048.996672828096,
+      "y": 4578.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 419335,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          363.26524953789294,
+          -171.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-83e0698ed072",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-93b753fd9f36",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.03a44c4699043c38"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2814080757,
+      "isDeleted": false,
+      "id": "edge-dbe50ccf92ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1536.3282692307694,
+      "y": 4330.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 266342,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          417.2178846153845,
+          -371.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-93b753fd9f36",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-862386f375a4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.b432882b705b53a4"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2455079364,
+      "isDeleted": false,
+      "id": "edge-11680c9d0db5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1579.2565384615386,
+      "y": 4330.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 786453,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          288.34346153846127,
+          -128.46007539410584
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-93b753fd9f36",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a45b66d24f88",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.1e9fabef66830f59"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6415195297,
+      "isDeleted": false,
+      "id": "edge-f842d732580f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1677.6000000000001,
+      "y": 4369.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 772944,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999977,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-93b753fd9f36",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-44344e6522c3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.253754de8b515abe"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4677081784,
+      "isDeleted": false,
+      "id": "edge-556e5cb8d4d7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1579.2565384615386,
+      "y": 4407.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 221456,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          288.34346153846127,
+          128.46007539410584
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-93b753fd9f36",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4a432a5b72c4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d21158f4c629c967"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1248024900,
+      "isDeleted": false,
+      "id": "edge-c2282fa8bd97",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1536.3282692307694,
+      "y": 4407.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 434548,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          417.2178846153845,
+          371.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-93b753fd9f36",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-afa06ca3786f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c3c60c622cd3da2e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7079659888,
+      "isDeleted": false,
+      "id": "edge-d5f16560c032",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 954.096551724138,
+      "y": 4700.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 404595,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          526.0724137931034,
+          930.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-83e0698ed072",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-755f14a6211b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6aa48e07033415ba"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9158372350,
+      "isDeleted": false,
+      "id": "edge-ec752ce9457d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1545.3461538461538,
+      "y": 5630.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 704826,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          423.2230769230771,
+          -371.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-755f14a6211b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b743fd201b04",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.de16abd447d58509"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4475851500,
+      "isDeleted": false,
+      "id": "edge-a4cb6bef2395",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1588.8923076923077,
+      "y": 5630.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 140958,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          295.5076923076924,
+          -129.7837837837842
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-755f14a6211b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3369451edb89",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c9e6c805226d2abc"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2285037443,
+      "isDeleted": false,
+      "id": "edge-f0b19d927eb6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1694.3999999999999,
+      "y": 5669.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 327978,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.00000000000023,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-755f14a6211b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ba8da7c65a77",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c49d29c83cd6ec5e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6570669070,
+      "isDeleted": false,
+      "id": "edge-c97f434108e1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1588.8923076923077,
+      "y": 5707.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 465346,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          295.5076923076924,
+          129.7837837837842
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-755f14a6211b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9a691568dab3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.9bb86d5cf4873239"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4793206154,
+      "isDeleted": false,
+      "id": "edge-22555f79e186",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1545.3461538461538,
+      "y": 5707.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 3306,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          423.2230769230771,
+          371.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-755f14a6211b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d166d4d64d24",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a5a3486b6d5c400d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1161802481,
+      "isDeleted": false,
+      "id": "edge-e9bf501696ab",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 346.95200537002853,
+      "y": 4078.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 425357,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          562.7197012921631,
+          2819.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-ef126ead0b76",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4f722e2ab6c3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.0248341d408071f5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3493342446,
+      "isDeleted": false,
+      "id": "edge-0aa12074a385",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 979.3199398797595,
+      "y": 6898.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 199754,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          407.2359719438879,
+          -339.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4f722e2ab6c3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6e0ed3bfa060",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.8b82b9d6098696ea"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4093791262,
+      "isDeleted": false,
+      "id": "edge-5ac69652f4de",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1044.2872384937239,
+      "y": 6898.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 689530,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          264.9127615062762,
+          -105.6997495826381
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4f722e2ab6c3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c9a8e99c5313",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.cb8781237ef65f4c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1502222443,
+      "isDeleted": false,
+      "id": "edge-6d7d46477c77",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 6951.498831385643,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 831417,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          3.3305509181964226
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4f722e2ab6c3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9a537d2af2ee",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.ab3e3f506e61d276"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9286116065,
+      "isDeleted": false,
+      "id": "edge-db7c01d3b198",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1039.039879759519,
+      "y": 6997.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 970618,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          270.1601202404811,
+          112.52913188647744
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4f722e2ab6c3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e58ec16a78e0",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.16f2b1a8fad6fb8f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3874125343,
+      "isDeleted": false,
+      "id": "edge-63dd32fac093",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 979.3199398797595,
+      "y": 6997.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 131156,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          407.2359719438879,
+          339.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4f722e2ab6c3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2ac9b7129236",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.35e2df4c1d5d0356"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1828114027,
+      "isDeleted": false,
+      "id": "edge-023cdfb73caf",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 342.7688912665508,
+      "y": 4078.5,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 95806,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          568.3622174668984,
+          3518.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-ef126ead0b76",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-8ee2140372f2",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.7f11848c1c7e1a7d"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

@@ -1,0 +1,4365 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6342293174,
+      "isDeleted": false,
+      "id": "node-47aa38506338",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120.0,
+      "y": 2836.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 765432,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-47aa38506338"
+        },
+        {
+          "id": "edge-645211c320bd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a5d2993cd81a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-e80b4b4f9ec7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4d019bdfc547",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-dc887e0076e4",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-azure-devops"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8620900443,
+      "isDeleted": false,
+      "id": "text-47aa38506338",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 2836.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 2092.5,
+      "seed": 285019,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Terraform and Azure DevOps\nAzure DevOps plays two parts in a\nTerraform setup. It is a system\nthat Terraform manages, through\nthe provider\n`microsoft/azuredevops` ([provider\ndocs](https://registry.terraform.i\no/providers/microsoft/azuredevops/\nlatest/docs)). It is also the\nrunner: Azure Pipelines runs\n`terraform plan` and `apply` for\nevery other system, such as AWS,\nSnowflake and Aiven. This map\ncovers both parts. The [Terraform\nmap](../terraform.md) explains\nTerraform itself.\n\nThe unit is one Azure DevOps\norganization, which holds\nprojects. A project holds Git\nrepositories, pipelines and the\nresources that pipelines use. A\npipeline is a YAML file in a\nrepository plus a pipeline\ndefinition in Azure DevOps that\npoints to it. Pipelines reach\nother systems through these\nresources:\n\n- A service connection stores the\ncredentials for one outside\nsystem, such as an AWS account\n([Service Connections](#service-co\nnnections-service-connections)).\n- A variable group stores named\nvalues and secrets for many\npipelines.\n- An environment is a named\ntarget, such as `production`, that\ncan carry checks, such as\napprovals.\n- A secure file stores a file,\nsuch as a private key, for use in\na run.\n\nThree gates decide whether a run\nmay use such a resource ([Three\nGates on a Resource](#three-gates-\non-a-resource-three-gates-on-a-res\nource)). The most important gate,\nthe checks, lives outside the YAML\nfile ([Checks Live Outside the YAM\nL](#checks-live-outside-the-yaml-c\nhecks-live-outside-the-yaml)).\n\nWhen Azure Pipelines runs\nTerraform, three more ideas\nexplain what happens:\n\n- Each job starts on a fresh\nmachine. A plan file from one job\nis missing in the next job, unless\nthe pipeline publishes it ([Each\nJob Starts Fresh](#each-job-starts\n-fresh-each-job-starts-fresh)).\n- The pipeline task that runs\nTerraform decides which\ncredentials reach Terraform ([The\nTask Shapes the Run](#the-task-sha\npes-the-run-the-task-shapes-the-ru\nn)).\n- Azure Pipelines hides secrets in\nlogs, but only when they appear in\nfull ([Masking Is Best Effort](#ma\nsking-is-best-effort-masking-is-be\nst-effort)).\n\nNow compare dbt Cloud. A dbt Cloud\njob holds the commands and the\nschedule of a dbt run. An Azure\npipeline holds the commands and\nthe triggers of a Terraform run,\nand its environment checks play\nthe role of a release approval.\n\nThe map has four parts. Mental\nModels explains the ideas above.\nReading Pipelines and\nConfigurations says where to look\nfirst. Pitfalls lists the failures\nthat experienced users plan\naround. Good and Bad Decisions\ncompares the main design choices.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-47aa38506338",
+      "originalText": "Terraform and Azure DevOps\nAzure DevOps plays two parts in a Terraform setup. It is a system that Terraform manages, through the provider `microsoft/azuredevops` ([provider docs](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs)). It is also the runner: Azure Pipelines runs `terraform plan` and `apply` for every other system, such as AWS, Snowflake and Aiven. This map covers both parts. The [Terraform map](../terraform.md) explains Terraform itself.\n\nThe unit is one Azure DevOps organization, which holds projects. A project holds Git repositories, pipelines and the resources that pipelines use. A pipeline is a YAML file in a repository plus a pipeline definition in Azure DevOps that points to it. Pipelines reach other systems through these resources:\n\n- A service connection stores the credentials for one outside system, such as an AWS account ([Service Connections](#service-connections-service-connections)).\n- A variable group stores named values and secrets for many pipelines.\n- An environment is a named target, such as `production`, that can carry checks, such as approvals.\n- A secure file stores a file, such as a private key, for use in a run.\n\nThree gates decide whether a run may use such a resource ([Three Gates on a Resource](#three-gates-on-a-resource-three-gates-on-a-resource)). The most important gate, the checks, lives outside the YAML file ([Checks Live Outside the YAML](#checks-live-outside-the-yaml-checks-live-outside-the-yaml)).\n\nWhen Azure Pipelines runs Terraform, three more ideas explain what happens:\n\n- Each job starts on a fresh machine. A plan file from one job is missing in the next job, unless the pipeline publishes it ([Each Job Starts Fresh](#each-job-starts-fresh-each-job-starts-fresh)).\n- The pipeline task that runs Terraform decides which credentials reach Terraform ([The Task Shapes the Run](#the-task-shapes-the-run-the-task-shapes-the-run)).\n- Azure Pipelines hides secrets in logs, but only when they appear in full ([Masking Is Best Effort](#masking-is-best-effort-masking-is-best-effort)).\n\nNow compare dbt Cloud. A dbt Cloud job holds the commands and the schedule of a dbt run. An Azure pipeline holds the commands and the triggers of a Terraform run, and its environment checks play the role of a release approval.\n\nThe map has four parts. Mental Models explains the ideas above. Reading Pipelines and Configurations says where to look first. Pitfalls lists the failures that experienced users plan around. Good and Bad Decisions compares the main design choices.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-azure-devops"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2861358120,
+      "isDeleted": false,
+      "id": "node-5268cf60e953",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 947.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 4932,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5268cf60e953"
+        },
+        {
+          "id": "edge-645211c320bd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-3ed1c8fe2c42",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5a7a2a4d267c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a58dad7e93c2",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6f7c040ad8f2",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ab17b9fa6dd3",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-72c06fd44720",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-72129f3abf5c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-mental-models"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5602717986,
+      "isDeleted": false,
+      "id": "text-5268cf60e953",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 963.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 988863,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Mental Models\nThe models come in dependency\norder: each model uses only\nthe models before it.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-5268cf60e953",
+      "originalText": "Mental Models\nThe models come in dependency order: each model uses only the models before it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-mental-models"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8843935548,
+      "isDeleted": false,
+      "id": "node-59276aa14377",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 568501,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-59276aa14377"
+        },
+        {
+          "id": "edge-3ed1c8fe2c42",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "service-connections"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4551202183,
+      "isDeleted": false,
+      "id": "text-59276aa14377",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 437.5,
+      "seed": 228962,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Service Connections\nA service connection holds the credentials for\none outside system. For AWS, it holds an\naccess key or an OIDC setup, and optionally a\nrole to assume ([AWS connection doc](https://g\nithub.com/microsoft/terraform-provider-azurede\nvops/blob/v1.16.0/website/docs/r/serviceendpoi\nnt_aws.html.markdown)). A pipeline refers to a\nconnection by its name. Authorizations and\nchecks refer to it by its ID. The secrets can\nbe written but never read back, so Terraform\ncannot see a secret that someone changed in\nthe web interface.\n\nOIDC stands for OpenID Connect. With OIDC,\nAzure DevOps gives each run a short-lived\ntoken, and the outside system trusts that\ntoken instead of a stored key. Microsoft\nrecommends this workload identity federation\nover stored secrets ([security overview](https\n://learn.microsoft.com/en-us/azure/devops/pipe\nlines/security/overview)). The [authentication\nmap](../../authentication/authentication.md#wo\nrkload-identity-federation-workload-identity-f\nederation) explains the idea.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-59276aa14377",
+      "originalText": "Service Connections\nA service connection holds the credentials for one outside system. For AWS, it holds an access key or an OIDC setup, and optionally a role to assume ([AWS connection doc](https://github.com/microsoft/terraform-provider-azuredevops/blob/v1.16.0/website/docs/r/serviceendpoint_aws.html.markdown)). A pipeline refers to a connection by its name. Authorizations and checks refer to it by its ID. The secrets can be written but never read back, so Terraform cannot see a secret that someone changed in the web interface.\n\nOIDC stands for OpenID Connect. With OIDC, Azure DevOps gives each run a short-lived token, and the outside system trusts that token instead of a stored key. Microsoft recommends this workload identity federation over stored secrets ([security overview](https://learn.microsoft.com/en-us/azure/devops/pipelines/security/overview)). The [authentication map](../../authentication/authentication.md#workload-identity-federation-workload-identity-federation) explains the idea.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "service-connections"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3136642753,
+      "isDeleted": false,
+      "id": "node-f84d79cdc868",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 342625,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f84d79cdc868"
+        },
+        {
+          "id": "edge-def14148ff9f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5a7a2a4d267c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "three-gates-on-a-resource"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2790527233,
+      "isDeleted": false,
+      "id": "text-f84d79cdc868",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 490.0,
+      "seed": 882717,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Three Gates on a Resource\nA run can use a service connection, a variable\ngroup or an environment only after three gates\n([resource permissions](https://learn.microsof\nt.com/en-us/azure/devops/pipelines/security/re\nsources)):\n\n1. User roles decide who may see, use or\nadminister the resource.\n2. Pipeline permissions decide which pipelines\nmay use it. A run of an unauthorized pipeline\nstops with \"This pipeline needs permission to\naccess a resource before this run can\ncontinue\" ([service connections](https://learn\n.microsoft.com/en-us/azure/devops/pipelines/li\nbrary/service-endpoints)).\n3. Checks, such as an approval or a branch\ncontrol, run each time a stage uses the\nresource.\n\nIn Terraform,\n`azuredevops_pipeline_authorization` grants\nthe second gate. Without `pipeline_id`, it\nauthorizes every pipeline of the project\n([authorization doc](https://github.com/micros\noft/terraform-provider-azuredevops/blob/v1.16.\n0/website/docs/r/pipeline_authorization.html.m\narkdown#L111)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-f84d79cdc868",
+      "originalText": "Three Gates on a Resource\nA run can use a service connection, a variable group or an environment only after three gates ([resource permissions](https://learn.microsoft.com/en-us/azure/devops/pipelines/security/resources)):\n\n1. User roles decide who may see, use or administer the resource.\n2. Pipeline permissions decide which pipelines may use it. A run of an unauthorized pipeline stops with \"This pipeline needs permission to access a resource before this run can continue\" ([service connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints)).\n3. Checks, such as an approval or a branch control, run each time a stage uses the resource.\n\nIn Terraform, `azuredevops_pipeline_authorization` grants the second gate. Without `pipeline_id`, it authorizes every pipeline of the project ([authorization doc](https://github.com/microsoft/terraform-provider-azuredevops/blob/v1.16.0/website/docs/r/pipeline_authorization.html.markdown#L111)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "three-gates-on-a-resource"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6494033473,
+      "isDeleted": false,
+      "id": "node-23758bfb109d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 605980,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-23758bfb109d"
+        },
+        {
+          "id": "edge-a58dad7e93c2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "checks-live-outside-the-yaml"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9234333544,
+      "isDeleted": false,
+      "id": "text-23758bfb109d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 367.5,
+      "seed": 763828,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Checks Live Outside the YAML\nMicrosoft puts it this way: \"Users modifying\nthe pipeline yaml file can't modify the\nchecks\" ([approvals and checks](https://learn.\nmicrosoft.com/en-us/azure/devops/pipelines/pro\ncess/approvals)). Administrators of the\nresource manage its checks in the web\ninterface or in Terraform. So a check on an\nenvironment or a service connection protects\nproduction even when someone edits the\npipeline in a pull request.\n\nGates written in YAML are weaker. A\n`condition` on a stage, such as \"only on the\nmain branch\", lives in the same file that a\npull request can change. The task\n`ManualValidation` pauses a run in YAML, and\nany user with the Queue builds permission can\nresume it ([manual validation](https://learn.m\nicrosoft.com/en-us/azure/devops/pipelines/task\ns/reference/manual-validation-v0)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-23758bfb109d",
+      "originalText": "Checks Live Outside the YAML\nMicrosoft puts it this way: \"Users modifying the pipeline yaml file can't modify the checks\" ([approvals and checks](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals)). Administrators of the resource manage its checks in the web interface or in Terraform. So a check on an environment or a service connection protects production even when someone edits the pipeline in a pull request.\n\nGates written in YAML are weaker. A `condition` on a stage, such as \"only on the main branch\", lives in the same file that a pull request can change. The task `ManualValidation` pauses a run in YAML, and any user with the Queue builds permission can resume it ([manual validation](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/manual-validation-v0)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "checks-live-outside-the-yaml"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9384951633,
+      "isDeleted": false,
+      "id": "node-0b705e95f761",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 340358,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-0b705e95f761"
+        },
+        {
+          "id": "edge-6f7c040ad8f2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "triggers-come-from-two-places"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1621847291,
+      "isDeleted": false,
+      "id": "text-0b705e95f761",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 655795,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Triggers Come from Two Places\nFor a repository in Azure Repos, a continuous\nintegration (CI) trigger comes from the\n`trigger` section of the YAML file. A pull\nrequest trigger does not come from YAML: a\nbranch policy on the target branch starts the\nrun ([PR triggers](https://learn.microsoft.com\n/en-us/azure/devops/pipelines/repos/azure-repo\ns-git)). So the `paths` in the YAML decide\nwhen a merge starts a run, while the path\nfilter of the branch policy decides when a\npull request starts one. The two lists must\nmatch by hand.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-0b705e95f761",
+      "originalText": "Triggers Come from Two Places\nFor a repository in Azure Repos, a continuous integration (CI) trigger comes from the `trigger` section of the YAML file. A pull request trigger does not come from YAML: a branch policy on the target branch starts the run ([PR triggers](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/azure-repos-git)). So the `paths` in the YAML decide when a merge starts a run, while the path filter of the branch policy decides when a pull request starts one. The two lists must match by hand.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "triggers-come-from-two-places"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7160772514,
+      "isDeleted": false,
+      "id": "node-5c8ecc0ddb03",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 535609,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5c8ecc0ddb03"
+        },
+        {
+          "id": "edge-6eb45c622f93",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ab17b9fa6dd3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "each-job-starts-fresh"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3009246980,
+      "isDeleted": false,
+      "id": "text-5c8ecc0ddb03",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 84953,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Each Job Starts Fresh\nEach job of a pipeline can run on a different\nmachine. A saved plan file from the plan job\ntherefore does not exist in the apply job,\nunless the pipeline publishes it as an\nartifact and downloads it again. HashiCorp\ndescribes what that needs: the whole working\ndirectory, with the same files, at the same\npath ([running Terraform in automation](https:\n//developer.hashicorp.com/terraform/tutorials/\nautomation/automate-terraform)). Without it,\nthe apply job makes a new plan and applies\nthat one.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-5c8ecc0ddb03",
+      "originalText": "Each Job Starts Fresh\nEach job of a pipeline can run on a different machine. A saved plan file from the plan job therefore does not exist in the apply job, unless the pipeline publishes it as an artifact and downloads it again. HashiCorp describes what that needs: the whole working directory, with the same files, at the same path ([running Terraform in automation](https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform)). Without it, the apply job makes a new plan and applies that one.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "each-job-starts-fresh"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9412954341,
+      "isDeleted": false,
+      "id": "node-93c37c334180",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 476221,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-93c37c334180"
+        },
+        {
+          "id": "edge-d3937f7863ff",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-72c06fd44720",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "the-task-shapes-the-run"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8189495257,
+      "isDeleted": false,
+      "id": "text-93c37c334180",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 297.5,
+      "seed": 240437,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "The Task Shapes the Run\nA pipeline can run Terraform through a task,\nsuch as the community task TerraformCLI. The\ntask turns a service connection into\nenvironment variables and command-line\noptions. TerraformCLI, for example, exports\nonly the access key, the secret key and the\nregion of an AWS connection ([task code](https\n://github.com/jason-johnson/azure-pipelines-ta\nsks-terraform/blob/1.2.2/tasks/terraform-cli/s\nrc/providers/aws.ts#L23-L27)). It also adds\n`-auto-approve` to every `apply` ([task code](\nhttps://github.com/jason-johnson/azure-pipelin\nes-tasks-terraform/blob/1.2.2/tasks/terraform-\ncli/src/commands/tf-apply.ts#L20)). So read\nthe task's source or docs to learn what a run\nreally does.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-93c37c334180",
+      "originalText": "The Task Shapes the Run\nA pipeline can run Terraform through a task, such as the community task TerraformCLI. The task turns a service connection into environment variables and command-line options. TerraformCLI, for example, exports only the access key, the secret key and the region of an AWS connection ([task code](https://github.com/jason-johnson/azure-pipelines-tasks-terraform/blob/1.2.2/tasks/terraform-cli/src/providers/aws.ts#L23-L27)). It also adds `-auto-approve` to every `apply` ([task code](https://github.com/jason-johnson/azure-pipelines-tasks-terraform/blob/1.2.2/tasks/terraform-cli/src/commands/tf-apply.ts#L20)). So read the task's source or docs to learn what a run really does.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "the-task-shapes-the-run"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3900843937,
+      "isDeleted": false,
+      "id": "node-9f44c29f4148",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 685161,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9f44c29f4148"
+        },
+        {
+          "id": "edge-b3cfaa939217",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-72129f3abf5c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "masking-is-best-effort"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8303556703,
+      "isDeleted": false,
+      "id": "text-9f44c29f4148",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1692.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 23918,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Masking Is Best Effort\nAzure Pipelines replaces each secret value\nwith `***` in the logs. It does not mask parts\nof a secret: \"We never mask substrings of\nsecrets\" ([set secret variables](https://learn\n.microsoft.com/en-us/azure/devops/pipelines/pr\nocess/set-secret-variables)). A secret that a\nscript splits, encodes or prints line by line\ncan therefore appear in clear text. Microsoft\nadvises against structured data, such as JSON,\nas a secret value.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9f44c29f4148",
+      "originalText": "Masking Is Best Effort\nAzure Pipelines replaces each secret value with `***` in the logs. It does not mask parts of a secret: \"We never mask substrings of secrets\" ([set secret variables](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/set-secret-variables)). A secret that a script splits, encodes or prints line by line can therefore appear in clear text. Microsoft advises against structured data, such as JSON, as a secret value.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "masking-is-best-effort"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2701640369,
+      "isDeleted": false,
+      "id": "node-574f87ad914a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 2093.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 167.0,
+      "seed": 894783,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-574f87ad914a"
+        },
+        {
+          "id": "edge-a5d2993cd81a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-bdeab774458f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5d645aebd615",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-azdo"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4619519980,
+      "isDeleted": false,
+      "id": "text-574f87ad914a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 2097.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 157.5,
+      "seed": 119632,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading Pipelines and\nConfigurations\nThese nodes say where to look\nfirst in a pipeline that runs\nTerraform, and in a Terraform\nconfiguration that manages Azure\nDevOps.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-574f87ad914a",
+      "originalText": "Reading Pipelines and Configurations\nThese nodes say where to look first in a pipeline that runs Terraform, and in a Terraform configuration that manages Azure DevOps.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-azdo"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7409981962,
+      "isDeleted": false,
+      "id": "node-1bff65d7b6b4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 1936.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 56205,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-1bff65d7b6b4"
+        },
+        {
+          "id": "edge-bdeab774458f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-a-terraform-pipeline"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2418703937,
+      "isDeleted": false,
+      "id": "text-1bff65d7b6b4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 1936.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 560.0,
+      "seed": 74571,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading a Terraform Pipeline\nRead the pipeline YAML of a Terraform root\nmodule in this order:\n\n1. Find the variable or parameter that names\nthe working directory. It binds the pipeline\nto its root module.\n2. Read `trigger` and its `paths`, then the\nbranch policy of the main branch. Pull request\nruns come only from the policy.\n3. Follow each `template:` reference. The\nsteps can live in shared template files.\n4. Find the condition of the apply step: the\nbranch, `Build.Reason` and any override\nparameter. It tells you what can reach\nproduction.\n5. Look for `deployment:` jobs with an\n`environment:`, then read that environment's\nchecks in the web interface. They are the real\ngate.\n6. List the service connection inputs of the\nTerraform tasks. For each connection, read its\nrole, its pipeline permissions and its checks.\n7. Read how the run selects its state: the\nworkspace, `-backend-config` values and\n`-var-file` values.\n8. List the secret sources: variable groups,\n`$(variable)` macros, `TF_VAR_*` environment\nvariables and secure files.\n9. Check whether the apply uses the saved plan\nfile, and whether the Terraform version is\npinned.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-1bff65d7b6b4",
+      "originalText": "Reading a Terraform Pipeline\nRead the pipeline YAML of a Terraform root module in this order:\n\n1. Find the variable or parameter that names the working directory. It binds the pipeline to its root module.\n2. Read `trigger` and its `paths`, then the branch policy of the main branch. Pull request runs come only from the policy.\n3. Follow each `template:` reference. The steps can live in shared template files.\n4. Find the condition of the apply step: the branch, `Build.Reason` and any override parameter. It tells you what can reach production.\n5. Look for `deployment:` jobs with an `environment:`, then read that environment's checks in the web interface. They are the real gate.\n6. List the service connection inputs of the Terraform tasks. For each connection, read its role, its pipeline permissions and its checks.\n7. Read how the run selects its state: the workspace, `-backend-config` values and `-var-file` values.\n8. List the secret sources: variable groups, `$(variable)` macros, `TF_VAR_*` environment variables and secure files.\n9. Check whether the apply uses the saved plan file, and whether the Terraform version is pinned.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-a-terraform-pipeline"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3581328172,
+      "isDeleted": false,
+      "id": "node-a8444fec7d9e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 2196.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 173165,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a8444fec7d9e"
+        },
+        {
+          "id": "edge-5d645aebd615",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-an-azdo-configuration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6310302718,
+      "isDeleted": false,
+      "id": "text-a8444fec7d9e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 2196.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 665.0,
+      "seed": 688594,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading an Azure DevOps Configuration\n| Resource | Azure DevOps object | What to\ncheck |\n| --- | --- | --- |\n| `azuredevops_project` | project | Usually\nlooked up with a data source, not created |\n| `azuredevops_serviceendpoint_aws` | AWS\nservice connection | Static keys or\n`use_oidc`, role to assume |\n| `azuredevops_pipeline_authorization` |\npermission of a pipeline to use a resource |\n`pipeline_id` set, or open to all pipelines |\n| `azuredevops_serviceendpoint_permissions` |\nuser roles on a connection | Which groups may\nuse or administer it |\n| `azuredevops_variable_group` | variable\ngroup | Secret values in the state |\n| `azuredevops_environment`,\n`azuredevops_check_approval` | environment and\nits checks | Who approves, and for which\nstages |\n| `azuredevops_build_definition` | pipeline\ndefinition | YAML path, and triggers from YAML\nor the definition |\n\nRead the version constraint and the lock file\nfirst, because older versions behave\ndifferently. Then find the provider's\ncredential: a personal access token (PAT), a\nservice principal or a managed identity\n([provider docs](https://github.com/microsoft/\nterraform-provider-azuredevops/blob/v1.16.0/we\nbsite/docs/index.html.markdown)). Last,\ncompare each connection, variable group and\nenvironment with the\n`azuredevops_pipeline_authorization`\nresources. A resource without one was\nauthorized by hand.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a8444fec7d9e",
+      "originalText": "Reading an Azure DevOps Configuration\n| Resource | Azure DevOps object | What to check |\n| --- | --- | --- |\n| `azuredevops_project` | project | Usually looked up with a data source, not created |\n| `azuredevops_serviceendpoint_aws` | AWS service connection | Static keys or `use_oidc`, role to assume |\n| `azuredevops_pipeline_authorization` | permission of a pipeline to use a resource | `pipeline_id` set, or open to all pipelines |\n| `azuredevops_serviceendpoint_permissions` | user roles on a connection | Which groups may use or administer it |\n| `azuredevops_variable_group` | variable group | Secret values in the state |\n| `azuredevops_environment`, `azuredevops_check_approval` | environment and its checks | Who approves, and for which stages |\n| `azuredevops_build_definition` | pipeline definition | YAML path, and triggers from YAML or the definition |\n\nRead the version constraint and the lock file first, because older versions behave differently. Then find the provider's credential: a personal access token (PAT), a service principal or a managed identity ([provider docs](https://github.com/microsoft/terraform-provider-azuredevops/blob/v1.16.0/website/docs/index.html.markdown)). Last, compare each connection, variable group and environment with the `azuredevops_pipeline_authorization` resources. A resource without one was authorized by hand.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-an-azdo-configuration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3968064842,
+      "isDeleted": false,
+      "id": "node-aabae97ec57d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 3502.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 144.5,
+      "seed": 12788,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-aabae97ec57d"
+        },
+        {
+          "id": "edge-e80b4b4f9ec7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-826e463d40ca",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-05108324578e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7817864190,
+      "isDeleted": false,
+      "id": "text-aabae97ec57d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 3518.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 112.5,
+      "seed": 960150,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pitfalls\nThe pitfalls fall into two groups:\nrunning Terraform in pipelines,\nand managing Azure DevOps with\nTerraform.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-aabae97ec57d",
+      "originalText": "Pitfalls\nThe pitfalls fall into two groups: running Terraform in pipelines, and managing Azure DevOps with Terraform.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6730097953,
+      "isDeleted": false,
+      "id": "node-7e78d3ba0aea",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 3018.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 368.40000000000003,
+      "height": 76.5,
+      "seed": 482218,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7e78d3ba0aea"
+        },
+        {
+          "id": "edge-826e463d40ca",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a3eeb6868f42",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d7d8d63a5f81",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-699d066f6805",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-67744c9d8d07",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d9043d6d8a1d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-pipeline-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1092501187,
+      "isDeleted": false,
+      "id": "text-7e78d3ba0aea",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 3030.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 344.40000000000003,
+      "height": 52.5,
+      "seed": 693600,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pipeline Pitfalls\nThese pitfalls affect every system that a\npipeline deploys.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7e78d3ba0aea",
+      "originalText": "Pipeline Pitfalls\nThese pitfalls affect every system that a pipeline deploys.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-pipeline-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1512474532,
+      "isDeleted": false,
+      "id": "node-d53f60d12a3b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 2456.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 838788,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d53f60d12a3b"
+        },
+        {
+          "id": "edge-6eb45c622f93",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a3eeb6868f42",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "apply-runs-unreviewed-plan"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8253481565,
+      "isDeleted": false,
+      "id": "text-d53f60d12a3b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 2456.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 280.0,
+      "seed": 676190,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Apply Runs an Unreviewed Plan\nWhen the apply step runs without the saved\nplan file, Terraform makes a new plan and\napplies it at once, because the task adds\n`-auto-approve`. That new plan can differ from\nthe one that reviewers saw: drift, a merge in\nbetween, or a changed secret all count.\nHashiCorp says a plan made without `-out`\ngives no guarantee about what the apply will\ndo ([plan command](https://developer.hashicorp\n.com/terraform/cli/commands/plan)). Publish\nthe plan file and apply exactly that file. A\nsaved plan already holds the variable values,\nso the apply step must not pass `-var` again\n([apply command](https://developer.hashicorp.c\nom/terraform/cli/commands/apply)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d53f60d12a3b",
+      "originalText": "Apply Runs an Unreviewed Plan\nWhen the apply step runs without the saved plan file, Terraform makes a new plan and applies it at once, because the task adds `-auto-approve`. That new plan can differ from the one that reviewers saw: drift, a merge in between, or a changed secret all count. HashiCorp says a plan made without `-out` gives no guarantee about what the apply will do ([plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)). Publish the plan file and apply exactly that file. A saved plan already holds the variable values, so the apply step must not pass `-var` again ([apply command](https://developer.hashicorp.com/terraform/cli/commands/apply)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "apply-runs-unreviewed-plan"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1891109478,
+      "isDeleted": false,
+      "id": "node-d4f38375ca88",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 2716.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 509053,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d4f38375ca88"
+        },
+        {
+          "id": "edge-d3937f7863ff",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d7d8d63a5f81",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "connection-role-ignored"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7556571117,
+      "isDeleted": false,
+      "id": "text-d4f38375ca88",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 2728.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 789946,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Connection Role Ignored\nAn AWS service connection can name a role to\nassume. TerraformCLI exports only the keys and\nthe region, so Terraform runs as the IAM user\nbehind the keys, not as the role.\nConfigurations work around this with\n`assume_role` in the provider block. A run\nthat relies on the connection's role instead\nfails with \"AccessDenied\" or reaches the wrong\naccount.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d4f38375ca88",
+      "originalText": "Connection Role Ignored\nAn AWS service connection can name a role to assume. TerraformCLI exports only the keys and the region, so Terraform runs as the IAM user behind the keys, not as the role. Configurations work around this with `assume_role` in the provider block. A run that relies on the connection's role instead fails with \"AccessDenied\" or reaches the wrong account.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "connection-role-ignored"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2719883518,
+      "isDeleted": false,
+      "id": "node-2d13706f1a97",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 2955.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 641262,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2d13706f1a97"
+        },
+        {
+          "id": "edge-b3cfaa939217",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-699d066f6805",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "multi-line-secrets-leak"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3434639343,
+      "isDeleted": false,
+      "id": "text-2d13706f1a97",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 2960.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 855554,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Multi-Line Secrets Leak\nA private key in PEM format has many lines.\nPassed on the command line as `-var\nkey=$(secret)`, each line can appear in the\nlog, because Azure Pipelines masks only the\nfull value ([secrets](https://learn.microsoft.\ncom/en-us/azure/devops/pipelines/security/secr\nets)). Pass such secrets as `TF_VAR_*`\nenvironment variables or as secure files, and\nrotate any secret that has leaked. Watch for a\ntrailing newline, which can make Terraform see\na changed value.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2d13706f1a97",
+      "originalText": "Multi-Line Secrets Leak\nA private key in PEM format has many lines. Passed on the command line as `-var key=$(secret)`, each line can appear in the log, because Azure Pipelines masks only the full value ([secrets](https://learn.microsoft.com/en-us/azure/devops/pipelines/security/secrets)). Pass such secrets as `TF_VAR_*` environment variables or as secure files, and rotate any secret that has leaked. Watch for a trailing newline, which can make Terraform see a changed value.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "multi-line-secrets-leak"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5135647937,
+      "isDeleted": false,
+      "id": "node-e0adfcc7d35a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 3215.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 915235,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e0adfcc7d35a"
+        },
+        {
+          "id": "edge-67744c9d8d07",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "locks-and-waiting-runs"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7572535116,
+      "isDeleted": false,
+      "id": "text-e0adfcc7d35a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 3215.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 224114,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Locks and Waiting Runs\nWith `batch: true`, a new CI run waits until\nthe current run completes ([batching](https://\nlearn.microsoft.com/en-us/azure/devops/pipelin\nes/repos/azure-repos-git)). A run that waits\nfor an approval therefore holds back every\nlater merge. The YAML setting `lockBehavior`\nhas effect only together with an exclusive\nlock check on the resource ([exclusive lock](h\nttps://learn.microsoft.com/en-us/azure/devops/\npipelines/process/approvals)). Terraform's own\nstate lock is separate. A plan with\n`-lock=false` can read state while another run\nwrites it.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e0adfcc7d35a",
+      "originalText": "Locks and Waiting Runs\nWith `batch: true`, a new CI run waits until the current run completes ([batching](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/azure-repos-git)). A run that waits for an approval therefore holds back every later merge. The YAML setting `lockBehavior` has effect only together with an exclusive lock check on the resource ([exclusive lock](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals)). Terraform's own state lock is separate. A plan with `-lock=false` can read state while another run writes it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "locks-and-waiting-runs"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3595674084,
+      "isDeleted": false,
+      "id": "node-369753c7496c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 3475.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 979114,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-369753c7496c"
+        },
+        {
+          "id": "edge-d9043d6d8a1d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "misspelled-environments"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9432358664,
+      "isDeleted": false,
+      "id": "text-369753c7496c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 3487.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 157.5,
+      "seed": 384733,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Misspelled Environments\nWhen a pipeline names an environment that does\nnot exist, Azure Pipelines creates it\nautomatically when it can ([environments](http\ns://learn.microsoft.com/en-us/azure/devops/pip\nelines/process/environments)). The new\nenvironment has no checks. So a typo in the\nenvironment name of a production stage removes\nits approval without any error.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-369753c7496c",
+      "originalText": "Misspelled Environments\nWhen a pipeline names an environment that does not exist, Azure Pipelines creates it automatically when it can ([environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments)). The new environment has no checks. So a typo in the environment name of a production stage removes its approval without any error.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "misspelled-environments"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8600887262,
+      "isDeleted": false,
+      "id": "node-23ae8df753b7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 4157.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 368.40000000000003,
+      "height": 76.5,
+      "seed": 851074,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-23ae8df753b7"
+        },
+        {
+          "id": "edge-05108324578e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-948b22701374",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-be5136559626",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f9b64f73923f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c2961d19e84b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-provider-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8159191263,
+      "isDeleted": false,
+      "id": "text-23ae8df753b7",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 4169.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 344.40000000000003,
+      "height": 52.5,
+      "seed": 975495,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Provider Pitfalls\nThese pitfalls affect configurations that\nmanage Azure DevOps objects.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-23ae8df753b7",
+      "originalText": "Provider Pitfalls\nThese pitfalls affect configurations that manage Azure DevOps objects.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-provider-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5277397839,
+      "isDeleted": false,
+      "id": "node-508d918ca5b3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 3697.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 608902,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-508d918ca5b3"
+        },
+        {
+          "id": "edge-def14148ff9f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-948b22701374",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "new-connections-not-authorized"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7789649563,
+      "isDeleted": false,
+      "id": "text-508d918ca5b3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 3697.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 378700,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "New Connections Are Not Authorized\nA service connection that Terraform creates,\nor replaces, has no pipeline permission. The\nnext run of each pipeline that uses it stops\nand waits for permission ([issue 1008](https:/\n/github.com/microsoft/terraform-provider-azure\ndevops/issues/1008)). Add an\n`azuredevops_pipeline_authorization` for each\npipeline in the same configuration. Find the\npipeline ID with the data source\n`azuredevops_build_definition`, instead of\nwriting the number by hand; a recreated\npipeline gets a new ID.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-508d918ca5b3",
+      "originalText": "New Connections Are Not Authorized\nA service connection that Terraform creates, or replaces, has no pipeline permission. The next run of each pipeline that uses it stops and waits for permission ([issue 1008](https://github.com/microsoft/terraform-provider-azuredevops/issues/1008)). Add an `azuredevops_pipeline_authorization` for each pipeline in the same configuration. Find the pipeline ID with the data source `azuredevops_build_definition`, instead of writing the number by hand; a recreated pipeline gets a new ID.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "new-connections-not-authorized"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1379038425,
+      "isDeleted": false,
+      "id": "node-ec13f18134d3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 3957.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 654963,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ec13f18134d3"
+        },
+        {
+          "id": "edge-be5136559626",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-secrets-in-state"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9108632462,
+      "isDeleted": false,
+      "id": "text-ec13f18134d3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 3962.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 354927,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secrets in State\nThe secret key of an AWS connection and the\nsecret values of a variable group sit in the\nstate in plain text. Anyone who can read the\nstate bucket can read them. Because the\nprovider never reads these secrets back, a\nsecret changed in the web interface never\nshows in a plan. A connection with `use_oidc`\nholds no secret at all ([AWS connection doc](h\nttps://github.com/microsoft/terraform-provider\n-azuredevops/blob/v1.16.0/website/docs/r/servi\nceendpoint_aws.html.markdown#L55)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-ec13f18134d3",
+      "originalText": "Secrets in State\nThe secret key of an AWS connection and the secret values of a variable group sit in the state in plain text. Anyone who can read the state bucket can read them. Because the provider never reads these secrets back, a secret changed in the web interface never shows in a plan. A connection with `use_oidc` holds no secret at all ([AWS connection doc](https://github.com/microsoft/terraform-provider-azuredevops/blob/v1.16.0/website/docs/r/serviceendpoint_aws.html.markdown#L55)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-secrets-in-state"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6346348303,
+      "isDeleted": false,
+      "id": "node-c67b214a6d33",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 4217.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 961417,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c67b214a6d33"
+        },
+        {
+          "id": "edge-f9b64f73923f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "renamed-and-idle-connections"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6474423107,
+      "isDeleted": false,
+      "id": "text-c67b214a6d33",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 4217.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 718280,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Renamed and Idle Connections\nA pipeline refers to a service connection by\nname, and an AWS role that trusts Azure DevOps\nthrough OIDC can also name it. Renaming the\nconnection in Terraform therefore breaks every\nYAML file and trust policy that uses the old\nname. Separately, Azure Pipelines can disable\na connection after 100 days without use\n([service connections](https://learn.microsoft\n.com/en-us/azure/devops/pipelines/library/serv\nice-endpoints)). The provider has no field for\nthis state, so the plan stays clean while runs\nfail.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c67b214a6d33",
+      "originalText": "Renamed and Idle Connections\nA pipeline refers to a service connection by name, and an AWS role that trusts Azure DevOps through OIDC can also name it. Renaming the connection in Terraform therefore breaks every YAML file and trust policy that uses the old name. Separately, Azure Pipelines can disable a connection after 100 days without use ([service connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints)). The provider has no field for this state, so the plan stays clean while runs fail.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "renamed-and-idle-connections"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8198586525,
+      "isDeleted": false,
+      "id": "node-71c0d3b03ac9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1878.4,
+      "y": 4477.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 636079,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-71c0d3b03ac9"
+        },
+        {
+          "id": "edge-c2961d19e84b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "token-lifetimes"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9294933950,
+      "isDeleted": false,
+      "id": "text-71c0d3b03ac9",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1890.4,
+      "y": 4480.25,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 205111,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Token Lifetimes\nA PAT expires, and on organizations that use\nMicrosoft Entra ID it becomes inactive after\n90 days without use ([personal access tokens](\nhttps://learn.microsoft.com/en-us/azure/devops\n/organizations/accounts/use-personal-access-to\nkens-to-authenticate)). Microsoft is also\nretiring global PATs. The same page names\n2027-01-27 in one place and 2026-12-01 in\nanother as the end date. A configuration whose\nprovider uses a PAT stops working when the\ntoken does.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-71c0d3b03ac9",
+      "originalText": "Token Lifetimes\nA PAT expires, and on organizations that use Microsoft Entra ID it becomes inactive after 90 days without use ([personal access tokens](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)). Microsoft is also retiring global PATs. The same page names 2027-01-27 in one place and 2026-12-01 in another as the end date. A configuration whose provider uses a PAT stops working when the token does.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "token-lifetimes"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7126953821,
+      "isDeleted": false,
+      "id": "node-6660185f0d0e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 5108.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 99.5,
+      "seed": 125255,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6660185f0d0e"
+        },
+        {
+          "id": "edge-4d019bdfc547",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-00464a2d709c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-93cc97652643",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4d5ccb994908",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5698a34c22f8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-decisions"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1186441477,
+      "isDeleted": false,
+      "id": "text-6660185f0d0e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 5124.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 67.5,
+      "seed": 49641,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Good and Bad Decisions\nEach node compares a choice with\nits alternative.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-6660185f0d0e",
+      "originalText": "Good and Bad Decisions\nEach node compares a choice with its alternative.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-decisions"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1398038461,
+      "isDeleted": false,
+      "id": "node-5285b2a7870b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4733.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 391134,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5285b2a7870b"
+        },
+        {
+          "id": "edge-00464a2d709c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "apply-the-saved-plan"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3677082291,
+      "isDeleted": false,
+      "id": "text-5285b2a7870b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4745.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 986897,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Apply the Saved Plan\nPlan once, publish the plan file with the\nworking directory, review it, and apply that\nfile. HashiCorp recommends this for automation\n([running Terraform in automation](https://dev\neloper.hashicorp.com/terraform/tutorials/autom\nation/automate-terraform)). Treat the plan\nfile as a secret, because it holds the\nvariable values and parts of the state.\nRe-planning in the apply job is simpler, but\nwhat it applies was never reviewed.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-5285b2a7870b",
+      "originalText": "Apply the Saved Plan\nPlan once, publish the plan file with the working directory, review it, and apply that file. HashiCorp recommends this for automation ([running Terraform in automation](https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform)). Treat the plan file as a secret, because it holds the variable values and parts of the state. Re-planning in the apply job is simpler, but what it applies was never reviewed.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "apply-the-saved-plan"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2891599332,
+      "isDeleted": false,
+      "id": "node-c39f15685009",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4990.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 164.0,
+      "seed": 251890,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c39f15685009"
+        },
+        {
+          "id": "edge-93cc97652643",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "gates-that-yaml-cannot-change"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2046225204,
+      "isDeleted": false,
+      "id": "text-c39f15685009",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5002.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 140.0,
+      "seed": 218085,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Gates That YAML Cannot Change\nPut the approval for production on the\nenvironment or the service connection, as a\ncheck. A pull request cannot remove such a\ncheck. A stage `condition` or a\n`ManualValidation` step lives in YAML, so a\npull request can change it. Pull request\nreview alone is the weakest gate.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c39f15685009",
+      "originalText": "Gates That YAML Cannot Change\nPut the approval for production on the environment or the service connection, as a check. A pull request cannot remove such a check. A stage `condition` or a `ManualValidation` step lives in YAML, so a pull request can change it. Pull request review alone is the weakest gate.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "gates-that-yaml-cannot-change"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6848339850,
+      "isDeleted": false,
+      "id": "node-dbe9f33faed7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5194.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 527783,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-dbe9f33faed7"
+        },
+        {
+          "id": "edge-4d5ccb994908",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-identity-per-environment"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4846588013,
+      "isDeleted": false,
+      "id": "text-dbe9f33faed7",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5199.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 865947,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Identity per Environment\nMicrosoft recommends a branch control check on\neach service connection, and workload identity\nfederation instead of stored secrets\n([security overview](https://learn.microsoft.c\nom/en-us/azure/devops/pipelines/security/overv\niew)). A separate connection for each\nenvironment, with production restricted to the\nmain branch, keeps a pull request build away\nfrom production credentials. A plan on a pull\nrequest needs only read access; only the apply\nneeds write access.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-dbe9f33faed7",
+      "originalText": "One Identity per Environment\nMicrosoft recommends a branch control check on each service connection, and workload identity federation instead of stored secrets ([security overview](https://learn.microsoft.com/en-us/azure/devops/pipelines/security/overview)). A separate connection for each environment, with production restricted to the main branch, keeps a pull request build away from production credentials. A plan on a pull request needs only read access; only the apply needs write access.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-identity-per-environment"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9819812392,
+      "isDeleted": false,
+      "id": "node-c04f1cf96e0a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5454.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 410.40000000000003,
+      "height": 129.0,
+      "seed": 497746,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c04f1cf96e0a"
+        },
+        {
+          "id": "edge-5698a34c22f8",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-pin-terraform"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4071610976,
+      "isDeleted": false,
+      "id": "text-c04f1cf96e0a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5466.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 105.0,
+      "seed": 607635,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pin Terraform and Providers\nPin the Terraform version in the install step,\nand commit `.terraform.lock.hcl`. A pipeline\nthat installs `latest` can change behavior on\nany day without a code change. Pinning moves\nupgrades into reviewed pull requests.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c04f1cf96e0a",
+      "originalText": "Pin Terraform and Providers\nPin the Terraform version in the install step, and commit `.terraform.lock.hcl`. A pipeline that installs `latest` can change behavior on any day without a code change. Pinning moves upgrades into reviewed pull requests.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-pin-terraform"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5303280704,
+      "isDeleted": false,
+      "id": "node-81947e79dad6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 5623.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 410.0,
+      "height": 150.0,
+      "seed": 993494,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-81947e79dad6"
+        },
+        {
+          "id": "edge-dc887e0076e4",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "azdo-about-the-sources"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7745998187,
+      "isDeleted": false,
+      "id": "text-81947e79dad6",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 730.0,
+      "y": 5633.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 390.0,
+      "height": 130.0,
+      "seed": 438624,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Sources\nThe provider facts come from the\n`microsoft/azuredevops` repository at tag v1.16.0,\nthe latest release on 2026-11-23. The task facts\ncome from the TerraformCLI task repository at tag\n1.2.2. The Azure Pipelines facts come from\nlearn.microsoft.com, and the Terraform facts from\ndeveloper.hashicorp.com, on the same day.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-81947e79dad6",
+      "originalText": "About the Sources\nThe provider facts come from the `microsoft/azuredevops` repository at tag v1.16.0, the latest release on 2026-11-23. The task facts come from the TerraformCLI task repository at tag 1.2.2. The Azure Pipelines facts come from learn.microsoft.com, and the Terraform facts from developer.hashicorp.com, on the same day.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "azdo-about-the-sources"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4893193131,
+      "isDeleted": false,
+      "id": "edge-645211c320bd",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 357.82548690829356,
+      "y": 2836.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 399589,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          527.3712885334709,
+          -1767.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-47aa38506338",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.62f7a26736f0f4e5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7030575560,
+      "isDeleted": false,
+      "id": "edge-3ed1c8fe2c42",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 949.08043687761,
+      "y": 947.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 141802,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          454.74500481850305,
+          -607.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-59276aa14377",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4811e1ad4e276ef3"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7137145609,
+      "isDeleted": false,
+      "id": "edge-def14148ff9f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1506.1505577328912,
+      "y": 600.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 86550,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          561.698884534218,
+          3097.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-f84d79cdc868",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-508d918ca5b3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.1f86bf20b48873b8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6270181343,
+      "isDeleted": false,
+      "id": "edge-5a7a2a4d267c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 971.9977809937288,
+      "y": 947.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 978852,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          390.5013024602026,
+          -347.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f84d79cdc868",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4323eee942d824ca"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5967719062,
+      "isDeleted": false,
+      "id": "edge-a58dad7e93c2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1041.0604065827686,
+      "y": 947.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 883560,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          235.7395934172314,
+          -104.46079272477698
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-23758bfb109d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c959d6fbf30f6b3d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5582899649,
+      "isDeleted": false,
+      "id": "edge-6f7c040ad8f2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 1008.8007035003432,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 356530,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.5705216197666232
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-0b705e95f761",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.88a8b2678a7613e3"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4505389575,
+      "isDeleted": false,
+      "id": "edge-6eb45c622f93",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1537.2420362514463,
+      "y": 1380.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 695258,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          499.51592749710767,
+          1076.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5c8ecc0ddb03",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d53f60d12a3b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.401549d1d391a9ca"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6925995087,
+      "isDeleted": false,
+      "id": "edge-ab17b9fa6dd3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1039.219675262655,
+      "y": 1069.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 387209,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          237.58032473734488,
+          106.70324296499666
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5c8ecc0ddb03",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a83f5773002a18d4"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7193917706,
+      "isDeleted": false,
+      "id": "edge-d3937f7863ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1537.6587869362365,
+      "y": 1640.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 943575,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          503.594401244168,
+          1076.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-93c37c334180",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d4f38375ca88",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.71d1ca9f1531ef9e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1449791213,
+      "isDeleted": false,
+      "id": "edge-72c06fd44720",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 971.5376137997125,
+      "y": 1069.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 301568,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          391.79127934834696,
+          350.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-93c37c334180",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.1fd52a2bbebd6892"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7200897466,
+      "isDeleted": false,
+      "id": "edge-b3cfaa939217",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1537.1870424740655,
+      "y": 1896.5,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 523689,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          498.8016441573693,
+          1059.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-9f44c29f4148",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2d13706f1a97",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.da2a4f6310bcc8fa"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9356627979,
+      "isDeleted": false,
+      "id": "edge-72129f3abf5c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 948.9779487179487,
+      "y": 1069.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 228850,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          456.3398717948719,
+          610.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-5268cf60e953",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9f44c29f4148",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.68f8d57ed38b4392"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8313055056,
+      "isDeleted": false,
+      "id": "edge-a5d2993cd81a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 410.7142857142857,
+      "y": 2836.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 710535,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          449.2207792207792,
+          -576.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-47aa38506338",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-574f87ad914a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.1e37127694d545d9"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5699447817,
+      "isDeleted": false,
+      "id": "edge-bdeab774458f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1130.0,
+      "y": 2132.406684315023,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 248062,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -40.866975512905356
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-574f87ad914a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-1bff65d7b6b4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d0d4be88b6768f86"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8553430262,
+      "isDeleted": false,
+      "id": "edge-5d645aebd615",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1130.0,
+      "y": 2220.593315684977,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 84867,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          40.866975512905356
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-574f87ad914a",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a8444fec7d9e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.48c823118d3f2840"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4391730241,
+      "isDeleted": false,
+      "id": "edge-e80b4b4f9ec7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 430.01193317422434,
+      "y": 3056.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 507004,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          426.01431980906926,
+          446.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-47aa38506338",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-aabae97ec57d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.7afc89002401c9b4"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7831214452,
+      "isDeleted": false,
+      "id": "edge-826e463d40ca",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1005.7471297636276,
+      "y": 3502.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 127884,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          455.70438977327547,
+          -407.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aabae97ec57d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7e78d3ba0aea",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.8b385c312c696e98"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2628007801,
+      "isDeleted": false,
+      "id": "edge-a3eeb6868f42",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1549.733299337073,
+      "y": 3018.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 799376,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          407.1212646608874,
+          -342.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7e78d3ba0aea",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d53f60d12a3b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a36341c45d1e6e68"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5892094602,
+      "isDeleted": false,
+      "id": "edge-d7d8d63a5f81",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1596.9214953271028,
+      "y": 3018.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 64530,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          281.4785046728973,
+          -116.11711788896491
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7e78d3ba0aea",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d4f38375ca88",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e560a61776c1e6d5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5785587406,
+      "isDeleted": false,
+      "id": "edge-699d066f6805",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1688.4,
+      "y": 3059.5117374914325,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 762877,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          2.8486977381767247
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7e78d3ba0aea",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2d13706f1a97",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.cfdb3f9b57702576"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1126245066,
+      "isDeleted": false,
+      "id": "edge-67744c9d8d07",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1587.2612093023256,
+      "y": 3095.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 377559,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          291.1387906976745,
+          134.0705106237151
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7e78d3ba0aea",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e0adfcc7d35a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.7db9487102f48be6"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3090330853,
+      "isDeleted": false,
+      "id": "edge-d9043d6d8a1d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1548.0129538763495,
+      "y": 3095.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 894851,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          435.8386653581945,
+          380.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7e78d3ba0aea",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-369753c7496c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.f9c8be6f149623b8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4882139220,
+      "isDeleted": false,
+      "id": "edge-05108324578e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 992.4682789197905,
+      "y": 3647.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 377054,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          476.0132204756146,
+          509.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aabae97ec57d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-23ae8df753b7",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.595fba60f01bb300"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2216239599,
+      "isDeleted": false,
+      "id": "edge-948b22701374",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1561.6956857694786,
+      "y": 4157.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 180130,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          360.75724404378616,
+          -240.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-23ae8df753b7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-508d918ca5b3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.ca743ea71297ed83"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3681724568,
+      "isDeleted": false,
+      "id": "edge-be5136559626",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1678.2561403508773,
+      "y": 4157.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 50839,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          200.14385964912276,
+          -43.98295065113052
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-23ae8df753b7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ec13f18134d3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.654f05d0533682e1"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8236592619,
+      "isDeleted": false,
+      "id": "edge-f9b64f73923f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1673.6322580645162,
+      "y": 4233.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 774990,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          204.76774193548385,
+          46.22712474297441
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-23ae8df753b7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c67b214a6d33",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.f0aea958c9d47b34"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4379875931,
+      "isDeleted": false,
+      "id": "edge-c2961d19e84b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1561.4376923076923,
+      "y": 4233.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 977419,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          364.37589743589774,
+          243.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-23ae8df753b7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-71c0d3b03ac9",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5ba5e588360a3eee"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9124755742,
+      "isDeleted": false,
+      "id": "edge-4d019bdfc547",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 354.5720583248559,
+      "y": 3056.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 280940,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          551.6533062054934,
+          2052.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-47aa38506338",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6660185f0d0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.90fd259ab480d533"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9256740142,
+      "isDeleted": false,
+      "id": "edge-00464a2d709c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1013.75560821485,
+      "y": 5108.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 176226,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          299.97314375987355,
+          -158.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6660185f0d0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5285b2a7870b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.0a0717b3948e1d5d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8209109744,
+      "isDeleted": false,
+      "id": "edge-93cc97652643",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 5129.50959933222,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 843312,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -27.358096828046655
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6660185f0d0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c39f15685009",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.fcc350f81fc3d7cf"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9218307455,
+      "isDeleted": false,
+      "id": "edge-4d5ccb994908",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 5206.817111853088,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 220859,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          46.23121869782972
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6660185f0d0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-dbe9f33faed7",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e31ee3e379b385c6"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2476819579,
+      "isDeleted": false,
+      "id": "edge-5698a34c22f8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1001.741013185288,
+      "y": 5208.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 196749,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          406.1646079111729,
+          246.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6660185f0d0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c04f1cf96e0a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.670002c82b30c5dc"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8240734373,
+      "isDeleted": false,
+      "id": "edge-dc887e0076e4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 348.98691622751227,
+      "y": 3056.5,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 326244,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          559.6583681628204,
+          2566.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-47aa38506338",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-81947e79dad6",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.295b5107f286cb36"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

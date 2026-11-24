@@ -1,0 +1,4243 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5882622364,
+      "isDeleted": false,
+      "id": "node-b489306ab05d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120.0,
+      "y": 2754.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 356758,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b489306ab05d"
+        },
+        {
+          "id": "edge-b670d38b209c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a9c407dcb9fd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-72ad107687d4",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6b67e15eeb48",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6decabaeeedb",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-dbt-cloud"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1047538689,
+      "isDeleted": false,
+      "id": "text-b489306ab05d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 2754.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 2295.0,
+      "seed": 621194,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Terraform for dbt Cloud\nThe dbt Cloud provider lets\nTerraform manage the objects of a\ndbt Cloud account: projects,\nconnections, credentials,\nenvironments, environment\nvariables and jobs. dbt Labs\nmaintains it under the source\naddress `dbt-labs/dbtcloud`\n([provider docs](https://registry.\nterraform.io/providers/dbt-labs/db\ntcloud/latest/docs)). It started\nas the community provider\n`GtheSheep/dbt-cloud` ([README](ht\ntps://github.com/dbt-labs/terrafor\nm-provider-dbtcloud/blob/v1.13.1/R\nEADME.md#L5-L7)). The provider\ncalls the dbt Cloud API with a\ntoken. The [Terraform\nmap](../terraform.md) explains\nTerraform itself, and the [dbt map\n](../../dbt/dbt-deep-mental-model.\nmd) explains dbt.\n\nThe unit is one dbt Cloud account.\nThe provider block names the\naccount ID, the API host and the\ntoken ([provider configuration](ht\ntps://github.com/dbt-labs/terrafor\nm-provider-dbtcloud/blob/v1.13.1/d\nocs/index.md#L44-L54)). Your dbt\nmodels live in Git. The dbt Cloud\nobjects say where, how and when\nthose models run. Terraform\nmanages these run settings, not\nthe models.\n\nThe objects sit at two levels\n([Account and Project](#account-an\nd-project-account-and-project)):\n\n- The account holds objects that\nmany projects share, such as\nglobal connections to a data\nplatform, service tokens and user\ngroups.\n- A project holds a Git\nrepository, credentials,\nenvironments, environment\nvariables and jobs.\n\nInside a project, two objects do\nmost of the work:\n\n- An environment decides where and\nhow the code runs: the connection,\nthe credential, the dbt version\nand the Git branch ([The\nEnvironment Decides Where](#the-en\nvironment-decides-where-the-enviro\nnment-decides-where)).\n- A job decides what runs and\nwhen: the dbt commands, the\ntriggers and the target name. Each\njob belongs to one environment.\n\nThree more ideas explain most\nplans. The type of an environment\nswitches dbt features on and off\n([Environment Types Are Switches](\n#environment-types-are-switches-en\nvironment-types-are-switches)).\nThe provider reads most settings\nback from dbt Cloud, but never\nsecrets ([What the Provider Reads \nBack](#what-the-provider-reads-bac\nk-what-the-provider-reads-back)).\nAnd provider versions 0.x and 1.x\nhave different schemas, so the\ndocs must match the pinned version\n([Two Provider Generations](#two-p\nrovider-generations-two-provider-g\nenerations)).\n\nNow compare Snowflake. A dbt Cloud\ncredential names a Snowflake user,\nrole, database and warehouse as\nplain text. Other Terraform, or a\nperson, creates those Snowflake\nobjects. The [Snowflake map](../sn\nowflake/terraform-snowflake.md)\ncovers them.\n\nThe map has four parts. Mental\nModels explains the ideas above.\nReading a dbt Cloud Configuration\nsays what you will see and where\nto look first. Pitfalls lists the\nfailures that experienced users\nplan around. Good and Bad\nDecisions compares the main design\nchoices.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-b489306ab05d",
+      "originalText": "Terraform for dbt Cloud\nThe dbt Cloud provider lets Terraform manage the objects of a dbt Cloud account: projects, connections, credentials, environments, environment variables and jobs. dbt Labs maintains it under the source address `dbt-labs/dbtcloud` ([provider docs](https://registry.terraform.io/providers/dbt-labs/dbtcloud/latest/docs)). It started as the community provider `GtheSheep/dbt-cloud` ([README](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/README.md#L5-L7)). The provider calls the dbt Cloud API with a token. The [Terraform map](../terraform.md) explains Terraform itself, and the [dbt map](../../dbt/dbt-deep-mental-model.md) explains dbt.\n\nThe unit is one dbt Cloud account. The provider block names the account ID, the API host and the token ([provider configuration](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/index.md#L44-L54)). Your dbt models live in Git. The dbt Cloud objects say where, how and when those models run. Terraform manages these run settings, not the models.\n\nThe objects sit at two levels ([Account and Project](#account-and-project-account-and-project)):\n\n- The account holds objects that many projects share, such as global connections to a data platform, service tokens and user groups.\n- A project holds a Git repository, credentials, environments, environment variables and jobs.\n\nInside a project, two objects do most of the work:\n\n- An environment decides where and how the code runs: the connection, the credential, the dbt version and the Git branch ([The Environment Decides Where](#the-environment-decides-where-the-environment-decides-where)).\n- A job decides what runs and when: the dbt commands, the triggers and the target name. Each job belongs to one environment.\n\nThree more ideas explain most plans. The type of an environment switches dbt features on and off ([Environment Types Are Switches](#environment-types-are-switches-environment-types-are-switches)). The provider reads most settings back from dbt Cloud, but never secrets ([What the Provider Reads Back](#what-the-provider-reads-back-what-the-provider-reads-back)). And provider versions 0.x and 1.x have different schemas, so the docs must match the pinned version ([Two Provider Generations](#two-provider-generations-two-provider-generations)).\n\nNow compare Snowflake. A dbt Cloud credential names a Snowflake user, role, database and warehouse as plain text. Other Terraform, or a person, creates those Snowflake objects. The [Snowflake map](../snowflake/terraform-snowflake.md) covers them.\n\nThe map has four parts. Mental Models explains the ideas above. Reading a dbt Cloud Configuration says what you will see and where to look first. Pitfalls lists the failures that experienced users plan around. Good and Bad Decisions compares the main design choices.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-dbt-cloud"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8941852877,
+      "isDeleted": false,
+      "id": "node-203cf37a7c5f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 689.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 854669,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-203cf37a7c5f"
+        },
+        {
+          "id": "edge-b670d38b209c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-848c8b1c9162",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-fe12cbcbbd67",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ad67c98faba7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a626b1f7124a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-55a1e2872913",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-mental-models"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6177035209,
+      "isDeleted": false,
+      "id": "text-203cf37a7c5f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 705.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 95817,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Mental Models\nThe models come in dependency\norder: each model uses only\nthe models before it.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-203cf37a7c5f",
+      "originalText": "Mental Models\nThe models come in dependency order: each model uses only the models before it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-mental-models"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6614998948,
+      "isDeleted": false,
+      "id": "node-76d1ab9bd7d5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 272151,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-76d1ab9bd7d5"
+        },
+        {
+          "id": "edge-848c8b1c9162",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "account-and-project"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4324522541,
+      "isDeleted": false,
+      "id": "text-76d1ab9bd7d5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 630.0,
+      "seed": 230726,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Account and Project\nA global connection,\n`dbtcloud_global_connection`, belongs to the\naccount and holds the details of one data\nplatform, such as a Snowflake account. A\nproject does not point to a connection. Each\nenvironment of the project does, with\n`connection_id` ([environment doc](https://git\nhub.com/dbt-labs/terraform-provider-dbtcloud/b\nlob/v1.13.1/docs/resources/environment.md#L72)\n). So one connection can serve many projects.\n\nA project holds the rest:\n\n- `dbtcloud_repository` names the Git\nrepository. `dbtcloud_project_repository`\nlinks it to the project.\n- A credential, such as\n`dbtcloud_snowflake_credential`, holds the\nuser, role, schema and secret that one\ndeployment environment uses.\n- `dbtcloud_environment` combines a\nconnection, a credential and code settings.\n- `dbtcloud_environment_variable` holds one\nvariable with a value for each environment.\n- `dbtcloud_job` holds the commands that run\nin one environment.\n\nProvider version 1.0.0 removed the older\nconnection resources, such as\n`dbtcloud_connection` and\n`dbtcloud_project_connection`.\n`dbtcloud_global_connection` replaces them\n([upgrade guide](https://github.com/dbt-labs/t\nerraform-provider-dbtcloud/blob/v1.13.1/docs/g\nuides/90_upgrading_from_v0_to_v1.md#L7-L12)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-76d1ab9bd7d5",
+      "originalText": "Account and Project\nA global connection, `dbtcloud_global_connection`, belongs to the account and holds the details of one data platform, such as a Snowflake account. A project does not point to a connection. Each environment of the project does, with `connection_id` ([environment doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/environment.md#L72)). So one connection can serve many projects.\n\nA project holds the rest:\n\n- `dbtcloud_repository` names the Git repository. `dbtcloud_project_repository` links it to the project.\n- A credential, such as `dbtcloud_snowflake_credential`, holds the user, role, schema and secret that one deployment environment uses.\n- `dbtcloud_environment` combines a connection, a credential and code settings.\n- `dbtcloud_environment_variable` holds one variable with a value for each environment.\n- `dbtcloud_job` holds the commands that run in one environment.\n\nProvider version 1.0.0 removed the older connection resources, such as `dbtcloud_connection` and `dbtcloud_project_connection`. `dbtcloud_global_connection` replaces them ([upgrade guide](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/guides/90_upgrading_from_v0_to_v1.md#L7-L12)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "account-and-project"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2495006602,
+      "isDeleted": false,
+      "id": "node-c18e8b9521f0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 839174,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c18e8b9521f0"
+        },
+        {
+          "id": "edge-fe12cbcbbd67",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "the-environment-decides-where"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7708584384,
+      "isDeleted": false,
+      "id": "text-c18e8b9521f0",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 669840,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "The Environment Decides Where\nAn environment is either `development` or\n`deployment`. A project has one development\nenvironment and as many deployment\nenvironments as needed ([environment doc](http\ns://github.com/dbt-labs/terraform-provider-dbt\ncloud/blob/v1.13.1/docs/resources/environment.\nmd#L11)). Each environment sets four things ([\narguments](https://github.com/dbt-labs/terrafo\nrm-provider-dbtcloud/blob/v1.13.1/docs/resourc\nes/environment.md#L72-L83)):\n\n- `connection_id`: the data platform.\n- `credential_id`: the identity for deployment\nruns. A development environment has none,\nbecause each developer sets their own\ncredentials in dbt Cloud.\n- `dbt_version`: for example `latest` or\n`versionless`.\n- `custom_branch`: the Git branch to run.\n\nA job adds what to run and when:\n`execute_steps` holds the dbt commands,\n`triggers` holds the trigger flags, and\n`target_name` sets the value of `target.name`\nin the models ([job doc](https://github.com/db\nt-labs/terraform-provider-dbtcloud/blob/v1.13.\n1/docs/resources/job.md#L216-L246)). A model\nthat checks `target.name` therefore behaves\naccording to the job, not the environment.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c18e8b9521f0",
+      "originalText": "The Environment Decides Where\nAn environment is either `development` or `deployment`. A project has one development environment and as many deployment environments as needed ([environment doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/environment.md#L11)). Each environment sets four things ([arguments](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/environment.md#L72-L83)):\n\n- `connection_id`: the data platform.\n- `credential_id`: the identity for deployment runs. A development environment has none, because each developer sets their own credentials in dbt Cloud.\n- `dbt_version`: for example `latest` or `versionless`.\n- `custom_branch`: the Git branch to run.\n\nA job adds what to run and when: `execute_steps` holds the dbt commands, `triggers` holds the trigger flags, and `target_name` sets the value of `target.name` in the models ([job doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/job.md#L216-L246)). A model that checks `target.name` therefore behaves according to the job, not the environment.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "the-environment-decides-where"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8532165480,
+      "isDeleted": false,
+      "id": "node-a840ba22ae5e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 555422,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a840ba22ae5e"
+        },
+        {
+          "id": "edge-ad67c98faba7",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "environment-types-are-switches"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9878168784,
+      "isDeleted": false,
+      "id": "text-a840ba22ae5e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 420.0,
+      "seed": 807287,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Environment Types Are Switches\nA deployment environment has a\n`deployment_type`: `production`, `staging`, or\nempty for a general environment ([environment \ndoc](https://github.com/dbt-labs/terraform-pro\nvider-dbtcloud/blob/v1.13.1/docs/resources/env\nironment.md#L76)). The value is more than a\nlabel. dbt uses it to decide how references\nbetween projects resolve in dbt Mesh, and it\nsets the variable `DBT_CLOUD_ENVIRONMENT_TYPE`\nin each run ([project dependencies](https://do\ncs.getdbt.com/docs/mesh/govern/project-depende\nncies); [special variables](https://docs.getdb\nt.com/docs/build/environment-variables)). That\nvariable is `prod`, `staging`, or empty for a\ngeneral environment.\n\nThe environment `type`, development or\ndeployment, cannot change in place. A new\nvalue replaces the environment ([schema](https\n://github.com/dbt-labs/terraform-provider-dbtc\nloud/blob/v1.13.1/pkg/framework/objects/enviro\nnment/schema.go#L234-L240)), and the pitfall\nReplacements Delete Jobs shows what follows.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a840ba22ae5e",
+      "originalText": "Environment Types Are Switches\nA deployment environment has a `deployment_type`: `production`, `staging`, or empty for a general environment ([environment doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/environment.md#L76)). The value is more than a label. dbt uses it to decide how references between projects resolve in dbt Mesh, and it sets the variable `DBT_CLOUD_ENVIRONMENT_TYPE` in each run ([project dependencies](https://docs.getdbt.com/docs/mesh/govern/project-dependencies); [special variables](https://docs.getdbt.com/docs/build/environment-variables)). That variable is `prod`, `staging`, or empty for a general environment.\n\nThe environment `type`, development or deployment, cannot change in place. A new value replaces the environment ([schema](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/pkg/framework/objects/environment/schema.go#L234-L240)), and the pitfall Replacements Delete Jobs shows what follows.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "environment-types-are-switches"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4717997500,
+      "isDeleted": false,
+      "id": "node-521a2d4b4f29",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 31881,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-521a2d4b4f29"
+        },
+        {
+          "id": "edge-ac7f377056f5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a626b1f7124a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "what-the-provider-reads-back"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9917543642,
+      "isDeleted": false,
+      "id": "text-521a2d4b4f29",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 367.5,
+      "seed": 131510,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What the Provider Reads Back\nA refresh reads most settings of jobs and\nenvironments from dbt Cloud. So an edit in the\ndbt Cloud UI to such a setting shows in the\nnext plan, and the apply reverts it. The\n[Terraform map](../terraform.md#outside-change\ns-get-reverted-outside-changes-get-reverted)\nshows the same effect with Snowflake.\n\nSecrets are the exception. The dbt Cloud API\nmasks them, so the provider cannot read them\nback. For an environment variable whose name\nstarts with `DBT_ENV_SECRET`, the provider\nkeeps the values from its own state\n([environment variable code](https://github.co\nm/dbt-labs/terraform-provider-dbtcloud/blob/v1\n.13.1/pkg/framework/objects/environment_variab\nle/resource.go#L161-L182)). A secret that\nsomeone changes in the UI therefore never\nshows in a plan, and the next apply does not\nrestore it either.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-521a2d4b4f29",
+      "originalText": "What the Provider Reads Back\nA refresh reads most settings of jobs and environments from dbt Cloud. So an edit in the dbt Cloud UI to such a setting shows in the next plan, and the apply reverts it. The [Terraform map](../terraform.md#outside-changes-get-reverted-outside-changes-get-reverted) shows the same effect with Snowflake.\n\nSecrets are the exception. The dbt Cloud API masks them, so the provider cannot read them back. For an environment variable whose name starts with `DBT_ENV_SECRET`, the provider keeps the values from its own state ([environment variable code](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/pkg/framework/objects/environment_variable/resource.go#L161-L182)). A secret that someone changes in the UI therefore never shows in a plan, and the next apply does not restore it either.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "what-the-provider-reads-back"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6763560236,
+      "isDeleted": false,
+      "id": "node-6bb3db4f7fda",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 551935,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6bb3db4f7fda"
+        },
+        {
+          "id": "edge-112fe4873cd5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-55a1e2872913",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "two-provider-generations"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3525814137,
+      "isDeleted": false,
+      "id": "text-6bb3db4f7fda",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 560.0,
+      "seed": 377940,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Two Provider Generations\nProvider 1.0.0 rewrote the provider on\nHashiCorp's newer Plugin Framework. It changed\nthe schema of several resources and removed\nthe old connection resources ([upgrade guide](\nhttps://github.com/dbt-labs/terraform-provider\n-dbtcloud/blob/v1.13.1/docs/guides/90_upgradin\ng_from_v0_to_v1.md)). The Terraform Registry\nshows the docs of the latest version by\ndefault. A configuration pinned to 0.x needs\nthe 0.x docs, which GitHub keeps under the\ntag, for example [v0.3.26](https://github.com/\ndbt-labs/terraform-provider-dbtcloud/tree/v0.3\n.26/docs).\n\nSome arguments still exist but are deprecated:\n\n- `triggers.custom_branch_only`: the docs say\nto remove it; jobs now use the environment's\nbranch ([job doc](https://github.com/dbt-labs/\nterraform-provider-dbtcloud/blob/v1.13.1/docs/\nresources/job.md#L216)).\n- `timeout_seconds` on a job: use\n`execution.timeout_seconds` instead ([job doc]\n(https://github.com/dbt-labs/terraform-provide\nr-dbtcloud/blob/v1.13.1/docs/resources/job.md#\nL244)).\n- `deferring_job_id`: use\n`deferring_environment_id` instead ([job doc](\nhttps://github.com/dbt-labs/terraform-provider\n-dbtcloud/blob/v1.13.1/docs/resources/job.md#L\n14)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-6bb3db4f7fda",
+      "originalText": "Two Provider Generations\nProvider 1.0.0 rewrote the provider on HashiCorp's newer Plugin Framework. It changed the schema of several resources and removed the old connection resources ([upgrade guide](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/guides/90_upgrading_from_v0_to_v1.md)). The Terraform Registry shows the docs of the latest version by default. A configuration pinned to 0.x needs the 0.x docs, which GitHub keeps under the tag, for example [v0.3.26](https://github.com/dbt-labs/terraform-provider-dbtcloud/tree/v0.3.26/docs).\n\nSome arguments still exist but are deprecated:\n\n- `triggers.custom_branch_only`: the docs say to remove it; jobs now use the environment's branch ([job doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/job.md#L216)).\n- `timeout_seconds` on a job: use `execution.timeout_seconds` instead ([job doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/job.md#L244)).\n- `deferring_job_id`: use `deferring_environment_id` instead ([job doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/job.md#L14)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "two-provider-generations"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8981254749,
+      "isDeleted": false,
+      "id": "node-e2aa47ddcda1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 1717.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 144.5,
+      "seed": 600008,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e2aa47ddcda1"
+        },
+        {
+          "id": "edge-a9c407dcb9fd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-8e4a5e96ec5f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-934252568839",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-52d4656b7bd2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-dbtcloud-configuration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3745253836,
+      "isDeleted": false,
+      "id": "text-e2aa47ddcda1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 1733.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 112.5,
+      "seed": 488754,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading a dbt Cloud Configuration\nThese nodes say what you will find\nin the files, in which order to\nread them, and what each kind of\nplan line means.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-e2aa47ddcda1",
+      "originalText": "Reading a dbt Cloud Configuration\nThese nodes say what you will find in the files, in which order to read them, and what each kind of plan line means.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-dbtcloud-configuration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2107661761,
+      "isDeleted": false,
+      "id": "node-645fbdca96ef",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 406566,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-645fbdca96ef"
+        },
+        {
+          "id": "edge-8e4a5e96ec5f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-what-you-will-see"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2148666593,
+      "isDeleted": false,
+      "id": "text-645fbdca96ef",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 665.0,
+      "seed": 914566,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What You Will See\n| Resource | dbt Cloud object | What to check\n| Import ID |\n| --- | --- | --- | --- |\n| `dbtcloud_project` | project | Its name and\nsubdirectory | `project_id` |\n| `dbtcloud_global_connection` | connection to\na data platform | Snowflake account, OAuth\nsettings, how other code finds it |\n`connection_id` |\n| `dbtcloud_repository`,\n`dbtcloud_project_repository` | Git repository\nand its link | Remote URL and provider |\n`project_id:repository_id` |\n| `dbtcloud_snowflake_credential` | deployment\ncredential | `auth_type`, database, schema,\nrole, warehouse, secret source |\n`project_id:credential_id` |\n| `dbtcloud_environment` | environment |\n`type`, `deployment_type`, `connection_id`,\n`credential_id`, `dbt_version` |\n`project_id:environment_id` |\n| `dbtcloud_environment_variable` | variable\nwith values per environment | Secret prefix,\nenvironment names as keys | `project_id:NAME`\n|\n| `dbtcloud_job` | job | `execute_steps`,\n`triggers`, `target_name`, `num_threads` |\n`job_id` |\n\nThe import IDs come from the Import section of\neach [resource doc](https://github.com/dbt-lab\ns/terraform-provider-dbtcloud/tree/v1.13.1/doc\ns/resources). A Terraform configuration can\ncreate jobs whose IDs other systems need, for\nexample a pipeline that starts runs through\nthe API. Find where the configuration outputs\nthose IDs.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-645fbdca96ef",
+      "originalText": "What You Will See\n| Resource | dbt Cloud object | What to check | Import ID |\n| --- | --- | --- | --- |\n| `dbtcloud_project` | project | Its name and subdirectory | `project_id` |\n| `dbtcloud_global_connection` | connection to a data platform | Snowflake account, OAuth settings, how other code finds it | `connection_id` |\n| `dbtcloud_repository`, `dbtcloud_project_repository` | Git repository and its link | Remote URL and provider | `project_id:repository_id` |\n| `dbtcloud_snowflake_credential` | deployment credential | `auth_type`, database, schema, role, warehouse, secret source | `project_id:credential_id` |\n| `dbtcloud_environment` | environment | `type`, `deployment_type`, `connection_id`, `credential_id`, `dbt_version` | `project_id:environment_id` |\n| `dbtcloud_environment_variable` | variable with values per environment | Secret prefix, environment names as keys | `project_id:NAME` |\n| `dbtcloud_job` | job | `execute_steps`, `triggers`, `target_name`, `num_threads` | `job_id` |\n\nThe import IDs come from the Import section of each [resource doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/tree/v1.13.1/docs/resources). A Terraform configuration can create jobs whose IDs other systems need, for example a pipeline that starts runs through the API. Find where the configuration outputs those IDs.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-what-you-will-see"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7316514240,
+      "isDeleted": false,
+      "id": "node-44ed3355e97a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 250371,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-44ed3355e97a"
+        },
+        {
+          "id": "edge-934252568839",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-where-to-look-first"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3761903149,
+      "isDeleted": false,
+      "id": "text-44ed3355e97a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 2664,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Where to Look First\nRead a dbt Cloud configuration in this order:\n\n1. `required_providers` and the lock file. A\n0.x pin means the Registry docs do not match;\nread the docs at the pinned tag.\n2. The `provider \"dbtcloud\"` block. Check\n`host_url` and where the token comes from.\n3. The backend and the workspaces. Find which\nenvironments share one state, because one plan\nthen touches all of them.\n4. `dbtcloud_project`, and the `import` and\n`moved` blocks. They show which objects were\nfirst made in the UI.\n5. The connection, or the data source that\nfinds it, and the `connection_id` of every\nenvironment.\n6. The environments: `type`,\n`deployment_type`, the credential wiring,\n`dbt_version` and the branch.\n7. The credentials: `auth_type`, the Snowflake\nnames, and where the private key comes from.\n8. The jobs: `execute_steps`, `target_name`,\n`triggers`, the schedule fields and\n`num_threads`.\n9. The environment variables, and which values\nare secret.\n10. The outputs and pipelines that use job\nIDs, and the Snowflake code that creates the\nnamed database, role and warehouse.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-44ed3355e97a",
+      "originalText": "Where to Look First\nRead a dbt Cloud configuration in this order:\n\n1. `required_providers` and the lock file. A 0.x pin means the Registry docs do not match; read the docs at the pinned tag.\n2. The `provider \"dbtcloud\"` block. Check `host_url` and where the token comes from.\n3. The backend and the workspaces. Find which environments share one state, because one plan then touches all of them.\n4. `dbtcloud_project`, and the `import` and `moved` blocks. They show which objects were first made in the UI.\n5. The connection, or the data source that finds it, and the `connection_id` of every environment.\n6. The environments: `type`, `deployment_type`, the credential wiring, `dbt_version` and the branch.\n7. The credentials: `auth_type`, the Snowflake names, and where the private key comes from.\n8. The jobs: `execute_steps`, `target_name`, `triggers`, the schedule fields and `num_threads`.\n9. The environment variables, and which values are secret.\n10. The outputs and pipelines that use job IDs, and the Snowflake code that creates the named database, role and warehouse.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-where-to-look-first"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2299779813,
+      "isDeleted": false,
+      "id": "node-973a743f8fb2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 978755,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-973a743f8fb2"
+        },
+        {
+          "id": "edge-52d4656b7bd2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-plan-signals"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8215231943,
+      "isDeleted": false,
+      "id": "text-973a743f8fb2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 350.0,
+      "seed": 852052,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `~ triggers` or `~ schedule_*` on a job\nwithout a code change | Someone changed the\njob in the UI; the apply will revert it. |\n| `-/+ dbtcloud_environment` | The environment\nis replaced; dbt deletes its jobs with it. |\n| `-/+ dbtcloud_job ... triggers` | The job\nchanges type between CI, merge and other jobs;\nit gets a new ID. |\n| `+ credential_id = (known after apply)`\nright after an upgrade to 1.x | The new\nversion stores empty values as null instead of\n0 ([issue 519](https://github.com/dbt-labs/ter\nraform-provider-dbtcloud/issues/519)). |\n| `target_name = \"default\"` on a new job | The\njob uses the provider default; models that\ncheck `target.name` may skip production logic.\n|",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-973a743f8fb2",
+      "originalText": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `~ triggers` or `~ schedule_*` on a job without a code change | Someone changed the job in the UI; the apply will revert it. |\n| `-/+ dbtcloud_environment` | The environment is replaced; dbt deletes its jobs with it. |\n| `-/+ dbtcloud_job ... triggers` | The job changes type between CI, merge and other jobs; it gets a new ID. |\n| `+ credential_id = (known after apply)` right after an upgrade to 1.x | The new version stores empty values as null instead of 0 ([issue 519](https://github.com/dbt-labs/terraform-provider-dbtcloud/issues/519)). |\n| `target_name = \"default\"` on a new job | The job uses the provider default; models that check `target.name` may skip production logic. |",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-plan-signals"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3253079972,
+      "isDeleted": false,
+      "id": "node-6ccc9fa4f6d6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 3248.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 377.59999999999997,
+      "height": 122.0,
+      "seed": 994260,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6ccc9fa4f6d6"
+        },
+        {
+          "id": "edge-72ad107687d4",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1524971233a9",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b4b33aaf065c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f81dc53423df",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5872662160,
+      "isDeleted": false,
+      "id": "text-6ccc9fa4f6d6",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 3264.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 345.59999999999997,
+      "height": 90.0,
+      "seed": 100686,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pitfalls\nThe pitfalls fall into three\ngroups: drift, replacements, and\njob settings.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-6ccc9fa4f6d6",
+      "originalText": "Pitfalls\nThe pitfalls fall into three groups: drift, replacements, and job settings.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8543051917,
+      "isDeleted": false,
+      "id": "node-033bc202b756",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1287.6,
+      "y": 2521.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 410.40000000000003,
+      "height": 76.5,
+      "seed": 634692,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-033bc202b756"
+        },
+        {
+          "id": "edge-1524971233a9",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-39331d94699d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-3f4cbac9c545",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-9aa9c6d9b2da",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-drift-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7520298410,
+      "isDeleted": false,
+      "id": "text-033bc202b756",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1299.6,
+      "y": 2533.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 52.5,
+      "seed": 116181,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Drift Pitfalls\nThese pitfalls come from the split between the\nUI and the code.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-033bc202b756",
+      "originalText": "Drift Pitfalls\nThese pitfalls come from the split between the UI and the code.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-drift-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8584359840,
+      "isDeleted": false,
+      "id": "node-70de4920c868",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1888.0,
+      "y": 2200.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 509320,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-70de4920c868"
+        },
+        {
+          "id": "edge-ac7f377056f5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-39331d94699d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "ui-edits-get-reverted"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7336338356,
+      "isDeleted": false,
+      "id": "text-70de4920c868",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1900.0,
+      "y": 2212.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 29165,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "UI Edits Get Reverted\ndbt Cloud lets anyone with the right role edit\na job in the UI. When the job is in Terraform,\nthe next apply reverts that edit, with no\nwarning beyond the plan line. dbt Cloud keeps\nthe settings history of each job for 90 days,\nso you can see what changed ([deploy jobs](htt\nps://docs.getdbt.com/docs/deploy/deploy-jobs))\n. Make every change to a Terraform-managed job\nin code.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-70de4920c868",
+      "originalText": "UI Edits Get Reverted\ndbt Cloud lets anyone with the right role edit a job in the UI. When the job is in Terraform, the next apply reverts that edit, with no warning beyond the plan line. dbt Cloud keeps the settings history of each job for 90 days, so you can see what changed ([deploy jobs](https://docs.getdbt.com/docs/deploy/deploy-jobs)). Make every change to a Terraform-managed job in code.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "ui-edits-get-reverted"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4295234200,
+      "isDeleted": false,
+      "id": "node-ea15b27ee859",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1888.0,
+      "y": 2439.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 221291,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ea15b27ee859"
+        },
+        {
+          "id": "edge-3f4cbac9c545",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "secrets-in-state"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2903084597,
+      "isDeleted": false,
+      "id": "text-ea15b27ee859",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1900.0,
+      "y": 2439.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 350.0,
+      "seed": 854347,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secrets in State and Out of Sight\nThe private key and passphrase of a credential\nare stored in the state in plain text;\n`sensitive` only hides them in plan output\n([credential doc](https://github.com/dbt-labs/\nterraform-provider-dbtcloud/blob/v1.13.1/docs/\nresources/snowflake_credential.md#L62)). The\nvalues of environment variables are not even\nmarked sensitive ([variable doc](https://githu\nb.com/dbt-labs/terraform-provider-dbtcloud/blo\nb/v1.13.1/docs/resources/environment_variable.\nmd#L39)). Newer 1.x versions add write-only\narguments such as `private_key_wo`, which keep\na secret out of the state; they need Terraform\n1.11 or later ([credential doc](https://github\n.com/dbt-labs/terraform-provider-dbtcloud/blob\n/v1.13.1/docs/resources/snowflake_credential.m\nd#L26-L27)). And a secret changed in the UI\nstays invisible to Terraform, as What the\nProvider Reads Back explains.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-ea15b27ee859",
+      "originalText": "Secrets in State and Out of Sight\nThe private key and passphrase of a credential are stored in the state in plain text; `sensitive` only hides them in plan output ([credential doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/snowflake_credential.md#L62)). The values of environment variables are not even marked sensitive ([variable doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/environment_variable.md#L39)). Newer 1.x versions add write-only arguments such as `private_key_wo`, which keep a secret out of the state; they need Terraform 1.11 or later ([credential doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/snowflake_credential.md#L26-L27)). And a secret changed in the UI stays invisible to Terraform, as What the Provider Reads Back explains.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "secrets-in-state"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9665000385,
+      "isDeleted": false,
+      "id": "node-cd65dbccb6e3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1888.0,
+      "y": 2699.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 74361,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-cd65dbccb6e3"
+        },
+        {
+          "id": "edge-9aa9c6d9b2da",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "lookups-by-name"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6149681797,
+      "isDeleted": false,
+      "id": "text-cd65dbccb6e3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1900.0,
+      "y": 2699.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 604163,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Lookups by Name\nA configuration can find a global connection\nby its name, with the data source\n`dbtcloud_global_connections` and a filter. If\nsomeone renames the connection, the lookup\nreturns nothing and the environment create\nfails. Two connections can also share one\nname; the provider's changelog suggests a\ncheck that names do not repeat ([changelog](ht\ntps://github.com/dbt-labs/terraform-provider-d\nbtcloud/blob/v0.3.26/CHANGELOG.md#L118-L121)).\nPass the connection ID from the state that\nowns the connection, or keep both in one\nstate.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-cd65dbccb6e3",
+      "originalText": "Lookups by Name\nA configuration can find a global connection by its name, with the data source `dbtcloud_global_connections` and a filter. If someone renames the connection, the lookup returns nothing and the environment create fails. Two connections can also share one name; the provider's changelog suggests a check that names do not repeat ([changelog](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v0.3.26/CHANGELOG.md#L118-L121)). Pass the connection ID from the state that owns the connection, or keep both in one state.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "lookups-by-name"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2647577008,
+      "isDeleted": false,
+      "id": "node-b1a97efbe5d2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1287.6,
+      "y": 3269.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 59.0,
+      "seed": 877942,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b1a97efbe5d2"
+        },
+        {
+          "id": "edge-b4b33aaf065c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f3f1f7b8f75d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d14aed2fd439",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-26020cf7f87b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-replacement-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8050015328,
+      "isDeleted": false,
+      "id": "text-b1a97efbe5d2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1299.6,
+      "y": 3273.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 52.5,
+      "seed": 719161,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Replacement Pitfalls\nThese pitfalls delete jobs or change their\nIDs.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b1a97efbe5d2",
+      "originalText": "Replacement Pitfalls\nThese pitfalls delete jobs or change their IDs.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-replacement-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4435657995,
+      "isDeleted": false,
+      "id": "node-f39b1dcc292e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.3999999999999,
+      "y": 2959.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 397405,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f39b1dcc292e"
+        },
+        {
+          "id": "edge-f3f1f7b8f75d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "replacements-delete-jobs"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6498090428,
+      "isDeleted": false,
+      "id": "text-f39b1dcc292e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1908.3999999999999,
+      "y": 2959.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 800530,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Replacements Delete Jobs\ndbt deletes an environment's jobs together\nwith the environment ([delete an environment](\nhttps://docs.getdbt.com/faqs/Environments/dele\nte-environment-job)). So a plan that replaces\nan environment, for example after a change of\n`type`, also takes its jobs with it. A job\nalso gets a new ID when its triggers move it\nbetween kinds: CI, merge, or other ([job code]\n(https://github.com/dbt-labs/terraform-provide\nr-dbtcloud/blob/v1.13.1/pkg/framework/objects/\njob/resource.go#L128-L157)). Any pipeline or\nservice that starts the job by ID then calls a\njob that no longer exists.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-f39b1dcc292e",
+      "originalText": "Replacements Delete Jobs\ndbt deletes an environment's jobs together with the environment ([delete an environment](https://docs.getdbt.com/faqs/Environments/delete-environment-job)). So a plan that replaces an environment, for example after a change of `type`, also takes its jobs with it. A job also gets a new ID when its triggers move it between kinds: CI, merge, or other ([job code](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/pkg/framework/objects/job/resource.go#L128-L157)). Any pipeline or service that starts the job by ID then calls a job that no longer exists.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "replacements-delete-jobs"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1408297791,
+      "isDeleted": false,
+      "id": "node-7831ee548d78",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.3999999999999,
+      "y": 3219.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 130386,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7831ee548d78"
+        },
+        {
+          "id": "edge-d14aed2fd439",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "is-active-false-deletes"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8674394330,
+      "isDeleted": false,
+      "id": "text-7831ee548d78",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1908.3999999999999,
+      "y": 3231.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 259039,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Setting is_active to False Deletes the Job\n`is_active = false` sounds like a pause, but\nthe docs say it \"is the same as creating a job\nin a deleted state\" ([job doc](https://github.\ncom/dbt-labs/terraform-provider-dbtcloud/blob/\nv1.13.1/docs/resources/job.md#L230)). To pause\na job, set every trigger to `false` instead ([\ntriggers](https://github.com/dbt-labs/terrafor\nm-provider-dbtcloud/blob/v1.13.1/docs/resource\ns/job.md#L216)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7831ee548d78",
+      "originalText": "Setting is_active to False Deletes the Job\n`is_active = false` sounds like a pause, but the docs say it \"is the same as creating a job in a deleted state\" ([job doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/job.md#L230)). To pause a job, set every trigger to `false` instead ([triggers](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/job.md#L216)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "is-active-false-deletes"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4548917174,
+      "isDeleted": false,
+      "id": "node-b1a587786eaa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1896.3999999999999,
+      "y": 3458.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 195272,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b1a587786eaa"
+        },
+        {
+          "id": "edge-26020cf7f87b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "authoritative-group-lists"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5677571055,
+      "isDeleted": false,
+      "id": "text-b1a587786eaa",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1908.3999999999999,
+      "y": 3470.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 157.5,
+      "seed": 517352,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Authoritative Group Lists\n`dbtcloud_user_groups` owns the full list of\ngroups of a user. It removes any group that\nsomeone added in the UI ([user groups doc](htt\nps://github.com/dbt-labs/terraform-provider-db\ntcloud/blob/v1.13.1/docs/resources/user_groups\n.md#L17)). A team that manages some groups in\ncode and others by hand loses the hand-made\nones at the next apply.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b1a587786eaa",
+      "originalText": "Authoritative Group Lists\n`dbtcloud_user_groups` owns the full list of groups of a user. It removes any group that someone added in the UI ([user groups doc](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/resources/user_groups.md#L17)). A team that manages some groups in code and others by hand loses the hand-made ones at the next apply.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "authoritative-group-lists"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4977075546,
+      "isDeleted": false,
+      "id": "node-659e27403167",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1287.6,
+      "y": 4011.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 402.0,
+      "height": 76.5,
+      "seed": 865610,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-659e27403167"
+        },
+        {
+          "id": "edge-f81dc53423df",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5a4e2eaf6762",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-344a79a7f79e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-25a3267265a9",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-job-setting-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9819701773,
+      "isDeleted": false,
+      "id": "text-659e27403167",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1299.6,
+      "y": 4023.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 378.0,
+      "height": 52.5,
+      "seed": 510532,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Job Setting Pitfalls\nThese pitfalls come from defaults that\ndiffer from the UI.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-659e27403167",
+      "originalText": "Job Setting Pitfalls\nThese pitfalls come from defaults that differ from the UI.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-job-setting-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1587265005,
+      "isDeleted": false,
+      "id": "node-6f4b8cc2e483",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6,
+      "y": 3679.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 590831,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6f4b8cc2e483"
+        },
+        {
+          "id": "edge-5a4e2eaf6762",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "job-defaults-differ"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6847474487,
+      "isDeleted": false,
+      "id": "text-6f4b8cc2e483",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1891.6,
+      "y": 3679.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 315.0,
+      "seed": 100934,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Job Defaults Differ from the UI\nThe provider has its own defaults for two job\nsettings ([job schema](https://github.com/dbt-\nlabs/terraform-provider-dbtcloud/blob/v1.13.1/\npkg/framework/objects/job/schema.go#L541-L553)\n):\n\n- `target_name` defaults to `\"default\"`. A\nmacro or model that runs only when\n`target.name == 'prod'` silently skips that\nlogic.\n- `num_threads` defaults to 1. The UI suggests\n4 threads ([deploy jobs](https://docs.getdbt.c\nom/docs/deploy/deploy-jobs)), so a Terraform\njob without the setting runs one model at a\ntime.\n\nSet both on every job.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-6f4b8cc2e483",
+      "originalText": "Job Defaults Differ from the UI\nThe provider has its own defaults for two job settings ([job schema](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/pkg/framework/objects/job/schema.go#L541-L553)):\n\n- `target_name` defaults to `\"default\"`. A macro or model that runs only when `target.name == 'prod'` silently skips that logic.\n- `num_threads` defaults to 1. The UI suggests 4 threads ([deploy jobs](https://docs.getdbt.com/docs/deploy/deploy-jobs)), so a Terraform job without the setting runs one model at a time.\n\nSet both on every job.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "job-defaults-differ"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4518889250,
+      "isDeleted": false,
+      "id": "node-56f75a338628",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6,
+      "y": 3939.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 494372,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-56f75a338628"
+        },
+        {
+          "id": "edge-344a79a7f79e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "jobs-started-by-api"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6405271652,
+      "isDeleted": false,
+      "id": "text-56f75a338628",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1891.6,
+      "y": 3944.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 527886,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Jobs Started by the API\nA job with all triggers off runs only when\nsomething calls the API. The scheduler queues\nsuch runs, and it does not cancel\nover-scheduled runs that the API started ([job\nscheduler](https://docs.getdbt.com/docs/deploy\n/job-scheduler)). A slow job that a pipeline\ncalls every hour can therefore build a growing\nqueue. dbt also deactivates a job after 100\nfailed runs in a row. A successful call to\nstart a run says nothing about the result; the\ncaller must poll the run.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-56f75a338628",
+      "originalText": "Jobs Started by the API\nA job with all triggers off runs only when something calls the API. The scheduler queues such runs, and it does not cancel over-scheduled runs that the API started ([job scheduler](https://docs.getdbt.com/docs/deploy/job-scheduler)). A slow job that a pipeline calls every hour can therefore build a growing queue. dbt also deactivates a job after 100 failed runs in a row. A successful call to start a run says nothing about the result; the caller must poll the run.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "jobs-started-by-api"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4144780842,
+      "isDeleted": false,
+      "id": "node-008afdcbaab5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1879.6,
+      "y": 4199.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 901300,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-008afdcbaab5"
+        },
+        {
+          "id": "edge-112fe4873cd5",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-25a3267265a9",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "version-gap"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9444464654,
+      "isDeleted": false,
+      "id": "text-008afdcbaab5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1891.6,
+      "y": 4199.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 587621,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Version Gap\nA constraint such as `~> 0.3` with no\ncommitted lock file stays on 0.3.26, the last\n0.x release. The Registry docs then describe a\ndifferent schema. An upgrade to 1.x needs\ncare: the first 1.x plans can show\n`connection_id` and `credential_id` changes\n([issue 429](https://github.com/dbt-labs/terra\nform-provider-dbtcloud/issues/429); [issue 519\n](https://github.com/dbt-labs/terraform-provid\ner-dbtcloud/issues/519)). Read the upgrade\nguide and the changelog, upgrade in one step\nto a recent 1.x version, and review the first\nplan line by line.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-008afdcbaab5",
+      "originalText": "Version Gap\nA constraint such as `~> 0.3` with no committed lock file stays on 0.3.26, the last 0.x release. The Registry docs then describe a different schema. An upgrade to 1.x needs care: the first 1.x plans can show `connection_id` and `credential_id` changes ([issue 429](https://github.com/dbt-labs/terraform-provider-dbtcloud/issues/429); [issue 519](https://github.com/dbt-labs/terraform-provider-dbtcloud/issues/519)). Read the upgrade guide and the changelog, upgrade in one step to a recent 1.x version, and review the first plan line by line.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "version-gap"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3568392123,
+      "isDeleted": false,
+      "id": "node-4b65f5a6e253",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 4897.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 99.5,
+      "seed": 924003,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4b65f5a6e253"
+        },
+        {
+          "id": "edge-6b67e15eeb48",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-20fe861bf0ac",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-9bb18abd6767",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a50173f0f409",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b45c3deade66",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-decisions"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6316886154,
+      "isDeleted": false,
+      "id": "text-4b65f5a6e253",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 4913.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 67.5,
+      "seed": 766463,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Good and Bad Decisions\nEach node compares a choice with\nits alternative.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-4b65f5a6e253",
+      "originalText": "Good and Bad Decisions\nEach node compares a choice with its alternative.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-decisions"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9334057028,
+      "isDeleted": false,
+      "id": "node-00c5156bac31",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4459.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 476095,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-00c5156bac31"
+        },
+        {
+          "id": "edge-20fe861bf0ac",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "who-schedules-the-jobs"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5867521271,
+      "isDeleted": false,
+      "id": "text-00c5156bac31",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4471.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 886664,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Who Schedules the Jobs\ndbt Cloud can start jobs on a schedule, on a\nmerge, or on a pull request. A team can\ninstead turn all triggers off and start jobs\nfrom its own orchestrator through the API. The\nsecond way gives one scheduler for all systems\nand quiet plans. Its costs: the dbt Cloud UI\nshows no schedule, runs can queue (see Jobs\nStarted by the API), and the orchestrator must\npoll each run for its result.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-00c5156bac31",
+      "originalText": "Who Schedules the Jobs\ndbt Cloud can start jobs on a schedule, on a merge, or on a pull request. A team can instead turn all triggers off and start jobs from its own orchestrator through the API. The second way gives one scheduler for all systems and quiet plans. Its costs: the dbt Cloud UI shows no schedule, runs can queue (see Jobs Started by the API), and the orchestrator must poll each run for its result.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "who-schedules-the-jobs"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9419078997,
+      "isDeleted": false,
+      "id": "node-d83ab5c3e784",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4698.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 945311,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d83ab5c3e784"
+        },
+        {
+          "id": "edge-9bb18abd6767",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "import-what-the-ui-built"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7311181090,
+      "isDeleted": false,
+      "id": "text-d83ab5c3e784",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4710.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 83565,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Import What the UI Built\nMany dbt Cloud accounts start in the UI.\n`import` blocks adopt those objects without a\ndestroy, and `moved` blocks keep them safe\nduring refactors. dbt Labs offers the tool\n`dbtcloud-terraforming`, which writes both the\nconfiguration and the import blocks for an\naccount ([import guide](https://github.com/dbt\n-labs/terraform-provider-dbtcloud/blob/v1.13.1\n/docs/guides/3_importing_existing_configuratio\nn.md#L8-L10)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d83ab5c3e784",
+      "originalText": "Import What the UI Built\nMany dbt Cloud accounts start in the UI. `import` blocks adopt those objects without a destroy, and `moved` blocks keep them safe during refactors. dbt Labs offers the tool `dbtcloud-terraforming`, which writes both the configuration and the import blocks for an account ([import guide](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v1.13.1/docs/guides/3_importing_existing_configuration.md#L8-L10)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "import-what-the-ui-built"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4961263051,
+      "isDeleted": false,
+      "id": "node-30d13a731c0e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4955.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 964946,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-30d13a731c0e"
+        },
+        {
+          "id": "edge-a50173f0f409",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "key-pairs-for-snowflake"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6139238667,
+      "isDeleted": false,
+      "id": "text-30d13a731c0e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4955.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 239049,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Key Pairs for Snowflake\ndbt Cloud no longer lets you create Snowflake\ncredentials with a user name and password. New\ncredentials default to key pairs, and dbt\nrecommends PKCS#8 keys ([connect Snowflake](ht\ntps://docs.getdbt.com/docs/platform/connect-da\nta-platform/connect-snowflake)). In Terraform,\npass the key from a secret file at run time,\nand use `private_key_wo` on Terraform 1.11 or\nlater, so the key stays out of the state. The\n[authentication map](../../authentication/auth\nentication.md#private-key-private-key)\nexplains key-pair sign-in.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-30d13a731c0e",
+      "originalText": "Key Pairs for Snowflake\ndbt Cloud no longer lets you create Snowflake credentials with a user name and password. New credentials default to key pairs, and dbt recommends PKCS#8 keys ([connect Snowflake](https://docs.getdbt.com/docs/platform/connect-data-platform/connect-snowflake)). In Terraform, pass the key from a secret file at run time, and use `private_key_wo` on Terraform 1.11 or later, so the key stays out of the state. The [authentication map](../../authentication/authentication.md#private-key-private-key) explains key-pair sign-in.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "key-pairs-for-snowflake"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3640060202,
+      "isDeleted": false,
+      "id": "node-f5d19ca15e5c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5215.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 432318,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f5d19ca15e5c"
+        },
+        {
+          "id": "edge-b45c3deade66",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "leave-some-objects-out"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8965257146,
+      "isDeleted": false,
+      "id": "text-f5d19ca15e5c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5215.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 297.5,
+      "seed": 138100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Leave Some Objects Out\nNot every dbt Cloud object belongs in\nTerraform. Two examples:\n\n- Any change to a service token replaces it,\nbecause the API does not allow changes to an\nexisting token. The new token has a new secret\n([changelog](https://github.com/dbt-labs/terra\nform-provider-dbtcloud/blob/v0.3.26/CHANGELOG.\nmd#L17)).\n- `dbtcloud_user_groups` removes groups that\npeople add by hand (see Authoritative Group\nLists).\n\nObjects that people change often, or whose\nreplacement breaks callers, can stay in the\nUI. Write down which objects Terraform owns.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-f5d19ca15e5c",
+      "originalText": "Leave Some Objects Out\nNot every dbt Cloud object belongs in Terraform. Two examples:\n\n- Any change to a service token replaces it, because the API does not allow changes to an existing token. The new token has a new secret ([changelog](https://github.com/dbt-labs/terraform-provider-dbtcloud/blob/v0.3.26/CHANGELOG.md#L17)).\n- `dbtcloud_user_groups` removes groups that people add by hand (see Authoritative Group Lists).\n\nObjects that people change often, or whose replacement breaks callers, can stay in the UI. Write down which objects Terraform owns.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "leave-some-objects-out"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3225972379,
+      "isDeleted": false,
+      "id": "node-d68647715fd6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 5475.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 410.0,
+      "height": 133.75,
+      "seed": 143953,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d68647715fd6"
+        },
+        {
+          "id": "edge-6decabaeeedb",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dbtcloud-about-the-sources"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8699196593,
+      "isDeleted": false,
+      "id": "text-d68647715fd6",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 730.0,
+      "y": 5485.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 390.0,
+      "height": 113.75,
+      "seed": 666656,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Sources\nThe provider facts come from the\n`dbt-labs/dbtcloud` repository at tag v1.13.1, the\nlatest release on 2026-11-23, and at tag v0.3.26,\nthe last 0.x release. The dbt facts come from\ndocs.getdbt.com on the same day. No dbt Cloud API\nwas called to write this map.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-d68647715fd6",
+      "originalText": "About the Sources\nThe provider facts come from the `dbt-labs/dbtcloud` repository at tag v1.13.1, the latest release on 2026-11-23, and at tag v0.3.26, the last 0.x release. The dbt facts come from docs.getdbt.com on the same day. No dbt Cloud API was called to write this map.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dbtcloud-about-the-sources"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6772154657,
+      "isDeleted": false,
+      "id": "edge-b670d38b209c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 355.091161690807,
+      "y": 2754.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 530773,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          531.6219213715636,
+          -1943.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b489306ab05d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-203cf37a7c5f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.b3e7d32cac551f8b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3267111029,
+      "isDeleted": false,
+      "id": "edge-848c8b1c9162",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 971.766923076923,
+      "y": 689.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 644025,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          391.1484615384617,
+          -349.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-203cf37a7c5f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-76d1ab9bd7d5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6d73fe12748475ce"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5243145934,
+      "isDeleted": false,
+      "id": "edge-fe12cbcbbd67",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1040.1338461538462,
+      "y": 689.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 575295,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          236.66615384615375,
+          -105.58201784488676
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-203cf37a7c5f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c18e8b9521f0",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.876725b9a39de89b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7159383123,
+      "isDeleted": false,
+      "id": "edge-ad67c98faba7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 750.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 323213,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-203cf37a7c5f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a840ba22ae5e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d3bcef68bb15c4db"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3997708573,
+      "isDeleted": false,
+      "id": "edge-ac7f377056f5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1538.3380379992245,
+      "y": 1120.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 213554,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          511.90073671965865,
+          1080.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-521a2d4b4f29",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-70de4920c868",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.a3a4b7f261a017a5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9331110811,
+      "isDeleted": false,
+      "id": "edge-a626b1f7124a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1040.1338461538462,
+      "y": 811.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 568218,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          236.66615384615375,
+          105.58201784488676
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-203cf37a7c5f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-521a2d4b4f29",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.b854975f6285f1d9"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2857961487,
+      "isDeleted": false,
+      "id": "edge-112fe4873cd5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1508.0154301694358,
+      "y": 1380.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 529225,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          559.1691396611284,
+          2819.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6bb3db4f7fda",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-008afdcbaab5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.94d2a99bb04706c0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8730245215,
+      "isDeleted": false,
+      "id": "edge-55a1e2872913",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 971.766923076923,
+      "y": 811.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 489050,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          391.1484615384617,
+          349.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-203cf37a7c5f",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6bb3db4f7fda",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.bdd3f1d78f8aebf7"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9288783610,
+      "isDeleted": false,
+      "id": "edge-a9c407dcb9fd",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 385.878184991274,
+      "y": 2754.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 353476,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          493.73591623036657,
+          -892.125
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b489306ab05d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e2aa47ddcda1",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3e538ffe7aff1af9"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2968427153,
+      "isDeleted": false,
+      "id": "edge-8e4a5e96ec5f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 1717.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 964757,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          -96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e2aa47ddcda1",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-645fbdca96ef",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3887237f6d3d6f0c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7863288382,
+      "isDeleted": false,
+      "id": "edge-934252568839",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 1790.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 681889,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e2aa47ddcda1",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-44ed3355e97a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.64290871c7d0ad74"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7236730347,
+      "isDeleted": false,
+      "id": "edge-52d4656b7bd2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 1862.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 992212,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e2aa47ddcda1",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-973a743f8fb2",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.7731ca3296f739e7"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3534056494,
+      "isDeleted": false,
+      "id": "edge-72ad107687d4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 469.18860510805496,
+      "y": 2974.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 942899,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          359.6522593320236,
+          274.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b489306ab05d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6ccc9fa4f6d6",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.48ea7e39f50a206f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2302644370,
+      "isDeleted": false,
+      "id": "edge-1524971233a9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 956.2828390536488,
+      "y": 3248.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 175030,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          506.74308563812065,
+          -651.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6ccc9fa4f6d6",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-033bc202b756",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.bb6130278ac1c17a"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8206948191,
+      "isDeleted": false,
+      "id": "edge-39331d94699d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1581.7459615384614,
+      "y": 2521.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 709581,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          306.2540384615386,
+          -131.70038041680436
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-033bc202b756",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-70de4920c868",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.cde51eb040d1edd4"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2088184034,
+      "isDeleted": false,
+      "id": "edge-3f4cbac9c545",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1698.0,
+      "y": 2555.936321534899,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 40092,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -3.299702282500675
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-033bc202b756",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ea15b27ee859",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.89b0fd17b360c9e8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3401813757,
+      "isDeleted": false,
+      "id": "edge-9aa9c6d9b2da",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1585.4891783567134,
+      "y": 2597.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 869134,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          302.5108216432866,
+          124.83699966920267
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-033bc202b756",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-cd65dbccb6e3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.f4d13edf084740fb"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9876859324,
+      "isDeleted": false,
+      "id": "edge-b4b33aaf065c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1097.6,
+      "y": 3306.379717783067,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 442076,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -3.391703502210021
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6ccc9fa4f6d6",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b1a97efbe5d2",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.acf7a342f04d542d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9019833364,
+      "isDeleted": false,
+      "id": "edge-f3f1f7b8f75d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1575.000434310532,
+      "y": 3269.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 887176,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          321.39956568946764,
+          -121.55428712220737
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b1a97efbe5d2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f39b1dcc292e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.672775877f4d8c53"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4412061868,
+      "isDeleted": false,
+      "id": "edge-d14aed2fd439",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1706.4,
+      "y": 3305.8711399474378,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 106126,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          6.007720105124463
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b1a97efbe5d2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7831ee548d78",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.78e9caf550ca2a1f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5227498867,
+      "isDeleted": false,
+      "id": "edge-26020cf7f87b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1568.9823647294588,
+      "y": 3328.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 9051,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          327.4176352705408,
+          134.18314717477006
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b1a97efbe5d2",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b1a587786eaa",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.9ab6722487e83ffd"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2033841586,
+      "isDeleted": false,
+      "id": "edge-f81dc53423df",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 956.6104765123353,
+      "y": 3370.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 223886,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          502.01000337951996,
+          640.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6ccc9fa4f6d6",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-659e27403167",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.99fbf4cce0be0eec"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4600665427,
+      "isDeleted": false,
+      "id": "edge-5a4e2eaf6762",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1576.9280769230768,
+      "y": 4011.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 159321,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          302.6719230769231,
+          -131.07045303131235
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-659e27403167",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6f4b8cc2e483",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6465fcb1c9c6b7c2"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1489782039,
+      "isDeleted": false,
+      "id": "edge-344a79a7f79e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1689.6,
+      "y": 4049.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 652213,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-659e27403167",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-56f75a338628",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c3c49ad177333eb0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4877116693,
+      "isDeleted": false,
+      "id": "edge-25a3267265a9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1576.9280769230768,
+      "y": 4087.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 416097,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          302.6719230769231,
+          131.07045303131235
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-659e27403167",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-008afdcbaab5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.bb5e5d0636b06321"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9148208287,
+      "isDeleted": false,
+      "id": "edge-6b67e15eeb48",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 356.40178839344657,
+      "y": 2974.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 21084,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          548.9960391286083,
+          1923.125
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b489306ab05d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4b65f5a6e253",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.287a82510b5fb465"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5695647372,
+      "isDeleted": false,
+      "id": "edge-20fe861bf0ac",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 996.3553122987767,
+      "y": 4897.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 563891,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          368.7340631036702,
+          -239.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4b65f5a6e253",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-00c5156bac31",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e98d9412ed32b0f1"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3953872498,
+      "isDeleted": false,
+      "id": "edge-9bb18abd6767",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 4900.432303839733,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 109582,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -44.56594323873196
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4b65f5a6e253",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d83ab5c3e784",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a63d3a7fe305ee55"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6265460593,
+      "isDeleted": false,
+      "id": "edge-a50173f0f409",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 4986.486894824708,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 399998,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          37.34974958263774
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4b65f5a6e253",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-30d13a731c0e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4af6014610568ade"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9697674354,
+      "isDeleted": false,
+      "id": "edge-b45c3deade66",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 998.4888153540702,
+      "y": 4997.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 723848,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          345.6836532097949,
+          218.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4b65f5a6e253",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f5d19ca15e5c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d36e58e481bf40a0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2235169789,
+      "isDeleted": false,
+      "id": "edge-6decabaeeedb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 349.6498599439776,
+      "y": 2974.375,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 904723,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          560.3641456582633,
+          2500.625
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b489306ab05d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d68647715fd6",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.3b692578d9c913e1"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

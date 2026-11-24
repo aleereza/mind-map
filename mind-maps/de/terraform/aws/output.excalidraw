@@ -1,0 +1,5399 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1898142318,
+      "isDeleted": false,
+      "id": "node-7deeeb828571",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120.0,
+      "y": 3535.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 743483,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7deeeb828571"
+        },
+        {
+          "id": "edge-a222a9487eeb",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c7e4f0d08fd1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-03f7187bbfbc",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-e55f07484e7c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4ad1d9b15035",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-aws"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4764688646,
+      "isDeleted": false,
+      "id": "text-7deeeb828571",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 3535.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 2227.5,
+      "seed": 633647,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Terraform for AWS\nThe AWS provider lets Terraform\nmanage resources in Amazon Web\nServices through the AWS APIs.\nHashiCorp maintains it under the\nsource address `hashicorp/aws`\n([provider docs](https://registry.\nterraform.io/providers/hashicorp/a\nws/latest/docs)). A second\nprovider, `hashicorp/awscc`,\nreaches AWS through the Cloud\nControl API instead ([awscc docs](\nhttps://registry.terraform.io/prov\niders/hashicorp/awscc/latest/docs)\n). The [Terraform\nmap](../terraform.md) explains\nTerraform itself.\n\nThe unit is one AWS account and\none region. Each provider block\nreaches one account through a\nchain of identities, and it works\nin one region by default ([The\nIdentity Chain](#the-identity-chai\nn-the-identity-chain)). AWS has\nhundreds of services. A data\nengineer meets a few of them:\n\n- S3 (Simple Storage Service)\nbuckets hold data files, such as\nIceberg tables and files for\nSnowpipe.\n- IAM roles and policies decide\nwho may read and write those\nfiles. IAM is AWS Identity and\nAccess Management.\n- Secrets Manager holds passwords\nand keys for programs.\n- Queues in SQS (Simple Queue\nService), topics in SNS (Simple\nNotification Service) and Lambda\nfunctions react to new files.\n- Services in ECS (Elastic\nContainer Service) and databases\nin RDS (Relational Database\nService) run the apps that produce\nor serve data.\n\nFour ideas explain most AWS plans:\n\n- Many AWS settings are one\ndocument, such as the notification\nsettings of a bucket. Each\ndocument can have only one owner\nin Terraform ([One Document, One O\nwner](#one-document-one-owner-one-\ndocument-one-owner)).\n- Some resources add one item to a\nset, and others own the whole set\n([Adders and Owners](#adders-and-o\nwners-adders-and-owners)).\n- Access between AWS and another\nsystem needs trust on both sides\n([Trust Has Two Sides](#trust-has-\ntwo-sides-trust-has-two-sides)).\n- Every value that Terraform reads\nor writes, secrets included, sits\nin the state ([State Holds Secret \nValues](#state-holds-secret-values\n-state-holds-secret-values)).\n\nDeletes also differ by service,\nand each provider version changes\nsome rules ([Deletes Differ by Ser\nvice](#deletes-differ-by-service-d\neletes-differ-by-service);\n[Provider Generations](#provider-g\nenerations-provider-generations)).\n\nNow compare Snowflake. In\nSnowflake, the role that creates\nan object owns it, and grants\ndecide access. In AWS, the account\nowns every resource, and IAM\npolicies decide access. A\nSnowflake grant connects a role to\nan object; an IAM policy connects\nan identity to actions on\nresources.\n\nThe map has four parts. Mental\nModels explains the ideas above.\nReading an AWS Configuration says\nwhat you will see and where to\nlook first. Pitfalls lists the\nfailures that experienced users\nplan around. Good and Bad\nDecisions compares the main design\nchoices.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-7deeeb828571",
+      "originalText": "Terraform for AWS\nThe AWS provider lets Terraform manage resources in Amazon Web Services through the AWS APIs. HashiCorp maintains it under the source address `hashicorp/aws` ([provider docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)). A second provider, `hashicorp/awscc`, reaches AWS through the Cloud Control API instead ([awscc docs](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs)). The [Terraform map](../terraform.md) explains Terraform itself.\n\nThe unit is one AWS account and one region. Each provider block reaches one account through a chain of identities, and it works in one region by default ([The Identity Chain](#the-identity-chain-the-identity-chain)). AWS has hundreds of services. A data engineer meets a few of them:\n\n- S3 (Simple Storage Service) buckets hold data files, such as Iceberg tables and files for Snowpipe.\n- IAM roles and policies decide who may read and write those files. IAM is AWS Identity and Access Management.\n- Secrets Manager holds passwords and keys for programs.\n- Queues in SQS (Simple Queue Service), topics in SNS (Simple Notification Service) and Lambda functions react to new files.\n- Services in ECS (Elastic Container Service) and databases in RDS (Relational Database Service) run the apps that produce or serve data.\n\nFour ideas explain most AWS plans:\n\n- Many AWS settings are one document, such as the notification settings of a bucket. Each document can have only one owner in Terraform ([One Document, One Owner](#one-document-one-owner-one-document-one-owner)).\n- Some resources add one item to a set, and others own the whole set ([Adders and Owners](#adders-and-owners-adders-and-owners)).\n- Access between AWS and another system needs trust on both sides ([Trust Has Two Sides](#trust-has-two-sides-trust-has-two-sides)).\n- Every value that Terraform reads or writes, secrets included, sits in the state ([State Holds Secret Values](#state-holds-secret-values-state-holds-secret-values)).\n\nDeletes also differ by service, and each provider version changes some rules ([Deletes Differ by Service](#deletes-differ-by-service-deletes-differ-by-service); [Provider Generations](#provider-generations-provider-generations)).\n\nNow compare Snowflake. In Snowflake, the role that creates an object owns it, and grants decide access. In AWS, the account owns every resource, and IAM policies decide access. A Snowflake grant connects a role to an object; an IAM policy connects an identity to actions on resources.\n\nThe map has four parts. Mental Models explains the ideas above. Reading an AWS Configuration says what you will see and where to look first. Pitfalls lists the failures that experienced users plan around. Good and Bad Decisions compares the main design choices.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-aws"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3050410755,
+      "isDeleted": false,
+      "id": "node-4d046b89dbe9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 949.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 553927,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4d046b89dbe9"
+        },
+        {
+          "id": "edge-a222a9487eeb",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-2bb73f2500fc",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a18ccb93d3cd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ed745e7ce7f1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-305787187814",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f38d2b9af69a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-2b2409ecc40c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a1be7eb20add",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-mental-models"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2133460053,
+      "isDeleted": false,
+      "id": "text-4d046b89dbe9",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 965.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 496500,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Mental Models\nThe models come in dependency\norder: each model uses only\nthe models before it.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-4d046b89dbe9",
+      "originalText": "Mental Models\nThe models come in dependency order: each model uses only the models before it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-mental-models"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9789439119,
+      "isDeleted": false,
+      "id": "node-0e46fd6733f9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 741757,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-0e46fd6733f9"
+        },
+        {
+          "id": "edge-2bb73f2500fc",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "the-identity-chain"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8677319826,
+      "isDeleted": false,
+      "id": "text-0e46fd6733f9",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 490.0,
+      "seed": 758729,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "The Identity Chain\nTerraform starts with some credentials, for\nexample the keys of a pipeline. The provider\ncan then assume an IAM role in the target\naccount with `assume_role`, and it can assume\nseveral roles in a row ([role chaining](https:\n//github.com/hashicorp/terraform-provider-aws/\nblob/v6.73.0/website/docs/index.html.markdown#\nL77)). The final role decides which account\nthe plan touches and what it may do. So read\nthe `role_arn` expression of every provider\nblock. When it depends on the workspace, the\nworkspace picks the account.\n\nTwo settings help. `allowed_account_ids` stops\na run in the wrong account. `default_tags`\nadds the same tags to every resource of the\nprovider ([provider arguments](https://github.\ncom/hashicorp/terraform-provider-aws/blob/v6.7\n3.0/website/docs/index.html.markdown#L372-L380\n)). The backend that stores the state has its\nown chain, set in the `backend \"s3\"` block.\n\nA configuration can have several provider\nblocks with aliases, for example one for a DNS\naccount and one for the region `us-east-1`. A\nresource then picks its block with `provider =\naws.<alias>`.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-0e46fd6733f9",
+      "originalText": "The Identity Chain\nTerraform starts with some credentials, for example the keys of a pipeline. The provider can then assume an IAM role in the target account with `assume_role`, and it can assume several roles in a row ([role chaining](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/index.html.markdown#L77)). The final role decides which account the plan touches and what it may do. So read the `role_arn` expression of every provider block. When it depends on the workspace, the workspace picks the account.\n\nTwo settings help. `allowed_account_ids` stops a run in the wrong account. `default_tags` adds the same tags to every resource of the provider ([provider arguments](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/index.html.markdown#L372-L380)). The backend that stores the state has its own chain, set in the `backend \"s3\"` block.\n\nA configuration can have several provider blocks with aliases, for example one for a DNS account and one for the region `us-east-1`. A resource then picks its block with `provider = aws.<alias>`.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "the-identity-chain"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3816270466,
+      "isDeleted": false,
+      "id": "node-6a9cc2d9f504",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 954496,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6a9cc2d9f504"
+        },
+        {
+          "id": "edge-dd74114e7949",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0fda591dafb6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a18ccb93d3cd",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-document-one-owner"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9541229945,
+      "isDeleted": false,
+      "id": "text-6a9cc2d9f504",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 560.0,
+      "seed": 89347,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Document, One Owner\nSeveral AWS settings are a single document\nthat the API replaces as a whole:\n\n- The notification configuration of an S3\nbucket ([notification note](https://github.com\n/hashicorp/terraform-provider-aws/blob/v6.73.0\n/website/docs/r/s3_bucket_notification.html.ma\nrkdown#L13)).\n- The lifecycle configuration and the policy\nof a bucket.\n- The access policy of an SQS queue or an SNS\ntopic.\n- The inline rules of a security group, which\nis a firewall for network traffic.\n\nIf two resources, or a resource and a person,\nwrite the same document, each write removes\nthe other's part. Plans then show the same\nchange again and again. Give each document\nexactly one owner in Terraform.\n\nSince provider version 4, an S3 bucket has one\nresource for each document:\n`aws_s3_bucket_versioning`,\n`aws_s3_bucket_lifecycle_configuration`,\n`aws_s3_bucket_policy`,\n`aws_s3_bucket_notification` and others\n([version 4 upgrade](https://github.com/hashic\norp/terraform-provider-aws/blob/v6.73.0/websit\ne/docs/guides/version-4-upgrade.html.markdown#\nL1324-L1335)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-6a9cc2d9f504",
+      "originalText": "One Document, One Owner\nSeveral AWS settings are a single document that the API replaces as a whole:\n\n- The notification configuration of an S3 bucket ([notification note](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/s3_bucket_notification.html.markdown#L13)).\n- The lifecycle configuration and the policy of a bucket.\n- The access policy of an SQS queue or an SNS topic.\n- The inline rules of a security group, which is a firewall for network traffic.\n\nIf two resources, or a resource and a person, write the same document, each write removes the other's part. Plans then show the same change again and again. Give each document exactly one owner in Terraform.\n\nSince provider version 4, an S3 bucket has one resource for each document: `aws_s3_bucket_versioning`, `aws_s3_bucket_lifecycle_configuration`, `aws_s3_bucket_policy`, `aws_s3_bucket_notification` and others ([version 4 upgrade](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/guides/version-4-upgrade.html.markdown#L1324-L1335)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-document-one-owner"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2945167631,
+      "isDeleted": false,
+      "id": "node-68e4efcade69",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 138241,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-68e4efcade69"
+        },
+        {
+          "id": "edge-ed745e7ce7f1",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "adders-and-owners"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6021807203,
+      "isDeleted": false,
+      "id": "text-68e4efcade69",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 455.0,
+      "seed": 31177,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Adders and Owners\nIAM attaches policies to roles. Two styles of\nresource do this:\n\n- Adders add one item and leave the rest\nalone. Examples are\n`aws_iam_role_policy_attachment` and\n`aws_iam_role_policy`.\n- Owners own the whole set and remove items\nthat they do not list. Examples are the\n`inline_policy` and `managed_policy_arns`\narguments of `aws_iam_role` ([role note](https\n://github.com/hashicorp/terraform-provider-aws\n/blob/v6.73.0/website/docs/r/iam_role.html.mar\nkdown#L15)), and the `*_exclusive` resources.\n\nOne owner is a trap.\n`aws_iam_policy_attachment` owns every\nattachment of one policy across the whole\naccount ([warning](https://github.com/hashicor\np/terraform-provider-aws/blob/v6.73.0/website/\ndocs/r/iam_policy_attachment.html.markdown#L13\n)). If another configuration attaches the same\npolicy elsewhere, the next apply detaches it\nthere. Use `aws_iam_role_policy_attachment`\ninstead.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-68e4efcade69",
+      "originalText": "Adders and Owners\nIAM attaches policies to roles. Two styles of resource do this:\n\n- Adders add one item and leave the rest alone. Examples are `aws_iam_role_policy_attachment` and `aws_iam_role_policy`.\n- Owners own the whole set and remove items that they do not list. Examples are the `inline_policy` and `managed_policy_arns` arguments of `aws_iam_role` ([role note](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/iam_role.html.markdown#L15)), and the `*_exclusive` resources.\n\nOne owner is a trap. `aws_iam_policy_attachment` owns every attachment of one policy across the whole account ([warning](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/iam_policy_attachment.html.markdown#L13)). If another configuration attaches the same policy elsewhere, the next apply detaches it there. Use `aws_iam_role_policy_attachment` instead.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "adders-and-owners"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3463413010,
+      "isDeleted": false,
+      "id": "node-60b6f75694ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 879759,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-60b6f75694ff"
+        },
+        {
+          "id": "edge-3c9d6eeab8c1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-305787187814",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "trust-has-two-sides"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9634083162,
+      "isDeleted": false,
+      "id": "text-60b6f75694ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 420.0,
+      "seed": 508269,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Trust Has Two Sides\nAn IAM role has a trust policy. It names who\nmay assume the role, and it can demand an\nexternal ID, a shared value that the caller\nmust present ([external ID](https://docs.aws.a\nmazon.com/IAM/latest/UserGuide/id_roles_common\n-scenarios_third-party.html)). Another system\nthat uses the role, such as Snowflake or a\nKafka Connect connector, must know the role's\nARN (Amazon Resource Name, the unique ID of an\nAWS resource) and the external ID. So each\nside needs values from the other side.\n\nWhen the other system generates its values,\nsomeone must copy them into the trust policy,\nfor example in a second apply. When you choose\nthe external ID yourself and fix the role name\nin advance, both sides know every value before\nthe first apply. AWS does not treat the\nexternal ID as a secret. The [Snowflake map](.\n./snowflake/terraform-snowflake.md#two-step-tr\nust-with-aws-two-step-trust-with-aws) shows\nthe three ways that configurations solve this\nloop for Snowflake.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-60b6f75694ff",
+      "originalText": "Trust Has Two Sides\nAn IAM role has a trust policy. It names who may assume the role, and it can demand an external ID, a shared value that the caller must present ([external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)). Another system that uses the role, such as Snowflake or a Kafka Connect connector, must know the role's ARN (Amazon Resource Name, the unique ID of an AWS resource) and the external ID. So each side needs values from the other side.\n\nWhen the other system generates its values, someone must copy them into the trust policy, for example in a second apply. When you choose the external ID yourself and fix the role name in advance, both sides know every value before the first apply. AWS does not treat the external ID as a secret. The [Snowflake map](../snowflake/terraform-snowflake.md#two-step-trust-with-aws-two-step-trust-with-aws) shows the three ways that configurations solve this loop for Snowflake.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "trust-has-two-sides"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6450078978,
+      "isDeleted": false,
+      "id": "node-4f84b61db706",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 748300,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4f84b61db706"
+        },
+        {
+          "id": "edge-572aadd18049",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f38d2b9af69a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "state-holds-secret-values"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9853139792,
+      "isDeleted": false,
+      "id": "text-4f84b61db706",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 437.5,
+      "seed": 290833,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "State Holds Secret Values\nThe state stores every attribute that\nTerraform reads or writes, in plain text:\n\n- `aws_iam_access_key` stores the secret key\nof an IAM user ([access key doc](https://githu\nb.com/hashicorp/terraform-provider-aws/blob/v6\n.73.0/website/docs/r/iam_access_key.html.markd\nown#L77)).\n- `aws_secretsmanager_secret_version` stores\nthe secret value.\n- `aws_db_instance` stores the master\npassword.\n- A data source that reads a secret stores it\ntoo.\n\nWrite-only arguments, such as\n`secret_string_wo` and `password_wo`, keep a\nvalue out of the state. They need Terraform\n1.11 or later ([secret version doc](https://gi\nthub.com/hashicorp/terraform-provider-aws/blob\n/v6.73.0/website/docs/r/secretsmanager_secret_\nversion.html.markdown#L15)). A program can\nalso read a secret at run time by its ARN, so\nthe value never passes through Terraform.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-4f84b61db706",
+      "originalText": "State Holds Secret Values\nThe state stores every attribute that Terraform reads or writes, in plain text:\n\n- `aws_iam_access_key` stores the secret key of an IAM user ([access key doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/iam_access_key.html.markdown#L77)).\n- `aws_secretsmanager_secret_version` stores the secret value.\n- `aws_db_instance` stores the master password.\n- A data source that reads a secret stores it too.\n\nWrite-only arguments, such as `secret_string_wo` and `password_wo`, keep a value out of the state. They need Terraform 1.11 or later ([secret version doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/secretsmanager_secret_version.html.markdown#L15)). A program can also read a secret at run time by its ARN, so the value never passes through Terraform.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "state-holds-secret-values"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8950111852,
+      "isDeleted": false,
+      "id": "node-5b4bacb933fe",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 136275,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-5b4bacb933fe"
+        },
+        {
+          "id": "edge-2b2409ecc40c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "deletes-differ-by-service"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8567666255,
+      "isDeleted": false,
+      "id": "text-5b4bacb933fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 665.0,
+      "seed": 231156,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Deletes Differ by Service\nA destroy in the plan means different things\nfor different services:\n\n| Resource | What a destroy does |\n| --- | --- |\n| `aws_s3_bucket` | Fails if the bucket holds\nobjects, unless `force_destroy` is true; then\nit deletes all objects and versions first\n([bucket doc](https://github.com/hashicorp/ter\nraform-provider-aws/blob/v6.73.0/website/docs/\nr/s3_bucket.html.markdown#L58)). |\n| `aws_secretsmanager_secret` | Schedules the\nsecret for deletion after a recovery window,\n30 days by default ([secret doc](https://githu\nb.com/hashicorp/terraform-provider-aws/blob/v6\n.73.0/website/docs/r/secretsmanager_secret.htm\nl.markdown#L44)). |\n| `aws_db_instance` | Fails while\n`deletion_protection` is on; otherwise it\ntakes a final snapshot unless\n`skip_final_snapshot` is true ([db_instance do\nc](https://github.com/hashicorp/terraform-prov\nider-aws/blob/v6.73.0/website/docs/r/db_instan\nce.html.markdown#L332)). |\n| `aws_kms_key` | Schedules the key for\ndeletion after a waiting period of 7 to 30\ndays ([key doc](https://github.com/hashicorp/t\nerraform-provider-aws/blob/v6.73.0/website/doc\ns/r/kms_key.html.markdown#L316)). |\n| `aws_sns_topic_policy` | Resets the policy\nto the default instead of deleting it\n([provider code](https://github.com/hashicorp/\nterraform-provider-aws/blob/v6.73.0/internal/s\nervice/sns/topic_policy.go#L108-L122)). |\n\nSo `-` in a plan can mean \"gone now\", \"gone in\n30 days\" or \"reset\".",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-5b4bacb933fe",
+      "originalText": "Deletes Differ by Service\nA destroy in the plan means different things for different services:\n\n| Resource | What a destroy does |\n| --- | --- |\n| `aws_s3_bucket` | Fails if the bucket holds objects, unless `force_destroy` is true; then it deletes all objects and versions first ([bucket doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/s3_bucket.html.markdown#L58)). |\n| `aws_secretsmanager_secret` | Schedules the secret for deletion after a recovery window, 30 days by default ([secret doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/secretsmanager_secret.html.markdown#L44)). |\n| `aws_db_instance` | Fails while `deletion_protection` is on; otherwise it takes a final snapshot unless `skip_final_snapshot` is true ([db_instance doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/db_instance.html.markdown#L332)). |\n| `aws_kms_key` | Schedules the key for deletion after a waiting period of 7 to 30 days ([key doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/kms_key.html.markdown#L316)). |\n| `aws_sns_topic_policy` | Resets the policy to the default instead of deleting it ([provider code](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/internal/service/sns/topic_policy.go#L108-L122)). |\n\nSo `-` in a plan can mean \"gone now\", \"gone in 30 days\" or \"reset\".",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "deletes-differ-by-service"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3808260535,
+      "isDeleted": false,
+      "id": "node-c28df3279598",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 879619,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c28df3279598"
+        },
+        {
+          "id": "edge-1a85b0cef5b2",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a1be7eb20add",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "provider-generations"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9813018942,
+      "isDeleted": false,
+      "id": "text-c28df3279598",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 647.5,
+      "seed": 303916,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Provider Generations\nEach major version of the provider changed how\ncode looks:\n\n| Version | Released | Main change |\n| --- | --- | --- |\n| 4.0.0 | 2022-02-10 | S3 bucket settings\nmoved into separate resources. |\n| 5.0.0 | 2023-05-25 | Tag handling changed,\nand old arguments were removed. |\n| 6.0.0 | 2025-06-18 | Each resource can set\nits own `region`. |\n\nThe upgrade guides list every change ([version\n6 guide](https://github.com/hashicorp/terrafor\nm-provider-aws/blob/v6.73.0/website/docs/guide\ns/version-6-upgrade.html.markdown)). HashiCorp\nadvises moving to the latest minor version\nfirst, getting a clean plan, and only then\nraising the major version ([upgrade steps](htt\nps://github.com/hashicorp/terraform-provider-a\nws/blob/v6.73.0/website/docs/guides/version-6-\nupgrade.html.markdown#L109-L116)).\n\n`awscc` is generated from AWS CloudFormation\nschemas. Every optional attribute in it is\nalso computed, so it cannot detect drift in\nvalues that you did not set, and it ignores\n`default_tags` ([awscc docs](https://github.co\nm/hashicorp/terraform-provider-awscc/blob/v1.1\n10.0/docs/index.md#L20-L26)). HashiCorp built\nit to bring new AWS resources to Terraform\nfaster, and expects it to run next to\n`hashicorp/aws` ([using both providers](https:\n//github.com/hashicorp/terraform-provider-aws/\nblob/v6.73.0/website/docs/guides/using-aws-wit\nh-awscc-provider.html.markdown)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c28df3279598",
+      "originalText": "Provider Generations\nEach major version of the provider changed how code looks:\n\n| Version | Released | Main change |\n| --- | --- | --- |\n| 4.0.0 | 2022-02-10 | S3 bucket settings moved into separate resources. |\n| 5.0.0 | 2023-05-25 | Tag handling changed, and old arguments were removed. |\n| 6.0.0 | 2025-06-18 | Each resource can set its own `region`. |\n\nThe upgrade guides list every change ([version 6 guide](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/guides/version-6-upgrade.html.markdown)). HashiCorp advises moving to the latest minor version first, getting a clean plan, and only then raising the major version ([upgrade steps](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/guides/version-6-upgrade.html.markdown#L109-L116)).\n\n`awscc` is generated from AWS CloudFormation schemas. Every optional attribute in it is also computed, so it cannot detect drift in values that you did not set, and it ignores `default_tags` ([awscc docs](https://github.com/hashicorp/terraform-provider-awscc/blob/v1.110.0/docs/index.md#L20-L26)). HashiCorp built it to bring new AWS resources to Terraform faster, and expects it to run next to `hashicorp/aws` ([using both providers](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/guides/using-aws-with-awscc-provider.html.markdown)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "provider-generations"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2299269988,
+      "isDeleted": false,
+      "id": "node-e010128d9537",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 2237.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 144.5,
+      "seed": 1899,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e010128d9537"
+        },
+        {
+          "id": "edge-c7e4f0d08fd1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c577505b4f18",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-9f44029e4908",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-91ab47826e8f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-aws-configuration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8002116694,
+      "isDeleted": false,
+      "id": "text-e010128d9537",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 2253.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 112.5,
+      "seed": 352935,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading an AWS Configuration\nThese nodes say what you will find\nin the files, in which order to\nread them, and what each kind of\nplan line means.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-e010128d9537",
+      "originalText": "Reading an AWS Configuration\nThese nodes say what you will find in the files, in which order to read them, and what each kind of plan line means.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-aws-configuration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7686234612,
+      "isDeleted": false,
+      "id": "node-e6d94c072290",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 701779,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e6d94c072290"
+        },
+        {
+          "id": "edge-c577505b4f18",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-what-you-will-see"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1454194525,
+      "isDeleted": false,
+      "id": "text-e6d94c072290",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 682.5,
+      "seed": 94781,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What You Will See\n| Area | Resources | What to check |\n| --- | --- | --- |\n| Data buckets | `aws_s3_bucket`,\n`aws_s3_bucket_versioning`,\n`aws_s3_bucket_lifecycle_configuration`,\n`aws_s3_bucket_policy`,\n`aws_s3_bucket_notification`,\n`aws_s3_bucket_public_access_block` |\n`force_destroy`, versioning, expiry rules, one\nnotification resource per bucket |\n| Access | `aws_iam_role`, `aws_iam_policy`,\n`aws_iam_role_policy_attachment`,\n`data.aws_iam_policy_document` | Trust\nprincipals and external IDs, adders or owners\n|\n| Users with keys | `aws_iam_user`,\n`aws_iam_access_key` | Where the secret key\ngoes |\n| Secrets | `aws_secretsmanager_secret`,\n`aws_secretsmanager_secret_version` | Value\nsource, recovery window, `prevent_destroy` |\n| Events | `aws_sns_topic`, `aws_sqs_queue`,\n`aws_sqs_queue_policy`, `aws_lambda_function`,\n`aws_lambda_event_source_mapping` | Queue\npolicies, dead-letter queues, timeouts |\n| Apps | `aws_ecs_service`,\n`aws_ecs_task_definition` | Image tags,\n`ignore_changes` |\n| Databases | `aws_db_instance` |\n`deletion_protection`, `engine_version`,\npassword source |\n| Network | `aws_security_group`,\n`aws_vpc_security_group_ingress_rule` | Inline\nrules or separate rule resources |\n\n`data.aws_iam_policy_document` builds policy\nJSON from HCL blocks. It gives stable JSON, so\nwhitespace or key order cannot cause diffs.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e6d94c072290",
+      "originalText": "What You Will See\n| Area | Resources | What to check |\n| --- | --- | --- |\n| Data buckets | `aws_s3_bucket`, `aws_s3_bucket_versioning`, `aws_s3_bucket_lifecycle_configuration`, `aws_s3_bucket_policy`, `aws_s3_bucket_notification`, `aws_s3_bucket_public_access_block` | `force_destroy`, versioning, expiry rules, one notification resource per bucket |\n| Access | `aws_iam_role`, `aws_iam_policy`, `aws_iam_role_policy_attachment`, `data.aws_iam_policy_document` | Trust principals and external IDs, adders or owners |\n| Users with keys | `aws_iam_user`, `aws_iam_access_key` | Where the secret key goes |\n| Secrets | `aws_secretsmanager_secret`, `aws_secretsmanager_secret_version` | Value source, recovery window, `prevent_destroy` |\n| Events | `aws_sns_topic`, `aws_sqs_queue`, `aws_sqs_queue_policy`, `aws_lambda_function`, `aws_lambda_event_source_mapping` | Queue policies, dead-letter queues, timeouts |\n| Apps | `aws_ecs_service`, `aws_ecs_task_definition` | Image tags, `ignore_changes` |\n| Databases | `aws_db_instance` | `deletion_protection`, `engine_version`, password source |\n| Network | `aws_security_group`, `aws_vpc_security_group_ingress_rule` | Inline rules or separate rule resources |\n\n`data.aws_iam_policy_document` builds policy JSON from HCL blocks. It gives stable JSON, so whitespace or key order cannot cause diffs.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-what-you-will-see"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5895524993,
+      "isDeleted": false,
+      "id": "node-93d00a7a1fe5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 24282,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-93d00a7a1fe5"
+        },
+        {
+          "id": "edge-9f44029e4908",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-where-to-look-first"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6685608329,
+      "isDeleted": false,
+      "id": "text-93d00a7a1fe5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 577.5,
+      "seed": 255395,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Where to Look First\nRead an AWS configuration in this order:\n\n1. The `terraform` block: the backend, its key\nand its lock setting, and the version of\n`hashicorp/aws`. A committed\n`.terraform.lock.hcl` tells you the exact\nbuild.\n2. Every `provider \"aws\"` block: the region,\nthe `assume_role` role ARN, aliases,\n`allowed_account_ids` and `default_tags`.\nTogether they tell you where each resource\nlands.\n3. The inputs per environment: workspaces,\nvariable files or YAML files. The same code\ncan run in several accounts.\n4. IAM: the trust policies, the external IDs,\nthe attachment style, and every IAM user with\nan access key.\n5. The data buckets: `force_destroy`,\nversioning, expiry, notifications and\npolicies. Data loss and event wiring live\nhere.\n6. The secrets: where each value comes from,\nthe recovery window and `prevent_destroy`.\n7. The `lifecycle` blocks, and the `moved`,\n`removed` and `import` blocks. They show what\nTerraform will not touch and what moved.\n8. The event paths: queue and topic policies,\ndead-letter queues, and Lambda timeouts.\n9. The lookups of other states, such as data\nsources by name or tag, and SSM parameters.\nThey are the contracts between configurations.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-93d00a7a1fe5",
+      "originalText": "Where to Look First\nRead an AWS configuration in this order:\n\n1. The `terraform` block: the backend, its key and its lock setting, and the version of `hashicorp/aws`. A committed `.terraform.lock.hcl` tells you the exact build.\n2. Every `provider \"aws\"` block: the region, the `assume_role` role ARN, aliases, `allowed_account_ids` and `default_tags`. Together they tell you where each resource lands.\n3. The inputs per environment: workspaces, variable files or YAML files. The same code can run in several accounts.\n4. IAM: the trust policies, the external IDs, the attachment style, and every IAM user with an access key.\n5. The data buckets: `force_destroy`, versioning, expiry, notifications and policies. Data loss and event wiring live here.\n6. The secrets: where each value comes from, the recovery window and `prevent_destroy`.\n7. The `lifecycle` blocks, and the `moved`, `removed` and `import` blocks. They show what Terraform will not touch and what moved.\n8. The event paths: queue and topic policies, dead-letter queues, and Lambda timeouts.\n9. The lookups of other states, such as data sources by name or tag, and SSM parameters. They are the contracts between configurations.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-where-to-look-first"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9166313198,
+      "isDeleted": false,
+      "id": "node-3f3194462ffc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 2460.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 329314,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3f3194462ffc"
+        },
+        {
+          "id": "edge-91ab47826e8f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-plan-signals"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1454843210,
+      "isDeleted": false,
+      "id": "text-3f3194462ffc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 2460.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 385.0,
+      "seed": 378066,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `-/+ aws_s3_bucket` | A new bucket name; S3\ncannot rename a bucket, so the data stays in\nthe old one or is lost with it. |\n| The same `~` on a notification, policy or\nsecurity group in every plan | Two owners\nwrite one document. |\n| `-/+ aws_iam_policy` after a description\nchange | A new description forces a new policy\n([policy doc](https://github.com/hashicorp/ter\nraform-provider-aws/blob/v6.73.0/website/docs/\nr/iam_policy.html.markdown#L45)). |\n| `~ engine_version` back to an older value on\n`aws_db_instance` | AWS upgraded the minor\nversion; AWS will reject a downgrade. |\n| `~ tags_all` with no tag change | Tags from\n`default_tags` differ from the live tags. |\n| `- aws_secretsmanager_secret` | The secret\nis scheduled for deletion; its name stays\ntaken during the recovery window. |",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-3f3194462ffc",
+      "originalText": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `-/+ aws_s3_bucket` | A new bucket name; S3 cannot rename a bucket, so the data stays in the old one or is lost with it. |\n| The same `~` on a notification, policy or security group in every plan | Two owners write one document. |\n| `-/+ aws_iam_policy` after a description change | A new description forces a new policy ([policy doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/iam_policy.html.markdown#L45)). |\n| `~ engine_version` back to an older value on `aws_db_instance` | AWS upgraded the minor version; AWS will reject a downgrade. |\n| `~ tags_all` with no tag change | Tags from `default_tags` differ from the live tags. |\n| `- aws_secretsmanager_secret` | The secret is scheduled for deletion; its name stays taken during the recovery window. |",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-plan-signals"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2495510371,
+      "isDeleted": false,
+      "id": "node-51ed7cd12f1d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 4309.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 122.0,
+      "seed": 423187,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-51ed7cd12f1d"
+        },
+        {
+          "id": "edge-03f7187bbfbc",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b075fc744fda",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ac075bed84ef",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5bff11e6ba67",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-7d3b27aec054",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2052177041,
+      "isDeleted": false,
+      "id": "text-51ed7cd12f1d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 4314.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 112.5,
+      "seed": 171810,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pitfalls\nThe pitfalls fall into four\ngroups: data loss, event wiring,\nidentity and secrets, and provider\nversions.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-51ed7cd12f1d",
+      "originalText": "Pitfalls\nThe pitfalls fall into four groups: data loss, event wiring, identity and secrets, and provider versions.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8653224480,
+      "isDeleted": false,
+      "id": "node-22c822d24826",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 3060.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 334.8,
+      "height": 59.0,
+      "seed": 316677,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-22c822d24826"
+        },
+        {
+          "id": "edge-b075fc744fda",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b47e337eb6bf",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-94b5ae3d1661",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4f97b7c07d02",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-data-loss-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8999068032,
+      "isDeleted": false,
+      "id": "text-22c822d24826",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 3063.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 310.8,
+      "height": 52.5,
+      "seed": 430790,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Data Loss Pitfalls\nThese pitfalls delete or freeze\ndata.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-22c822d24826",
+      "originalText": "Data Loss Pitfalls\nThese pitfalls delete or freeze data.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-data-loss-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9066818723,
+      "isDeleted": false,
+      "id": "node-c61c53f0c367",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1844.8,
+      "y": 2720.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 605756,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c61c53f0c367"
+        },
+        {
+          "id": "edge-b47e337eb6bf",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "force-destroy-empties-bucket"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1623570195,
+      "isDeleted": false,
+      "id": "text-c61c53f0c367",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1856.8,
+      "y": 2725.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 536387,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Force Destroy Empties the Bucket\nWith `force_destroy = true`, a destroy of the\nbucket first deletes every object and every\nversion, locked objects included ([bucket doc]\n(https://github.com/hashicorp/terraform-provid\ner-aws/blob/v6.73.0/website/docs/r/s3_bucket.h\ntml.markdown#L58)). A rename, a moved resource\nwithout a `moved` block, or a deleted module\ncall can plan that destroy. The setting takes\neffect only after an apply has stored it in\nthe state. Keep it false on buckets with data,\nand add `prevent_destroy`.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c61c53f0c367",
+      "originalText": "Force Destroy Empties the Bucket\nWith `force_destroy = true`, a destroy of the bucket first deletes every object and every version, locked objects included ([bucket doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/s3_bucket.html.markdown#L58)). A rename, a moved resource without a `moved` block, or a deleted module call can plan that destroy. The setting takes effect only after an apply has stored it in the state. Keep it false on buckets with data, and add `prevent_destroy`.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "force-destroy-empties-bucket"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2487683009,
+      "isDeleted": false,
+      "id": "node-a43b0c9766b0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1844.8,
+      "y": 2980.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 404402,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a43b0c9766b0"
+        },
+        {
+          "id": "edge-94b5ae3d1661",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "versioning-cannot-be-turned-off"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8045532404,
+      "isDeleted": false,
+      "id": "text-a43b0c9766b0",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1856.8,
+      "y": 2980.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 232661,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Versioning Cannot Be Turned Off\n`Disabled` is valid only when a bucket is\ncreated or imported. A change from `Enabled`\nor `Suspended` to `Disabled` fails, because S3\ncannot return a bucket to the unversioned\nstate ([versioning doc](https://github.com/has\nhicorp/terraform-provider-aws/blob/v6.73.0/web\nsite/docs/r/s3_bucket_versioning.html.markdown\n#L103-L104)). Use `Suspended` instead. After\nyou first enable versioning, AWS advises\nwaiting 15 minutes before writes ([versioning \ndoc](https://github.com/hashicorp/terraform-pr\novider-aws/blob/v6.73.0/website/docs/r/s3_buck\net_versioning.html.markdown#L17)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a43b0c9766b0",
+      "originalText": "Versioning Cannot Be Turned Off\n`Disabled` is valid only when a bucket is created or imported. A change from `Enabled` or `Suspended` to `Disabled` fails, because S3 cannot return a bucket to the unversioned state ([versioning doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/s3_bucket_versioning.html.markdown#L103-L104)). Use `Suspended` instead. After you first enable versioning, AWS advises waiting 15 minutes before writes ([versioning doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/s3_bucket_versioning.html.markdown#L17)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "versioning-cannot-be-turned-off"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3036531442,
+      "isDeleted": false,
+      "id": "node-62f7b42ee02c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1844.8,
+      "y": 3240.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 303187,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-62f7b42ee02c"
+        },
+        {
+          "id": "edge-4f97b7c07d02",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "database-versions-and-replacements"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9839409045,
+      "isDeleted": false,
+      "id": "text-62f7b42ee02c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1856.8,
+      "y": 3240.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 155109,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Database Versions and Replacements\nWith automatic minor upgrades on, AWS raises\nthe engine version of an RDS instance by\nitself. A configuration that pins\n`engine_version = \"16.4\"` then plans a\ndowngrade, and AWS rejects it. The provider\ndocs advise a version prefix, such as `\"16\"`,\nin that case ([db_instance doc](https://github\n.com/hashicorp/terraform-provider-aws/blob/v6.\n73.0/website/docs/r/db_instance.html.markdown#\nL342)). Other changes replace the instance:\nfor example `engine`, `username`, `db_name` or\n`storage_encrypted`. Keep\n`deletion_protection` on and a final snapshot\nset.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-62f7b42ee02c",
+      "originalText": "Database Versions and Replacements\nWith automatic minor upgrades on, AWS raises the engine version of an RDS instance by itself. A configuration that pins `engine_version = \"16.4\"` then plans a downgrade, and AWS rejects it. The provider docs advise a version prefix, such as `\"16\"`, in that case ([db_instance doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/db_instance.html.markdown#L342)). Other changes replace the instance: for example `engine`, `username`, `db_name` or `storage_encrypted`. Keep `deletion_protection` on and a final snapshot set.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "database-versions-and-replacements"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8878878862,
+      "isDeleted": false,
+      "id": "node-edfcc2a0579c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 3823.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 402.0,
+      "height": 94.0,
+      "seed": 592025,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-edfcc2a0579c"
+        },
+        {
+          "id": "edge-ac075bed84ef",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-92b99a7ebf76",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-e038247571d4",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c24febb9027a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-event-wiring-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6486446428,
+      "isDeleted": false,
+      "id": "text-edfcc2a0579c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 3835.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 378.0,
+      "height": 70.0,
+      "seed": 683791,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Event Wiring Pitfalls\nThese pitfalls break the path from a new\nfile to the code that handles it. Files keep\narriving, but nothing reacts.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-edfcc2a0579c",
+      "originalText": "Event Wiring Pitfalls\nThese pitfalls break the path from a new file to the code that handles it. Files keep arriving, but nothing reacts.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-event-wiring-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7023098431,
+      "isDeleted": false,
+      "id": "node-66dbfc785f33",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1912.0,
+      "y": 3500.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 824210,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-66dbfc785f33"
+        },
+        {
+          "id": "edge-dd74114e7949",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-92b99a7ebf76",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-notification-configuration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3984542382,
+      "isDeleted": false,
+      "id": "text-66dbfc785f33",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1924.0,
+      "y": 3500.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 280.0,
+      "seed": 848318,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Notification Configuration per Bucket\n`aws_s3_bucket_notification` writes the whole\nnotification configuration of a bucket, so a\nbucket can have only one such resource\n([notification note](https://github.com/hashic\norp/terraform-provider-aws/blob/v6.73.0/websit\ne/docs/r/s3_bucket_notification.html.markdown#\nL13)). A second resource, a console edit, or a\nSnowflake pipe with auto-ingest overwrites the\nothers. S3 also rejects two rules with\noverlapping prefixes or suffixes for the same\nevent type ([event filters](https://docs.aws.a\nmazon.com/AmazonS3/latest/userguide/notificati\non-how-to-filtering.html)). To send one event\nto several readers, send it to one SNS topic\nor to EventBridge, and fan out from there.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-66dbfc785f33",
+      "originalText": "One Notification Configuration per Bucket\n`aws_s3_bucket_notification` writes the whole notification configuration of a bucket, so a bucket can have only one such resource ([notification note](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/s3_bucket_notification.html.markdown#L13)). A second resource, a console edit, or a Snowflake pipe with auto-ingest overwrites the others. S3 also rejects two rules with overlapping prefixes or suffixes for the same event type ([event filters](https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html)). To send one event to several readers, send it to one SNS topic or to EventBridge, and fan out from there.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-notification-configuration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5802157634,
+      "isDeleted": false,
+      "id": "node-929cb07c2106",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1912.0,
+      "y": 3760.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 238542,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-929cb07c2106"
+        },
+        {
+          "id": "edge-e038247571d4",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "queue-timeouts-and-policies"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9360124234,
+      "isDeleted": false,
+      "id": "text-929cb07c2106",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1924.0,
+      "y": 3760.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 402.5,
+      "seed": 919542,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Queue Timeouts and Policies\nWhen a Lambda function reads an SQS queue, AWS\nadvises a visibility timeout of at least six\ntimes the function timeout ([Lambda with SQS](\nhttps://docs.aws.amazon.com/lambda/latest/dg/s\nervices-sqs-configure.html)). For example, a\nfunction with a 60-second timeout needs a\nqueue visibility timeout of at least 360\nseconds. With 300 seconds, a slow batch can\nreach a second reader before the first one\nfinishes. Two more traps:\n\n- Creating or updating a queue with a queue\npolicy hangs unless the policy sets `Version =\n\"2012-10-17\"` ([queue note](https://github.com\n/hashicorp/terraform-provider-aws/blob/v6.73.0\n/website/docs/r/sqs_queue.html.markdown#L13)).\n- A queue policy for SNS or S3 should name the\nsender with the condition `aws:SourceArn`, so\nno other topic or bucket can write to the\nqueue ([confused deputy](https://docs.aws.amaz\non.com/IAM/latest/UserGuide/confused-deputy.ht\nml)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-929cb07c2106",
+      "originalText": "Queue Timeouts and Policies\nWhen a Lambda function reads an SQS queue, AWS advises a visibility timeout of at least six times the function timeout ([Lambda with SQS](https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-configure.html)). For example, a function with a 60-second timeout needs a queue visibility timeout of at least 360 seconds. With 300 seconds, a slow batch can reach a second reader before the first one finishes. Two more traps:\n\n- Creating or updating a queue with a queue policy hangs unless the policy sets `Version = \"2012-10-17\"` ([queue note](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/sqs_queue.html.markdown#L13)).\n- A queue policy for SNS or S3 should name the sender with the condition `aws:SourceArn`, so no other topic or bucket can write to the queue ([confused deputy](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "queue-timeouts-and-policies"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2343906749,
+      "isDeleted": false,
+      "id": "node-533d2489368b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1912.0,
+      "y": 4020.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 585437,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-533d2489368b"
+        },
+        {
+          "id": "edge-c24febb9027a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "lambda-zips-built-at-plan-time"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6514943650,
+      "isDeleted": false,
+      "id": "text-533d2489368b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1924.0,
+      "y": 4020.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 290603,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Lambda Zips Built at Plan Time\nThe data source `archive_file` builds the zip\nfile of a Lambda function during the plan\n([archive provider](https://github.com/hashico\nrp/terraform-provider-archive/blob/v2.8.1/docs\n/data-sources/file.md#L10)). The apply needs\nthe same file. When plan and apply run on\ndifferent machines, the apply cannot find it.\n`source_code_hash` detects only the code\nchanges that pass through Terraform. The newer\nargument `code_sha256` also catches code\nchanged outside Terraform ([function doc](http\ns://github.com/hashicorp/terraform-provider-aw\ns/blob/v6.73.0/website/docs/r/lambda_function.\nhtml.markdown#L715)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-533d2489368b",
+      "originalText": "Lambda Zips Built at Plan Time\nThe data source `archive_file` builds the zip file of a Lambda function during the plan ([archive provider](https://github.com/hashicorp/terraform-provider-archive/blob/v2.8.1/docs/data-sources/file.md#L10)). The apply needs the same file. When plan and apply run on different machines, the apply cannot find it. `source_code_hash` detects only the code changes that pass through Terraform. The newer argument `code_sha256` also catches code changed outside Terraform ([function doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/lambda_function.html.markdown#L715)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "lambda-zips-built-at-plan-time"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3117537706,
+      "isDeleted": false,
+      "id": "node-aab60b0c23dc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 4722.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 393.6,
+      "height": 76.5,
+      "seed": 250225,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-aab60b0c23dc"
+        },
+        {
+          "id": "edge-5bff11e6ba67",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ea773a03aaa2",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c5f18fb0a275",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d8f6a9493383",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-18e418995e82",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-identity-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8814689265,
+      "isDeleted": false,
+      "id": "text-aab60b0c23dc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 4734.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 369.6,
+      "height": 52.5,
+      "seed": 813817,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Identity and Secret Pitfalls\nThese pitfalls break access or leak secrets.\nPlans show them only indirectly.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-aab60b0c23dc",
+      "originalText": "Identity and Secret Pitfalls\nThese pitfalls break access or leak secrets. Plans show them only indirectly.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-identity-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9476907879,
+      "isDeleted": false,
+      "id": "node-104af0ff58d3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1903.6,
+      "y": 4280.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 878442,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-104af0ff58d3"
+        },
+        {
+          "id": "edge-3c9d6eeab8c1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ea773a03aaa2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "deleted-principals-break-trust"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4331439217,
+      "isDeleted": false,
+      "id": "text-104af0ff58d3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1915.6,
+      "y": 4285.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 553102,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Deleted Principals Break Trust\nWhen IAM deletes a user or role that a trust\npolicy names, it replaces the ARN in the\npolicy with an internal ID. A new role with\nthe same name does not restore the trust,\nbecause it has a new ID ([principals](https://\ndocs.aws.amazon.com/IAM/latest/UserGuide/refer\nence_policies_elements_principal.html)). So a\nreplaced role silently locks out the systems\nthat it trusted, and the systems that trusted\nit. Trust policies that name temporary session\nARNs have the same weakness.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-104af0ff58d3",
+      "originalText": "Deleted Principals Break Trust\nWhen IAM deletes a user or role that a trust policy names, it replaces the ARN in the policy with an internal ID. A new role with the same name does not restore the trust, because it has a new ID ([principals](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)). So a replaced role silently locks out the systems that it trusted, and the systems that trusted it. Trust policies that name temporary session ARNs have the same weakness.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "deleted-principals-break-trust"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3412065349,
+      "isDeleted": false,
+      "id": "node-ea15b27ee859",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1903.6,
+      "y": 4540.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 252841,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ea15b27ee859"
+        },
+        {
+          "id": "edge-572aadd18049",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-c5f18fb0a275",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "secrets-in-state"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6845966707,
+      "isDeleted": false,
+      "id": "text-ea15b27ee859",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1915.6,
+      "y": 4540.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 697817,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secrets in State\nAn access key, a secret value or a database\npassword in the state is readable by anyone\nwho can read the state bucket. A sensitive\nmark only hides the value in plan output.\nThree ways reduce the exposure: write-only\narguments, programs that read secrets at run\ntime by ARN, and roles instead of access keys.\nAn imported access key has no secret in the\nstate at all ([access key doc](https://github.\ncom/hashicorp/terraform-provider-aws/blob/v6.7\n3.0/website/docs/r/iam_access_key.html.markdow\nn#L122)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-ea15b27ee859",
+      "originalText": "Secrets in State\nAn access key, a secret value or a database password in the state is readable by anyone who can read the state bucket. A sensitive mark only hides the value in plan output. Three ways reduce the exposure: write-only arguments, programs that read secrets at run time by ARN, and roles instead of access keys. An imported access key has no secret in the state at all ([access key doc](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/iam_access_key.html.markdown#L122)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "secrets-in-state"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5562309512,
+      "isDeleted": false,
+      "id": "node-f799b5596904",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1903.6,
+      "y": 4800.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 560078,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f799b5596904"
+        },
+        {
+          "id": "edge-d8f6a9493383",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "deleted-secrets-hold-names"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5639091639,
+      "isDeleted": false,
+      "id": "text-f799b5596904",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1915.6,
+      "y": 4800.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 280.0,
+      "seed": 404610,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Deleted Secrets Hold Their Names\nA deleted secret waits in a recovery window,\n30 days by default ([DeleteSecret](https://doc\ns.aws.amazon.com/secretsmanager/latest/apirefe\nrence/API_DeleteSecret.html)). During that\ntime, a new secret with the same name fails\nwith \"The secret is scheduled for deletion\" ([\nCreateSecret](https://docs.aws.amazon.com/secr\netsmanager/latest/apireference/API_CreateSecre\nt.html)). So a rename or a replacement of a\nsecret resource cannot reuse the name at once.\nThe recovery window is also the only way back\nfrom a wrong destroy. `recovery_window_in_days\n= 0` deletes with no recovery.\n`prevent_destroy` stops the destroy in the\nplan.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-f799b5596904",
+      "originalText": "Deleted Secrets Hold Their Names\nA deleted secret waits in a recovery window, 30 days by default ([DeleteSecret](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_DeleteSecret.html)). During that time, a new secret with the same name fails with \"The secret is scheduled for deletion\" ([CreateSecret](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html)). So a rename or a replacement of a secret resource cannot reuse the name at once. The recovery window is also the only way back from a wrong destroy. `recovery_window_in_days = 0` deletes with no recovery. `prevent_destroy` stops the destroy in the plan.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "deleted-secrets-hold-names"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9810275737,
+      "isDeleted": false,
+      "id": "node-e519c45766dc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1903.6,
+      "y": 5060.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 471375,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e519c45766dc"
+        },
+        {
+          "id": "edge-18e418995e82",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "iam-size-limits"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8095379729,
+      "isDeleted": false,
+      "id": "text-e519c45766dc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1915.6,
+      "y": 5063.25,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 304079,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "IAM Size Limits\nThe inline policies of one role can hold\n10,240 characters in total, and one managed\npolicy can hold 6,144 ([IAM quotas](https://do\ncs.aws.amazon.com/IAM/latest/UserGuide/referen\nce_iam-quotas.html)). A role can have 20\nattached managed policies by default, and 25\nat most. A growing `for_each` that adds\nstatements can pass the plan and fail the\napply at one of these limits.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e519c45766dc",
+      "originalText": "IAM Size Limits\nThe inline policies of one role can hold 10,240 characters in total, and one managed policy can hold 6,144 ([IAM quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)). A role can have 20 attached managed policies by default, and 25 at most. A growing `for_each` that adds statements can pass the plan and fail the apply at one of these limits.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "iam-size-limits"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8725957737,
+      "isDeleted": false,
+      "id": "node-fc903f369db7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1320.0,
+      "y": 5613.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 76.5,
+      "seed": 92914,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-fc903f369db7"
+        },
+        {
+          "id": "edge-7d3b27aec054",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-11563d5a587b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f7e270ab83be",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6994e1617209",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-provider-version-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9147228668,
+      "isDeleted": false,
+      "id": "text-fc903f369db7",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1332.0,
+      "y": 5625.25,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 52.5,
+      "seed": 728300,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Provider Version Pitfalls\nThese pitfalls come from Terraform and\nprovider versions.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-fc903f369db7",
+      "originalText": "Provider Version Pitfalls\nThese pitfalls come from Terraform and provider versions.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-provider-version-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8093371571,
+      "isDeleted": false,
+      "id": "node-e772705d75d5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1928.8,
+      "y": 5281.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 576163,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e772705d75d5"
+        },
+        {
+          "id": "edge-11563d5a587b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "old-s3-backend-arguments"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6708978783,
+      "isDeleted": false,
+      "id": "text-e772705d75d5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1940.8,
+      "y": 5281.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 402956,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Old S3 Backend Arguments\nTerraform 1.10.0 removed the old top-level\narguments for assuming a role in `backend\n\"s3\"`, such as `role_arn`; it requires an\n`assume_role` block ([Terraform 1.10.0 changes\n](https://github.com/hashicorp/terraform/blob/\nv1.10.0/CHANGELOG.md#L35)). A configuration\nwith the old form therefore keeps the whole\npipeline on Terraform 1.9. That also blocks\nwrite-only arguments, which need 1.11.\nTerraform 1.11.0 deprecated DynamoDB locking\nin favor of `use_lockfile` ([Terraform 1.11.0 \nchanges](https://github.com/hashicorp/terrafor\nm/blob/v1.11.0/CHANGELOG.md#L10)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e772705d75d5",
+      "originalText": "Old S3 Backend Arguments\nTerraform 1.10.0 removed the old top-level arguments for assuming a role in `backend \"s3\"`, such as `role_arn`; it requires an `assume_role` block ([Terraform 1.10.0 changes](https://github.com/hashicorp/terraform/blob/v1.10.0/CHANGELOG.md#L35)). A configuration with the old form therefore keeps the whole pipeline on Terraform 1.9. That also blocks write-only arguments, which need 1.11. Terraform 1.11.0 deprecated DynamoDB locking in favor of `use_lockfile` ([Terraform 1.11.0 changes](https://github.com/hashicorp/terraform/blob/v1.11.0/CHANGELOG.md#L10)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "old-s3-backend-arguments"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9888711185,
+      "isDeleted": false,
+      "id": "node-59b5478ad985",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1928.8,
+      "y": 5541.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 978489,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-59b5478ad985"
+        },
+        {
+          "id": "edge-0fda591dafb6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f7e270ab83be",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "inline-rules-win"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7949425442,
+      "isDeleted": false,
+      "id": "text-59b5478ad985",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1940.8,
+      "y": 5546.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 815451,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Inline Security Group Rules Win\nA security group with inline `ingress` or\n`egress` blocks owns all its rules. Its next\napply removes rules that someone added by\nhand, by script or from another configuration.\nThe provider warns against mixing inline rules\nwith separate rule resources ([security group \nnote](https://github.com/hashicorp/terraform-p\nrovider-aws/blob/v6.73.0/website/docs/r/securi\nty_group.html.markdown#L13-L15)). Use one\nseparate resource for each rule, such as\n`aws_vpc_security_group_ingress_rule`.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-59b5478ad985",
+      "originalText": "Inline Security Group Rules Win\nA security group with inline `ingress` or `egress` blocks owns all its rules. Its next apply removes rules that someone added by hand, by script or from another configuration. The provider warns against mixing inline rules with separate rule resources ([security group note](https://github.com/hashicorp/terraform-provider-aws/blob/v6.73.0/website/docs/r/security_group.html.markdown#L13-L15)). Use one separate resource for each rule, such as `aws_vpc_security_group_ingress_rule`.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "inline-rules-win"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5763615695,
+      "isDeleted": false,
+      "id": "node-37d58ab0a531",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1928.8,
+      "y": 5801.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 297534,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-37d58ab0a531"
+        },
+        {
+          "id": "edge-1a85b0cef5b2",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6994e1617209",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "version-bugs"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7680303772,
+      "isDeleted": false,
+      "id": "text-37d58ab0a531",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1940.8,
+      "y": 5801.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 129746,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Version Bugs\nEach provider release fixes bugs, and some\nreleases add them. For example, on versions\n6.0 to 6.8, a tag change on `aws_ecs_service`\nappeared in every plan, but the apply never\nwrote it; 6.9.0 fixed it ([issue 43570](https:\n//github.com/hashicorp/terraform-provider-aws/\nissues/43570)). A patch-level pin, such as `~>\n6.8.0`, keeps such a bug. With no committed\nlock file, a loose constraint such as `>=\n6.5.0` installs each new major version as soon\nas it appears. Commit the lock file, and raise\nversions on purpose.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-37d58ab0a531",
+      "originalText": "Version Bugs\nEach provider release fixes bugs, and some releases add them. For example, on versions 6.0 to 6.8, a tag change on `aws_ecs_service` appeared in every plan, but the apply never wrote it; 6.9.0 fixed it ([issue 43570](https://github.com/hashicorp/terraform-provider-aws/issues/43570)). A patch-level pin, such as `~> 6.8.0`, keeps such a bug. With no committed lock file, a loose constraint such as `>= 6.5.0` installs each new major version as soon as it appears. Commit the lock file, and raise versions on purpose.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "version-bugs"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5528194814,
+      "isDeleted": false,
+      "id": "node-74a071dfb88b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 6471.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 99.5,
+      "seed": 248463,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-74a071dfb88b"
+        },
+        {
+          "id": "edge-e55f07484e7c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b7a9ac6da088",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-962066de9ad7",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-9c65f8c3897c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-50930dacdd1f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-decisions"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3712278399,
+      "isDeleted": false,
+      "id": "text-74a071dfb88b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 6487.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 67.5,
+      "seed": 899203,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Good and Bad Decisions\nEach node compares a choice with\nits alternative.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-74a071dfb88b",
+      "originalText": "Good and Bad Decisions\nEach node compares a choice with its alternative.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-decisions"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4133881321,
+      "isDeleted": false,
+      "id": "node-36b4238078a1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6061.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 442144,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-36b4238078a1"
+        },
+        {
+          "id": "edge-b7a9ac6da088",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "roles-instead-of-access-keys"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5518030683,
+      "isDeleted": false,
+      "id": "text-36b4238078a1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6073.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 520698,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Roles Instead of Access Keys\nAn IAM user with an access key has a\nlong-lived secret, and Terraform stores it in\nthe state. A role gives temporary credentials,\nand there is no secret to store. AWS\nrecommends temporary credentials for workloads\n([IAM best practices](https://docs.aws.amazon.\ncom/IAM/latest/UserGuide/best-practices.html))\n. Use access keys only for a system that\ncannot assume a role, and plan their rotation.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-36b4238078a1",
+      "originalText": "Roles Instead of Access Keys\nAn IAM user with an access key has a long-lived secret, and Terraform stores it in the state. A role gives temporary credentials, and there is no secret to store. AWS recommends temporary credentials for workloads ([IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)). Use access keys only for a system that cannot assume a role, and plan their rotation.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "roles-instead-of-access-keys"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6209804101,
+      "isDeleted": false,
+      "id": "node-b785e9a25001",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6300.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 199.0,
+      "seed": 43997,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b785e9a25001"
+        },
+        {
+          "id": "edge-962066de9ad7",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-choose-the-external-id"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8528661832,
+      "isDeleted": false,
+      "id": "text-b785e9a25001",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6312.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 175.0,
+      "seed": 755062,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Choose the External ID\nWhen both sides of a trust use an external ID\nthat you chose, one apply creates the role and\nthe other system's integration together.\nNobody copies values, and a recreated\nintegration keeps working. Because AWS does\nnot treat the external ID as a secret, it can\nlive in configuration ([external ID](https://d\nocs.aws.amazon.com/IAM/latest/UserGuide/id_rol\nes_common-scenarios_third-party.html)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b785e9a25001",
+      "originalText": "Choose the External ID\nWhen both sides of a trust use an external ID that you chose, one apply creates the role and the other system's integration together. Nobody copies values, and a recreated integration keeps working. Because AWS does not treat the external ID as a secret, it can live in configuration ([external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-choose-the-external-id"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7921118523,
+      "isDeleted": false,
+      "id": "node-b7819e8c4084",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6539.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 645080,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b7819e8c4084"
+        },
+        {
+          "id": "edge-9c65f8c3897c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "protect-buckets-that-hold-data"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8011583859,
+      "isDeleted": false,
+      "id": "text-b7819e8c4084",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6551.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 157.5,
+      "seed": 945612,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Protect Buckets That Hold Data\nA bucket for test files can use\n`force_destroy`, so it is easy to remove. A\nbucket with data that cannot be rebuilt should\nkeep `force_destroy` false and add `lifecycle\n{ prevent_destroy = true }`. Versioning and\nexpiry rules for old versions then protect\nagainst overwrites without growing the bucket\nforever.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b7819e8c4084",
+      "originalText": "Protect Buckets That Hold Data\nA bucket for test files can use `force_destroy`, so it is easy to remove. A bucket with data that cannot be rebuilt should keep `force_destroy` false and add `lifecycle { prevent_destroy = true }`. Versioning and expiry rules for old versions then protect against overwrites without growing the bucket forever.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "protect-buckets-that-hold-data"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2536359727,
+      "isDeleted": false,
+      "id": "node-84fb7a74e7ba",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6761.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 410.40000000000003,
+      "height": 220.0,
+      "seed": 526726,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-84fb7a74e7ba"
+        },
+        {
+          "id": "edge-50930dacdd1f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "contracts-between-configurations"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7493536010,
+      "isDeleted": false,
+      "id": "text-84fb7a74e7ba",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6761.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 315.0,
+      "seed": 994829,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Contracts Between Configurations\nOne configuration can need a value that\nanother one created, such as a certificate ARN\nor a queue ARN. Three ways exist:\n\n- Copy the value by hand into variables. It is\nsimple, but the copy goes stale without\nwarning.\n- Look the resource up by name or tag with a\ndata source. The name becomes the contract.\n- Publish the value as an SSM parameter in one\nconfiguration and read it with\n`data.aws_ssm_parameter` in the other. The\nparameter name becomes the contract, and a\nchange flows on the next plan.\n\nThe last two follow a change; the first one\ndoes not.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-84fb7a74e7ba",
+      "originalText": "Contracts Between Configurations\nOne configuration can need a value that another one created, such as a certificate ARN or a queue ARN. Three ways exist:\n\n- Copy the value by hand into variables. It is simple, but the copy goes stale without warning.\n- Look the resource up by name or tag with a data source. The name becomes the contract.\n- Publish the value as an SSM parameter in one configuration and read it with `data.aws_ssm_parameter` in the other. The parameter name becomes the contract, and a change flows on the next plan.\n\nThe last two follow a change; the first one does not.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "contracts-between-configurations"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1556251017,
+      "isDeleted": false,
+      "id": "node-b58f9ceb46f4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 7021.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 417.8,
+      "height": 150.0,
+      "seed": 392635,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b58f9ceb46f4"
+        },
+        {
+          "id": "edge-4ad1d9b15035",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "aws-about-the-sources"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9750374521,
+      "isDeleted": false,
+      "id": "text-b58f9ceb46f4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 730.0,
+      "y": 7031.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 397.8,
+      "height": 130.0,
+      "seed": 637136,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Sources\nThe provider facts come from the `hashicorp/aws`\nrepository at tag v6.73.0 and the `hashicorp/awscc`\nrepository at tag v1.110.0, the latest releases on\n2026-11-23. The AWS facts come from\ndocs.aws.amazon.com on the same day, and the\nTerraform facts from the Terraform changelogs at\ntags v1.10.0 and v1.11.0.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-b58f9ceb46f4",
+      "originalText": "About the Sources\nThe provider facts come from the `hashicorp/aws` repository at tag v6.73.0 and the `hashicorp/awscc` repository at tag v1.110.0, the latest releases on 2026-11-23. The AWS facts come from docs.aws.amazon.com on the same day, and the Terraform facts from the Terraform changelogs at tags v1.10.0 and v1.11.0.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "aws-about-the-sources"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6430824663,
+      "isDeleted": false,
+      "id": "edge-a222a9487eeb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 349.1411496869664,
+      "y": 3535.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 317176,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          540.8714854866249,
+          -2464.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7deeeb828571",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.289867918981c33f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1549028388,
+      "isDeleted": false,
+      "id": "edge-2bb73f2500fc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 948.9779487179487,
+      "y": 949.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 66392,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          455.03230769230777,
+          -609.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-0e46fd6733f9",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.82e6b00ee7f41b36"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9739875460,
+      "isDeleted": false,
+      "id": "edge-dd74114e7949",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1508.5948717948718,
+      "y": 600.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 883079,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          590.4102564102564,
+          2900.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6a9cc2d9f504",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-66dbfc785f33",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.ed564c8536953add"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4664988837,
+      "isDeleted": false,
+      "id": "edge-0fda591dafb6",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1500.095185508089,
+      "y": 600.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 582724,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          624.2096289838223,
+          4941.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-6a9cc2d9f504",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-59b5478ad985",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.84c7da0bb8bdfb06"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7069770042,
+      "isDeleted": false,
+      "id": "edge-a18ccb93d3cd",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 971.766923076923,
+      "y": 949.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 697576,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          391.1484615384617,
+          -349.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6a9cc2d9f504",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c9b99201ed84b927"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7982963976,
+      "isDeleted": false,
+      "id": "edge-ed745e7ce7f1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1040.1338461538462,
+      "y": 949.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 511686,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          236.66615384615375,
+          -105.58201784488676
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-68e4efcade69",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d55f1dcae7d02b08"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4658503928,
+      "isDeleted": false,
+      "id": "edge-3c9d6eeab8c1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1506.5988165680474,
+      "y": 1120.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 681400,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          586.0023668639051,
+          3160.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-60b6f75694ff",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-104af0ff58d3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.3112c217a049b6f7"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9447552621,
+      "isDeleted": false,
+      "id": "edge-305787187814",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 1010.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 3685,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-60b6f75694ff",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.f952c9fbe62cb490"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3414971163,
+      "isDeleted": false,
+      "id": "edge-572aadd18049",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1506.5988165680474,
+      "y": 1380.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 402222,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          586.0023668639051,
+          3160.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4f84b61db706",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ea15b27ee859",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.44fc321882685291"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4785855577,
+      "isDeleted": false,
+      "id": "edge-f38d2b9af69a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1040.1338461538462,
+      "y": 1071.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 469476,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          236.66615384615375,
+          105.58201784488665
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4f84b61db706",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.1fc744d862abc6ff"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5389328677,
+      "isDeleted": false,
+      "id": "edge-2b2409ecc40c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 971.766923076923,
+      "y": 1071.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 718486,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          391.1484615384617,
+          349.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-5b4bacb933fe",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.f26b422cbd6e474a"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6958393879,
+      "isDeleted": false,
+      "id": "edge-1a85b0cef5b2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1503.6014315176515,
+      "y": 1900.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 431662,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          617.1971369646969,
+          3901.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-c28df3279598",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-37d58ab0a531",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.313e9fd6197d4043"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4791326060,
+      "isDeleted": false,
+      "id": "edge-a1be7eb20add",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 948.9779487179487,
+      "y": 1071.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 959408,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          455.03230769230777,
+          609.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4d046b89dbe9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c28df3279598",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d0ac9589aea9a6e5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1208433419,
+      "isDeleted": false,
+      "id": "edge-c7e4f0d08fd1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 373.97491576188696,
+      "y": 3535.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 764595,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          513.4574691126918,
+          -1153.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7deeeb828571",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e010128d9537",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.55b10f06afe81b6b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6488839934,
+      "isDeleted": false,
+      "id": "edge-c577505b4f18",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 2237.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 370623,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          -96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e010128d9537",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e6d94c072290",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.88193fcbe2e1fe12"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1592468755,
+      "isDeleted": false,
+      "id": "edge-9f44029e4908",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 2310.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 141720,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e010128d9537",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-93d00a7a1fe5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.84a6e2b21c88c884"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7345988370,
+      "isDeleted": false,
+      "id": "edge-91ab47826e8f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 2382.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 367275,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e010128d9537",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3f3194462ffc",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.8b327767166074d3"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2454353496,
+      "isDeleted": false,
+      "id": "edge-03f7187bbfbc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 416.00310237849015,
+      "y": 3755.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 728393,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          458.5315408479834,
+          554.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7deeeb828571",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-51ed7cd12f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.ba7144c4f50d83c5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6333088121,
+      "isDeleted": false,
+      "id": "edge-b075fc744fda",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 951.7861799726722,
+      "y": 4309.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 124092,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          522.6598477454618,
+          -1190.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-51ed7cd12f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-22c822d24826",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.2bc5f1c2cbca4138"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2365271109,
+      "isDeleted": false,
+      "id": "edge-b47e337eb6bf",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1551.71,
+      "y": 3060.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 479198,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          293.0899999999997,
+          -134.44495412844026
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-22c822d24826",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c61c53f0c367",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e819194d266a16ca"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1955073962,
+      "isDeleted": false,
+      "id": "edge-94b5ae3d1661",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1654.8000000000002,
+      "y": 3090.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 864728,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-22c822d24826",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a43b0c9766b0",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.0707caed54477872"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5841772995,
+      "isDeleted": false,
+      "id": "edge-4f97b7c07d02",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1551.71,
+      "y": 3119.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 880993,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          293.0899999999997,
+          134.44495412844026
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-22c822d24826",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-62f7b42ee02c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.7105361ba0581694"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4610444796,
+      "isDeleted": false,
+      "id": "edge-ac075bed84ef",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 997.6030953569646,
+      "y": 4309.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 107459,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          467.4568147778332,
+          -392.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-51ed7cd12f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-edfcc2a0579c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e7241868707ed693"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6102730146,
+      "isDeleted": false,
+      "id": "edge-92b99a7ebf76",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1629.533846153846,
+      "y": 3823.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 265867,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          282.46615384615393,
+          -122.32045303131235
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-edfcc2a0579c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-66dbfc785f33",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.fcf1afddbbd0771d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3800450667,
+      "isDeleted": false,
+      "id": "edge-e038247571d4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1722.0,
+      "y": 3870.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 189942,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-edfcc2a0579c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-929cb07c2106",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.f466ee8b0b58b572"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9517741682,
+      "isDeleted": false,
+      "id": "edge-c24febb9027a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1629.533846153846,
+      "y": 3917.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 757492,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          282.46615384615393,
+          122.32045303131235
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-edfcc2a0579c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-533d2489368b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.21c7faa26a915884"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7934100348,
+      "isDeleted": false,
+      "id": "edge-5bff11e6ba67",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1017.5635897435898,
+      "y": 4431.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 81677,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          441.19448717948717,
+          290.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-51ed7cd12f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-aab60b0c23dc",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.ef05263e87271483"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2239534036,
+      "isDeleted": false,
+      "id": "edge-ea773a03aaa2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1578.3095077545515,
+      "y": 4722.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 25112,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          357.80040458530016,
+          -222.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aab60b0c23dc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-104af0ff58d3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.47500cf9ffe7e438"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3137561148,
+      "isDeleted": false,
+      "id": "edge-c5f18fb0a275",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1713.6,
+      "y": 4724.192468970145,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 859103,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -35.294364307279466
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aab60b0c23dc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ea15b27ee859",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.712007405dd40e15"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6936422255,
+      "isDeleted": false,
+      "id": "edge-d8f6a9493383",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1669.594974874372,
+      "y": 4799.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 300161,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          234.00502512562798,
+          58.57975511573295
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aab60b0c23dc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f799b5596904",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.2262a6bd48aa7f0a"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4825503451,
+      "isDeleted": false,
+      "id": "edge-18e418995e82",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1575.2734615384616,
+      "y": 4799.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 851231,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          398.99538461538464,
+          261.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-aab60b0c23dc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e519c45766dc",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.395e1d9b45acf30b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2256045421,
+      "isDeleted": false,
+      "id": "edge-7d3b27aec054",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 953.7865703689245,
+      "y": 4431.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 359321,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          557.5628342767911,
+          1181.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-51ed7cd12f1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-fc903f369db7",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.191f73cc0549c47b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5762545136,
+      "isDeleted": false,
+      "id": "edge-11563d5a587b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1618.9638461538461,
+      "y": 5613.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 964328,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          309.8361538461536,
+          -132.32161629434995
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-fc903f369db7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e772705d75d5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6d4dbe3f975e8dc3"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3511819258,
+      "isDeleted": false,
+      "id": "edge-f7e270ab83be",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1738.8000000000002,
+      "y": 5651.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 765245,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999955,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-fc903f369db7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-59b5478ad985",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.fde47fd07d3f19e5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3549632105,
+      "isDeleted": false,
+      "id": "edge-6994e1617209",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1618.9638461538461,
+      "y": 5689.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 990109,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          309.8361538461536,
+          132.32161629434995
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-fc903f369db7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-37d58ab0a531",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5029e1b14815304c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8135094989,
+      "isDeleted": false,
+      "id": "edge-e55f07484e7c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 347.7439798313483,
+      "y": 3755.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 755545,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          561.569538381292,
+          2716.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7deeeb828571",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-74a071dfb88b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.10b0f9ae07039e8d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5652100482,
+      "isDeleted": false,
+      "id": "edge-b7a9ac6da088",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.3210270645386,
+      "y": 6471.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 334840,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          350.83691880638435,
+          -211.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-74a071dfb88b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-36b4238078a1",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.963ebbf9f8feed73"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5181129101,
+      "isDeleted": false,
+      "id": "edge-962066de9ad7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 6480.846828046745,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 888811,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -38.45993322203685
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-74a071dfb88b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b785e9a25001",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6da66868ab0c9b2f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7649995282,
+      "isDeleted": false,
+      "id": "edge-9c65f8c3897c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 6557.571202003339,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 20881,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          34.574290484139965
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-74a071dfb88b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b7819e8c4084",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4b68d5a48fbb393e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1141418010,
+      "isDeleted": false,
+      "id": "edge-50930dacdd1f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1004.2070050035741,
+      "y": 6571.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 228287,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          323.12223016440316,
+          190.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-74a071dfb88b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-84fb7a74e7ba",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.41eb354aacfb0275"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4320772440,
+      "isDeleted": false,
+      "id": "edge-4ad1d9b15035",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 344.25199246486017,
+      "y": 3755.5,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 810688,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          571.5216490363716,
+          3265.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7deeeb828571",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b58f9ceb46f4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.a4f3b6614409049d"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

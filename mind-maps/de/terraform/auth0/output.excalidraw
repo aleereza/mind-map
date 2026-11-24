@@ -1,0 +1,4904 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4201695342,
+      "isDeleted": false,
+      "id": "node-b6aff488e8cc",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120.0,
+      "y": 3148.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 488611,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b6aff488e8cc"
+        },
+        {
+          "id": "edge-4189059a1f16",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-607caf8b041c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-390f202ea9de",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b1a531d4c00f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f36e89f19619",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-auth0"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6012384162,
+      "isDeleted": false,
+      "id": "text-b6aff488e8cc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 3148.5,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 2340.0,
+      "seed": 843584,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Terraform for Auth0\nThe Auth0 provider lets Terraform\nconfigure an Auth0 tenant through\nthe Auth0 Management API\n([provider docs](https://github.co\nm/auth0/terraform-provider-auth0/b\nlob/v1.63.0/docs/index.md#L9-L14))\n. Auth0 maintains it under the\nsource address `auth0/auth0`.\nAuth0 is a hosted sign-in service;\nthe [authentication map](../../aut\nhentication/authentication.md#auth\n0-auth0) explains what it does and\nhow OAuth works. The [Terraform\nmap](../terraform.md) explains\nTerraform itself.\n\nThe unit is one tenant. A tenant\nis one isolated Auth0 space with\nits own users, applications and\nsettings. One provider\nconfiguration manages exactly one\ntenant, and the API cannot create\ntenants, so someone creates each\ntenant by hand first ([tenant doc]\n(https://github.com/auth0/terrafor\nm-provider-auth0/blob/v1.63.0/docs\n/resources/tenant.md#L11-L12)).\nTerraform signs in to the tenant\nas one machine-to-machine\napplication, and the scopes of\nthat application decide what\nTerraform can read and change\n([One Tenant, One Identity](#one-t\nenant-one-identity-one-tenant-one-\nidentity)).\n\nA tenant holds these objects:\n\n- Applications, also called\nclients: the apps that sign users\nin, and the programs that call\nAPIs.\n- APIs, also called resource\nservers, with their scopes.\n- Client grants, which allow a\nmachine-to-machine application to\ncall an API.\n- Connections: the places where\nusers sign in, such as a user\ndatabase or a company directory.\n- Roles, organizations, and\nactions, which are small programs\nthat run during sign-in.\n- Log streams, which send the\ntenant's logs to another system.\n- Tenant-wide settings, such as\nbranding and the sign-in pages.\n\nThe provider has three families of\nresources for these objects\n([Three Families of Resources](#th\nree-families-of-resources-three-fa\nmilies-of-resources)). The family\ndecides what an import ID looks\nlike and what a destroy does.\nThree more ideas explain most\nplans:\n\n- For links between objects, a\nplural resource owns the whole\nlist, and a singular resource adds\none item ([Plural Owns, Singular A\ndds](#plural-owns-singular-adds-pl\nural-owns-singular-adds)).\n- An action is a draft until it is\ndeployed, and it runs only when it\nis bound to a flow ([Actions Have\nThree States](#actions-have-three-\nstates-actions-have-three-states))\n.\n- The state holds client secrets,\naction secrets and\nidentity-provider secrets ([State\nIs a Secrets Store](#state-is-a-se\ncrets-store-state-is-a-secrets-sto\nre)).\n\nNow compare Aiven. Both providers\nare remote controls for a service\nthat someone else runs. In Auth0,\nhowever, people also change the\nsame tenant in its dashboard every\nday, so drift is normal.\n\nThe map has four parts. Mental\nModels explains the ideas above.\nReading an Auth0 Configuration\nsays what you will see and where\nto look first. Pitfalls lists the\nfailures that experienced users\nplan around. Good and Bad\nDecisions compares the main design\nchoices.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-b6aff488e8cc",
+      "originalText": "Terraform for Auth0\nThe Auth0 provider lets Terraform configure an Auth0 tenant through the Auth0 Management API ([provider docs](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/index.md#L9-L14)). Auth0 maintains it under the source address `auth0/auth0`. Auth0 is a hosted sign-in service; the [authentication map](../../authentication/authentication.md#auth0-auth0) explains what it does and how OAuth works. The [Terraform map](../terraform.md) explains Terraform itself.\n\nThe unit is one tenant. A tenant is one isolated Auth0 space with its own users, applications and settings. One provider configuration manages exactly one tenant, and the API cannot create tenants, so someone creates each tenant by hand first ([tenant doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/tenant.md#L11-L12)). Terraform signs in to the tenant as one machine-to-machine application, and the scopes of that application decide what Terraform can read and change ([One Tenant, One Identity](#one-tenant-one-identity-one-tenant-one-identity)).\n\nA tenant holds these objects:\n\n- Applications, also called clients: the apps that sign users in, and the programs that call APIs.\n- APIs, also called resource servers, with their scopes.\n- Client grants, which allow a machine-to-machine application to call an API.\n- Connections: the places where users sign in, such as a user database or a company directory.\n- Roles, organizations, and actions, which are small programs that run during sign-in.\n- Log streams, which send the tenant's logs to another system.\n- Tenant-wide settings, such as branding and the sign-in pages.\n\nThe provider has three families of resources for these objects ([Three Families of Resources](#three-families-of-resources-three-families-of-resources)). The family decides what an import ID looks like and what a destroy does. Three more ideas explain most plans:\n\n- For links between objects, a plural resource owns the whole list, and a singular resource adds one item ([Plural Owns, Singular Adds](#plural-owns-singular-adds-plural-owns-singular-adds)).\n- An action is a draft until it is deployed, and it runs only when it is bound to a flow ([Actions Have Three States](#actions-have-three-states-actions-have-three-states)).\n- The state holds client secrets, action secrets and identity-provider secrets ([State Is a Secrets Store](#state-is-a-secrets-store-state-is-a-secrets-store)).\n\nNow compare Aiven. Both providers are remote controls for a service that someone else runs. In Auth0, however, people also change the same tenant in its dashboard every day, so drift is normal.\n\nThe map has four parts. Mental Models explains the ideas above. Reading an Auth0 Configuration says what you will see and where to look first. Pitfalls lists the failures that experienced users plan around. Good and Bad Decisions compares the main design choices.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-auth0"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4715507139,
+      "isDeleted": false,
+      "id": "node-2b1a0e28488e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 819.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 770779,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2b1a0e28488e"
+        },
+        {
+          "id": "edge-4189059a1f16",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-56cabeb25aaa",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-cbf49e394d25",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6f4d31151bd1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-35efaa6d6ec3",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-7c1c5acc1f81",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d9b41b48613d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-mental-models"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5245970324,
+      "isDeleted": false,
+      "id": "text-2b1a0e28488e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 835.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 223038,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Mental Models\nThe models come in dependency\norder: each model uses only\nthe models before it.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-2b1a0e28488e",
+      "originalText": "Mental Models\nThe models come in dependency order: each model uses only the models before it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-mental-models"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5438214466,
+      "isDeleted": false,
+      "id": "node-2d12e7f90d02",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 99985,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2d12e7f90d02"
+        },
+        {
+          "id": "edge-be65c04c332d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-56cabeb25aaa",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-tenant-one-identity"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6654692262,
+      "isDeleted": false,
+      "id": "text-2d12e7f90d02",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 630.0,
+      "seed": 282361,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Tenant, One Identity\nThe provider signs in with a domain and the\nclient ID and secret of a machine-to-machine\napplication, or with a signed JWT, or with an\nAPI token ([provider configuration](https://gi\nthub.com/auth0/terraform-provider-auth0/blob/v\n1.63.0/docs/index.md#L48-L63)). It reads the\nvalues from environment variables such as\n`AUTH0_DOMAIN`, `AUTH0_CLIENT_ID` and\n`AUTH0_CLIENT_SECRET`.\n\nEvery call uses the scopes that this\napplication holds on the Management API. A\nmissing read scope does not cause an error;\nthe provider just reads an empty value. For\nexample, `client_secret` is an empty string\nunless the application has the\n`read:client_keys` scope ([credentials doc](ht\ntps://github.com/auth0/terraform-provider-auth\n0/blob/v1.63.0/docs/resources/client_credentia\nls.md#L182)). Connection options need the\nscopes `read:connections_options` and\n`update:connections_options` ([options scope](\nhttps://auth0.com/docs/troubleshoot/product-li\nfecycle/deprecations-and-migrations/migrate-co\nnnection-options-scope)).\n\nAuth0 recommends one tenant for each\nenvironment, such as development, staging and\nproduction ([multiple environments](https://au\nth0.com/docs/get-started/auth0-overview/create\n-tenants/set-up-multiple-environments)). The\nIDs of objects differ from tenant to tenant,\nso configurations refer to objects through\nresources or data sources, never through\ncopied IDs.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2d12e7f90d02",
+      "originalText": "One Tenant, One Identity\nThe provider signs in with a domain and the client ID and secret of a machine-to-machine application, or with a signed JWT, or with an API token ([provider configuration](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/index.md#L48-L63)). It reads the values from environment variables such as `AUTH0_DOMAIN`, `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET`.\n\nEvery call uses the scopes that this application holds on the Management API. A missing read scope does not cause an error; the provider just reads an empty value. For example, `client_secret` is an empty string unless the application has the `read:client_keys` scope ([credentials doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/client_credentials.md#L182)). Connection options need the scopes `read:connections_options` and `update:connections_options` ([options scope](https://auth0.com/docs/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-connection-options-scope)).\n\nAuth0 recommends one tenant for each environment, such as development, staging and production ([multiple environments](https://auth0.com/docs/get-started/auth0-overview/create-tenants/set-up-multiple-environments)). The IDs of objects differ from tenant to tenant, so configurations refer to objects through resources or data sources, never through copied IDs.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-tenant-one-identity"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2018756272,
+      "isDeleted": false,
+      "id": "node-c2463087e13e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 914202,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-c2463087e13e"
+        },
+        {
+          "id": "edge-cbf49e394d25",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "three-families-of-resources"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3239642060,
+      "isDeleted": false,
+      "id": "text-c2463087e13e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 437.5,
+      "seed": 983973,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Three Families of Resources\n| Family | Examples | Import ID | What a\ndestroy does |\n| --- | --- | --- | --- |\n| Objects | `auth0_client`,\n`auth0_connection`, `auth0_action`,\n`auth0_log_stream` | The Auth0 ID, such as\n`con_\u2026` or `lst_\u2026` | Deletes the object |\n| Links | `auth0_connection_client`,\n`auth0_trigger_actions`, `auth0_client_grant`\n| Two IDs joined by `::`, such as\n`con_\u2026::<client ID>` | Removes the link |\n| Singletons | `auth0_tenant`,\n`auth0_branding`, `auth0_prompt`,\n`auth0_guardian` | Any random UUID | Differs\nby resource |\n\nThe import formats come from the Import\nsection of each [resource doc](https://github.\ncom/auth0/terraform-provider-auth0/tree/v1.63.\n0/docs/resources). A singleton is a setting\nthat exists once per tenant. Its destroy can\ndo nothing, delete something, or turn a\nprotection off; the pitfall Singletons on\nDestroy lists which.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-c2463087e13e",
+      "originalText": "Three Families of Resources\n| Family | Examples | Import ID | What a destroy does |\n| --- | --- | --- | --- |\n| Objects | `auth0_client`, `auth0_connection`, `auth0_action`, `auth0_log_stream` | The Auth0 ID, such as `con_\u2026` or `lst_\u2026` | Deletes the object |\n| Links | `auth0_connection_client`, `auth0_trigger_actions`, `auth0_client_grant` | Two IDs joined by `::`, such as `con_\u2026::<client ID>` | Removes the link |\n| Singletons | `auth0_tenant`, `auth0_branding`, `auth0_prompt`, `auth0_guardian` | Any random UUID | Differs by resource |\n\nThe import formats come from the Import section of each [resource doc](https://github.com/auth0/terraform-provider-auth0/tree/v1.63.0/docs/resources). A singleton is a setting that exists once per tenant. Its destroy can do nothing, delete something, or turn a protection off; the pitfall Singletons on Destroy lists which.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "three-families-of-resources"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1351326646,
+      "isDeleted": false,
+      "id": "node-82312bd34668",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 392317,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-82312bd34668"
+        },
+        {
+          "id": "edge-de20b1b9e0bc",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4e92ab99347b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6f4d31151bd1",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "plural-owns-singular-adds"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6218595935,
+      "isDeleted": false,
+      "id": "text-82312bd34668",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 542.5,
+      "seed": 136337,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plural Owns, Singular Adds\nMany links exist in two versions:\n\n| Link | Plural resource: owns the whole list\n| Singular resource: adds one item |\n| --- | --- | --- |\n| Apps that may use a connection |\n`auth0_connection_clients` |\n`auth0_connection_client` |\n| Actions bound to a trigger |\n`auth0_trigger_actions` |\n`auth0_trigger_action` |\n| Scopes of an API |\n`auth0_resource_server_scopes` |\n`auth0_resource_server_scope` |\n| Permissions of a role |\n`auth0_role_permissions` |\n`auth0_role_permission` |\n\nA plural resource writes exactly its own list\nand removes everything else. A singular\nresource appends one item and ignores the\nrest. The provider warns not to use both for\nthe same parent ([connection clients](https://\ngithub.com/auth0/terraform-provider-auth0/blob\n/v1.63.0/docs/resources/connection_client.md#L\n11-L14); [trigger actions](https://github.com/\nauth0/terraform-provider-auth0/blob/v1.63.0/do\ncs/resources/trigger_actions.md#L11-L13)).\nChoose one style for each parent, across all\nrepos and states.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-82312bd34668",
+      "originalText": "Plural Owns, Singular Adds\nMany links exist in two versions:\n\n| Link | Plural resource: owns the whole list | Singular resource: adds one item |\n| --- | --- | --- |\n| Apps that may use a connection | `auth0_connection_clients` | `auth0_connection_client` |\n| Actions bound to a trigger | `auth0_trigger_actions` | `auth0_trigger_action` |\n| Scopes of an API | `auth0_resource_server_scopes` | `auth0_resource_server_scope` |\n| Permissions of a role | `auth0_role_permissions` | `auth0_role_permission` |\n\nA plural resource writes exactly its own list and removes everything else. A singular resource appends one item and ignores the rest. The provider warns not to use both for the same parent ([connection clients](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/connection_client.md#L11-L14); [trigger actions](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/trigger_actions.md#L11-L13)). Choose one style for each parent, across all repos and states.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "plural-owns-singular-adds"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1029065832,
+      "isDeleted": false,
+      "id": "node-40135bbde6ac",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 496740,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-40135bbde6ac"
+        },
+        {
+          "id": "edge-d5a8682beade",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-35efaa6d6ec3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "connection-options-are-one-document"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5697560043,
+      "isDeleted": false,
+      "id": "text-40135bbde6ac",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 905.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 384227,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Connection Options Are One Document\nThe `options` block of an `auth0_connection`\nholds the details of a sign-in method, such as\nthe directory of an identity provider and its\nclient secret. The provider sends `options` as\none whole document. The docs warn that every\nnested field must be set, or existing settings\ncan be lost ([connection doc](https://github.c\nom/auth0/terraform-provider-auth0/blob/v1.63.0\n/docs/resources/connection.md#L14)). So a\nsmall change to one option rewrites them all,\nwith the values that Terraform knows.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-40135bbde6ac",
+      "originalText": "Connection Options Are One Document\nThe `options` block of an `auth0_connection` holds the details of a sign-in method, such as the directory of an identity provider and its client secret. The provider sends `options` as one whole document. The docs warn that every nested field must be set, or existing settings can be lost ([connection doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/connection.md#L14)). So a small change to one option rewrites them all, with the values that Terraform knows.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "connection-options-are-one-document"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3223978623,
+      "isDeleted": false,
+      "id": "node-8ca3228e3c1d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 335343,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-8ca3228e3c1d"
+        },
+        {
+          "id": "edge-f90a2be1fbdd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-7c1c5acc1f81",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "actions-have-three-states"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7406759408,
+      "isDeleted": false,
+      "id": "text-8ca3228e3c1d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 332.5,
+      "seed": 947888,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Actions Have Three States\nAn action is code that runs in a flow, such as\n`post-login`. It has three states ([write your\nfirst action](https://auth0.com/docs/customize\n/actions/write-your-first-action)):\n\n1. A draft. `auth0_action` saves the code, and\nwith the default `deploy = false` it stays a\ndraft.\n2. A deployed version. With `deploy = true`,\nthe code becomes the live version.\n3. Bound to a flow. Only a binding, through\n`auth0_trigger_actions` or\n`auth0_trigger_action`, makes the action run.\n\nSo a code change in Terraform can stay a\ndraft, and a deployed action can stay unused.\nA bound action with `deploy = true`, however,\nchanges live sign-ins at the next apply.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-8ca3228e3c1d",
+      "originalText": "Actions Have Three States\nAn action is code that runs in a flow, such as `post-login`. It has three states ([write your first action](https://auth0.com/docs/customize/actions/write-your-first-action)):\n\n1. A draft. `auth0_action` saves the code, and with the default `deploy = false` it stays a draft.\n2. A deployed version. With `deploy = true`, the code becomes the live version.\n3. Bound to a flow. Only a binding, through `auth0_trigger_actions` or `auth0_trigger_action`, makes the action run.\n\nSo a code change in Terraform can stay a draft, and a deployed action can stay unused. A bound action with `deploy = true`, however, changes live sign-ins at the next apply.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "actions-have-three-states"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1296918412,
+      "isDeleted": false,
+      "id": "node-b40422f9593e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 69966,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b40422f9593e"
+        },
+        {
+          "id": "edge-04f207eb6341",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d9b41b48613d",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "state-is-a-secrets-store"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1616474756,
+      "isDeleted": false,
+      "id": "text-b40422f9593e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 297.5,
+      "seed": 988939,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "State Is a Secrets Store\nThe state of an Auth0 configuration holds\nseveral kinds of secret:\n\n- The client secrets of applications, in\n`auth0_client_credentials`.\n- The `secrets` of actions, in plain text\n([action doc](https://github.com/auth0/terrafo\nrm-provider-auth0/blob/v1.63.0/docs/resources/\naction.md#L16-L18)).\n- The client secret of an identity provider,\ninside connection `options`.\n\nNewer provider versions add write-only\narguments, such as `secrets_wo` and\n`client_secret_wo`, which keep a value out of\nthe state. They need Terraform 1.11 or later.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b40422f9593e",
+      "originalText": "State Is a Secrets Store\nThe state of an Auth0 configuration holds several kinds of secret:\n\n- The client secrets of applications, in `auth0_client_credentials`.\n- The `secrets` of actions, in plain text ([action doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/action.md#L16-L18)).\n- The client secret of an identity provider, inside connection `options`.\n\nNewer provider versions add write-only arguments, such as `secrets_wo` and `client_secret_wo`, which keep a value out of the state. They need Terraform 1.11 or later.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "state-is-a-secrets-store"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7632461862,
+      "isDeleted": false,
+      "id": "node-8b1ec677edd3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 1977.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 144.5,
+      "seed": 913353,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-8b1ec677edd3"
+        },
+        {
+          "id": "edge-607caf8b041c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0ce367004b01",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-3a051eaeef42",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ec6d90e09624",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-auth0-configuration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9443190683,
+      "isDeleted": false,
+      "id": "text-8b1ec677edd3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 1993.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 112.5,
+      "seed": 208166,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading an Auth0 Configuration\nThese nodes say what you will find\nin the files, in which order to\nread them, and what each kind of\nplan line means.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-8b1ec677edd3",
+      "originalText": "Reading an Auth0 Configuration\nThese nodes say what you will find in the files, in which order to read them, and what each kind of plan line means.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-auth0-configuration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7391236106,
+      "isDeleted": false,
+      "id": "node-df8837358f72",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 937445,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-df8837358f72"
+        },
+        {
+          "id": "edge-0ce367004b01",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-what-you-will-see"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3131660267,
+      "isDeleted": false,
+      "id": "text-df8837358f72",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 612.5,
+      "seed": 293823,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What You Will See\n| Resource | Auth0 object | What to check |\n| --- | --- | --- |\n| `auth0_client` | application | `app_type`,\ncallback and origin lists |\n| `auth0_client_credentials` | sign-in method\nand secret of an application | Where the\nsecret goes next |\n| `auth0_resource_server` | API | Its\nidentifier, which tokens use as the audience |\n| `auth0_client_grant` | access of an\napplication to an API | Which scopes,\nespecially on the Management API |\n| `auth0_connection` | sign-in method |\n`strategy`, a complete `options` block, secret\nsources |\n| `auth0_connection_client(s)` | apps enabled\non a connection | Singular or plural, and who\nelse manages them |\n| `auth0_action`, `auth0_trigger_action(s)` |\ncode in a flow, and its binding | `deploy`,\nruntime, secrets, where the binding lives |\n| `auth0_role`, `auth0_organization` | access\ngroups | Who assigns users to them |\n| `auth0_log_stream` | export of tenant logs |\n`type`, `filters`, the target |\n| `auth0_tenant`, `auth0_branding`,\n`auth0_prompt` | tenant-wide settings |\nExactly one owner per tenant |\n\nAn application of type `non_interactive` is a\nmachine-to-machine application. A client grant\nto the Management API lets such an application\nchange the tenant itself, so these grants\ndeserve a careful look.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-df8837358f72",
+      "originalText": "What You Will See\n| Resource | Auth0 object | What to check |\n| --- | --- | --- |\n| `auth0_client` | application | `app_type`, callback and origin lists |\n| `auth0_client_credentials` | sign-in method and secret of an application | Where the secret goes next |\n| `auth0_resource_server` | API | Its identifier, which tokens use as the audience |\n| `auth0_client_grant` | access of an application to an API | Which scopes, especially on the Management API |\n| `auth0_connection` | sign-in method | `strategy`, a complete `options` block, secret sources |\n| `auth0_connection_client(s)` | apps enabled on a connection | Singular or plural, and who else manages them |\n| `auth0_action`, `auth0_trigger_action(s)` | code in a flow, and its binding | `deploy`, runtime, secrets, where the binding lives |\n| `auth0_role`, `auth0_organization` | access groups | Who assigns users to them |\n| `auth0_log_stream` | export of tenant logs | `type`, `filters`, the target |\n| `auth0_tenant`, `auth0_branding`, `auth0_prompt` | tenant-wide settings | Exactly one owner per tenant |\n\nAn application of type `non_interactive` is a machine-to-machine application. A client grant to the Management API lets such an application change the tenant itself, so these grants deserve a careful look.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-what-you-will-see"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9217218476,
+      "isDeleted": false,
+      "id": "node-bc6e0f055b2e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 728156,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-bc6e0f055b2e"
+        },
+        {
+          "id": "edge-3a051eaeef42",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-where-to-look-first"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3256560063,
+      "isDeleted": false,
+      "id": "text-bc6e0f055b2e",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 57511,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Where to Look First\nRead an Auth0 configuration in this order:\n\n1. `required_providers`, the lock file and the\nprovider block. Note the version gap to the\nlatest release, and where the credentials and\nthe tenant domain come from.\n2. The backend and the environment selector.\nMap each state to a tenant, and flag any\ntenant that two states change.\n3. The singletons. Each one needs exactly one\nowner per tenant.\n4. The link resources. Look for singular and\nplural styles on the same parent, in this repo\nand in others.\n5. `auth0_action`: `deploy`, the runtime, the\nsecrets, and where its binding lives.\n6. `auth0_connection`: the strategy, the full\n`options` block and its secrets.\n7. `auth0_client`, its credentials and grants:\nthe app type, the callback and origin lists,\nand grants to the Management API.\n8. The data sources and outputs: lookups by\nname, and secrets that leave for other\nsystems.\n9. The `lifecycle` blocks: each\n`ignore_changes` marks a field that a person\nor another state owns.\n10. `auth0_log_stream`: the filters and the\ntarget system.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-bc6e0f055b2e",
+      "originalText": "Where to Look First\nRead an Auth0 configuration in this order:\n\n1. `required_providers`, the lock file and the provider block. Note the version gap to the latest release, and where the credentials and the tenant domain come from.\n2. The backend and the environment selector. Map each state to a tenant, and flag any tenant that two states change.\n3. The singletons. Each one needs exactly one owner per tenant.\n4. The link resources. Look for singular and plural styles on the same parent, in this repo and in others.\n5. `auth0_action`: `deploy`, the runtime, the secrets, and where its binding lives.\n6. `auth0_connection`: the strategy, the full `options` block and its secrets.\n7. `auth0_client`, its credentials and grants: the app type, the callback and origin lists, and grants to the Management API.\n8. The data sources and outputs: lookups by name, and secrets that leave for other systems.\n9. The `lifecycle` blocks: each `ignore_changes` marks a field that a person or another state owns.\n10. `auth0_log_stream`: the filters and the target system.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-where-to-look-first"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5788594415,
+      "isDeleted": false,
+      "id": "node-fb752c7dfef1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 821053,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-fb752c7dfef1"
+        },
+        {
+          "id": "edge-ec6d90e09624",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-plan-signals"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7069849506,
+      "isDeleted": false,
+      "id": "text-fb752c7dfef1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 350.0,
+      "seed": 628076,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `+` on an object that exists in the tenant |\nSomeone deleted it in the dashboard, or\nanother state deleted its link; Terraform\nrecreates it. |\n| `~` on `options` of a connection | The whole\noptions document will be rewritten. |\n| `~ cross_origin_auth = true -> null` in\nevery plan | A field with a server default\nthat the code does not set ([issue 1029](https\n://github.com/auth0/terraform-provider-auth0/i\nssues/1029)). |\n| `~` on `auth0_trigger_actions` | The plural\nbinding will write its exact list; bindings\nmade elsewhere disappear. |\n| `-/+ auth0_log_stream` | The stream is\nreplaced; a stream to AWS EventBridge gets a\nnew partner event source. |",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-fb752c7dfef1",
+      "originalText": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| `+` on an object that exists in the tenant | Someone deleted it in the dashboard, or another state deleted its link; Terraform recreates it. |\n| `~` on `options` of a connection | The whole options document will be rewritten. |\n| `~ cross_origin_auth = true -> null` in every plan | A field with a server default that the code does not set ([issue 1029](https://github.com/auth0/terraform-provider-auth0/issues/1029)). |\n| `~` on `auth0_trigger_actions` | The plural binding will write its exact list; bindings made elsewhere disappear. |\n| `-/+ auth0_log_stream` | The stream is replaced; a stream to AWS EventBridge gets a new partner event source. |",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-plan-signals"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2056872290,
+      "isDeleted": false,
+      "id": "node-91b8fb9586f9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 3807.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 913006,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-91b8fb9586f9"
+        },
+        {
+          "id": "edge-390f202ea9de",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-2f6b0546008a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1f5b80b33645",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-2e9c471952ed",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9707572134,
+      "isDeleted": false,
+      "id": "text-91b8fb9586f9",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 3823.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 913221,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pitfalls\nThe pitfalls fall into three\ngroups: ownership, secrets,\nand change management.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-91b8fb9586f9",
+      "originalText": "Pitfalls\nThe pitfalls fall into three groups: ownership, secrets, and change management.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3605974254,
+      "isDeleted": false,
+      "id": "node-657353782e12",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 2791.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 393.6,
+      "height": 76.5,
+      "seed": 260415,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-657353782e12"
+        },
+        {
+          "id": "edge-2f6b0546008a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5709534729d6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a504e34a43f3",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-8e58ea48d7e2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-ownership-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2969020201,
+      "isDeleted": false,
+      "id": "text-657353782e12",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 2803.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 369.6,
+      "height": 52.5,
+      "seed": 778207,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Ownership Pitfalls\nThese pitfalls appear when two owners act on\none tenant.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-657353782e12",
+      "originalText": "Ownership Pitfalls\nThese pitfalls appear when two owners act on one tenant.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-ownership-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7237787850,
+      "isDeleted": false,
+      "id": "node-4ce16aa51659",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1860.4,
+      "y": 2460.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 698406,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4ce16aa51659"
+        },
+        {
+          "id": "edge-de20b1b9e0bc",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5709534729d6",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "mixed-trigger-bindings"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9865456947,
+      "isDeleted": false,
+      "id": "text-4ce16aa51659",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1872.4,
+      "y": 2460.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 280.0,
+      "seed": 691641,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Mixed Trigger Bindings\n`auth0_trigger_actions` writes its exact list\nof actions on every create and update, and\nwrites an empty list on destroy. So its\ndestroy unbinds every action of the flow,\nincluding actions that another configuration\nbound with `auth0_trigger_action` ([code](http\ns://github.com/auth0/terraform-provider-auth0/\nblob/v1.63.0/internal/auth0/action/resource_tr\nigger_actions.go#L76-L139)).\n`auth0_trigger_action` also cannot set the\norder: it appends its action at the end of the\nflow ([trigger action doc](https://github.com/\nauth0/terraform-provider-auth0/blob/v1.63.0/do\ncs/resources/trigger_action.md#L10-L12)). Bind\nall actions of one flow in one place.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-4ce16aa51659",
+      "originalText": "Mixed Trigger Bindings\n`auth0_trigger_actions` writes its exact list of actions on every create and update, and writes an empty list on destroy. So its destroy unbinds every action of the flow, including actions that another configuration bound with `auth0_trigger_action` ([code](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/internal/auth0/action/resource_trigger_actions.go#L76-L139)). `auth0_trigger_action` also cannot set the order: it appends its action at the end of the flow ([trigger action doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/trigger_action.md#L10-L12)). Bind all actions of one flow in one place.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "mixed-trigger-bindings"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1693580666,
+      "isDeleted": false,
+      "id": "node-cb8532742bfb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1860.4,
+      "y": 2720.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 722727,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-cb8532742bfb"
+        },
+        {
+          "id": "edge-4e92ab99347b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a504e34a43f3",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "two-states-one-object"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3220453713,
+      "isDeleted": false,
+      "id": "text-cb8532742bfb",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1872.4,
+      "y": 2720.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 698123,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Two States, One Object\nTwo configurations can manage the same object\nwithout knowing it. For example, the create of\n`auth0_client_grant` adopts an existing grant\nfor the same application and API ([grant code]\n(https://github.com/auth0/terraform-provider-a\nuth0/blob/v1.27.0/internal/auth0/client/resour\nce_grant.go#L70-L96)). When either\nconfiguration destroys it, the other loses it.\nA `data \"auth0_client\"` lookup by name returns\nthe first match, so a duplicate name silently\npicks the wrong application ([data source code\n](https://github.com/auth0/terraform-provider-\nauth0/blob/v1.63.0/internal/auth0/client/data_\nsource.go#L314-L340)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-cb8532742bfb",
+      "originalText": "Two States, One Object\nTwo configurations can manage the same object without knowing it. For example, the create of `auth0_client_grant` adopts an existing grant for the same application and API ([grant code](https://github.com/auth0/terraform-provider-auth0/blob/v1.27.0/internal/auth0/client/resource_grant.go#L70-L96)). When either configuration destroys it, the other loses it. A `data \"auth0_client\"` lookup by name returns the first match, so a duplicate name silently picks the wrong application ([data source code](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/internal/auth0/client/data_source.go#L314-L340)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "two-states-one-object"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2591353749,
+      "isDeleted": false,
+      "id": "node-7b4228ff18ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1860.4,
+      "y": 2980.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 917095,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7b4228ff18ff"
+        },
+        {
+          "id": "edge-8e58ea48d7e2",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "singletons-on-destroy"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8709684856,
+      "isDeleted": false,
+      "id": "text-7b4228ff18ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1872.4,
+      "y": 2980.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 962362,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Singletons on Destroy\nA destroy of a tenant-wide setting does\ndifferent things:\n\n| Resource | What a destroy does |\n| --- | --- |\n| `auth0_tenant`, `auth0_prompt` | Nothing in\nAuth0; it only leaves the state ([tenant code]\n(https://github.com/auth0/terraform-provider-a\nuth0/blob/v1.63.0/internal/auth0/tenant/resour\nce.go#L642-L644)). |\n| `auth0_branding` | Deletes the Universal\nLogin template ([branding code](https://github\n.com/auth0/terraform-provider-auth0/blob/v1.63\n.0/internal/auth0/branding/resource.go#L177-L1\n88)). |\n| `auth0_attack_protection` | Turns off\nbreached-password detection, brute-force\nprotection and IP throttling ([code](https://g\nithub.com/auth0/terraform-provider-auth0/blob/\nv1.63.0/internal/auth0/attackprotection/resour\nce.go#L837-L879)). |\n| `auth0_guardian` | Turns off all\nmulti-factor authentication factors ([code](ht\ntps://github.com/auth0/terraform-provider-auth\n0/blob/v1.63.0/internal/auth0/guardian/resourc\ne.go#L693-L709)). |\n\nSo removing a singleton from the code can\nweaken the security of a production tenant.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7b4228ff18ff",
+      "originalText": "Singletons on Destroy\nA destroy of a tenant-wide setting does different things:\n\n| Resource | What a destroy does |\n| --- | --- |\n| `auth0_tenant`, `auth0_prompt` | Nothing in Auth0; it only leaves the state ([tenant code](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/internal/auth0/tenant/resource.go#L642-L644)). |\n| `auth0_branding` | Deletes the Universal Login template ([branding code](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/internal/auth0/branding/resource.go#L177-L188)). |\n| `auth0_attack_protection` | Turns off breached-password detection, brute-force protection and IP throttling ([code](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/internal/auth0/attackprotection/resource.go#L837-L879)). |\n| `auth0_guardian` | Turns off all multi-factor authentication factors ([code](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/internal/auth0/guardian/resource.go#L693-L709)). |\n\nSo removing a singleton from the code can weaken the security of a production tenant.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "singletons-on-destroy"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9062685474,
+      "isDeleted": false,
+      "id": "node-e05febfd0cf7",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 3701.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 393.6,
+      "height": 76.5,
+      "seed": 97838,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e05febfd0cf7"
+        },
+        {
+          "id": "edge-1f5b80b33645",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-2c3cadf51d0f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-789acbbf0c28",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-37dfae66a702",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-8a1c0947b33f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-secret-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1317242383,
+      "isDeleted": false,
+      "id": "text-e05febfd0cf7",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 3713.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 369.6,
+      "height": 52.5,
+      "seed": 636981,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secret Pitfalls\nThese pitfalls put secrets where they do not\nbelong, or lose them.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e05febfd0cf7",
+      "originalText": "Secret Pitfalls\nThese pitfalls put secrets where they do not belong, or lose them.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-secret-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5924787715,
+      "isDeleted": false,
+      "id": "node-428ebd2abc20",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1860.4,
+      "y": 3240.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 207970,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-428ebd2abc20"
+        },
+        {
+          "id": "edge-04f207eb6341",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-2c3cadf51d0f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "data-sources-copy-secrets"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6390663619,
+      "isDeleted": false,
+      "id": "text-428ebd2abc20",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1872.4,
+      "y": 3240.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 481508,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Data Sources Copy Secrets\n`data \"auth0_client\"` stores the client secret\nof the application that it reads. `data\n\"auth0_connection\"` stores the connection\noptions, including an identity provider's\nsecret. So every configuration that only reads\nthese objects also holds their secrets in its\nstate. Newer versions add `hide_client_secret`\nto both data sources ([client data source](htt\nps://github.com/auth0/terraform-provider-auth0\n/blob/v1.63.0/docs/data-sources/client.md#L31)\n; [connection data source](https://github.com/\nauth0/terraform-provider-auth0/blob/v1.63.0/do\ncs/data-sources/connection.md#L31)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-428ebd2abc20",
+      "originalText": "Data Sources Copy Secrets\n`data \"auth0_client\"` stores the client secret of the application that it reads. `data \"auth0_connection\"` stores the connection options, including an identity provider's secret. So every configuration that only reads these objects also holds their secrets in its state. Newer versions add `hide_client_secret` to both data sources ([client data source](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/data-sources/client.md#L31); [connection data source](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/data-sources/connection.md#L31)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "data-sources-copy-secrets"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7369000023,
+      "isDeleted": false,
+      "id": "node-212aacd5db73",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1860.4,
+      "y": 3500.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 260910,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-212aacd5db73"
+        },
+        {
+          "id": "edge-be65c04c332d",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-789acbbf0c28",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "empty-secret-without-scope"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3369190377,
+      "isDeleted": false,
+      "id": "text-212aacd5db73",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1872.4,
+      "y": 3500.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 662162,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Empty Secret Without Scope\nIf Terraform's application lacks\n`read:client_keys`, `client_secret` reads as\nan empty string, with no error ([credentials d\noc](https://github.com/auth0/terraform-provide\nr-auth0/blob/v1.63.0/docs/resources/client_cre\ndentials.md#L182)). A configuration that\ncopies the secret into AWS Secrets Manager or\ninto an action secret then stores an empty\nvalue. The plan looks clean, and the app fails\nto sign in later. A `postcondition` that\nchecks the length of the secret catches this\nat plan time.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-212aacd5db73",
+      "originalText": "Empty Secret Without Scope\nIf Terraform's application lacks `read:client_keys`, `client_secret` reads as an empty string, with no error ([credentials doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/client_credentials.md#L182)). A configuration that copies the secret into AWS Secrets Manager or into an action secret then stores an empty value. The plan looks clean, and the app fails to sign in later. A `postcondition` that checks the length of the secret catches this at plan time.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "empty-secret-without-scope"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6290592401,
+      "isDeleted": false,
+      "id": "node-062d41d86ba5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1860.4,
+      "y": 3760.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 180558,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-062d41d86ba5"
+        },
+        {
+          "id": "edge-d5a8682beade",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-37dfae66a702",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "connection-options-replaced"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3671954667,
+      "isDeleted": false,
+      "id": "text-062d41d86ba5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1872.4,
+      "y": 3760.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 229118,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Connection Options Replaced Whole\nBecause `options` is one document, an update\nsends all of it. Fields that the code leaves\nout are wiped, secrets included, and\n`ignore_changes` inside `options` does not\nprevent this ([issue 860](https://github.com/a\nuth0/terraform-provider-auth0/issues/860)).\nWithout the options scopes, the API leaves\n`options` out of its answers, and updates that\ncontain `options` fail ([options scope](https:\n//auth0.com/docs/troubleshoot/product-lifecycl\ne/deprecations-and-migrations/migrate-connecti\non-options-scope)). Write the full `options`\nblock, and add a precondition that the secret\ninputs are not empty.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-062d41d86ba5",
+      "originalText": "Connection Options Replaced Whole\nBecause `options` is one document, an update sends all of it. Fields that the code leaves out are wiped, secrets included, and `ignore_changes` inside `options` does not prevent this ([issue 860](https://github.com/auth0/terraform-provider-auth0/issues/860)). Without the options scopes, the API leaves `options` out of its answers, and updates that contain `options` fail ([options scope](https://auth0.com/docs/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-connection-options-scope)). Write the full `options` block, and add a precondition that the secret inputs are not empty.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "connection-options-replaced"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9119887106,
+      "isDeleted": false,
+      "id": "node-a18975aa6d4b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1860.4,
+      "y": 4020.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 552790,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-a18975aa6d4b"
+        },
+        {
+          "id": "edge-8a1c0947b33f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "secret-rotation"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2037555451,
+      "isDeleted": false,
+      "id": "text-a18975aa6d4b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1872.4,
+      "y": 4020.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 597967,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Secret Rotation\nAuth0 rotates a client secret in the dashboard\nor through the API, and a new secret can take\nup to 30 seconds to work ([rotate a client sec\nret](https://auth0.com/docs/get-started/applic\nations/rotate-client-secret)). Replacing\n`auth0_client_credentials` in Terraform does\nnot rotate the secret ([issue 1785](https://gi\nthub.com/auth0/terraform-provider-auth0/issues\n/1785)). A rotated secret can also have\ncopies, for example in Secrets Manager, in an\naction secret or in a pipeline variable. Each\ncopy changes only at the next apply of the\nconfiguration that writes it.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-a18975aa6d4b",
+      "originalText": "Secret Rotation\nAuth0 rotates a client secret in the dashboard or through the API, and a new secret can take up to 30 seconds to work ([rotate a client secret](https://auth0.com/docs/get-started/applications/rotate-client-secret)). Replacing `auth0_client_credentials` in Terraform does not rotate the secret ([issue 1785](https://github.com/auth0/terraform-provider-auth0/issues/1785)). A rotated secret can also have copies, for example in Secrets Manager, in an action secret or in a pipeline variable. Each copy changes only at the next apply of the configuration that writes it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "secret-rotation"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3024106109,
+      "isDeleted": false,
+      "id": "node-b6793ec4a789",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 4740.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 76.5,
+      "seed": 111172,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-b6793ec4a789"
+        },
+        {
+          "id": "edge-2e9c471952ed",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b07e84a833b6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-bd4465ee3a8c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-7d89e0a11b0f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-a868f7404f8b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-change-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6565395683,
+      "isDeleted": false,
+      "id": "text-b6793ec4a789",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 4752.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 52.5,
+      "seed": 136524,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Change Pitfalls\nThese pitfalls appear during normal changes\nand upgrades.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-b6793ec4a789",
+      "originalText": "Change Pitfalls\nThese pitfalls appear during normal changes and upgrades.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-change-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9572601397,
+      "isDeleted": false,
+      "id": "node-6da763786c8a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1885.6,
+      "y": 4280.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 857817,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-6da763786c8a"
+        },
+        {
+          "id": "edge-f90a2be1fbdd",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b07e84a833b6",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "deploy-and-bind"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1558312029,
+      "isDeleted": false,
+      "id": "text-6da763786c8a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1897.6,
+      "y": 4292.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 961617,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Deploy and Bind\nWith the default `deploy = false`, a code\nchange in `auth0_action` stays a draft, and\nnothing changes for users. With `deploy =\ntrue`, the change goes live at once in every\nflow that binds the action. Deleting an action\nthat is still bound fails with `409 Conflict`.\nUnbind it in one apply, and delete it in the\nnext ([trigger actions doc](https://github.com\n/auth0/terraform-provider-auth0/blob/v1.63.0/d\nocs/resources/trigger_actions.md#L17-L19)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-6da763786c8a",
+      "originalText": "Deploy and Bind\nWith the default `deploy = false`, a code change in `auth0_action` stays a draft, and nothing changes for users. With `deploy = true`, the change goes live at once in every flow that binds the action. Deleting an action that is still bound fails with `409 Conflict`. Unbind it in one apply, and delete it in the next ([trigger actions doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/trigger_actions.md#L17-L19)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "deploy-and-bind"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2722201591,
+      "isDeleted": false,
+      "id": "node-0864a35b180f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1885.6,
+      "y": 4536.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 237860,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-0864a35b180f"
+        },
+        {
+          "id": "edge-bd4465ee3a8c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "lists-stay-unless-emptied"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6119901684,
+      "isDeleted": false,
+      "id": "text-0864a35b180f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1897.6,
+      "y": 4541.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 167298,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Lists Stay Unless Emptied\nRemoving a list argument, such as `callbacks`\nor `allowed_origins`, from the code changes\nnothing in Auth0. To clear a list, set it to\n`[]` ([issue 1108](https://github.com/auth0/te\nrraform-provider-auth0/issues/1108)).\n`allowed_origins` also defaults to the\ncallback URLs ([client doc](https://github.com\n/auth0/terraform-provider-auth0/blob/v1.63.0/d\nocs/resources/client.md#L213)). So a localhost\ncallback left in a development list also\nbecomes an allowed origin.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-0864a35b180f",
+      "originalText": "Lists Stay Unless Emptied\nRemoving a list argument, such as `callbacks` or `allowed_origins`, from the code changes nothing in Auth0. To clear a list, set it to `[]` ([issue 1108](https://github.com/auth0/terraform-provider-auth0/issues/1108)). `allowed_origins` also defaults to the callback URLs ([client doc](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/resources/client.md#L213)). So a localhost callback left in a development list also becomes an allowed origin.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "lists-stay-unless-emptied"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8954821312,
+      "isDeleted": false,
+      "id": "node-2c3ae304c2f4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1885.6,
+      "y": 4796.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 294838,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2c3ae304c2f4"
+        },
+        {
+          "id": "edge-7d89e0a11b0f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "rate-limits"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4288354493,
+      "isDeleted": false,
+      "id": "text-2c3ae304c2f4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1897.6,
+      "y": 4801.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 328311,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Rate Limits\nThe Management API has rate limits per tenant\n([rate limit policy](https://auth0.com/docs/tr\noubleshoot/customer-support/operational-polici\nes/rate-limit-policy)). A large configuration\nreads many objects in every plan, even with no\nchanges, and it can hit the limit ([issue 1488\n](https://github.com/auth0/terraform-provider-\nauth0/issues/1488)). The provider then waits\nand retries, so plans get slow. Calls that\nTerraform makes share the limit with the apps\nthat use the tenant.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2c3ae304c2f4",
+      "originalText": "Rate Limits\nThe Management API has rate limits per tenant ([rate limit policy](https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy)). A large configuration reads many objects in every plan, even with no changes, and it can hit the limit ([issue 1488](https://github.com/auth0/terraform-provider-auth0/issues/1488)). The provider then waits and retries, so plans get slow. Calls that Terraform makes share the limit with the apps that use the tenant.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "rate-limits"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9888241096,
+      "isDeleted": false,
+      "id": "node-1511f7055147",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1885.6,
+      "y": 5056.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 188687,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-1511f7055147"
+        },
+        {
+          "id": "edge-a868f7404f8b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-version-gaps"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5470286341,
+      "isDeleted": false,
+      "id": "text-1511f7055147",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1897.6,
+      "y": 5056.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 280.0,
+      "seed": 610598,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Version Gaps and Deprecations\nAuth0 changes its API on a schedule, and old\nprovider versions fall behind it. For example,\nthe old way of managing the enabled clients of\na connection reached its end of life on\n2026-07-13 ([deprecations](https://auth0.com/d\nocs/troubleshoot/product-lifecycle/deprecation\ns-and-migrations)). Auth0 names provider\n1.29.0 or later as compatible with the new\nendpoints ([dedicated connection endpoints](ht\ntps://auth0.com/docs/troubleshoot/product-life\ncycle/deprecations-and-migrations/migrate-dedi\ncated-connection-endpoints)). The same page\nlists Rules and Hooks as deprecated in favor\nof actions. Read the changelog before each\nupgrade, and upgrade in steps.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-1511f7055147",
+      "originalText": "Version Gaps and Deprecations\nAuth0 changes its API on a schedule, and old provider versions fall behind it. For example, the old way of managing the enabled clients of a connection reached its end of life on 2026-07-13 ([deprecations](https://auth0.com/docs/troubleshoot/product-lifecycle/deprecations-and-migrations)). Auth0 names provider 1.29.0 or later as compatible with the new endpoints ([dedicated connection endpoints](https://auth0.com/docs/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-dedicated-connection-endpoints)). The same page lists Rules and Hooks as deprecated in favor of actions. Read the changelog before each upgrade, and upgrade in steps.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-version-gaps"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4614985457,
+      "isDeleted": false,
+      "id": "node-f79783f00208",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 5728.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 99.5,
+      "seed": 162076,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-f79783f00208"
+        },
+        {
+          "id": "edge-b1a531d4c00f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-226c3f33fc5b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-bb4076b54e99",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b8aed5e25225",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-69af5796ced0",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-decisions"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1504496962,
+      "isDeleted": false,
+      "id": "text-f79783f00208",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 5744.25,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 67.5,
+      "seed": 787462,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Good and Bad Decisions\nEach node compares a choice with\nits alternative.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-f79783f00208",
+      "originalText": "Good and Bad Decisions\nEach node compares a choice with its alternative.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-decisions"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9722569905,
+      "isDeleted": false,
+      "id": "node-dc7f387de99d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5316.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 208560,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-dc7f387de99d"
+        },
+        {
+          "id": "edge-226c3f33fc5b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-tenant-per-environment"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9337791015,
+      "isDeleted": false,
+      "id": "text-dc7f387de99d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5316.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 128806,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Tenant per Environment\nAuth0 recommends separate tenants for\ndevelopment, staging and production ([multiple\nenvironments](https://auth0.com/docs/get-start\ned/auth0-overview/create-tenants/set-up-multip\nle-environments)). A shared tenant saves a\ntenant and lets staging test the real company\ndirectory. But then the tenant-wide settings\nneed guards in code, two states share objects,\na staging log stream also exports production\nevents, and a staging apply can change\nproduction actions. A tenant used by\nproduction should also carry the production\ntag, because the production rate limits apply\nonly to such tenants (same page).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-dc7f387de99d",
+      "originalText": "One Tenant per Environment\nAuth0 recommends separate tenants for development, staging and production ([multiple environments](https://auth0.com/docs/get-started/auth0-overview/create-tenants/set-up-multiple-environments)). A shared tenant saves a tenant and lets staging test the real company directory. But then the tenant-wide settings need guards in code, two states share objects, a staging log stream also exports production events, and a staging apply can change production actions. A tenant used by production should also carry the production tag, because the production rate limits apply only to such tenants (same page).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-tenant-per-environment"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4124688038,
+      "isDeleted": false,
+      "id": "node-451b3f394516",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5576.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 576195,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-451b3f394516"
+        },
+        {
+          "id": "edge-bb4076b54e99",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "least-privilege-for-terraform"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1357419288,
+      "isDeleted": false,
+      "id": "text-451b3f394516",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5576.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 297.5,
+      "seed": 651401,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Least Privilege for Terraform's Client\nThe provider's quickstart authorizes all\nManagement API scopes for Terraform's\napplication ([quickstart](https://github.com/a\nuth0/terraform-provider-auth0/blob/v1.63.0/doc\ns/guides/quickstart.md#L27-L28)). That is\neasy, but it includes every delete scope. A\nsmaller set must still include the read scopes\nthat some attributes depend on, such as\n`read:client_keys` and\n`read:connections_options`; otherwise values\nread as empty. Keep the credentials in\nenvironment variables, not in code, and prefer\na signed JWT over a shared secret ([provider c\nonfiguration](https://github.com/auth0/terrafo\nrm-provider-auth0/blob/v1.63.0/docs/index.md#L\n29-L41)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-451b3f394516",
+      "originalText": "Least Privilege for Terraform's Client\nThe provider's quickstart authorizes all Management API scopes for Terraform's application ([quickstart](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/guides/quickstart.md#L27-L28)). That is easy, but it includes every delete scope. A smaller set must still include the read scopes that some attributes depend on, such as `read:client_keys` and `read:connections_options`; otherwise values read as empty. Keep the credentials in environment variables, not in code, and prefer a signed JWT over a shared secret ([provider configuration](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/index.md#L29-L41)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "least-privilege-for-terraform"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7924989347,
+      "isDeleted": false,
+      "id": "node-55d1f4fb9b97",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5836.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 410.40000000000003,
+      "height": 146.5,
+      "seed": 473155,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-55d1f4fb9b97"
+        },
+        {
+          "id": "edge-b8aed5e25225",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-owner-per-parent"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4062148097,
+      "isDeleted": false,
+      "id": "text-55d1f4fb9b97",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5848.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 122.5,
+      "seed": 207189,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Owner per Parent\nUse a plural link resource when one\nconfiguration owns the parent: it removes\nstrays and keeps the order of actions. Use\nsingular resources when several configurations\neach add their own item. Never mix the two on\none parent (see Plural Owns, Singular Adds).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-55d1f4fb9b97",
+      "originalText": "One Owner per Parent\nUse a plural link resource when one configuration owns the parent: it removes strays and keeps the order of actions. Use singular resources when several configurations each add their own item. Never mix the two on one parent (see Plural Owns, Singular Adds).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-owner-per-parent"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7208900471,
+      "isDeleted": false,
+      "id": "node-aa0ef375b8b4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 6023.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 9358,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-aa0ef375b8b4"
+        },
+        {
+          "id": "edge-69af5796ced0",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "start-from-generated-config"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4478698215,
+      "isDeleted": false,
+      "id": "text-aa0ef375b8b4",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 6035.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 415083,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Start from the Generated Config\nThe Auth0 CLI command `auth0 tf generate`\nwrites Terraform files and import blocks for\nan existing tenant ([generate guide](https://g\nithub.com/auth0/terraform-provider-auth0/blob/\nv1.63.0/docs/guides/generate_terraform_config.\nmd)). It is experimental, and it does not\nexport secrets. It writes plural resources\nsuch as `auth0_trigger_actions`, so check for\nsingular resources on the same parents before\nyou merge its output.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-aa0ef375b8b4",
+      "originalText": "Start from the Generated Config\nThe Auth0 CLI command `auth0 tf generate` writes Terraform files and import blocks for an existing tenant ([generate guide](https://github.com/auth0/terraform-provider-auth0/blob/v1.63.0/docs/guides/generate_terraform_config.md)). It is experimental, and it does not export secrets. It writes plural resources such as `auth0_trigger_actions`, so check for singular resources on the same parents before you merge its output.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "start-from-generated-config"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5620074946,
+      "isDeleted": false,
+      "id": "node-dafc8c02d937",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 6279.5,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 402.2,
+      "height": 117.5,
+      "seed": 996003,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-dafc8c02d937"
+        },
+        {
+          "id": "edge-f36e89f19619",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "auth0-about-the-sources"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7991384572,
+      "isDeleted": false,
+      "id": "text-dafc8c02d937",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 730.0,
+      "y": 6289.5,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 382.2,
+      "height": 97.5,
+      "seed": 954342,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Sources\nThe provider facts come from the `auth0/auth0`\nrepository at tag v1.63.0, the latest release on\n2026-11-23, and at tag v1.27.0 for one older\ncode path. The Auth0 facts come from\nauth0.com/docs on the same day.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-dafc8c02d937",
+      "originalText": "About the Sources\nThe provider facts come from the `auth0/auth0` repository at tag v1.63.0, the latest release on 2026-11-23, and at tag v1.27.0 for one older code path. The Auth0 facts come from auth0.com/docs on the same day.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "auth0-about-the-sources"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9854570808,
+      "isDeleted": false,
+      "id": "edge-4189059a1f16",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 351.7496321210847,
+      "y": 3148.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 849184,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          536.8164809754047,
+          -2207.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6aff488e8cc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2b1a0e28488e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a30adaa6bbe1b6c8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6292835684,
+      "isDeleted": false,
+      "id": "edge-be65c04c332d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1505.1928994082841,
+      "y": 340.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 177528,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          545.6142011834322,
+          3160.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2d12e7f90d02",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-212aacd5db73",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.c34c4cbca72a4ca5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5942509231,
+      "isDeleted": false,
+      "id": "edge-56cabeb25aaa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 958.0935384615384,
+      "y": 819.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 960567,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          429.47876923076933,
+          -479.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2b1a0e28488e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2d12e7f90d02",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.2f21e2b06c2f996b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2937469658,
+      "isDeleted": false,
+      "id": "edge-cbf49e394d25",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 994.5558974358975,
+      "y": 819.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 174803,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          327.26461538461547,
+          -219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2b1a0e28488e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-c2463087e13e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.aac182684b4a7603"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2640223273,
+      "isDeleted": false,
+      "id": "edge-de20b1b9e0bc",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1521.4725274725274,
+      "y": 860.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 862313,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          513.0549450549454,
+          1600.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-82312bd34668",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4ce16aa51659",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.06e75798ce99b886"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6220785454,
+      "isDeleted": false,
+      "id": "edge-4e92ab99347b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1517.0634615384615,
+      "y": 860.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 311369,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          521.8730769230772,
+          1860.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-82312bd34668",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-cb8532742bfb",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.5429e5eefc7667bd"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5525583534,
+      "isDeleted": false,
+      "id": "edge-6f4d31151bd1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 839.0905971173645,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 625410,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -42.38160603980782
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2b1a0e28488e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-82312bd34668",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.0f56eeae605f54d2"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7775310757,
+      "isDeleted": false,
+      "id": "edge-d5a8682beade",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1508.646153846154,
+      "y": 1120.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 39290,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          538.7076923076922,
+          2640.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-40135bbde6ac",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-062d41d86ba5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.0d90edde16af5f74"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2524864197,
+      "isDeleted": false,
+      "id": "edge-35efaa6d6ec3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 920.9094028826355,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 576934,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          42.38160603980782
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2b1a0e28488e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-40135bbde6ac",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.f63ba4eab5c22311"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9809694121,
+      "isDeleted": false,
+      "id": "edge-f90a2be1fbdd",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1507.6761484807184,
+      "y": 1380.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 965807,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          566.1893690371203,
+          2900.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8ca3228e3c1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6da763786c8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.8309ca8fb436e0ab"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1747887240,
+      "isDeleted": false,
+      "id": "edge-7c1c5acc1f81",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 994.5558974358975,
+      "y": 941.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 945983,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          327.26461538461547,
+          219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2b1a0e28488e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-8ca3228e3c1d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.61c5fa4373c4eb78"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2399175329,
+      "isDeleted": false,
+      "id": "edge-04f207eb6341",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1521.4725274725274,
+      "y": 1640.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 815059,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          513.0549450549454,
+          1600.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b40422f9593e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-428ebd2abc20",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.782d507078b68bb5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8626331743,
+      "isDeleted": false,
+      "id": "edge-d9b41b48613d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 958.0935384615384,
+      "y": 941.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 185926,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          429.47876923076933,
+          479.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2b1a0e28488e",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b40422f9593e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.db54c65049e00569"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5723603531,
+      "isDeleted": false,
+      "id": "edge-607caf8b041c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 379.1216383947042,
+      "y": 3148.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 570330,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          504.93028547786514,
+          -1026.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6aff488e8cc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-8b1ec677edd3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.71a15823c313707d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1252682203,
+      "isDeleted": false,
+      "id": "edge-0ce367004b01",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 1977.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 435671,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          -96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8b1ec677edd3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-df8837358f72",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.591e856540ab1b43"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5123732631,
+      "isDeleted": false,
+      "id": "edge-3a051eaeef42",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 2050.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 942852,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8b1ec677edd3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-bc6e0f055b2e",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3bac76922768d65d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9430125468,
+      "isDeleted": false,
+      "id": "edge-ec6d90e09624",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 2122.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 600700,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-8b1ec677edd3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-fb752c7dfef1",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.1301a77bb7ac3c16"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4729554262,
+      "isDeleted": false,
+      "id": "edge-390f202ea9de",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 429.34440344403447,
+      "y": 3368.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 587465,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          416.19188191881915,
+          438.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6aff488e8cc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-91b8fb9586f9",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.be0755c4a9e8f35e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9667874227,
+      "isDeleted": false,
+      "id": "edge-2f6b0546008a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 936.9007946063086,
+      "y": 3807.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 339781,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          515.6925595954731,
+          -939.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-91b8fb9586f9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-657353782e12",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.44ffbceadd28d1cc"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1995403898,
+      "isDeleted": false,
+      "id": "edge-5709534729d6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1561.3101923076922,
+      "y": 2791.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 629785,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          299.0898076923079,
+          -130.43165045286833
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-657353782e12",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4ce16aa51659",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.878791caef5675a8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1408127331,
+      "isDeleted": false,
+      "id": "edge-a504e34a43f3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1670.3999999999999,
+      "y": 2830.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 691067,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.00000000000023,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-657353782e12",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-cb8532742bfb",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.cec4d0fe325ef9b1"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1556526738,
+      "isDeleted": false,
+      "id": "edge-8e58ea48d7e2",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1561.3101923076922,
+      "y": 2868.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 744676,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          299.0898076923079,
+          130.43165045286833
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-657353782e12",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7b4228ff18ff",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.81df68426483ca5e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8443336572,
+      "isDeleted": false,
+      "id": "edge-1f5b80b33645",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 3826.999473868818,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 18256,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          216.7403508771929,
+          -48.74947386881786
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-91b8fb9586f9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e05febfd0cf7",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.e7b58d3cb3db60d2"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1762746907,
+      "isDeleted": false,
+      "id": "edge-2c3cadf51d0f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1532.0734615384615,
+      "y": 3701.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 627226,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          369.56756410256435,
+          -241.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e05febfd0cf7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-428ebd2abc20",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.74a8129ac5f5d874"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6377334543,
+      "isDeleted": false,
+      "id": "edge-789acbbf0c28",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1649.0203846153845,
+      "y": 3701.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 673893,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          211.3796153846156,
+          -46.090825226433935
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e05febfd0cf7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-212aacd5db73",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.ebe951ba35cfb969"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1480792650,
+      "isDeleted": false,
+      "id": "edge-37dfae66a702",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1649.0203846153845,
+      "y": 3778.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 531741,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          211.3796153846156,
+          46.090825226433935
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e05febfd0cf7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-062d41d86ba5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.09dfa051a48314cc"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4206451283,
+      "isDeleted": false,
+      "id": "edge-8a1c0947b33f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1532.0734615384615,
+      "y": 3778.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 288010,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          369.56756410256435,
+          241.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e05febfd0cf7",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-a18975aa6d4b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.356345582cd6bcee"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2243353455,
+      "isDeleted": false,
+      "id": "edge-2e9c471952ed",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 942.4668131868132,
+      "y": 3929.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 479192,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          519.2363736263737,
+          810.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-91b8fb9586f9",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-b6793ec4a789",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4e7e5c107d62941d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2033074272,
+      "isDeleted": false,
+      "id": "edge-b07e84a833b6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1545.9092307692308,
+      "y": 4740.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 373267,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          380.10974358974363,
+          -243.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6793ec4a789",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-6da763786c8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5e3c98f1bbc9070b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1378776478,
+      "isDeleted": false,
+      "id": "edge-bd4465ee3a8c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1662.9483870967742,
+      "y": 4740.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 422436,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          222.65161290322567,
+          -48.183886333771625
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6793ec4a789",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-0864a35b180f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.33895ed6e3ede887"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9999077147,
+      "isDeleted": false,
+      "id": "edge-7d89e0a11b0f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1667.7719298245615,
+      "y": 4816.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 768715,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          217.82807017543837,
+          45.887729960578326
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6793ec4a789",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2c3ae304c2f4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3ad93a8ec3297a96"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8281468991,
+      "isDeleted": false,
+      "id": "edge-a868f7404f8b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1546.1783644558918,
+      "y": 4816.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 3111,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          376.3348358016742,
+          240.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6793ec4a789",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-1511f7055147",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.89b9f18883a46a97"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6183987236,
+      "isDeleted": false,
+      "id": "edge-b1a531d4c00f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 350.95991268108753,
+      "y": 3368.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 314664,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          556.8991268108751,
+          2359.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6aff488e8cc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-f79783f00208",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4f43cef45e238eff"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1501982870,
+      "isDeleted": false,
+      "id": "edge-226c3f33fc5b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1004.3802275960171,
+      "y": 5728.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 203003,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          326.7660028449503,
+          -191.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-f79783f00208",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-dc7f387de99d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a340bb0faf3ec2c5"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9354369554,
+      "isDeleted": false,
+      "id": "edge-bb4076b54e99",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 5747.510183639399,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 792487,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -29.02337228714532
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-f79783f00208",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-451b3f394516",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.740ae8808a056f1e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1516857933,
+      "isDeleted": false,
+      "id": "edge-b8aed5e25225",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 5822.21200403497,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 786025,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          42.08557498318714
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-f79783f00208",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-55d1f4fb9b97",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.42f17b63ba78bead"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6192749647,
+      "isDeleted": false,
+      "id": "edge-69af5796ced0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1003.9602264685068,
+      "y": 5827.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 73650,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          331.0820948336873,
+          195.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-f79783f00208",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-aa0ef375b8b4",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.bfbe4653299adb63"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4637260729,
+      "isDeleted": false,
+      "id": "edge-f36e89f19619",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 346.29101388099684,
+      "y": 3368.5,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 683888,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          563.4376491598345,
+          2911.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-b6aff488e8cc",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-dafc8c02d937",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.8325e8c52a29c932"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

@@ -1,0 +1,4365 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "excali-builder",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9760552540,
+      "isDeleted": false,
+      "id": "node-719ebb249997",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 120.0,
+      "y": 2726.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 409.99999999999994,
+      "height": 220.0,
+      "seed": 161386,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-719ebb249997"
+        },
+        {
+          "id": "edge-585f2231ea44",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-bbabd6b4b977",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-8b76ae7f069a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-6a256c8cc205",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-8e2e1276249f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "terraform-postgresql"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8328766297,
+      "isDeleted": false,
+      "id": "text-719ebb249997",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 136.0,
+      "y": 2726.375,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 377.99999999999994,
+      "height": 2070.0,
+      "seed": 244606,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Terraform for PostgreSQL\nThe PostgreSQL provider lets\nTerraform manage the objects\ninside a PostgreSQL server: roles,\ndatabases, schemas, grants,\ndefault privileges and extensions.\nA community maintainer publishes\nit under the source address\n`cyrilgdn/postgresql` ([provider d\nocs](https://registry.terraform.io\n/providers/cyrilgdn/postgresql/lat\nest/docs)). It replaced\nHashiCorp's older provider ([READM\nE](https://github.com/cyrilgdn/ter\nraform-provider-postgresql/blob/v1\n.27.0/README.md)). The [Terraform\nmap](../terraform.md) explains\nTerraform itself.\n\nThe provider is a SQL client, not\nan API client. It opens a database\nconnection as an admin role and\nruns SQL such as `CREATE ROLE` and\n`GRANT`. Even a refresh queries\nthe system catalogs, so every plan\nneeds a live connection to the\nserver ([A SQL Client](#a-sql-clie\nnt-a-sql-client)).\n\nThe unit is one server and, by\ndefault, one database. A cloud\nprovider can run the server, for\nexample Amazon RDS (Relational\nDatabase Service). Then two\nproviders share the work ([Two\nPlanes, Two Credentials](#two-plan\nes-two-credentials-two-planes-two-\ncredentials)):\n\n- The AWS provider creates the RDS\ninstance, through the AWS API.\n- The PostgreSQL provider creates\nwhat lives inside the instance,\nthrough a database connection.\n\nInside the server, access follows\nthree rules that shape every plan:\n\n- A grant resource owns the full\nprivilege set of one role on one\nkind of object in one schema ([A\nGrant Owns Its Set](#a-grant-owns-\nits-set-a-grant-owns-its-set)).\n- The owner of an object has all\nprivileges on it without any grant\n([Owners Need No Grants](#owners-n\need-no-grants-owners-need-no-grant\ns)).\n- Default privileges apply to\nobjects that one named role\ncreates later ([Default Privileges\nFollow the Creator](#default-privi\nleges-follow-the-creator-default-p\nrivileges-follow-the-creator)).\n\nOn RDS, the admin role is not a\nfull superuser, which limits what\nthe provider can do ([The RDS\nAdmin Is Not a Superuser](#the-rds\n-admin-is-not-a-superuser-the-rds-\nadmin-is-not-a-superuser)).\n\nNow compare Snowflake. A Snowflake\nfuture grant and a PostgreSQL\ndefault privilege both cover\nobjects that do not exist yet.\nSnowflake keys the rule on a\ndatabase or schema; PostgreSQL\nkeys it on the role that creates\nthe objects. Default Privileges\nFollow the Creator compares the\ntwo.\n\nThe map has four parts. Mental\nModels explains the ideas above.\nReading a PostgreSQL Configuration\nsays what you will see and where\nto look first. Pitfalls lists the\nfailures that experienced users\nplan around. Good and Bad\nDecisions compares the main design\nchoices.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-719ebb249997",
+      "originalText": "Terraform for PostgreSQL\nThe PostgreSQL provider lets Terraform manage the objects inside a PostgreSQL server: roles, databases, schemas, grants, default privileges and extensions. A community maintainer publishes it under the source address `cyrilgdn/postgresql` ([provider docs](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs)). It replaced HashiCorp's older provider ([README](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/README.md)). The [Terraform map](../terraform.md) explains Terraform itself.\n\nThe provider is a SQL client, not an API client. It opens a database connection as an admin role and runs SQL such as `CREATE ROLE` and `GRANT`. Even a refresh queries the system catalogs, so every plan needs a live connection to the server ([A SQL Client](#a-sql-client-a-sql-client)).\n\nThe unit is one server and, by default, one database. A cloud provider can run the server, for example Amazon RDS (Relational Database Service). Then two providers share the work ([Two Planes, Two Credentials](#two-planes-two-credentials-two-planes-two-credentials)):\n\n- The AWS provider creates the RDS instance, through the AWS API.\n- The PostgreSQL provider creates what lives inside the instance, through a database connection.\n\nInside the server, access follows three rules that shape every plan:\n\n- A grant resource owns the full privilege set of one role on one kind of object in one schema ([A Grant Owns Its Set](#a-grant-owns-its-set-a-grant-owns-its-set)).\n- The owner of an object has all privileges on it without any grant ([Owners Need No Grants](#owners-need-no-grants-owners-need-no-grants)).\n- Default privileges apply to objects that one named role creates later ([Default Privileges Follow the Creator](#default-privileges-follow-the-creator-default-privileges-follow-the-creator)).\n\nOn RDS, the admin role is not a full superuser, which limits what the provider can do ([The RDS Admin Is Not a Superuser](#the-rds-admin-is-not-a-superuser-the-rds-admin-is-not-a-superuser)).\n\nNow compare Snowflake. A Snowflake future grant and a PostgreSQL default privilege both cover objects that do not exist yet. Snowflake keys the rule on a database or schema; PostgreSQL keys it on the role that creates the objects. Default Privileges Follow the Creator compares the two.\n\nThe map has four parts. Mental Models explains the ideas above. Reading a PostgreSQL Configuration says what you will see and where to look first. Pitfalls lists the failures that experienced users plan around. Good and Bad Decisions compares the main design choices.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "terraform-postgresql"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6028778904,
+      "isDeleted": false,
+      "id": "node-3eb95c922e3c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 819.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 55288,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3eb95c922e3c"
+        },
+        {
+          "id": "edge-585f2231ea44",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d51fb88e5a3c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-3b63b06d5258",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d6284797b4d1",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-245aac9f32f9",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-65086a3d43be",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d5f4b3b3da8c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-mental-models"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9987474784,
+      "isDeleted": false,
+      "id": "text-3eb95c922e3c",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 835.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 499450,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Mental Models\nThe models come in dependency\norder: each model uses only\nthe models before it.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-3eb95c922e3c",
+      "originalText": "Mental Models\nThe models come in dependency order: each model uses only the models before it.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-mental-models"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9873468474,
+      "isDeleted": false,
+      "id": "node-bef2980b4c40",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 560351,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-bef2980b4c40"
+        },
+        {
+          "id": "edge-46378ff7ff2f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d51fb88e5a3c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "a-sql-client"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9748384087,
+      "isDeleted": false,
+      "id": "text-bef2980b4c40",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 120.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 507.5,
+      "seed": 787879,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "A SQL Client\nEach read, create, update and delete of a\nresource first opens a connection to the\nserver ([connect code](https://github.com/cyri\nlgdn/terraform-provider-postgresql/blob/v1.27.\n0/postgresql/helpers.go#L14-L36)). The\nprovider settings say where and how ([provider\nsettings](https://github.com/cyrilgdn/terrafor\nm-provider-postgresql/blob/v1.27.0/website/doc\ns/index.html.markdown#L141-L188)):\n\n- `host`, `port`, `database`, `username` and\n`password`, or the environment variables\n`PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER` and\n`PGPASSWORD`.\n- `sslmode`, whose default `require` encrypts\nthe connection but does not check the server\ncertificate. `verify-full` checks it.\n- `superuser`, which must be `false` on RDS.\n- `expected_version`. Without it, each new\nconnection runs `SELECT VERSION()` to detect\nthe server's features ([config code](https://g\nithub.com/cyrilgdn/terraform-provider-postgres\nql/blob/v1.27.0/postgresql/config.go#L318-L327\n)).\n\nSo the machine that runs the plan must reach\nthe server's port 5432 and log in with a valid\npassword.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-bef2980b4c40",
+      "originalText": "A SQL Client\nEach read, create, update and delete of a resource first opens a connection to the server ([connect code](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/postgresql/helpers.go#L14-L36)). The provider settings say where and how ([provider settings](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/index.html.markdown#L141-L188)):\n\n- `host`, `port`, `database`, `username` and `password`, or the environment variables `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER` and `PGPASSWORD`.\n- `sslmode`, whose default `require` encrypts the connection but does not check the server certificate. `verify-full` checks it.\n- `superuser`, which must be `false` on RDS.\n- `expected_version`. Without it, each new connection runs `SELECT VERSION()` to detect the server's features ([config code](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/postgresql/config.go#L318-L327)).\n\nSo the machine that runs the plan must reach the server's port 5432 and log in with a valid password.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "a-sql-client"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6347220574,
+      "isDeleted": false,
+      "id": "node-e05fc03f80f8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 519856,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e05fc03f80f8"
+        },
+        {
+          "id": "edge-3b63b06d5258",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "two-planes-two-credentials"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9708926131,
+      "isDeleted": false,
+      "id": "text-e05fc03f80f8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 380.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 163589,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Two Planes, Two Credentials\nThe AWS API and IAM build the RDS instance. A\ndatabase connection and a database role build\nwhat is inside it. Each plane needs its own\ncredentials. A provider setting can use a data\nsource, so the PostgreSQL provider can read\nits host or password from AWS ([provider docs]\n(https://github.com/cyrilgdn/terraform-provide\nr-postgresql/blob/v1.27.0/website/docs/index.h\ntml.markdown#L118-L124)). It cannot safely use\nan attribute of an instance that the same run\ncreates. So keep the instance and the objects\ninside it in separate root modules.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e05fc03f80f8",
+      "originalText": "Two Planes, Two Credentials\nThe AWS API and IAM build the RDS instance. A database connection and a database role build what is inside it. Each plane needs its own credentials. A provider setting can use a data source, so the PostgreSQL provider can read its host or password from AWS ([provider docs](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/index.html.markdown#L118-L124)). It cannot safely use an attribute of an instance that the same run creates. So keep the instance and the objects inside it in separate root modules.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "two-planes-two-credentials"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5823212251,
+      "isDeleted": false,
+      "id": "node-ab4e0bab5b80",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 390895,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-ab4e0bab5b80"
+        },
+        {
+          "id": "edge-352841c877d9",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d6284797b4d1",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "a-grant-owns-its-set"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9300449735,
+      "isDeleted": false,
+      "id": "text-ab4e0bab5b80",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 640.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 315.0,
+      "seed": 506072,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "A Grant Owns Its Set\nOne `postgresql_grant` covers one combination\nof role, database, schema and object type,\nsuch as \"role `app`, tables in schema\n`public`\". On every create and update, it\nrevokes all privileges of that combination and\nthen grants its own list, in one transaction\n([grant code](https://github.com/cyrilgdn/terr\naform-provider-postgresql/blob/v1.27.0/postgre\nsql/resource_postgresql_grant.go#L194-L204)).\nSo any other grant on the same combination,\nmade by hand or by another resource,\ndisappears at the next update.\n\n`objects = []` means all objects of that type\nthat exist at apply time. A refresh checks\nevery one of them, so a table created later\nshows as a difference.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-ab4e0bab5b80",
+      "originalText": "A Grant Owns Its Set\nOne `postgresql_grant` covers one combination of role, database, schema and object type, such as \"role `app`, tables in schema `public`\". On every create and update, it revokes all privileges of that combination and then grants its own list, in one transaction ([grant code](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/postgresql/resource_postgresql_grant.go#L194-L204)). So any other grant on the same combination, made by hand or by another resource, disappears at the next update.\n\n`objects = []` means all objects of that type that exist at apply time. A refresh checks every one of them, so a table created later shows as a difference.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "a-grant-owns-its-set"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3237920406,
+      "isDeleted": false,
+      "id": "node-3673e00101fa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 400355,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3673e00101fa"
+        },
+        {
+          "id": "edge-86b13aa0fe29",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-245aac9f32f9",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "owners-need-no-grants"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4110977386,
+      "isDeleted": false,
+      "id": "text-3673e00101fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 900.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 525.0,
+      "seed": 633781,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Owners Need No Grants\nThe owner of a table has all privileges on it,\nand PostgreSQL's docs say there is no need to\ngrant privileges to the owner ([GRANT](https:/\n/www.postgresql.org/docs/current/sql-grant.htm\nl)). An owner can, however, revoke its own\nprivileges ([privileges](https://www.postgresq\nl.org/docs/current/ddl-priv.html)). So a\n`REVOKE` that a grant resource runs against\nthe owner really removes the owner's rights.\n\nA table's access list shows these rights as\nletters. For example, `app=arwdxt/app` means\nthat role `app` holds these privileges,\ngranted by `app`:\n\n| Letter | Privilege |\n| --- | --- |\n| `r` | SELECT |\n| `a` | INSERT |\n| `w` | UPDATE |\n| `d` | DELETE |\n| `D` | TRUNCATE |\n| `x` | REFERENCES |\n| `t` | TRIGGER |\n\nThis entry has no `D`, so `app` cannot run\n`TRUNCATE` on the table, even if it owns it\n([ACL letters](https://www.postgresql.org/docs\n/current/ddl-priv.html)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-3673e00101fa",
+      "originalText": "Owners Need No Grants\nThe owner of a table has all privileges on it, and PostgreSQL's docs say there is no need to grant privileges to the owner ([GRANT](https://www.postgresql.org/docs/current/sql-grant.html)). An owner can, however, revoke its own privileges ([privileges](https://www.postgresql.org/docs/current/ddl-priv.html)). So a `REVOKE` that a grant resource runs against the owner really removes the owner's rights.\n\nA table's access list shows these rights as letters. For example, `app=arwdxt/app` means that role `app` holds these privileges, granted by `app`:\n\n| Letter | Privilege |\n| --- | --- |\n| `r` | SELECT |\n| `a` | INSERT |\n| `w` | UPDATE |\n| `d` | DELETE |\n| `D` | TRUNCATE |\n| `x` | REFERENCES |\n| `t` | TRIGGER |\n\nThis entry has no `D`, so `app` cannot run `TRUNCATE` on the table, even if it owns it ([ACL letters](https://www.postgresql.org/docs/current/ddl-priv.html)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "owners-need-no-grants"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 3603093179,
+      "isDeleted": false,
+      "id": "node-7bbe586948d3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 748157,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-7bbe586948d3"
+        },
+        {
+          "id": "edge-090358ed2bc0",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-65086a3d43be",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "default-privileges-follow-the-creator"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7900768750,
+      "isDeleted": false,
+      "id": "text-7bbe586948d3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1160.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 577.5,
+      "seed": 264746,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Default Privileges Follow the Creator\n`postgresql_default_privileges` runs `ALTER\nDEFAULT PRIVILEGES FOR ROLE <owner>`. It\napplies only to objects that the `owner` role\ncreates after the rule exists ([resource doc](\nhttps://github.com/cyrilgdn/terraform-provider\n-postgresql/blob/v1.27.0/website/docs/r/postgr\nesql_default_privileges.html.markdown#L33)).\nPostgreSQL states that new objects are only\naffected by the default privileges of the role\nthat creates them, and that existing objects\ndo not change ([ALTER DEFAULT PRIVILEGES](http\ns://www.postgresql.org/docs/current/sql-alterd\nefaultprivileges.html)).\n\n| | PostgreSQL default privileges | Snowflake\nfuture grants |\n| --- | --- | --- |\n| Keyed by | The role that creates the objects\n| The database or schema that holds them |\n| Existing objects | Unchanged; add a grant on\nexisting tables | Unchanged; add an `all`\ngrant |\n| When two rules overlap | Schema-level rules\nadd to the global ones | Schema-level rules\nreplace database-level ones |\n\nThe Snowflake column comes from Snowflake's\n[GRANT docs](https://docs.snowflake.com/en/sql\n-reference/sql/grant-privilege); the\n[Snowflake map](../snowflake/terraform-snowfla\nke.md#schema-level-future-grants-win-schema-le\nvel-future-grants-win) explains its trap.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-7bbe586948d3",
+      "originalText": "Default Privileges Follow the Creator\n`postgresql_default_privileges` runs `ALTER DEFAULT PRIVILEGES FOR ROLE <owner>`. It applies only to objects that the `owner` role creates after the rule exists ([resource doc](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/r/postgresql_default_privileges.html.markdown#L33)). PostgreSQL states that new objects are only affected by the default privileges of the role that creates them, and that existing objects do not change ([ALTER DEFAULT PRIVILEGES](https://www.postgresql.org/docs/current/sql-alterdefaultprivileges.html)).\n\n| | PostgreSQL default privileges | Snowflake future grants |\n| --- | --- | --- |\n| Keyed by | The role that creates the objects | The database or schema that holds them |\n| Existing objects | Unchanged; add a grant on existing tables | Unchanged; add an `all` grant |\n| When two rules overlap | Schema-level rules add to the global ones | Schema-level rules replace database-level ones |\n\nThe Snowflake column comes from Snowflake's [GRANT docs](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege); the [Snowflake map](../snowflake/terraform-snowflake.md#schema-level-future-grants-win-schema-level-future-grants-win) explains its trap.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "default-privileges-follow-the-creator"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9394430357,
+      "isDeleted": false,
+      "id": "node-1397921802f5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 330193,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-1397921802f5"
+        },
+        {
+          "id": "edge-d5f4b3b3da8c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "the-rds-admin-is-not-a-superuser"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2822794700,
+      "isDeleted": false,
+      "id": "text-1397921802f5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 1420.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 245.0,
+      "seed": 611485,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "The RDS Admin Is Not a Superuser\nOn Amazon RDS, the master user is a member of\nthe role `rds_superuser`, but it is not a real\nsuperuser ([RDS roles](https://docs.aws.amazon\n.com/AmazonRDS/latest/UserGuide/Appendix.Postg\nreSQL.CommonDBATasks.Roles.rds_superuser.html)\n). The provider must know this: set `superuser\n= false`. Then some features are off; for\nexample, the provider cannot read a role's\npassword back from the database ([provider doc\ns](https://github.com/cyrilgdn/terraform-provi\nder-postgresql/blob/v1.27.0/website/docs/index\n.html.markdown#L155-L156)). A password changed\noutside Terraform then never shows in a plan.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-1397921802f5",
+      "originalText": "The RDS Admin Is Not a Superuser\nOn Amazon RDS, the master user is a member of the role `rds_superuser`, but it is not a real superuser ([RDS roles](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Roles.rds_superuser.html)). The provider must know this: set `superuser = false`. Then some features are off; for example, the provider cannot read a role's password back from the database ([provider docs](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/index.html.markdown#L155-L156)). A password changed outside Terraform then never shows in a plan.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "the-rds-admin-is-not-a-superuser"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1311952488,
+      "isDeleted": false,
+      "id": "node-bf02960694aa",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 1977.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 144.5,
+      "seed": 705620,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-bf02960694aa"
+        },
+        {
+          "id": "edge-bbabd6b4b977",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-19aef967fe7e",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-19aabf23be70",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-bd9722135aba",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reading-pg-configuration"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7793542106,
+      "isDeleted": false,
+      "id": "text-bf02960694aa",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 1993.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 112.5,
+      "seed": 798007,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reading a PostgreSQL Configuration\nThese nodes say what you will find\nin the files, in which order to\nread them, and what each kind of\nplan line means.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-bf02960694aa",
+      "originalText": "Reading a PostgreSQL Configuration\nThese nodes say what you will find in the files, in which order to read them, and what each kind of plan line means.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reading-pg-configuration"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6604023759,
+      "isDeleted": false,
+      "id": "node-319d7052e62d",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 915806,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-319d7052e62d"
+        },
+        {
+          "id": "edge-19aef967fe7e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-what-you-will-see"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4282887795,
+      "isDeleted": false,
+      "id": "text-319d7052e62d",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1680.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 420.0,
+      "seed": 396725,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "What You Will See\n| Resource | PostgreSQL object | What to check\n| Import ID |\n| --- | --- | --- | --- |\n| `postgresql_role` | role, or a user when\n`login = true` | Password source, `roles` list\n| `name` |\n| `postgresql_database` | database and its\nowner | Owner, `prevent_destroy` | `name` |\n| `postgresql_schema` | schema | Owner |\n`db.schema` |\n| `postgresql_extension` | extension, such as\n`uuid-ossp` | Which database | `db.extension`\n|\n| `postgresql_grant` | privileges of a role on\none kind of object | Grantee, object type,\n`objects`, `privileges` | No import |\n| `postgresql_default_privileges` | rules for\nfuture objects | The `owner` role | No import\n|\n| `postgresql_grant_role` | membership of a\nrole in another role | Conflicts with the\n`roles` list of `postgresql_role` | No import\n|",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-319d7052e62d",
+      "originalText": "What You Will See\n| Resource | PostgreSQL object | What to check | Import ID |\n| --- | --- | --- | --- |\n| `postgresql_role` | role, or a user when `login = true` | Password source, `roles` list | `name` |\n| `postgresql_database` | database and its owner | Owner, `prevent_destroy` | `name` |\n| `postgresql_schema` | schema | Owner | `db.schema` |\n| `postgresql_extension` | extension, such as `uuid-ossp` | Which database | `db.extension` |\n| `postgresql_grant` | privileges of a role on one kind of object | Grantee, object type, `objects`, `privileges` | No import |\n| `postgresql_default_privileges` | rules for future objects | The `owner` role | No import |\n| `postgresql_grant_role` | membership of a role in another role | Conflicts with the `roles` list of `postgresql_role` | No import |",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-what-you-will-see"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6123591301,
+      "isDeleted": false,
+      "id": "node-2ddb7537c012",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 499787,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2ddb7537c012"
+        },
+        {
+          "id": "edge-19aabf23be70",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-where-to-look-first"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2657931197,
+      "isDeleted": false,
+      "id": "text-2ddb7537c012",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 1940.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 560.0,
+      "seed": 567344,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Where to Look First\nRead a PostgreSQL configuration in this order:\n\n1. `required_providers` and the Terraform\nversion. Provider 1.24.0 is \"the first version\ncompatible with Postgresql 16\" ([v1.24.0](http\ns://github.com/cyrilgdn/terraform-provider-pos\ntgresql/releases/tag/v1.24.0)). The ephemeral\n`password_wo` arrived in 1.26.0 ([v1.26.0](htt\nps://github.com/cyrilgdn/terraform-provider-po\nstgresql/releases/tag/v1.26.0)) and needs\nTerraform 1.11.\n2. The `provider \"postgresql\"` block, or its\nabsence. Find where the host, user, password\nand `sslmode` come from, and whether\n`superuser = false` is set.\n3. The pipeline. Find how the runner reaches\nport 5432, and which credentials each stage\ngets.\n4. The environment inputs. Find which role is\nthe app's user and owner in each environment.\n5. `postgresql_role`: the password source,\n`ignore_changes`, and `skip_reassign_owned` or\n`skip_drop_role`.\n6. `postgresql_database`: the owner,\n`prevent_destroy`, and the arguments that\nforce a replacement.\n7. `postgresql_grant`: is the grantee also the\nowner, is `objects` empty, and do two\nresources cover one combination?\n8. `postgresql_default_privileges`: is `owner`\nthe role that creates the tables?",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2ddb7537c012",
+      "originalText": "Where to Look First\nRead a PostgreSQL configuration in this order:\n\n1. `required_providers` and the Terraform version. Provider 1.24.0 is \"the first version compatible with Postgresql 16\" ([v1.24.0](https://github.com/cyrilgdn/terraform-provider-postgresql/releases/tag/v1.24.0)). The ephemeral `password_wo` arrived in 1.26.0 ([v1.26.0](https://github.com/cyrilgdn/terraform-provider-postgresql/releases/tag/v1.26.0)) and needs Terraform 1.11.\n2. The `provider \"postgresql\"` block, or its absence. Find where the host, user, password and `sslmode` come from, and whether `superuser = false` is set.\n3. The pipeline. Find how the runner reaches port 5432, and which credentials each stage gets.\n4. The environment inputs. Find which role is the app's user and owner in each environment.\n5. `postgresql_role`: the password source, `ignore_changes`, and `skip_reassign_owned` or `skip_drop_role`.\n6. `postgresql_database`: the owner, `prevent_destroy`, and the arguments that force a replacement.\n7. `postgresql_grant`: is the grantee also the owner, is `objects` empty, and do two resources cover one combination?\n8. `postgresql_default_privileges`: is `owner` the role that creates the tables?",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-where-to-look-first"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2305279193,
+      "isDeleted": false,
+      "id": "node-d2ca72066928",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 238051,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d2ca72066928"
+        },
+        {
+          "id": "edge-bd9722135aba",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-plan-signals"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4887042983,
+      "isDeleted": false,
+      "id": "text-d2ca72066928",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 2200.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 251909,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| The plan fails before any diff with `error\ndetecting capabilities` or a timeout | The\nrunner cannot reach the server, or the login\nfails. |\n| `~ privileges` on a table grant with no code\nchange | New tables appeared; the apply will\nrun `REVOKE ALL` and grant again. |\n| `-` or `-/+` on `postgresql_database` | The\ndatabase will be dropped, with its data. |\n| `-` on `postgresql_role` | The role's\nobjects will be reassigned and dropped in the\ndefault database first. |",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d2ca72066928",
+      "originalText": "Plan Signals\n| Line in the plan | Meaning |\n| --- | --- |\n| The plan fails before any diff with `error detecting capabilities` or a timeout | The runner cannot reach the server, or the login fails. |\n| `~ privileges` on a table grant with no code change | New tables appeared; the apply will run `REVOKE ALL` and grant again. |\n| `-` or `-/+` on `postgresql_database` | The database will be dropped, with its data. |\n| `-` on `postgresql_role` | The role's objects will be reassigned and dropped in the default database first. |",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-plan-signals"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1106393845,
+      "isDeleted": false,
+      "id": "node-e225a97bcf88",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 3370.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 366.79999999999995,
+      "height": 122.0,
+      "seed": 34805,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e225a97bcf88"
+        },
+        {
+          "id": "edge-8b76ae7f069a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-d25cdd212edb",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4b63453018f6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-2d55233ab753",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3446454654,
+      "isDeleted": false,
+      "id": "text-e225a97bcf88",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 3386.0,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 334.79999999999995,
+      "height": 90.0,
+      "seed": 931129,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Pitfalls\nThe pitfalls fall into three\ngroups: connection, grants,\nand destroy.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-e225a97bcf88",
+      "originalText": "Pitfalls\nThe pitfalls fall into three groups: connection, grants, and destroy.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8172647811,
+      "isDeleted": false,
+      "id": "node-2c67391abf22",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 2642.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 76.5,
+      "seed": 755221,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-2c67391abf22"
+        },
+        {
+          "id": "edge-d25cdd212edb",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f00d33b4c35a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-10a311aea62a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-connection-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9525152378,
+      "isDeleted": false,
+      "id": "text-2c67391abf22",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 2654.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 52.5,
+      "seed": 740428,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Connection Pitfalls\nThese pitfalls stop the plan or point it at\nthe wrong server.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-2c67391abf22",
+      "originalText": "Connection Pitfalls\nThese pitfalls stop the plan or point it at the wrong server.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-connection-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1639406626,
+      "isDeleted": false,
+      "id": "node-cfcb0b477ba5",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1885.6,
+      "y": 2460.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 388803,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-cfcb0b477ba5"
+        },
+        {
+          "id": "edge-46378ff7ff2f",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-f00d33b4c35a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "plan-needs-the-database"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5929958791,
+      "isDeleted": false,
+      "id": "text-cfcb0b477ba5",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1897.6,
+      "y": 2460.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 612672,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Plan Needs the Database\nWhen the state holds PostgreSQL resources, the\nplan connects to the server. Without a network\npath or with a wrong password, it fails before\nany diff, and each attempt can wait up to the\n180-second `connect_timeout` ([provider settin\ngs](https://github.com/cyrilgdn/terraform-prov\nider-postgresql/blob/v1.27.0/postgresql/provid\ner.go#L181-L187)). The provider has no\nbuilt-in bastion option; a SOCKS5 proxy\nthrough `ALL_PROXY` works ([provider docs](htt\nps://github.com/cyrilgdn/terraform-provider-po\nstgresql/blob/v1.27.0/website/docs/index.html.\nmarkdown#L333-L337)). A runner inside the\nprivate network avoids the problem.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-cfcb0b477ba5",
+      "originalText": "Plan Needs the Database\nWhen the state holds PostgreSQL resources, the plan connects to the server. Without a network path or with a wrong password, it fails before any diff, and each attempt can wait up to the 180-second `connect_timeout` ([provider settings](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/postgresql/provider.go#L181-L187)). The provider has no built-in bastion option; a SOCKS5 proxy through `ALL_PROXY` works ([provider docs](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/index.html.markdown#L333-L337)). A runner inside the private network avoids the problem.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "plan-needs-the-database"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1102059953,
+      "isDeleted": false,
+      "id": "node-e3628dd16989",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1885.6,
+      "y": 2720.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 181.5,
+      "seed": 556844,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-e3628dd16989"
+        },
+        {
+          "id": "edge-10a311aea62a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "workspace-and-server-disagree"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8096191246,
+      "isDeleted": false,
+      "id": "text-e3628dd16989",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1897.6,
+      "y": 2732.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 157.5,
+      "seed": 354391,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Workspace and Server Can Disagree\nThe workspace chooses the state, but the `PG*`\nenvironment variables choose the server. When\nthe object names are the same in every\nenvironment, a local run with the wrong\n`PGHOST` changes the wrong server, and the\nplan looks normal. Set `host` from a data\nsource of the environment's instance, so the\nworkspace decides both.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-e3628dd16989",
+      "originalText": "Workspace and Server Can Disagree\nThe workspace chooses the state, but the `PG*` environment variables choose the server. When the object names are the same in every environment, a local run with the wrong `PGHOST` changes the wrong server, and the plan looks normal. Set `host` from a data source of the environment's instance, so the workspace decides both.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "workspace-and-server-disagree"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9086490256,
+      "isDeleted": false,
+      "id": "node-4bf6297d71d8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 3243.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 385.2,
+      "height": 76.5,
+      "seed": 486787,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4bf6297d71d8"
+        },
+        {
+          "id": "edge-4b63453018f6",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5ea06ac8fa3a",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b5ad6842e74b",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-73477b93e40e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-grant-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 8942080425,
+      "isDeleted": false,
+      "id": "text-4bf6297d71d8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 3255.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 361.2,
+      "height": 52.5,
+      "seed": 689968,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Grant Pitfalls\nThese pitfalls remove privileges without\nan error.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-4bf6297d71d8",
+      "originalText": "Grant Pitfalls\nThese pitfalls remove privileges without an error.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-grant-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4383846824,
+      "isDeleted": false,
+      "id": "node-d761dc3f3345",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1852.0,
+      "y": 2941.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 410.40000000000003,
+      "height": 164.0,
+      "seed": 933334,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d761dc3f3345"
+        },
+        {
+          "id": "edge-352841c877d9",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-5ea06ac8fa3a",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "grant-takes-the-whole-set"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5928486833,
+      "isDeleted": false,
+      "id": "text-d761dc3f3345",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1864.0,
+      "y": 2953.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 140.0,
+      "seed": 920310,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "A Grant Takes the Whole Set\nTwo `postgresql_grant` resources on the same\ncombination of role, database, schema and\nobject type revoke each other's privileges at\neach update. A grant made by hand on that\ncombination disappears the same way. Give each\ncombination exactly one resource, with every\nprivilege it needs.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d761dc3f3345",
+      "originalText": "A Grant Takes the Whole Set\nTwo `postgresql_grant` resources on the same combination of role, database, schema and object type revoke each other's privileges at each update. A grant made by hand on that combination disappears the same way. Give each combination exactly one resource, with every privilege it needs.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "grant-takes-the-whole-set"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9025460575,
+      "isDeleted": false,
+      "id": "node-70f5cec87d8a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1852.0,
+      "y": 3145.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 132973,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-70f5cec87d8a"
+        },
+        {
+          "id": "edge-86b13aa0fe29",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-b5ad6842e74b",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "owner-table-grant-drifts"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 6522937630,
+      "isDeleted": false,
+      "id": "text-70f5cec87d8a",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1864.0,
+      "y": 3145.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 262.5,
+      "seed": 464211,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Owner Table Grant Drifts\nSome configurations grant table privileges to\nthe role that also owns the tables, while the\napp's migrations create new tables after each\napply. New tables have no explicit access\nlist, so the next refresh shows the privileges\nas missing, and the plan shows `~ privileges`\nwith no code change. The apply then runs\n`REVOKE ALL` and grants the listed privileges\nagain. If the list lacks `TRUNCATE`, the owner\nloses `TRUNCATE` on its existing tables\n([issue 627](https://github.com/cyrilgdn/terra\nform-provider-postgresql/issues/627)). Do not\ngrant table privileges to the owner: it\nalready has them.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-70f5cec87d8a",
+      "originalText": "Owner Table Grant Drifts\nSome configurations grant table privileges to the role that also owns the tables, while the app's migrations create new tables after each apply. New tables have no explicit access list, so the next refresh shows the privileges as missing, and the plan shows `~ privileges` with no code change. The apply then runs `REVOKE ALL` and grants the listed privileges again. If the list lacks `TRUNCATE`, the owner loses `TRUNCATE` on its existing tables ([issue 627](https://github.com/cyrilgdn/terraform-provider-postgresql/issues/627)). Do not grant table privileges to the owner: it already has them.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "owner-table-grant-drifts"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 2162145062,
+      "isDeleted": false,
+      "id": "node-d82fa53cd5d8",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1852.0,
+      "y": 3405.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 410.40000000000003,
+      "height": 216.5,
+      "seed": 983835,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-d82fa53cd5d8"
+        },
+        {
+          "id": "edge-090358ed2bc0",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-73477b93e40e",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "default-privileges-miss-objects"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9013463850,
+      "isDeleted": false,
+      "id": "text-d82fa53cd5d8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1864.0,
+      "y": 3417.5,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 386.40000000000003,
+      "height": 192.5,
+      "seed": 673746,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Default Privileges Miss Objects\nA rule for future tables helps only when its\n`owner` is the role that really creates the\ntables. If migrations run as the app role, but\nthe rule names the Terraform admin, new tables\nget no privileges for the reader, and queries\nfail with \"permission denied\". The plan shows\nnothing, because the rule itself is unchanged.\nUse one rule for each role that creates\nobjects, and a grant for the tables that exist\nalready.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-d82fa53cd5d8",
+      "originalText": "Default Privileges Miss Objects\nA rule for future tables helps only when its `owner` is the role that really creates the tables. If migrations run as the app role, but the rule names the Terraform admin, new tables get no privileges for the reader, and queries fail with \"permission denied\". The plan shows nothing, because the rule itself is unchanged. Use one rule for each role that creates objects, and a grant for the tables that exist already.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "default-privileges-miss-objects"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7784251264,
+      "isDeleted": false,
+      "id": "node-443be9e9b99b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1276.8,
+      "y": 4002.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 385.2,
+      "height": 59.0,
+      "seed": 363288,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-443be9e9b99b"
+        },
+        {
+          "id": "edge-2d55233ab753",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-560e856f3a0c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-04e44062e3e0",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4c3e5ba4fd2c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-destroy-pitfalls"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 7622982350,
+      "isDeleted": false,
+      "id": "text-443be9e9b99b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1288.8,
+      "y": 4005.75,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 361.2,
+      "height": 52.5,
+      "seed": 110855,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Destroy Pitfalls\nThese pitfalls turn a refactor into a\ndrop.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-443be9e9b99b",
+      "originalText": "Destroy Pitfalls\nThese pitfalls turn a refactor into a drop.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-destroy-pitfalls"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1241554709,
+      "isDeleted": false,
+      "id": "node-06ddc8c7d87f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1852.0,
+      "y": 3662.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 137824,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-06ddc8c7d87f"
+        },
+        {
+          "id": "edge-560e856f3a0c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "dropping-a-role-that-owns-objects"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2307099516,
+      "isDeleted": false,
+      "id": "text-06ddc8c7d87f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1864.0,
+      "y": 3662.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 754108,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Dropping a Role That Owns Objects\nWhen a `postgresql_role` leaves the\nconfiguration, the provider runs `REASSIGN\nOWNED` and `DROP OWNED` before `DROP ROLE`\n([role doc](https://github.com/cyrilgdn/terraf\norm-provider-postgresql/blob/v1.27.0/website/d\nocs/r/postgresql_role.html.markdown#L14-L22)).\nIt does this only in the provider's database.\nIf the role owns objects in another database,\n`DROP ROLE` fails. A rename of the role is an\nin-place `ALTER ROLE ... RENAME`. A new\nresource address without a `moved` block,\nhowever, plans a drop and a create.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-06ddc8c7d87f",
+      "originalText": "Dropping a Role That Owns Objects\nWhen a `postgresql_role` leaves the configuration, the provider runs `REASSIGN OWNED` and `DROP OWNED` before `DROP ROLE` ([role doc](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/r/postgresql_role.html.markdown#L14-L22)). It does this only in the provider's database. If the role owns objects in another database, `DROP ROLE` fails. A rename of the role is an in-place `ALTER ROLE ... RENAME`. A new resource address without a `moved` block, however, plans a drop and a create.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "dropping-a-role-that-owns-objects"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 9115615107,
+      "isDeleted": false,
+      "id": "node-9574e61fb294",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1852.0,
+      "y": 3922.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 903325,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9574e61fb294"
+        },
+        {
+          "id": "edge-04e44062e3e0",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "destroying-a-database-forces-disconnects"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5230239019,
+      "isDeleted": false,
+      "id": "text-9574e61fb294",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1864.0,
+      "y": 3922.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 227.5,
+      "seed": 727343,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Destroying a Database Forces Disconnects\nA destroy of `postgresql_database` terminates\nthe open connections and then runs `DROP\nDATABASE ... WITH (FORCE)` on PostgreSQL 13\nand later ([database code](https://github.com/\ncyrilgdn/terraform-provider-postgresql/blob/v1\n.27.0/postgresql/resource_postgresql_database.\ngo#L240-L290)). A drop cannot be undone ([DROP\nDATABASE](https://www.postgresql.org/docs/curr\nent/sql-dropdatabase.html)). A change of\n`template`, `encoding`, `lc_collate` or\n`lc_ctype` also replaces the database. Add\n`prevent_destroy` to every database with data.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9574e61fb294",
+      "originalText": "Destroying a Database Forces Disconnects\nA destroy of `postgresql_database` terminates the open connections and then runs `DROP DATABASE ... WITH (FORCE)` on PostgreSQL 13 and later ([database code](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/postgresql/resource_postgresql_database.go#L240-L290)). A drop cannot be undone ([DROP DATABASE](https://www.postgresql.org/docs/current/sql-dropdatabase.html)). A change of `template`, `encoding`, `lc_collate` or `lc_ctype` also replaces the database. Add `prevent_destroy` to every database with data.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "destroying-a-database-forces-disconnects"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5358813633,
+      "isDeleted": false,
+      "id": "node-4a532f16afe1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1852.0,
+      "y": 4182.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "#FEF3C7",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 118385,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-4a532f16afe1"
+        },
+        {
+          "id": "edge-4c3e5ba4fd2c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-passwords-in-state"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 3871511249,
+      "isDeleted": false,
+      "id": "text-4a532f16afe1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1864.0,
+      "y": 4187.0,
+      "strokeColor": "#92400E",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 51278,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Passwords in State\nAll arguments of `postgresql_role`, including\nthe password, sit in the state in plain text\n([role doc](https://github.com/cyrilgdn/terraf\norm-provider-postgresql/blob/v1.27.0/website/d\nocs/r/postgresql_role.html.markdown#L24)). So\ndoes the master password of an RDS instance\nthat the AWS provider creates. `password_wo`\nkeeps a role password out of the state ([role \ndoc](https://github.com/cyrilgdn/terraform-pro\nvider-postgresql/blob/v1.27.0/website/docs/r/p\nostgresql_role.html.markdown#L27-L29)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-4a532f16afe1",
+      "originalText": "Passwords in State\nAll arguments of `postgresql_role`, including the password, sit in the state in plain text ([role doc](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/r/postgresql_role.html.markdown#L24)). So does the master password of an RDS instance that the AWS provider creates. `password_wo` keeps a role password out of the state ([role doc](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/r/postgresql_role.html.markdown#L27-L29)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-passwords-in-state"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 4940686075,
+      "isDeleted": false,
+      "id": "node-410e15a7da75",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 4860.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "#DBEAFE",
+      "width": 399.2,
+      "height": 99.5,
+      "seed": 790319,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-410e15a7da75"
+        },
+        {
+          "id": "edge-6a256c8cc205",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-1f6a52e4acf4",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-4574cd46e31c",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-0627984a06f4",
+          "type": "arrow"
+        },
+        {
+          "id": "edge-ba2d121cc21c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-decisions"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1697671193,
+      "isDeleted": false,
+      "id": "text-410e15a7da75",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 736.0,
+      "y": 4876.75,
+      "strokeColor": "#0F172A",
+      "backgroundColor": "transparent",
+      "width": 367.2,
+      "height": 67.5,
+      "seed": 110644,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Good and Bad Decisions\nEach node compares a choice with\nits alternative.",
+      "fontSize": 18,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 22.5,
+      "containerId": "node-410e15a7da75",
+      "originalText": "Good and Bad Decisions\nEach node compares a choice with its alternative.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-decisions"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 8367924296,
+      "isDeleted": false,
+      "id": "node-14bd258fde97",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4442.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 220.0,
+      "seed": 411936,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-14bd258fde97"
+        },
+        {
+          "id": "edge-1f6a52e4acf4",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "one-login-role-per-app"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 2320770242,
+      "isDeleted": false,
+      "id": "text-14bd258fde97",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4447.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 210.0,
+      "seed": 612885,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "One Login Role per App\nGive each app its own login role, and let that\nrole own the app's database. The predefined\nrole `pg_database_owner` owns the `public`\nschema, so each database owner governs that\nschema ([predefined roles](https://www.postgre\nsql.org/docs/current/predefined-roles.html)).\nDashboards and other readers then get their\nown roles with only `SELECT`. Sharing the RDS\nmaster user between apps and dashboards is\nsimpler, but one leaked password then opens\nevery database on the instance.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-14bd258fde97",
+      "originalText": "One Login Role per App\nGive each app its own login role, and let that role own the app's database. The predefined role `pg_database_owner` owns the `public` schema, so each database owner governs that schema ([predefined roles](https://www.postgresql.org/docs/current/predefined-roles.html)). Dashboards and other readers then get their own roles with only `SELECT`. Sharing the RDS master user between apps and dashboards is simpler, but one leaked password then opens every database on the instance.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "one-login-role-per-app"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5406074386,
+      "isDeleted": false,
+      "id": "node-fe5108ef8d5f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4702.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 164.0,
+      "seed": 435288,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-fe5108ef8d5f"
+        },
+        {
+          "id": "edge-4574cd46e31c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "separate-migration-and-reader-roles"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 9772759224,
+      "isDeleted": false,
+      "id": "text-fe5108ef8d5f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4714.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 140.0,
+      "seed": 629974,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Separate Migration and Reader Roles\nThe role that runs migrations creates the\ntables, so it owns them. A reader role gets a\ngrant on the tables that exist and a\ndefault-privileges rule `FOR ROLE <migration\nrole>` for the tables to come. This pair\ncovers past and future tables, and nothing in\nit drifts when migrations add tables.",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-fe5108ef8d5f",
+      "originalText": "Separate Migration and Reader Roles\nThe role that runs migrations creates the tables, so it owns them. A reader role gets a grant on the tables that exist and a default-privileges rule `FOR ROLE <migration role>` for the tables to come. This pair covers past and future tables, and nothing in it drifts when migrations add tables.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "separate-migration-and-reader-roles"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 6035887388,
+      "isDeleted": false,
+      "id": "node-9e4ceb4e5867",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 4906.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 18503,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-9e4ceb4e5867"
+        },
+        {
+          "id": "edge-0627984a06f4",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "reach-the-database-privately"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 5405695516,
+      "isDeleted": false,
+      "id": "text-9e4ceb4e5867",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 4918.0,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 53656,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Reach the Database Privately\nA public database endpoint with an allowlist\nfor the runner's address is quick to set up,\nbut it exposes the server to the internet. A\nrunner inside the private network, or a proxy,\nkeeps port 5432 private. With `sslmode =\n\"verify-full\"`, the provider also checks that\nit talks to the right server ([provider settin\ngs](https://github.com/cyrilgdn/terraform-prov\nider-postgresql/blob/v1.27.0/website/docs/inde\nx.html.markdown#L157-L163)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-9e4ceb4e5867",
+      "originalText": "Reach the Database Privately\nA public database endpoint with an allowlist for the runner's address is quick to set up, but it exposes the server to the internet. A runner inside the private network, or a proxy, keeps port 5432 private. With `sslmode = \"verify-full\"`, the provider also checks that it talks to the right server ([provider settings](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/index.html.markdown#L157-L163)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "reach-the-database-privately"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 5240296555,
+      "isDeleted": false,
+      "id": "node-eba857c57c8b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1309.2,
+      "y": 5162.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "#F8FAFC",
+      "width": 418.8,
+      "height": 216.5,
+      "seed": 123950,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 8
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-eba857c57c8b"
+        },
+        {
+          "id": "edge-ba2d121cc21c",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "close-the-default-doors"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4400792716,
+      "isDeleted": false,
+      "id": "text-eba857c57c8b",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1321.2,
+      "y": 5174.5,
+      "strokeColor": "#1E3A8A",
+      "backgroundColor": "transparent",
+      "width": 394.8,
+      "height": 192.5,
+      "seed": 251968,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "Close the Default Doors\nPostgreSQL grants `CONNECT` and `TEMPORARY` on\nevery new database to `PUBLIC`, which means\nevery role ([privileges](https://www.postgresq\nl.org/docs/current/ddl-priv.html)). So any\nlogin role on a shared server can connect to\nevery app's database. The grant resource docs\nshow how to revoke these defaults ([grant doc]\n(https://github.com/cyrilgdn/terraform-provide\nr-postgresql/blob/v1.27.0/website/docs/r/postg\nresql_grant.html.markdown#L57-L66)).",
+      "fontSize": 14,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 17.5,
+      "containerId": "node-eba857c57c8b",
+      "originalText": "Close the Default Doors\nPostgreSQL grants `CONNECT` and `TEMPORARY` on every new database to `PUBLIC`, which means every role ([privileges](https://www.postgresql.org/docs/current/ddl-priv.html)). So any login role on a shared server can connect to every app's database. The grant resource docs show how to revoke these defaults ([grant doc](https://github.com/cyrilgdn/terraform-provider-postgresql/blob/v1.27.0/website/docs/r/postgresql_grant.html.markdown#L57-L66)).",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "close-the-default-doors"
+      }
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 7271819018,
+      "isDeleted": false,
+      "id": "node-3c425d83ede3",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 720.0,
+      "y": 5419.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "#FAF7F2",
+      "width": 417.8,
+      "height": 133.75,
+      "seed": 186041,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3,
+        "value": 12
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-3c425d83ede3"
+        },
+        {
+          "id": "edge-8e2e1276249f",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "node_id": "pg-about-the-sources"
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 4099084902,
+      "isDeleted": false,
+      "id": "text-3c425d83ede3",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 730.0,
+      "y": 5429.0,
+      "strokeColor": "#57534E",
+      "backgroundColor": "transparent",
+      "width": 397.8,
+      "height": 113.75,
+      "seed": 691998,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "text": "About the Sources\nThe provider facts come from the\n`cyrilgdn/postgresql` repository at tag v1.27.0,\nthe latest release on 2026-11-23. The PostgreSQL\nfacts come from postgresql.org/docs/current, and\nthe RDS facts from docs.aws.amazon.com, on the same\nday.",
+      "fontSize": 13,
+      "fontFamily": 2,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "baseline": 16.25,
+      "containerId": "node-3c425d83ede3",
+      "originalText": "About the Sources\nThe provider facts come from the `cyrilgdn/postgresql` repository at tag v1.27.0, the latest release on 2026-11-23. The PostgreSQL facts come from postgresql.org/docs/current, and the RDS facts from docs.aws.amazon.com, on the same day.",
+      "lineHeight": 1.25,
+      "autoResize": true,
+      "customData": {
+        "node_id": "pg-about-the-sources"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1524900236,
+      "isDeleted": false,
+      "id": "edge-585f2231ea44",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 357.52137243626606,
+      "y": 2726.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 456394,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          527.8440483036227,
+          -1785.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-719ebb249997",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3eb95c922e3c",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c5f3e2bb5069dfc3"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5721259347,
+      "isDeleted": false,
+      "id": "edge-46378ff7ff2f",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1514.8188034188036,
+      "y": 340.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 125603,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          551.5623931623929,
+          2120.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bef2980b4c40",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-cfcb0b477ba5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.ad94b9484c5f822f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2186853289,
+      "isDeleted": false,
+      "id": "edge-d51fb88e5a3c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 958.0935384615384,
+      "y": 819.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 847137,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          429.47876923076933,
+          -479.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3eb95c922e3c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-bef2980b4c40",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.62913b2eb842230f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1273614079,
+      "isDeleted": false,
+      "id": "edge-3b63b06d5258",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 994.5558974358975,
+      "y": 819.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 789834,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          327.26461538461547,
+          -219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3eb95c922e3c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e05fc03f80f8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.26b829fb13e53969"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3181855452,
+      "isDeleted": false,
+      "id": "edge-352841c877d9",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1513.827006817682,
+      "y": 860.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 154329,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          522.778315372773,
+          2081.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-ab4e0bab5b80",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d761dc3f3345",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.5b27e6921e7f557c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2116859632,
+      "isDeleted": false,
+      "id": "edge-d6284797b4d1",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 839.0905971173645,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 988336,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -42.38160603980782
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3eb95c922e3c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-ab4e0bab5b80",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.5c2541dc4e81b109"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6931273605,
+      "isDeleted": false,
+      "id": "edge-86b13aa0fe29",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1514.3772433756403,
+      "y": 1120.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 21291,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          518.8455132487195,
+          2025.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3673e00101fa",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-70f5cec87d8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.2ce525e893ddc89c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4254378303,
+      "isDeleted": false,
+      "id": "edge-245aac9f32f9",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 920.9094028826355,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 923306,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          42.38160603980782
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3eb95c922e3c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3673e00101fa",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.973c6732ea7061cc"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3080471803,
+      "isDeleted": false,
+      "id": "edge-090358ed2bc0",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "dotted",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1514.1933147632312,
+      "y": 1380.0,
+      "strokeColor": "#6B7280",
+      "backgroundColor": "transparent",
+      "seed": 707528,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          515.4587186629524,
+          2025.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-7bbe586948d3",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d82fa53cd5d8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.e9ec42b30cbc6062"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6126050114,
+      "isDeleted": false,
+      "id": "edge-65086a3d43be",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 994.5558974358975,
+      "y": 941.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 726548,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          327.26461538461547,
+          219.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3eb95c922e3c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-7bbe586948d3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.024fb3b46d00373d"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6861554125,
+      "isDeleted": false,
+      "id": "edge-d5f4b3b3da8c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 958.0935384615384,
+      "y": 941.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 495504,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          429.47876923076933,
+          479.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-3eb95c922e3c",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-1397921802f5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.47e27c6800e5928c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8936442809,
+      "isDeleted": false,
+      "id": "edge-bbabd6b4b977",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 408.17405817835004,
+      "y": 2726.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 445815,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          456.7957081545064,
+          -604.125
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-719ebb249997",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-bf02960694aa",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.9c461a09821df731"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9465513770,
+      "isDeleted": false,
+      "id": "edge-19aef967fe7e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 1977.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 142611,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          -96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bf02960694aa",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-319d7052e62d",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.28661d11e962ffba"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1557977984,
+      "isDeleted": false,
+      "id": "edge-19aabf23be70",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 2050.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 586838,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bf02960694aa",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2ddb7537c012",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.1172bcfc08661733"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 6181421075,
+      "isDeleted": false,
+      "id": "edge-bd9722135aba",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.0528846153848,
+      "y": 2122.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 474322,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          223.1471153846153,
+          96.85851419031724
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-bf02960694aa",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d2ca72066928",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.037781fa1bbcb48b"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8798364478,
+      "isDeleted": false,
+      "id": "edge-8b76ae7f069a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 431.99852848433886,
+      "y": 2946.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 580617,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          412.0659239016187,
+          423.625
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-719ebb249997",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e225a97bcf88",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.3564d12cc8a317cf"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 5638033354,
+      "isDeleted": false,
+      "id": "edge-d25cdd212edb",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 950.7852715761412,
+      "y": 3370.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 384405,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          505.70183272242593,
+          -651.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e225a97bcf88",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-2c67391abf22",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d6a3bf928fc35e01"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3316983482,
+      "isDeleted": false,
+      "id": "edge-f00d33b4c35a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1695.6000000000001,
+      "y": 2642.6569480946123,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 541781,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          189.99999999999977,
+          -34.56389618922458
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2c67391abf22",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-cfcb0b477ba5",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.c0286c230fdb46ee"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2304192819,
+      "isDeleted": false,
+      "id": "edge-10a311aea62a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1665.3276923076924,
+      "y": 2719.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 877087,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          220.27230769230755,
+          47.035808147174976
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-2c67391abf22",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-e3628dd16989",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.71155fe2ccb1be4c"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4188738894,
+      "isDeleted": false,
+      "id": "edge-4b63453018f6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1086.8,
+      "y": 3382.638780918728,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 652191,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          237.54472361809053,
+          -62.638780918728116
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e225a97bcf88",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4bf6297d71d8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.7c6a340408fe7af4"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 3981520073,
+      "isDeleted": false,
+      "id": "edge-5ea06ac8fa3a",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1556.4604065827684,
+      "y": 3243.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 443430,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          314.1002904162633,
+          -138.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4bf6297d71d8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d761dc3f3345",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.311538b899ec0e97"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 4052139270,
+      "isDeleted": false,
+      "id": "edge-b5ad6842e74b",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1661.9999999999998,
+      "y": 3273.2098817567567,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 96974,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.00000000000023,
+          -8.42483108108081
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4bf6297d71d8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-70f5cec87d8a",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.28baa00206b76a01"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1202089104,
+      "isDeleted": false,
+      "id": "edge-73477b93e40e",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1566.3109913793103,
+      "y": 3320.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 283017,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          285.6890086206895,
+          112.75918679823053
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-4bf6297d71d8",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-d82fa53cd5d8",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.35989ca6daafb128"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 9300411515,
+      "isDeleted": false,
+      "id": "edge-2d55233ab753",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 960.8475873544093,
+      "y": 3492.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 970277,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          480.77038269550746,
+          510.5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-e225a97bcf88",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-443be9e9b99b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.07e319ce4edea5a4"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7125161047,
+      "isDeleted": false,
+      "id": "edge-560e856f3a0c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1536.5692307692307,
+      "y": 4002.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 502674,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          315.43076923076933,
+          -138.53378378378375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-443be9e9b99b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-06ddc8c7d87f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4c95dbd44f571e5e"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1257852391,
+      "isDeleted": false,
+      "id": "edge-04e44062e3e0",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1661.9999999999998,
+      "y": 4032.0,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 860967,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.00000000000023,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-443be9e9b99b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9574e61fb294",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.fae528f01be48587"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 8458159558,
+      "isDeleted": false,
+      "id": "edge-4c3e5ba4fd2c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1536.5692307692307,
+      "y": 4061.5,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 913485,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          315.43076923076933,
+          138.5337837837842
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-443be9e9b99b",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-4a532f16afe1",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.a1bd55c7de3d85dd"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2005807971,
+      "isDeleted": false,
+      "id": "edge-6a256c8cc205",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 356.5342614355451,
+      "y": 2946.375,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 516149,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          548.8036521424698,
+          1914.375
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-719ebb249997",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-410e15a7da75",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.d97a72273e6d6fe0"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2137786956,
+      "isDeleted": false,
+      "id": "edge-1f6a52e4acf4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.7248256624825,
+      "y": 4860.75,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 504929,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          332.08158995815916,
+          -198.75
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-410e15a7da75",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-14bd258fde97",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.6eb49307498c28e6"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1870671433,
+      "isDeleted": false,
+      "id": "edge-4574cd46e31c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 4868.347412353924,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 161333,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          -40.12520868113552
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-410e15a7da75",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-fe5108ef8d5f",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.269e71f6c1c3db4f"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1799453622,
+      "isDeleted": false,
+      "id": "edge-0627984a06f4",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1119.2,
+      "y": 4945.071786310517,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 374217,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190.0,
+          32.90901502504221
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-410e15a7da75",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-9e4ceb4e5867",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.4feef3c19fb6bda8"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 2946960387,
+      "isDeleted": false,
+      "id": "edge-ba2d121cc21c",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 1002.3210270645386,
+      "y": 4960.25,
+      "strokeColor": "#2563EB",
+      "backgroundColor": "transparent",
+      "seed": 799103,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          336.28799444829974,
+          202.25
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-410e15a7da75",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-eba857c57c8b",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "customData": {
+        "edge_id": "edge.cbc35a664b211924"
+      }
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 7262899650,
+      "isDeleted": false,
+      "id": "edge-8e2e1276249f",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 350.07227778826194,
+      "y": 2946.375,
+      "strokeColor": "#78716C",
+      "backgroundColor": "transparent",
+      "seed": 389062,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "boundElements": [],
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          563.5849169654653,
+          2472.625
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-719ebb249997",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "node-3c425d83ede3",
+        "focus": 0,
+        "gap": 1
+      },
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "customData": {
+        "edge_id": "edge.a7dba440bae4b7fe"
+      }
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
