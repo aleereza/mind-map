@@ -24,11 +24,46 @@ A sound is a small change of air pressure that travels as a wave. A microphone a
 
 > type: concept
 
-The signal of a sustained note from a string, a wind instrument or a voice repeats with a period T. As a periodic signal, it is a Fourier series: a sum of sine waves at the fundamental frequency f0 = 1/T and at the whole multiples 2·f0, 3·f0, 4·f0 and so on. Each sine wave has its own amplitude and phase ([Musical tone](https://en.wikipedia.org/wiki/Musical_tone)). Musicians call these sine waves harmonics, and the list of them is the [harmonic series](https://en.wikipedia.org/wiki/Harmonic_series_%28music%29). The fundamental is the first harmonic. The tuning note of an orchestra, A4, is a combination of 440 Hz, 880 Hz, 1,320 Hz, 1,760 Hz and higher multiples ([Timbre](https://en.wikipedia.org/wiki/Timbre)).
+Start with one key: middle C. In fixed-do solfège, the syllables Do, Re, Mi, Fa, Sol, La and Si are the names of the notes C, D, E, F, G, A and B, so this key is Do. The major Romance and Slavic languages use these syllables as the ordinary note names ([Solfège](https://en.wikipedia.org/wiki/Solf%C3%A8ge)). Middle C, or C4, is key 40 of the piano, and its fundamental frequency is 261.63 Hz. The Piano Keyboard explains the key names and numbers. When the hammer strikes the strings of this key, the sound that reaches the ear is a pressure signal p(t). The signal repeats almost exactly every T = 1 / 261.63 Hz = 3.822 ms.
 
-A real note is more than this steady part. Its start, the attack, has transients that do not repeat, and its envelope and pitch can change while it sounds ([Musical tone](https://en.wikipedia.org/wiki/Musical_tone)).
+The signal of a sustained note from a string, a wind instrument or a voice repeats with a period T. As a periodic signal, it is a Fourier series: a sum of sine waves at the fundamental frequency f0 = 1/T and at the whole multiples 2·f0, 3·f0, 4·f0 and so on. For Do, with f0 = 261.63 Hz:
+
+p(t) = A₁·sin(2π·261.63·t + φ₁) + A₂·sin(2π·523.25·t + φ₂) + A₃·sin(2π·784.88·t + φ₃) + …
+
+Each sine wave has its own amplitude Aₙ and phase φₙ ([Musical tone](https://en.wikipedia.org/wiki/Musical_tone)). Musicians call these sine waves harmonics, and the list of them is the [harmonic series](https://en.wikipedia.org/wiki/Harmonic_series_%28music%29). The fundamental is the first harmonic. Other notes work the same way: the tuning note of an orchestra, A4, is a combination of 440 Hz, 880 Hz, 1,320 Hz, 1,760 Hz and higher multiples ([Timbre](https://en.wikipedia.org/wiki/Timbre)).
 
 The physics of the instrument makes the multiples. A string is fixed at both ends, so it vibrates only in modes that fit a whole number of half waves along its length. Mode n has the frequency n·f0, and the string vibrates in many modes at the same time. The air column of a wind instrument works the same way ([harmonic series](https://en.wikipedia.org/wiki/Harmonic_series_%28music%29)). In a piano, a bridge passes the vibration of the strings to the soundboard, which couples it to the air ([Piano](https://en.wikipedia.org/wiki/Piano)).
+
+The table lists the first 16 harmonics of Do. Harmonic n has the frequency n × 261.63 Hz. The last two columns give the nearest piano key and the distance to that key in cents. A cent is one hundredth of a semitone, and Twelve Semitones explains the unit. A plus sign means that the harmonic is above the key, and a minus sign means that it is below.
+
+| Harmonic n | Frequency | Nearest key | Distance |
+|---|---|---|---|
+| 1 | 261.63 Hz | C4 (Do) | 0 cents |
+| 2 | 523.25 Hz | C5 | 0 cents |
+| 3 | 784.88 Hz | G5 | +2.0 cents |
+| 4 | 1,046.50 Hz | C6 | 0 cents |
+| 5 | 1,308.13 Hz | E6 | −13.7 cents |
+| 6 | 1,569.75 Hz | G6 | +2.0 cents |
+| 7 | 1,831.38 Hz | A♯/B♭6 | −31.2 cents |
+| 8 | 2,093.00 Hz | C7 | 0 cents |
+| 9 | 2,354.63 Hz | D7 | +3.9 cents |
+| 10 | 2,616.26 Hz | E7 | −13.7 cents |
+| 11 | 2,877.88 Hz | F♯/G♭7 | −48.7 cents |
+| 12 | 3,139.51 Hz | G7 | +2.0 cents |
+| 13 | 3,401.13 Hz | G♯/A♭7 | +40.5 cents |
+| 14 | 3,662.76 Hz | A♯/B♭7 | −31.2 cents |
+| 15 | 3,924.38 Hz | B7 | −11.7 cents |
+| 16 | 4,186.01 Hz | C8 | 0 cents |
+
+The picture shows the same 16 harmonics twice. On the linear frequency axis at the top, they are evenly spaced, one every 261.63 Hz. On the keyboard at the bottom, they crowd together. Each octave of the keyboard doubles the frequency, and listeners hear each doubling as the same step. So the keyboard is a logarithmic frequency scale, and on it the higher harmonics sit closer together ([harmonic series](https://en.wikipedia.org/wiki/Harmonic_series_%28music%29)).
+
+![The first 16 harmonics of Do: evenly spaced on a linear frequency axis at the top, and crowded together on the keyboard from C4 to C8 at the bottom](music-d2-diagram/do-harmonics.d2.svg)
+
+The octave from Do up to the next C holds one harmonic, Do itself. The next three octaves hold 2, 4 and 8 harmonics. The 16th harmonic, four octaves above Do, is C8, the top key of the piano. Harmonics 4, 5 and 6 sound C6, E6 and G6, which are the notes of a C major chord. In just intonation, a major chord has exactly the frequency ratios 4:5:6 ([Major chord](https://en.wikipedia.org/wiki/Major_chord)). Harmonics 7, 11, 13 and 14 fall between two keys of the piano.
+
+The bars of the picture have equal heights, because the picture shows only where the harmonics are. The amplitudes Aₙ differ from one instrument to another, and they change during the note ([Timbre](https://en.wikipedia.org/wiki/Timbre), [Piano acoustics](https://en.wikipedia.org/wiki/Piano_acoustics)). Timbre Is the Shape of the Spectrum explains that part.
+
+A real note is more than this steady part. Its start, the attack, has transients that do not repeat, and its envelope and pitch can change while it sounds ([Musical tone](https://en.wikipedia.org/wiki/Musical_tone)). On a piano, the upper partials also sit slightly above the exact multiples, as Real Partials Run Sharp explains.
 
 Three words name the parts of the spectrum. A partial is any sine component. A harmonic is a partial at a whole multiple of f0. An overtone is any partial above the lowest one. A pure tone is a single sine wave. A synthesizer can make one, and some flutes and ocarinas come close ([harmonic series](https://en.wikipedia.org/wiki/Harmonic_series_%28music%29)).
 
@@ -372,6 +407,13 @@ for h in range(1, 9):
     n = round(12 * math.log2(f / 440) + 49)
     print(f"{h} x 440 = {f} Hz, nearest key {key_name(n)} {key_freq(n):.2f} Hz, {cents(f / key_freq(n)):+.1f} cents")
 
+f0 = key_freq(40)
+print(f"Do = C4: {f0:.2f} Hz, period {1000 / f0:.3f} ms")
+for h in range(1, 17):
+    f = f0 * h
+    n = round(12 * math.log2(f / 440) + 49)
+    print(f"harmonic {h} = {f:.2f} Hz, nearest key {key_name(n)}, {cents(f / key_freq(n)):+.1f} cents")
+
 for label, ratio, steps in (("fifth 3:2", 3 / 2, 7), ("fourth 4:3", 4 / 3, 5), ("major third 5:4", 5 / 4, 4)):
     print(f"{label}: {cents(ratio):.2f} cents; {steps} semitones = {steps * 100} cents")
 
@@ -388,6 +430,8 @@ Some lines of its output:
 - `3 x 440 = 1320 Hz, nearest key E6 1318.51 Hz, +2.0 cents`
 - `5 x 440 = 2200 Hz, nearest key C♯/D♭7 2217.46 Hz, -13.7 cents`
 - `7 x 440 = 3080 Hz, nearest key G7 3135.96 Hz, -31.2 cents`
+- `Do = C4: 261.63 Hz, period 3.822 ms`
+- `harmonic 11 = 2877.88 Hz, nearest key F♯/G♭7, -48.7 cents`
 - `fifth 3:2: 701.96 cents; 7 semitones = 700 cents`
 - `dotted quarter: 1.5 beats = 0.75 s`
 

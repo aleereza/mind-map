@@ -1,0 +1,986 @@
+# The first 16 harmonics of Do (C4, 261.63 Hz): evenly spaced on a linear frequency axis, crowded on the keyboard, which is a logarithmic scale.
+
+vars: {
+  d2-config: {
+    layout-engine: tala
+    pad: 24
+  }
+}
+
+classes: {
+  white: {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  white_alt: {
+    style: {
+      fill: "#E2E8F0"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  middle_c: {
+    style: {
+      fill: "#FDE68A"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  tuning_a: {
+    style: {
+      fill: "#BFDBFE"
+      stroke: "#334155"
+      stroke-width: 2
+      border-radius: 3
+      font-color: "#0F172A"
+    }
+  }
+  black: {
+    style: {
+      fill: "#1E293B"
+      stroke: "#0F172A"
+      stroke-width: 1
+      border-radius: 3
+      font-color: "#FFFFFF"
+    }
+  }
+  ink: {
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 0
+    }
+  }
+  head_open: {
+    shape: oval
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  head_filled: {
+    shape: oval
+    style: {
+      fill: "#0F172A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  note_c4: {
+    shape: oval
+    style: {
+      fill: "#FDE68A"
+      stroke: "#0F172A"
+      stroke-width: 2
+    }
+  }
+  label: {
+    shape: text
+    style: {
+      font-color: "#0F172A"
+    }
+  }
+  tag: {
+    style: {
+      fill: transparent
+      stroke-width: 0
+      font-color: "#0F172A"
+      bold: false
+    }
+  }
+}
+
+title: "The first 16 harmonics of Do (C4, 261.63 Hz)" {
+  class: label
+  left: 0
+  top: 0
+  width: 500
+  style.font-size: 17
+}
+label_a: "Linear frequency axis: one harmonic every 261.63 Hz. The bars show positions only." {
+  class: label
+  left: 0
+  top: 40
+  width: 700
+  style.font-size: 14
+}
+bar_1: "" {
+  class: ink
+  left: 86
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_1_n: "1" {
+  class: label
+  left: 85
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_2: "" {
+  class: ink
+  left: 133
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_2_n: "2" {
+  class: label
+  left: 132
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_3: "" {
+  class: ink
+  left: 181
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_3_n: "3" {
+  class: label
+  left: 180
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_4: "" {
+  class: ink
+  left: 228
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_4_n: "4" {
+  class: label
+  left: 227
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_5: "" {
+  class: ink
+  left: 276
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_5_n: "5" {
+  class: label
+  left: 275
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_6: "" {
+  class: ink
+  left: 323
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_6_n: "6" {
+  class: label
+  left: 322
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_7: "" {
+  class: ink
+  left: 371
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#D97706"
+  style.stroke: "#D97706"
+}
+bar_7_n: "7" {
+  class: label
+  left: 370
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_8: "" {
+  class: ink
+  left: 419
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_8_n: "8" {
+  class: label
+  left: 418
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_9: "" {
+  class: ink
+  left: 466
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_9_n: "9" {
+  class: label
+  left: 465
+  top: 78
+  width: 7
+  style.font-size: 13
+}
+bar_10: "" {
+  class: ink
+  left: 514
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_10_n: "10" {
+  class: label
+  left: 509
+  top: 78
+  width: 14
+  style.font-size: 13
+}
+bar_11: "" {
+  class: ink
+  left: 561
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#D97706"
+  style.stroke: "#D97706"
+}
+bar_11_n: "11" {
+  class: label
+  left: 556
+  top: 78
+  width: 14
+  style.font-size: 13
+}
+bar_12: "" {
+  class: ink
+  left: 609
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_12_n: "12" {
+  class: label
+  left: 604
+  top: 78
+  width: 14
+  style.font-size: 13
+}
+bar_13: "" {
+  class: ink
+  left: 656
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#D97706"
+  style.stroke: "#D97706"
+}
+bar_13_n: "13" {
+  class: label
+  left: 651
+  top: 78
+  width: 14
+  style.font-size: 13
+}
+bar_14: "" {
+  class: ink
+  left: 704
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#D97706"
+  style.stroke: "#D97706"
+}
+bar_14_n: "14" {
+  class: label
+  left: 699
+  top: 78
+  width: 14
+  style.font-size: 13
+}
+bar_15: "" {
+  class: ink
+  left: 752
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_15_n: "15" {
+  class: label
+  left: 747
+  top: 78
+  width: 14
+  style.font-size: 13
+}
+bar_16: "" {
+  class: ink
+  left: 799
+  top: 102
+  width: 4
+  height: 112
+  style.fill: "#2563EB"
+  style.stroke: "#2563EB"
+}
+bar_16_n: "16" {
+  class: label
+  left: 794
+  top: 78
+  width: 14
+  style.font-size: 13
+}
+axis: "" {
+  class: ink
+  left: 40
+  top: 214
+  width: 800
+  height: 2
+}
+tick_0: "" {
+  class: ink
+  left: 39
+  top: 216
+  width: 2
+  height: 7
+}
+tick_0_label: "0 Hz" {
+  class: tag
+  left: 0
+  top: 222
+  width: 80
+  height: 36
+  style.font-size: 12
+}
+tick_1: "" {
+  class: ink
+  left: 221
+  top: 216
+  width: 2
+  height: 7
+}
+tick_1_label: "1,000 Hz" {
+  class: tag
+  left: 182
+  top: 222
+  width: 83
+  height: 36
+  style.font-size: 12
+}
+tick_2: "" {
+  class: ink
+  left: 403
+  top: 216
+  width: 2
+  height: 7
+}
+tick_2_label: "2,000 Hz" {
+  class: tag
+  left: 364
+  top: 222
+  width: 83
+  height: 36
+  style.font-size: 12
+}
+tick_3: "" {
+  class: ink
+  left: 584
+  top: 216
+  width: 2
+  height: 7
+}
+tick_3_label: "3,000 Hz" {
+  class: tag
+  left: 545
+  top: 222
+  width: 83
+  height: 36
+  style.font-size: 12
+}
+tick_4: "" {
+  class: ink
+  left: 766
+  top: 216
+  width: 2
+  height: 7
+}
+tick_4_label: "4,000 Hz" {
+  class: tag
+  left: 727
+  top: 222
+  width: 83
+  height: 36
+  style.font-size: 12
+}
+label_b: "Keyboard, a logarithmic scale: 1, 2, 4 and 8 harmonics in each octave" {
+  class: label
+  left: 0
+  top: 278
+  width: 640
+  style.font-size: 14
+}
+w_C4: "" {
+  class: white
+  left: 48
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_C4: "1" {
+  class: label
+  left: 58
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+oct_4: "C4 (Do)" {
+  class: tag
+  left: 21
+  top: 480
+  width: 80
+  height: 37
+  style.font-size: 13
+}
+w_D4: "" {
+  class: white
+  left: 75
+  top: 330
+  width: 27
+  height: 120
+}
+w_E4: "" {
+  class: white
+  left: 102
+  top: 330
+  width: 27
+  height: 120
+}
+w_F4: "" {
+  class: white
+  left: 129
+  top: 330
+  width: 27
+  height: 120
+}
+w_G4: "" {
+  class: white
+  left: 156
+  top: 330
+  width: 27
+  height: 120
+}
+w_A4: "" {
+  class: white
+  left: 183
+  top: 330
+  width: 27
+  height: 120
+}
+w_B4: "" {
+  class: white
+  left: 210
+  top: 330
+  width: 27
+  height: 120
+}
+w_C5: "" {
+  class: white
+  left: 237
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_C5: "2" {
+  class: label
+  left: 247
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+oct_5: "C5" {
+  class: tag
+  left: 210
+  top: 480
+  width: 80
+  height: 37
+  style.font-size: 13
+}
+w_D5: "" {
+  class: white
+  left: 264
+  top: 330
+  width: 27
+  height: 120
+}
+w_E5: "" {
+  class: white
+  left: 291
+  top: 330
+  width: 27
+  height: 120
+}
+w_F5: "" {
+  class: white
+  left: 318
+  top: 330
+  width: 27
+  height: 120
+}
+w_G5: "" {
+  class: white
+  left: 345
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_G5: "3" {
+  class: label
+  left: 355
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+w_A5: "" {
+  class: white
+  left: 372
+  top: 330
+  width: 27
+  height: 120
+}
+w_B5: "" {
+  class: white
+  left: 399
+  top: 330
+  width: 27
+  height: 120
+}
+w_C6: "" {
+  class: white
+  left: 426
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_C6: "4" {
+  class: label
+  left: 436
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+oct_6: "C6" {
+  class: tag
+  left: 399
+  top: 480
+  width: 80
+  height: 37
+  style.font-size: 13
+}
+w_D6: "" {
+  class: white
+  left: 453
+  top: 330
+  width: 27
+  height: 120
+}
+w_E6: "" {
+  class: white
+  left: 480
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_E6: "5" {
+  class: label
+  left: 490
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+w_F6: "" {
+  class: white
+  left: 507
+  top: 330
+  width: 27
+  height: 120
+}
+w_G6: "" {
+  class: white
+  left: 534
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_G6: "6" {
+  class: label
+  left: 544
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+w_A6: "" {
+  class: white
+  left: 561
+  top: 330
+  width: 27
+  height: 120
+}
+w_B6: "" {
+  class: white
+  left: 588
+  top: 330
+  width: 27
+  height: 120
+}
+w_C7: "" {
+  class: white
+  left: 615
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_C7: "8" {
+  class: label
+  left: 625
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+oct_7: "C7" {
+  class: tag
+  left: 588
+  top: 480
+  width: 80
+  height: 37
+  style.font-size: 13
+}
+w_D7: "" {
+  class: white
+  left: 642
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_D7: "9" {
+  class: label
+  left: 652
+  top: 454
+  width: 7
+  style.font-size: 13
+}
+w_E7: "" {
+  class: white
+  left: 669
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_E7: "10" {
+  class: label
+  left: 675
+  top: 454
+  width: 14
+  style.font-size: 13
+}
+w_F7: "" {
+  class: white
+  left: 696
+  top: 330
+  width: 27
+  height: 120
+}
+w_G7: "" {
+  class: white
+  left: 723
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_G7: "12" {
+  class: label
+  left: 729
+  top: 454
+  width: 14
+  style.font-size: 13
+}
+w_A7: "" {
+  class: white
+  left: 750
+  top: 330
+  width: 27
+  height: 120
+}
+w_B7: "" {
+  class: white
+  left: 777
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_B7: "15" {
+  class: label
+  left: 783
+  top: 454
+  width: 14
+  style.font-size: 13
+}
+w_C8: "" {
+  class: white
+  left: 804
+  top: 330
+  width: 27
+  height: 120
+  style.fill: "#93C5FD"
+}
+wn_C8: "16" {
+  class: label
+  left: 810
+  top: 454
+  width: 14
+  style.font-size: 13
+}
+oct_8: "C8" {
+  class: tag
+  left: 777
+  top: 480
+  width: 80
+  height: 37
+  style.font-size: 13
+}
+b_Cs4: "" {
+  class: black
+  left: 67
+  top: 330
+  width: 17
+  height: 74
+}
+b_Ds4: "" {
+  class: black
+  left: 94
+  top: 330
+  width: 17
+  height: 74
+}
+b_Fs4: "" {
+  class: black
+  left: 148
+  top: 330
+  width: 17
+  height: 74
+}
+b_Gs4: "" {
+  class: black
+  left: 175
+  top: 330
+  width: 17
+  height: 74
+}
+b_As4: "" {
+  class: black
+  left: 202
+  top: 330
+  width: 17
+  height: 74
+}
+b_Cs5: "" {
+  class: black
+  left: 256
+  top: 330
+  width: 17
+  height: 74
+}
+b_Ds5: "" {
+  class: black
+  left: 283
+  top: 330
+  width: 17
+  height: 74
+}
+b_Fs5: "" {
+  class: black
+  left: 337
+  top: 330
+  width: 17
+  height: 74
+}
+b_Gs5: "" {
+  class: black
+  left: 364
+  top: 330
+  width: 17
+  height: 74
+}
+b_As5: "" {
+  class: black
+  left: 391
+  top: 330
+  width: 17
+  height: 74
+}
+b_Cs6: "" {
+  class: black
+  left: 445
+  top: 330
+  width: 17
+  height: 74
+}
+b_Ds6: "" {
+  class: black
+  left: 472
+  top: 330
+  width: 17
+  height: 74
+}
+b_Fs6: "" {
+  class: black
+  left: 526
+  top: 330
+  width: 17
+  height: 74
+}
+b_Gs6: "" {
+  class: black
+  left: 553
+  top: 330
+  width: 17
+  height: 74
+}
+b_As6: "" {
+  class: black
+  left: 580
+  top: 330
+  width: 17
+  height: 74
+  style.fill: "#D97706"
+}
+bn_As6: "7" {
+  class: label
+  left: 585
+  top: 310
+  width: 7
+  style.font-size: 13
+}
+b_Cs7: "" {
+  class: black
+  left: 634
+  top: 330
+  width: 17
+  height: 74
+}
+b_Ds7: "" {
+  class: black
+  left: 661
+  top: 330
+  width: 17
+  height: 74
+}
+b_Fs7: "" {
+  class: black
+  left: 715
+  top: 330
+  width: 17
+  height: 74
+  style.fill: "#D97706"
+}
+bn_Fs7: "11" {
+  class: label
+  left: 716
+  top: 310
+  width: 14
+  style.font-size: 13
+}
+b_Gs7: "" {
+  class: black
+  left: 742
+  top: 330
+  width: 17
+  height: 74
+  style.fill: "#D97706"
+}
+bn_Gs7: "13" {
+  class: label
+  left: 743
+  top: 310
+  width: 14
+  style.font-size: 13
+}
+b_As7: "" {
+  class: black
+  left: 769
+  top: 330
+  width: 17
+  height: 74
+  style.fill: "#D97706"
+}
+bn_As7: "14" {
+  class: label
+  left: 770
+  top: 310
+  width: 14
+  style.font-size: 13
+}
+legend_blue: "Blue: the harmonic is within 14 cents of this key." {
+  class: label
+  left: 0
+  top: 532
+  width: 480
+  style.font-size: 13
+}
+legend_amber: "Amber: the harmonic falls between two keys, 31 to 49 cents from the nearest one." {
+  class: label
+  left: 0
+  top: 556
+  width: 640
+  style.font-size: 13
+}
