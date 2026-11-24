@@ -507,6 +507,129 @@ The consumer can trigger an alert, perform a calculation, or use a sink to write
 
 > type: category
 
+### Record Timestamps {#record-timestamps}
+
+> type: concept
+> edge.related: event
+
+Every Kafka record has one timestamp: a number of milliseconds since 1 January 1970, UTC. Either the producer or the broker sets it, as the [ProducerRecord docs](https://kafka.apache.org/44/javadoc/org/apache/kafka/clients/producer/ProducerRecord.html) describe. This section collects every timestamp that a pipeline meets, from the source to the table.
+
+Kafka Streams names three kinds of time ([Kafka Streams core concepts](https://kafka.apache.org/44/streams/core-concepts/)):
+
+- Event time is when the event happened at the source, for example when sensor 42 measured 21.4 °C.
+- Ingestion time is when a broker appended the record to a partition.
+- Processing time is when a consumer processes the record.
+
+The topic setting `message.timestamp.type` decides what the record timestamp holds. With `LogAppendTime`, it holds ingestion time. With `CreateTime`, the default, it holds the time that the producer set. That is event time only when the producer copies the event's time into it. Otherwise, it is the producer's clock at send time.
+
+One reading shows how far apart these times can be:
+
+| Step | Clock and time | Name of this time |
+|---|---|---|
+| Sensor 42 measures 21.4 °C | Sensor clock: 10:00:00.000 | Event time, kept as the field `measured_at` |
+| The gateway sends the reading after a 5-minute outage | Gateway clock, which runs 2 seconds fast: 10:05:02.000 | CreateTime, when the app sets no timestamp |
+| The leader broker appends the record | Broker clock: 10:05:00.120 | LogAppendTime, which is ingestion time |
+| The sink connector reads the record | Worker clock: 10:06:30.000 | Processing time |
+| The sink's commit makes the row visible | 10:10:00.000 | Commit time |
+
+The record timestamp keeps only one of these values: 10:05:02.000 under CreateTime, or 10:05:00.120 under LogAppendTime. Only the `measured_at` field keeps 10:00:00.000.
+
+Each part of a pipeline adds its own timestamps:
+
+| Timestamp | Part | Who sets it | Where it lives |
+|---|---|---|---|
+| Event time field, such as `measured_at` | Your data | The source app or device | The record value |
+| Record timestamp, CreateTime | Kafka | The producer: a time that the app chooses, or the producer's clock at send time | The record batch |
+| Record timestamp, LogAppendTime | Kafka | The leader broker's clock at append | The record batch |
+| `source.ts_ms` and `ts_ms` | Debezium connector | Debezium: the database's change time, and Debezium's processing time | The record value |
+| Copied record timestamp | Kafka Connect | An `InsertField` transform | A field in the value, then a column |
+| `CreateTime` or `LogAppendTime` key | Snowflake connector | The connector copies the record timestamp | The `RECORD_METADATA` column |
+| `SnowflakeConnectorPushTime` | Snowflake connector | The connector, when it buffers the record | The `RECORD_METADATA` column |
+| `_kafka_metadata_timestamp` | Iceberg sink | Its `KafkaMetadataTransform` copies the record timestamp | An Iceberg column |
+| Valid-through timestamp (VTTS) | Iceberg sink | The sink computes it from record timestamps | Each Iceberg snapshot summary |
+| `message_timestamp_type` | Aiven | You, in Terraform or the Aiven Console | The topic configuration |
+
+The child nodes explain each part.
+
+#### CreateTime and LogAppendTime {#create-time-log-append-time}
+
+> type: concept
+
+Kafka stores the timestamp in the record batch on disk ([message format](https://kafka.apache.org/44/implementation/message-format/)). The batch header has a `timestampType` bit, a `baseTimestamp` and a `maxTimestamp`. Each record stores its own `timestampDelta` from the base. So the type belongs to the whole batch. Under CreateTime, each record keeps its own value.
+
+The topic setting `message.timestamp.type` picks the type ([topic configs](https://kafka.apache.org/44/configuration/topic-configs/)). Its default comes from the broker setting `log.message.timestamp.type`, which is `CreateTime`:
+
+- CreateTime: the broker keeps the producer's timestamp. The producer uses the timestamp that the app passes in. If the app passes none, the producer stamps its own clock at send time.
+- LogAppendTime: the broker overwrites the timestamp with its own clock when it appends the record to its log. So the timestamps in a partition come from the leader's clock, and they rise with the offsets while that clock runs forward.
+
+In both cases, the producer gets the final timestamp back in its `RecordMetadata`.
+
+With CreateTime, the broker checks the producer's timestamp against its own clock. It rejects a record that is more than `message.timestamp.after.max.ms` in the future, 1 hour by default. `message.timestamp.before.max.ms` limits how old a timestamp can be, and its default sets no limit. With LogAppendTime, the broker ignores both settings.
+
+The broker applies the type when it appends a record. So a change of `message.timestamp.type` acts only on new records. Records already in the log keep their stored timestamps.
+
+#### What Kafka Does With Timestamps {#kafka-uses-timestamps}
+
+> type: concept
+> edge.related: retention
+
+The broker and the clients use the record timestamp in three ways:
+
+- Retention. Time-based retention deletes a whole segment when the largest timestamp in that segment is older than `retention.ms` ([log implementation](https://kafka.apache.org/44/implementation/log/)). So under CreateTime, a producer that sends week-old event times can make a segment ready for deletion at once.
+- Lookup by time. `offsetsForTimes` returns, for each partition, the earliest offset whose timestamp is at or after a given time ([KafkaConsumer docs](https://kafka.apache.org/44/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html)). A consumer uses it to start reading from a point in time. Under LogAppendTime, the timestamps follow the offsets, so this point is a clean cut. Under CreateTime, later offsets can hold earlier timestamps.
+- Time-based processing. A consumer reads each record's `timestamp()` and `timestampType()`. Kafka Streams uses the record timestamp for windows by default ([Kafka Streams core concepts](https://kafka.apache.org/44/streams/core-concepts/)). So the topic's type decides whether those windows use event time or ingestion time.
+
+Kafka orders records by offset, inside one partition. The records of different partitions interleave, so their timestamps interleave too.
+
+#### Timestamps in Kafka Connect {#connect-timestamps}
+
+> type: concept
+> edge.related: kafka-connect
+
+Kafka Connect passes the record timestamp through, and its transforms can copy or change it:
+
+- A source connector can give each record a timestamp, and it can leave the timestamp empty ([ConnectRecord docs](https://kafka.apache.org/44/javadoc/org/apache/kafka/connect/connector/ConnectRecord.html)). For an empty one, the worker's producer stamps the worker's clock, as for any producer.
+- The Debezium PostgreSQL connector also writes two times into the value of each change event ([Debezium PostgreSQL docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)). `source.ts_ms` is when the change happened in the database. `ts_ms` is when Debezium processed it, by the clock of the Kafka Connect worker. The difference shows how far Debezium lags behind the database.
+- A sink connector sees each record's timestamp and its type ([SinkRecord docs](https://kafka.apache.org/44/javadoc/org/apache/kafka/connect/sink/SinkRecord.html)).
+- The `InsertField` transform copies the record timestamp into a field of the value, through its `timestamp.field` setting ([Kafka Connect user guide](https://kafka.apache.org/44/kafka-connect/user-guide/)). The sink then writes that field as a normal column, so the Kafka timestamp stays in the table.
+- `TimestampConverter` changes the format of a timestamp field. `TimestampRouter` adds the record timestamp to the topic name, so a sink can write to a different table for each period.
+
+#### Timestamps in Snowflake and Iceberg Sinks {#sink-timestamps}
+
+> type: concept
+> edge.related: connect-snowflake-example
+
+- The Snowflake connector can write the record timestamp into the `RECORD_METADATA` column ([Kafka connector overview](https://docs.snowflake.com/en/user-guide/kafka-connector-overview)). The key is `CreateTime` or `LogAppendTime`, so the key name tells you which clock set the value. With Snowpipe Streaming, the connector can also add `SnowflakeConnectorPushTime`, the time when it buffered the record for loading. The gap between the two times shows the load delay.
+- The Apache Iceberg sink's `KafkaMetadataTransform` adds the record's topic, partition, offset and timestamp as columns, such as `_kafka_metadata_timestamp` ([Iceberg Kafka Connect docs](https://iceberg.apache.org/docs/latest/kafka-connect/)). The docs mark this transform as experimental.
+- The Iceberg sink also writes a valid-through timestamp (VTTS) into each commit. Every record with a timestamp at or below the VTTS is already in the table. The VTTS moves only forward when the topic uses LogAppendTime. The Valid-through timestamp (VTTS) node of the [Kafka → Iceberg → Snowflake map](../integration/kafka-iceberg-snowflake/kafka-iceberg-snowflake.md) explains it.
+
+#### Timestamps on Aiven {#aiven-timestamps}
+
+> type: concept
+> edge.related: aiven-kafka-service
+
+Aiven runs standard Apache Kafka, so the rules above apply without change. Aiven gives you its own places to set them:
+
+- The service-wide default is the advanced parameter `kafka.log_message_timestamp_type`, which sets `log.message.timestamp.type`. Its default is `CreateTime` ([advanced parameters](https://aiven.io/docs/products/kafka/reference/advanced-params)).
+- Each topic can override the default. In the Aiven provider for Terraform, the `config` block of `aiven_kafka_topic` takes `message_timestamp_type`, with the value `CreateTime` or `LogAppendTime` ([aiven_kafka_topic](https://registry.terraform.io/providers/aiven/aiven/latest/docs/resources/kafka_topic)). The same block takes `message_timestamp_after_max_ms` and `message_timestamp_before_max_ms`.
+
+Terraform writes underscores where Kafka writes dots: `message_timestamp_type` is the Kafka setting `message.timestamp.type`.
+
+#### Choosing Timestamps for a Pipeline {#choosing-timestamps}
+
+> type: concept
+
+These rules follow from the mechanisms above:
+
+1. Keep event time in the record value, as a field that the source sets, such as `measured_at`. The record timestamp has one slot, and LogAppendTime overwrites it.
+2. Set `message.timestamp.type` to the meaning that consumers need from the record timestamp:
+   - LogAppendTime gives ingestion time from one clock, the leader broker's. Use it when a consumer or a sink treats the record timestamp as the time the record reached Kafka, for example for the VTTS or for lookups by time.
+   - CreateTime keeps the producer's time. Use it when producers set event time on purpose, for example for Kafka Streams windows. The 1-hour limit on future timestamps is the only check that the broker makes by default.
+3. Choose the type when you create the topic. A later change acts only on new records, so the topic holds both kinds of timestamps until retention deletes the old records.
+4. Compare timestamps only inside one partition. Kafka orders records by offset, per partition.
+5. To keep the Kafka timestamp in a table, copy it into a column: with `InsertField` and `timestamp.field`, with the Iceberg `KafkaMetadataTransform`, or with the Snowflake `RECORD_METADATA` column.
+6. For incremental loads after the sink, filter on the copied Kafka timestamp, and stop at the sink's completeness watermark, such as the VTTS. A sink commits in batches, so a row with timestamp T can become visible after a reader has already passed T.
+
 ## Reliability & Operations {#reliability-and-operations}
 
 > type: category
